@@ -3,21 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <title>Stylish Horizon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       font-family: sans-serif;
       background: #fdfdfd;
       color: #222;
-      margin: 2em;
+      max-width: 640px;
+      margin: 2em auto;
+      padding: 0 1em;
+      line-height: 1.6;
     }
-    h1 {
-      font-weight: normal;
-      letter-spacing: -0.5px;
+
+    header h1 {
+      font-size: 2em;
+      margin-bottom: 0.2em;
+    }
+
+    header p {
+      font-style: italic;
+      color: #555;
+    }
+
+    h2 {
+      margin-top: 2em;
+      font-size: 1.4em;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 0.2em;
+    }
+
+    ul {
+      padding-left: 1.2em;
+    }
+
+    li {
+      margin-bottom: 0.5em;
+    }
+
+    a {
+      color: #0055cc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: 3em;
+      font-size: 0.9em;
+      color: #666;
+      border-top: 1px solid #ddd;
+      padding-top: 1em;
     }
   </style>
 </head>
 <body>
+
+<header>
   <h1>Stylish Horizon</h1>
-  <p>A minimalist archive of memory, restoration, and truth.</p>
+  <p>Digital restoration with integrity. No hype. No noise. Just memory.</p>
+</header>
+
+<main>
+  <section>
+    <h2>What we do</h2>
+    <p>We restore MiniDV, VHS, Hi8, and forgotten drives.  
+    If it still breathes — we help it speak again.</p>
+  </section>
+
+  <section>
+    <h2>How we work</h2>
+    <ul>
+      <li>No shipping. We find trusted studios near you.</li>
+      <li>No subscriptions. You pay for what you need — nothing more.</li>
+      <li>Every file is reviewed manually. No batch processing.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Why it matters</h2>
+    <p>We believe memory deserves clarity.  
+    Not filters, not nostalgia — just truth.</p>
+  </section>
+</main>
+
+<footer>
+  <p>
+    <a href="/philosophy.html">Philosophy</a> ·
+    <a href="/archive.html">Public Archive</a> ·
+    <a href="/contact.html">Contact</a>
+  </p>
+</footer>
+
 </body>
 </html>
