@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  padding: 2rem;
+  font-family: monospace;
+  background-color: #111;
+  color: #eee;
+  line-height: 1.6;
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li::before {
+  content: "> ";
+  color: #888;
+}
