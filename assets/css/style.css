@@ -20,12 +20,10 @@ header {
 
 .logo-full {
   display: block;
-  max-width: 300px;
-  width: 10%;
-  height: auto;
   margin: 0 auto 1.5rem;
+  max-width: 300px;
+  height: auto;
 }
-
 nav {
   display: flex;
   justify-content: center;
