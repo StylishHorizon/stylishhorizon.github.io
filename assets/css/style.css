@@ -25,7 +25,6 @@ header {
   height: auto;
   margin: 0 auto 1.5rem;
 }
-}
 
 nav {
   display: flex;
@@ -41,8 +40,15 @@ nav a {
   font-weight: 500;
 }
 
-nav a:hover {
+nav a:hover,
+nav a:focus {
   color: #fff;
+  outline: none;
+}
+
+nav a.active {
+  color: #fff;
+  border-bottom: 1px solid #fff;
 }
 
 h1 {
@@ -85,7 +91,6 @@ footer {
   }
 
   .logo-full {
-    height: auto;
     max-width: 90%;
   }
 }
