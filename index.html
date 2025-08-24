@@ -4,41 +4,55 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Stylish Horizon</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <nav class="main-nav">
+    <ul>
+      <li><a href="#philosophy">Philosophy</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#archive-preview">Before/After</a></li>
+    </ul>
+  </nav>
 
   <header>
-    <img src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon Logo" class="logo fade-in" />
+    <div class="logo-container">
+      <img src="logo.svg" alt="Stylish Horizon" class="logo" />
+    </div>
+    <div class="intro">
+      <h1>Digital memory, without noise.</h1>
+      <p>Minimalist structure. Honest restoration. Cross-device clarity.</p>
+    </div>
   </header>
 
   <main>
-    <section id="intro">
-      <div class="container">
-        <h1>Preserve Honestly</h1>
-        <p class="lead">We don’t sell nostalgia. We rescue memory.</p>
-        <p>Stylish Horizon is a minimalist platform for restoring digital truth — no filters, no fluff, no noise.</p>
+    <section id="philosophy">
+      <h2>Philosophy</h2>
+      <p>We archive without spectacle. We design without decoration. We restore without nostalgia.</p>
+    </section>
 
-        <h2>What We Do</h2>
-        <ul>
-          <li>Digitize MiniDV, VideoDVD, and other legacy formats</li>
-          <li>Restore footage with minimal interference</li>
-          <li>Build public archives with philosophical context</li>
-          <li>Connect users to trusted local studios worldwide</li>
-        </ul>
+    <section id="services">
+      <h2>Services</h2>
+      <ul>
+        <li>Minimalist site structures</li>
+        <li>Video restoration (MiniDV, VHS-C)</li>
+        <li>Consulting: anti-hype, honest UX</li>
+      </ul>
+    </section>
 
-        <h2>Why It Matters</h2>
-        <p>Every frame carries meaning. We preserve digital testimony without distortion — because memory deserves clarity, not decoration.</p>
-
-        <h2>Public Archive</h2>
-        <p>Coming soon: a curated collection of rescued footage, each with its own story, context, and ethical reflection.<br>No edits. No music. Just memory.</p>
-
-        <footer>
-          <p>© 2025 Stylish Horizon. Built for truth, not trends.</p>
-        </footer>
+    <section id="archive-preview">
+      <h2>Before / After</h2>
+      <div class="video-preview">
+        <video preload="auto" muted loop playsinline>
+          <source src="restored.mp4" type="video/mp4" />
+        </video>
       </div>
     </section>
   </main>
 
+  <footer>
+    <p>&copy; Stylish Horizon. Built for clarity.</p>
+    <div class="continue-hint">→ Continue</div>
+  </footer>
 </body>
 </html>
