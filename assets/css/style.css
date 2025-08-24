@@ -1,60 +1,159 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stylish Horizon</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
-</head>
-<body>
+/* Reset and base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  <nav class="main-nav">
-    <ul>
-      <li><a href="#philosophy">Philosophy</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#archive-preview">Before/After</a></li>
-    </ul>
-  </nav>
+body {
+  background-color: #f9f9f9;
+  color: #111;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 2vh 4vw;
+}
 
-  <header>
-    <div class="logo-container">
-      <img src="logo.svg" alt="Stylish Horizon" class="logo" />
-    </div>
-    <div class="intro content">
-      <h1>Digital memory, without noise.</h1>
-      <p class="tagline">Minimalist structure. Honest restoration. Cross-device clarity.</p>
-    </div>
-  </header>
+/* Navigation */
+.main-nav {
+  text-align: center;
+  margin-bottom: 2vh;
+}
 
-  <main>
-    <section id="philosophy">
-      <h2>Philosophy</h2>
-      <p>We archive without spectacle. We design without decoration. We restore without nostalgia.</p>
-    </section>
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0;
+}
 
-    <section id="services">
-      <h2>Services</h2>
-      <ul>
-        <li>Minimalist site structures</li>
-        <li>Video restoration (MiniDV, VHS-C)</li>
-        <li>Consulting: anti-hype, honest UX</li>
-      </ul>
-    </section>
+.main-nav li a {
+  text-decoration: none;
+  color: #111;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
 
-    <section id="archive-preview">
-      <h2>Before / After</h2>
-      <div class="video-preview">
-        <video preload="auto" muted loop playsinline>
-          <source src="restored.mp4" type="video/mp4" />
-        </video>
-      </div>
-    </section>
-  </main>
+.main-nav li a:hover {
+  color: #555;
+}
 
-  <footer>
-    <p>&copy; Stylish Horizon. Built for clarity.</p>
-    <div class="continue-hint">→ Continue</div>
-  </footer>
+/* Logo */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5vh;
+  animation: fadeIn 1.2s ease-out forwards;
+}
 
-</body>
-</html>
+.logo-container img {
+  max-width: 240px;
+  height: auto;
+  filter: blur(0px);
+  transition: filter 0.6s ease;
+}
+
+/* Intro */
+.intro {
+  text-align: center;
+  margin-top: 4vh;
+}
+
+.intro h1 {
+  font-size: 3rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  color: #444;
+}
+
+/* Sections */
+section {
+  margin: 4vh auto;
+  max-width: 700px;
+  text-align: center;
+}
+
+section h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+section p, section ul {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+section ul {
+  list-style: none;
+  padding: 0;
+}
+
+section ul li {
+  margin-bottom: 0.8rem;
+}
+
+/* Video */
+.video-preview {
+  margin-top: 2vh;
+}
+
+video {
+  max-width: 100%;
+  border-radius: 6px;
+}
+
+/* Footer */
+footer {
+  margin-top: auto;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #888;
+  padding: 2vh 0;
+}
+
+.continue-hint {
+  margin-top: 1vh;
+  font-size: 1rem;
+  color: #aaa;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .intro h1 {
+    font-size: 2.2rem;
+  }
+
+  .tagline {
+    font-size: 1rem;
+  }
+
+  .logo-container img {
+    max-width: 180px;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
