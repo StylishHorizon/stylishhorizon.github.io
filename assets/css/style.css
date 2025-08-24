@@ -1,73 +1,117 @@
-/* Base styles */
 body {
-  background-color: #000;
-  color: #f0f0f0;
-  font-family: 'Helvetica Neue', sans-serif;
   margin: 0;
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: #fdfdfd;
+  color: #111;
+}
+
+.main-nav {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.main-nav ul {
+  list-style: none;
   padding: 0;
+  margin: 0;
+  display: inline-flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-/* Logo styling with fade-in */
+.main-nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+  color: #000;
+}
+
+.logo-container {
+  text-align: center;
+  margin-top: 3rem;
+}
+
 .logo {
-  display: block;
-  max-width: 180px;
-  height: auto;
-  margin: 2rem auto;
+  width: 120px;
   opacity: 0;
-  animation: fadeIn 2s ease-in forwards;
+  filter: blur(8px);
+  animation: fadeInLogo 2s ease-out forwards;
 }
 
-@media (min-width: 768px) {
-  .logo {
-    margin: 2rem 0 2rem 2rem;
-  }
-}
-
-@keyframes fadeIn {
+@keyframes fadeInLogo {
   to {
     opacity: 1;
+    filter: blur(0);
   }
 }
 
-/* Intro section */
-#intro {
-  padding: 4rem 2rem;
+.intro {
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 600px;
+  padding: 0 1rem;
+}
+
+.intro h1 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  margin-bottom: 0.5rem;
+}
+
+.intro p {
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  color: #555;
+}
+
+section {
+  padding: 2rem 1rem;
   max-width: 800px;
   margin: 0 auto;
 }
 
-#intro h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #ffffff;
-}
-
-#intro h2 {
+h2 {
   font-size: 1.5rem;
-  margin-top: 2rem;
-  color: #cccccc;
+  margin-bottom: 1rem;
 }
 
-#intro p.lead {
-  font-size: 1.2rem;
-  font-weight: 300;
-  margin-bottom: 1.5rem;
-  color: #dddddd;
-}
-
-#intro ul {
+ul {
   list-style: none;
-  padding-left: 0;
+  padding: 0;
 }
 
-#intro ul li::before {
-  content: "— ";
-  color: #888;
+li {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.video-preview video {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
 }
 
 footer {
-  margin-top: 3rem;
-  font-size: 0.9rem;
-  color: #777;
   text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  color: #888;
+  position: relative;
+}
+
+.continue-hint {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  font-size: 1.2rem;
+  color: #ccc;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+body:hover .continue-hint {
+  opacity: 1;
 }
