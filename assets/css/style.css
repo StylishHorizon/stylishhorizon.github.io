@@ -1,14 +1,15 @@
-/* Reset and base */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Base */
 body {
-  background-color: #f9f9f9;
-  color: #111;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: #000;
+  color: #eee;
+  font-family: 'Helvetica Neue', sans-serif;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -26,18 +27,17 @@ body {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  padding: 0;
 }
 
 .main-nav li a {
   text-decoration: none;
-  color: #111;
+  color: #eee;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .main-nav li a:hover {
-  color: #555;
+  color: #aaa;
 }
 
 /* Logo */
@@ -49,11 +49,11 @@ body {
   animation: fadeIn 1.2s ease-out forwards;
 }
 
-.logo-container img {
+.logo {
   max-width: 240px;
   height: auto;
-  filter: blur(0px);
-  transition: filter 0.6s ease;
+  opacity: 0;
+  animation: fadeIn 1.2s ease-out forwards;
 }
 
 /* Intro */
@@ -71,12 +71,12 @@ body {
 .tagline {
   font-size: 1.2rem;
   margin-top: 1rem;
-  color: #444;
+  color: #ccc;
 }
 
 /* Sections */
 section {
-  margin: 4vh auto;
+  margin: 5vh auto;
   max-width: 700px;
   text-align: center;
 }
@@ -86,10 +86,11 @@ section h2 {
   margin-bottom: 1rem;
 }
 
-section p, section ul {
+section p,
+section ul {
   font-size: 1.1rem;
   line-height: 1.6;
-  color: #333;
+  color: #bbb;
 }
 
 section ul {
@@ -116,14 +117,14 @@ footer {
   margin-top: auto;
   text-align: center;
   font-size: 0.9rem;
-  color: #888;
+  color: #666;
   padding: 2vh 0;
 }
 
 .continue-hint {
   margin-top: 1vh;
   font-size: 1rem;
-  color: #aaa;
+  color: #888;
 }
 
 /* Animations */
@@ -148,7 +149,7 @@ footer {
     font-size: 1rem;
   }
 
-  .logo-container img {
+  .logo {
     max-width: 180px;
   }
 
