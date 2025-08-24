@@ -1,86 +1,60 @@
-/* Reset and base */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stylish Horizon</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
 
-body {
-  background-color: #f9f9f9;
-  color: #111;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  padding: 2vh 4vw;
-}
+  <nav class="main-nav">
+    <ul>
+      <li><a href="#philosophy">Philosophy</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#archive-preview">Before/After</a></li>
+    </ul>
+  </nav>
 
-/* Logo */
-.logo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 5vh;
-  animation: fadeIn 1.2s ease-out forwards;
-}
+  <header>
+    <div class="logo-container">
+      <img src="logo.svg" alt="Stylish Horizon" class="logo" />
+    </div>
+    <div class="intro content">
+      <h1>Digital memory, without noise.</h1>
+      <p class="tagline">Minimalist structure. Honest restoration. Cross-device clarity.</p>
+    </div>
+  </header>
 
-.logo-container img {
-  max-width: 240px;
-  height: auto;
-  filter: blur(0px);
-  transition: filter 0.6s ease;
-}
+  <main>
+    <section id="philosophy">
+      <h2>Philosophy</h2>
+      <p>We archive without spectacle. We design without decoration. We restore without nostalgia.</p>
+    </section>
 
-/* Content */
-.content {
-  text-align: center;
-  margin-top: 4vh;
-}
+    <section id="services">
+      <h2>Services</h2>
+      <ul>
+        <li>Minimalist site structures</li>
+        <li>Video restoration (MiniDV, VHS-C)</li>
+        <li>Consulting: anti-hype, honest UX</li>
+      </ul>
+    </section>
 
-.content h1 {
-  font-size: 3rem;
-  font-weight: 600;
-  letter-spacing: -0.5px;
-}
+    <section id="archive-preview">
+      <h2>Before / After</h2>
+      <div class="video-preview">
+        <video preload="auto" muted loop playsinline>
+          <source src="restored.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </section>
+  </main>
 
-.tagline {
-  font-size: 1.2rem;
-  margin-top: 1rem;
-  color: #444;
-}
+  <footer>
+    <p>&copy; Stylish Horizon. Built for clarity.</p>
+    <div class="continue-hint">→ Continue</div>
+  </footer>
 
-/* Footer */
-footer {
-  margin-top: auto;
-  text-align: center;
-  font-size: 0.9rem;
-  color: #888;
-  padding: 2vh 0;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .content h1 {
-    font-size: 2.2rem;
-  }
-
-  .tagline {
-    font-size: 1rem;
-  }
-
-  .logo-container img {
-    max-width: 180px;
-  }
-}
+</body>
+</html>
