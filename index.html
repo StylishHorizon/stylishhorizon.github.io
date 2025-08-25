@@ -12,6 +12,7 @@
       background-color: #0a0a0a;
       color: #f5f5f5;
       scroll-behavior: smooth;
+      line-height: 1.6;
     }
     header {
       display: flex;
@@ -22,18 +23,23 @@
     header img {
       max-width: 200px;
       opacity: 0.2;
-      animation: fadeInLogo 1.3s forwards;
+      animation: fadeInLogo 2s forwards;
     }
     @keyframes fadeInLogo {
       to { opacity: 1; }
     }
     section {
       padding: 4rem 2rem;
-      max-width: 1000px;
+      max-width: 900px;
       margin: 0 auto;
+      text-align: left;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     }
-    .hero {
-      text-align: center;
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .hero h1 {
       font-size: 2.5rem;
@@ -44,12 +50,8 @@
       font-size: 1.2rem;
       color: #bbb;
       max-width: 700px;
-      margin: 0 auto;
     }
-    .manifest, .service {
-      text-align: center;
-    }
-    h2.section-title {
+    .section-title {
       font-size: 2rem;
       margin-bottom: 1.5rem;
     }
@@ -59,7 +61,7 @@
       gap: 1rem;
     }
     .comparison .block {
-      text-align: center;
+      text-align: left;
     }
     iframe {
       width: 100%;
@@ -73,6 +75,11 @@
       padding: 1.5rem;
       margin: 1rem 0;
       border-radius: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .service .package:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.5);
     }
     .service .package h3 {
       margin-top: 0;
@@ -173,10 +180,10 @@
 
 <section class="contact">
   <h2 class="section-title">Contact</h2>
-  <form>
-    <input type="text" placeholder="Your Name" required>
-    <input type="email" placeholder="Email" required>
-    <textarea placeholder="Describe your tapes or request" rows="5" required></textarea>
+  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <textarea name="message" placeholder="Describe your tapes or request" rows="5" required></textarea>
     <button type="submit">Send Request</button>
   </form>
   <p style="text-align:center; margin-top:1rem; color:#888;">Minimalist chat placeholder (Tawk.to/Crisp can be integrated)</p>
@@ -185,6 +192,20 @@
 <footer>
   <p>© 2025 Stylish Horizon</p>
 </footer>
+
+<script>
+// Анимация появления блоков при скролле
+const sections = document.querySelectorAll('section');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+sections.forEach(section => observer.observe(section));
+</script>
 
 </body>
 </html>
