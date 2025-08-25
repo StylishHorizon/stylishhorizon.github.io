@@ -2,23 +2,111 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Stylish Horizon Archive</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles/archive.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stylish Horizon Archive</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #0a0a0a;
+      color: #f5f5f5;
+      line-height: 1.6;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 1rem;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      padding: 0.5rem 0;
+      background-color: #0a0a0a;
+      border-bottom: 1px solid #222;
+      margin-bottom: 1rem;
+    }
+    nav a {
+      color: #f5f5f5;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.3s;
+    }
+    nav a:hover {
+      opacity: 0.6;
+    }
+    nav a.active {
+      opacity: 0.6;
+    }
+    header {
+      display: flex;
+      justify-content: center;
+      padding: 0.5rem 0;
+      margin-bottom: 1rem;
+    }
+    header img {
+      max-width: 200px;
+      opacity: 0.2;
+      animation: fadeInLogo 2s forwards;
+    }
+    @keyframes fadeInLogo {
+      to { opacity: 1; }
+    }
+    h1, h2 {
+      margin-bottom: 1rem;
+    }
+    section {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      border-left: 3px solid rgba(255, 255, 255, 0.1);
+      transition: background 0.5s;
+    }
+    section:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+    p {
+      margin-bottom: 1rem;
+    }
+    footer {
+      text-align: left;
+      margin-top: 2rem;
+      color: #888;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1rem;
+    }
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      background-color: #111;
+    }
+  </style>
 </head>
 <body>
 
-  <header>
-    <img src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon Logo">
-  </header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="manifest.html">Manifest</a>
+  <a href="archive.html" class="active">Archive</a>
+  <a href="contact.html">Contact</a>
+</nav>
 
-  <main>
-    <section id="archive-content">
-      <!-- Archive entries will be injected here -->
-    </section>
-  </main>
+<header>
+  <img src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon Logo">
+</header>
 
-  <script src="assets/scripts/archive.js"></script>
+<section>
+  <h1>Archive</h1>
+  <p>Fragments of memory, untouched and unfiltered. Each frame below is a direct window — no enhancement, no narrative.</p>
+
+  <iframe src="assets/frames/archive1.html" title="Archive Frame 1"></iframe>
+  <iframe src="assets/frames/archive2.html" title="Archive Frame 2"></iframe>
+</section>
+
+<footer>
+  <p>© 2025 Stylish Horizon</p>
+</footer>
+
 </body>
 </html>
