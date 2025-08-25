@@ -11,8 +11,10 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: #0a0a0a;
     color: #f0f0f0;
+    scroll-behavior: smooth;
   }
 
+  /* --- Меню сверху --- */
   header {
     position: fixed;
     top: 0;
@@ -26,7 +28,7 @@
   }
 
   .logo {
-    font-size: 1.8em;
+    font-size: 2em;
     font-weight: bold;
     opacity: 0;
     animation: fadeIn 2s forwards;
@@ -45,18 +47,32 @@
     backdrop-filter: blur(5px);
   }
 
+  nav a:hover {
+    color: #1e90ff;
+    backdrop-filter: blur(5px);
+  }
+
   @keyframes fadeIn {
     to { opacity: 1; }
   }
 
+  /* --- Основной контент --- */
   main {
     max-width: 900px;
-    margin: 100px auto 50px auto;
+    margin: 120px auto 50px auto; /* учитываем фикс. меню */
     padding: 0 20px;
   }
 
   section {
-    margin-bottom: 50px;
+    margin-bottom: 60px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out;
+  }
+
+  section.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .preview {
@@ -70,12 +86,15 @@
     color: #999;
     font-style: italic;
     border-radius: 6px;
+    margin: 0 auto 30px auto;
   }
 
   .tech-info {
     background-color: #111;
     padding: 15px 20px;
     border-radius: 6px;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
   }
 
   .packages {
@@ -152,24 +171,43 @@
     packages: document.getElementById("nav-packages")
   };
 
-  window.addEventListener("scroll", () => {
+  function updateActiveNav() {
     let current = "";
     sections.forEach(section => {
-      const sectionTop = section.offsetTop - 80; // учитываем высоту меню
+      const sectionTop = section.offsetTop - 100;
       if (pageYOffset >= sectionTop) {
         current = section.id;
       }
     });
 
-    // сброс активных классов
     for (const key in navLinks) {
       navLinks[key].classList.remove("active");
     }
 
-    // 
     if (current === "preview") navLinks.preview.classList.add("active");
     else if (current === "tech-info") navLinks.techInfo.classList.add("active");
     else if (current === "packages") navLinks.packages.classList.add("active");
+  }
+
+  function revealSections() {
+    sections.forEach(section => {
+      const sectionTop = section.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      if (sectionTop < windowHeight - 100) {
+        section.classList.add("visible");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", () => {
+    updateActiveNav();
+    revealSections();
+  });
+
+  // при загрузке страницы
+  window.addEventListener("load", () => {
+    revealSections();
+    updateActiveNav();
   });
 </script>
 
