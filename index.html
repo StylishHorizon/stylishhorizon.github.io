@@ -1,60 +1,235 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stylish Horizon</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stylish Horizon — Honest Restoration</title>
+  <meta name="description" content="Digital memory, without noise. Minimalist structure. Honest restoration. Cross‑device clarity." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0c0d0f;          /* backdrop */
+      --panel:#111317;       /* cards/sections */
+      --ink:#e9ecf1;         /* main text */
+      --muted:#a9b1bd;       /* secondary text */
+      --accent:#7dd3fc;      /* cyan */
+      --accent-2:#a78bfa;    /* violet */
+      --line:rgba(255,255,255,.08);
+      --radius:18px;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#fafbfc; --panel:#ffffff; --ink:#0b0d12; --muted:#69707c; --line:rgba(0,0,0,.08) }
+      body{ background-image: radial-gradient(60% 50% at 20% 10%, #eef7ff 0,transparent 60%), radial-gradient(40% 30% at 90% 10%, #f2eaff 0,transparent 50%); }
+    }
+    *{ box-sizing: border-box }
+    html,body{ height:100% }
+    body{
+      margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink); background:var(--bg);
+      background-image: radial-gradient(60% 50% at 20% 10%, #0f172a 0,transparent 60%), radial-gradient(40% 30% at 90% 10%, #111827 0,transparent 50%);
+      letter-spacing:.1px;
+    }
+    a{ color:inherit; text-decoration:none }
+    .wrap{ width:min(1120px, 92vw); margin:0 auto }
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(8px);
+      background:linear-gradient(to bottom, rgba(12,13,15,.7), rgba(12,13,15,.3));
+      border-bottom:1px solid var(--line);
+    }
+    .nav{ display:flex; align-items:center; justify-content:space-between; gap:24px; padding:14px 0 }
+    .brand{ display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.5px }
+    .dot{ width:12px; height:12px; border-radius:50%; background:linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow:0 0 0 4px rgba(125,211,252,.12) }
+    .menu{ display:flex; align-items:center; gap:18px }
+    .menu a{ padding:8px 10px; border-radius:10px; transition:all .2s ease; color:var(--muted) }
+    .menu a:hover{ color:var(--ink); background:rgba(255,255,255,.06) }
+
+    /* Hero */
+    .hero{ padding:96px 0 64px }
+    .headline{ font-family:"Source Serif 4", ui-serif, Georgia, serif; font-size: clamp(36px, 6vw, 64px); line-height:1.05; margin:0 0 18px }
+    .sub{ color:var(--muted); font-size: clamp(16px, 2.4vw, 20px); max-width: 60ch }
+    .cta{ display:flex; gap:12px; margin-top:26px; flex-wrap:wrap }
+    .btn{ padding:12px 18px; border-radius:14px; border:1px solid var(--line); background:rgba(255,255,255,.02); color:var(--ink); font-weight:600; transition:transform .08s ease, background .2s ease, border-color .2s ease }
+    .btn:hover{ background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.18) }
+    .btn:active{ transform:translateY(1px) }
+    .btn.primary{ background:linear-gradient(135deg, rgba(125,211,252,.18), rgba(167,139,250,.18)); border-color:transparent }
+
+    /* Section shells */
+    section{ padding:56px 0; border-top:1px solid var(--line) }
+    h2{ font-size: clamp(22px, 3vw, 28px); margin:0 0 8px }
+    .lead{ color:var(--muted); margin:0 0 26px }
+
+    /* Cards grid */
+    .grid{ display:grid; grid-template-columns: repeat(12, 1fr); gap:16px }
+    .card{ grid-column: span 6; background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:22px; box-shadow: var(--shadow) }
+    .card h3{ margin:0 0 8px; font-size:18px }
+    .card p{ margin:0; color:var(--muted); line-height:1.6 }
+    @media (max-width: 800px){ .card{ grid-column:1/-1 } }
+
+    /* Before/After slider placeholder */
+    .ba{ position:relative; height:420px; border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); background:linear-gradient(180deg, rgba(125,211,252,.08), rgba(167,139,250,.08)); box-shadow: var(--shadow) }
+    .ba .before, .ba .after { position:absolute; inset:0; display:grid; place-items:center; font-weight:700; letter-spacing:.4px; text-transform:uppercase }
+    .ba .before{ color:#ffffff; background: repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0, rgba(255,255,255,.05) 10px, rgba(0,0,0,.05) 10px, rgba(0,0,0,.05) 20px) }
+    .ba .after{ color:#0b0d12; background:#f7f9fb; clip-path: inset(0 50% 0 0); transition: clip-path .25s ease }
+    .ba:hover .after{ clip-path: inset(0 0 0 0) }
+    .ba .hint{ position:absolute; bottom:12px; left:12px; font-size:12px; color:var(--muted); background:rgba(0,0,0,.3); padding:6px 10px; border-radius:999px; border:1px solid var(--line) }
+
+    /* Callout band */
+    .band{ margin-top:28px; padding:18px; border-radius:var(--radius); border:1px solid var(--line); background: linear-gradient(90deg, rgba(125,211,252,.08), rgba(167,139,250,.08)); display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap }
+    .band p{ margin:0; color:var(--muted) }
+
+    /* Footer */
+    footer{ padding:42px 0 70px; color:var(--muted) }
+    .foot{ display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; border-top:1px solid var(--line); padding-top:18px }
+    .foot a{ color:var(--muted) }
+
+    /* Subtle reveal */
+    .reveal{ opacity:0; transform: translateY(8px); animation: rise .6s ease forwards; }
+    .reveal:nth-child(1){ animation-delay:.05s } .reveal:nth-child(2){ animation-delay:.12s } .reveal:nth-child(3){ animation-delay:.18s }
+    @keyframes rise{ to{ opacity:1; transform:none } }
+  </style>
 </head>
 <body>
-
-  <nav class="main-nav">
-    <ul>
-      <li><a href="#philosophy">Philosophy</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#archive-preview">Before/After</a></li>
-    </ul>
-  </nav>
-
   <header>
-    <div class="logo-container">
-      <img src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon Logo" class="logo" />
-    </div>
-    <div class="intro">
-      <h1>Digital memory, without noise.</h1>
-      <p class="tagline">Minimalist structure. Honest restoration. Cross-device clarity.</p>
+    <div class="wrap nav">
+      <div class="brand"><span class="dot" aria-hidden="true"></span> Stylish Horizon</div>
+      <nav class="menu" aria-label="Primary">
+        <a href="#philosophy">Philosophy</a>
+        <a href="#services">Services</a>
+        <a href="#beforeafter">Before/After</a>
+      </nav>
     </div>
   </header>
 
   <main>
+    <section class="hero wrap">
+      <h1 class="headline reveal">Digital memory, without noise.</h1>
+      <p class="sub reveal">Minimalist structure. Honest restoration. Cross‑device clarity. We archive without spectacle. We design without decoration. We restore without nostalgia.</p>
+      <div class="cta reveal">
+        <a class="btn primary" href="#beforeafter">See Before / After</a>
+        <a class="btn" href="#services">Explore Services</a>
+      </div>
+    </section>
+
     <section id="philosophy">
-      <h2>Philosophy</h2>
-      <p>We archive without spectacle. We design without decoration. We restore without nostalgia.</p>
+      <div class="wrap">
+        <h2>Philosophy</h2>
+        <p class="lead">Quiet interfaces. Measurable fidelity. Fewer choices, better outcomes.</p>
+        <div class="grid">
+          <article class="card reveal">
+            <h3>Without Spectacle</h3>
+            <p>We let the footage speak. No artificial grain, no fake nostalgia, no over‑grading.</p>
+          </article>
+          <article class="card reveal">
+            <h3>Structure First</h3>
+            <p>Information architecture over decoration. Fast, legible, resilient layouts.</p>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section id="services">
-      <h2>Services</h2>
-      <ul>
-        <li>Minimalist site structures</li>
-        <li>Video restoration (MiniDV, VHS-C)</li>
-        <li>Consulting: anti-hype, honest UX</li>
-      </ul>
+      <div class="wrap">
+        <h2>Services</h2>
+        <p class="lead">MiniDV • VHS‑C • Hi8 — upscale, restoration, and honest presentation.</p>
+        <div class="grid">
+          <article class="card reveal">
+            <h3>Video Restoration</h3>
+            <p>Upscale to 4K, denoise, stabilize, true‑to‑source color management.</p>
+          </article>
+          <article class="card reveal">
+            <h3>Minimalist Sites</h3>
+            <p>Single‑file static builds for portfolios & archives. Fast by default.</p>
+          </article>
+          <article class="card reveal">
+            <h3>Consulting</h3>
+            <p>Anti‑hype UX, naming, information architecture, editorial tone.</p>
+          </article>
+          <article class="card reveal">
+            <h3>Archival Advice</h3>
+            <p>Ingest, codecs, storage strategy, long‑term integrity. Practical, not dogmatic.</p>
+          </article>
+        </div>
+        <div class="band">
+          <p>Want to see how it feels in motion? Scroll to the demo below. ↓</p>
+          <a class="btn" href="#beforeafter">Jump to demo</a>
+        </div>
+      </div>
     </section>
 
-    <section id="archive-preview">
-      <h2>Before / After</h2>
-      <div class="video-preview">
-        <video preload="auto" muted loop playsinline>
-          <source src="restored.mp4" type="video/mp4" />
-        </video>
+    <section id="beforeafter">
+      <div class="wrap">
+        <h2>Before / After</h2>
+        <p class="lead">Interactive split reveals the restoration. (Drop your assets later; the UI is ready.)</p>
+        <div class="ba" role="region" aria-label="Before and after demo">
+          <!-- TODO: Replace placeholders with your images or video frames.
+               Example: set .before to a background-image of the raw frame,
+               and .after to the restored frame; then wire up a real slider if you like. -->
+          <div class="before">Before (placeholder)</div>
+          <div class="after">After (placeholder)</div>
+          <div class="hint">Hover to reveal — tap on mobile</div>
+        </div>
+        <div class="band" style="margin-top:18px">
+          <p>Need a draggable handle? We can swap this hover effect for a slider in one line of JS.</p>
+          <button class="btn" id="toggleSlider">Enable handle</button>
+        </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; Stylish Horizon. Built for clarity.</p>
-    <div class="continue-hint">→ Continue</div>
+    <div class="wrap foot">
+      <small>© <span id="year"></span> Stylish Horizon — honest restoration</small>
+      <div style="display:flex; gap:14px; align-items:center">
+        <a href="mailto:contact@stylishhorizon.example">contact</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://github.com/stylishhorizon" target="_blank" rel="noopener">github</a>
+      </div>
+    </div>
   </footer>
 
+  <script>
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Optional: swap hover reveal with a draggable handle slider
+    const btn = document.getElementById('toggleSlider');
+    const ba = document.querySelector('.ba');
+    const after = ba.querySelector('.after');
+    let handleEnabled = false, dragging = false;
+
+    function enableHandle(){
+      handleEnabled = true;
+      after.style.clipPath = 'inset(0 50% 0 0)';
+      ba.style.cursor = 'ew-resize';
+      ba.addEventListener('pointerdown', startDrag);
+      ba.addEventListener('pointermove', onDrag);
+      window.addEventListener('pointerup', endDrag);
+      btn.textContent = 'Disable handle';
+    }
+    function disableHandle(){
+      handleEnabled = false; dragging = false;
+      after.style.clipPath = '';
+      ba.style.cursor = '';
+      ba.removeEventListener('pointerdown', startDrag);
+      ba.removeEventListener('pointermove', onDrag);
+      window.removeEventListener('pointerup', endDrag);
+      btn.textContent = 'Enable handle';
+    }
+    function startDrag(e){ dragging = true; onDrag(e); }
+    function endDrag(){ dragging = false; }
+    function onDrag(e){
+      if(!dragging) return;
+      const rect = ba.getBoundingClientRect();
+      const x = Math.min(Math.max(e.clientX - rect.left, 0), rect.width);
+      const right = Math.round(((rect.width - x) / rect.width) * 100);
+      after.style.clipPath = `inset(0 ${right}% 0 0)`;
+    }
+    btn?.addEventListener('click', () => handleEnabled ? disableHandle() : enableHandle());
+  </script>
 </body>
 </html>
