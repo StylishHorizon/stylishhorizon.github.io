@@ -5,32 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Archive / Project | Stylish Horizon</title>
 <style>
-  /* --- Основные стили --- */
-  body {
+  html, body {
     margin: 0;
+    padding: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: #0a0a0a;
     color: #f0f0f0;
   }
 
-  a {
-    color: #1e90ff;
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-
-  /* --- Шапка и меню --- */
   header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #0a0a0a;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
-    background-color: #0a0a0a;
-    position: sticky;
-    top: 0;
+    padding: 15px 40px;
     z-index: 100;
   }
 
@@ -44,17 +35,23 @@
   nav a {
     margin-left: 25px;
     font-weight: 500;
+    color: #f0f0f0;
+    text-decoration: none;
+    transition: 0.3s;
   }
 
-  /* --- Анимация логотипа --- */
+  nav a.active {
+    color: #1e90ff;
+    backdrop-filter: blur(5px);
+  }
+
   @keyframes fadeIn {
     to { opacity: 1; }
   }
 
-  /* --- Контент страницы --- */
   main {
     max-width: 900px;
-    margin: 60px auto;
+    margin: 100px auto 50px auto;
     padding: 0 20px;
   }
 
@@ -62,52 +59,36 @@
     margin-bottom: 50px;
   }
 
-  h1, h2, h3 {
-    color: #ffffff;
-  }
-
-  h1 {
-    font-size: 2em;
-    margin-bottom: 20px;
-  }
-
-  h2 {
-    margin-bottom: 15px;
-  }
-
-  p {
-    line-height: 1.6;
-  }
-
   .preview {
     width: 100%;
-    max-height: 400px;
+    max-width: 480px;
+    height: 270px;
     background-color: #222;
-    margin-bottom: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #999;
     font-style: italic;
+    border-radius: 6px;
   }
 
   .tech-info {
     background-color: #111;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
+    padding: 15px 20px;
+    border-radius: 6px;
   }
 
   .packages {
     display: flex;
-    gap: 20px;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
   }
 
   .package {
     background-color: #111;
-    padding: 15px;
-    border-radius: 5px;
+    padding: 15px 20px;
+    border-radius: 6px;
     flex: 1 1 200px;
   }
 
@@ -118,11 +99,13 @@
     color: #1e90ff;
   }
 
-  footer {
-    text-align: center;
-    padding: 40px 20px;
-    color: #555;
-    font-size: 0.9em;
+  a {
+    color: #1e90ff;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
   }
 </style>
 </head>
@@ -131,26 +114,23 @@
 <header>
   <div class="logo">Stylish Horizon</div>
   <nav>
-    <a href="index.html">Home</a>
-    <a href="manifest.html">Manifesto</a>
-    <a href="archive.html">Archive</a>
-    <a href="contact.html">Contact</a>
+    <a href="#preview" id="nav-preview">Preview</a>
+    <a href="#tech-info" id="nav-tech">Technical Info</a>
+    <a href="#packages" id="nav-packages">Packages</a>
   </nav>
 </header>
 
 <main>
-  <section>
-    <h1>Project Title</h1>
+  <section id="preview">
     <div class="preview">[Video Preview / 5 sec]</div>
   </section>
 
-  <section class="tech-info">
-    <h2>Technical Info</h2>
+  <section id="tech-info" class="tech-info">
     <p><strong>Type:</strong> DV / <strong>Info:</strong> Example / <strong>Mbps:</strong> 3.14 / <strong>FPS:</strong> 25 / <strong>Codec:</strong> ProRes 422 / <strong>Resolution:</strong> 720×576 / <strong>PAR:</strong> 1.067</p>
     <p><a href="#">Watch on YouTube</a></p>
   </section>
 
-  <section class="packages">
+  <section id="packages" class="packages">
     <div class="package">
       <h3>Package 1</h3>
       <p>Basic restoration, minor color correction, deinterlace only.</p>
@@ -164,9 +144,34 @@
   </section>
 </main>
 
-<footer>
-  &copy; 2025 Stylish Horizon. All rights reserved.
-</footer>
+<script>
+  const sections = document.querySelectorAll("section");
+  const navLinks = {
+    preview: document.getElementById("nav-preview"),
+    techInfo: document.getElementById("nav-tech"),
+    packages: document.getElementById("nav-packages")
+  };
+
+  window.addEventListener("scroll", () => {
+    let current = "";
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 80; // учитываем высоту меню
+      if (pageYOffset >= sectionTop) {
+        current = section.id;
+      }
+    });
+
+    // сброс активных классов
+    for (const key in navLinks) {
+      navLinks[key].classList.remove("active");
+    }
+
+    // 
+    if (current === "preview") navLinks.preview.classList.add("active");
+    else if (current === "tech-info") navLinks.techInfo.classList.add("active");
+    else if (current === "packages") navLinks.packages.classList.add("active");
+  });
+</script>
 
 </body>
 </html>
