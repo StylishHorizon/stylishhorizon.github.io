@@ -1,59 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Stylish Horizon</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #e0e0e0;
+      font-family: 'Helvetica Neue', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background-color: rgba(0, 0, 0, 0.85);
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      letter-spacing: 0.05em;
+      opacity: 0;
+      animation: fadeIn 1.5s ease-out forwards;
+    }
+
+    main {
+      padding: 4rem 2rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    section {
+      margin-bottom: 6rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1.2s ease-out forwards;
+      animation-delay: 0.5s;
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border: none;
+      display: block;
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+      backdrop-filter: blur(6px);
+    }
+
+    a {
+      color: #ff3c00;
+      text-decoration: none;
+      transition: letter-spacing 0.3s ease, opacity 0.3s ease;
+    }
+
+    a:hover {
+      letter-spacing: 0.5px;
+      opacity: 0.8;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <nav class="main-nav">
-    <ul>
-      <li><a href="#philosophy">Philosophy</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#archive-preview">Before/After</a></li>
-    </ul>
-  </nav>
-
   <header>
-    <div class="logo-container">
-      <img src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon Logo" class="logo" />
-    </div>
-    <div class="intro">
-      <h1>Digital memory, without noise.</h1>
-      <p class="tagline">Minimalist structure. Honest restoration. Cross-device clarity.</p>
-    </div>
+    Stylish Horizon — digital memory, not noise
   </header>
 
   <main>
-    <section id="philosophy">
-      <h2>Philosophy</h2>
-      <p>We archive without spectacle. We design without decoration. We restore without nostalgia.</p>
+    <section>
+      <video autoplay muted loop playsinline>
+        <source src="memory.mp4" type="video/mp4">
+      </video>
+      <h1>Memory as Witness</h1>
+      <p>We don’t archive for nostalgia. We preserve to resist forgetting. Every pixel, every frame — a testimony.</p>
     </section>
 
-    <section id="services">
-      <h2>Services</h2>
-      <ul>
-        <li>Minimalist site structures</li>
-        <li>Video restoration (MiniDV, VHS-C)</li>
-        <li>Consulting: anti-hype, honest UX</li>
-      </ul>
-    </section>
-
-    <section id="archive-preview">
-      <h2>Before / After</h2>
-      <div class="video-preview">
-        <video preload="auto" muted loop playsinline>
-          <source src="restored.mp4" type="video/mp4" />
-        </video>
-      </div>
+    <section>
+      <h2>Minimalism ≠ Emptiness</h2>
+      <p>What remains when we remove the noise? Clarity. Honesty. Space to breathe.</p>
+      <p><a href="#continue">→ Continue</a></p>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; Stylish Horizon. Built for clarity.</p>
-    <div class="continue-hint">→ Continue</div>
+  <footer id="continue">
+    Stylish Horizon © 2025 — Built without compromise
   </footer>
 
 </body>
