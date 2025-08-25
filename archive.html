@@ -1,67 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Archive</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <title>Stylish Horizon Archive</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles/archive.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+
   <header>
-    <div class="logo fade-in">Stylish Horizon</div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Index</a></li>
-        <li><a href="manifest.html">Manifest</a></li>
-        <li class="active"><a href="archive.html">Archive</a></li>
-      </ul>
-    </nav>
+    <img src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon Logo">
   </header>
 
   <main>
-    <section class="archive-block">
-      <h2>Archive 01</h2>
-      <div class="video-pair">
-        <div class="video-item">
-          <p>Before</p>
-          <a href="https://youtube.com/..." target="_blank">YouTube Link</a>
-          <video src="github-hosted-before-01.mp4" controls></video>
-        </div>
-        <div class="video-item">
-          <p>After</p>
-          <a href="https://youtube.com/..." target="_blank">YouTube Link</a>
-          <video src="github-hosted-after-01.mp4" controls></video>
-        </div>
-      </div>
-      <div class="frame-comparison">
-        <img src="frame-before-01.jpg" alt="Before frame">
-        <img src="frame-after-01.jpg" alt="After frame">
-      </div>
-    </section>
-
-    <section class="archive-block">
-      <h2>Archive 02</h2>
-      <div class="video-pair">
-        <div class="video-item">
-          <p>Before</p>
-          <a href="https://youtube.com/..." target="_blank">YouTube Link</a>
-          <video src="github-hosted-before-02.mp4" controls></video>
-        </div>
-        <div class="video-item">
-          <p>After</p>
-          <a href="https://youtube.com/..." target="_blank">YouTube Link</a>
-          <video src="github-hosted-after-02.mp4" controls></video>
-        </div>
-      </div>
-      <div class="frame-comparison">
-        <img src="frame-before-02.jpg" alt="Before frame">
-        <img src="frame-after-02.jpg" alt="After frame">
-      </div>
+    <section id="archive-content">
+      <!-- Archive entries will be injected here -->
     </section>
   </main>
 
-  <footer>
-    <p>© Stylish Horizon. All rights reserved.</p>
-  </footer>
+  <script src="assets/scripts/archive.js"></script>
 </body>
 </html>
