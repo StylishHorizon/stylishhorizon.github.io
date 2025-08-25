@@ -1,215 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Archive / Project | Stylish Horizon</title>
-<style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-color: #0a0a0a;
-    color: #f0f0f0;
-    scroll-behavior: smooth;
-  }
-
-  /* --- Меню сверху --- */
-  header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #0a0a0a;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 40px;
-    z-index: 100;
-  }
-
-  .logo {
-    font-size: 2em;
-    font-weight: bold;
-    opacity: 0;
-    animation: fadeIn 2s forwards;
-  }
-
-  nav a {
-    margin-left: 25px;
-    font-weight: 500;
-    color: #f0f0f0;
-    text-decoration: none;
-    transition: 0.3s;
-  }
-
-  nav a.active {
-    color: #1e90ff;
-    backdrop-filter: blur(5px);
-  }
-
-  nav a:hover {
-    color: #1e90ff;
-    backdrop-filter: blur(5px);
-  }
-
-  @keyframes fadeIn {
-    to { opacity: 1; }
-  }
-
-  /* --- Основной контент --- */
-  main {
-    max-width: 900px;
-    margin: 120px auto 50px auto; /* учитываем фикс. меню */
-    padding: 0 20px;
-  }
-
-  section {
-    margin-bottom: 60px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s ease-out;
-  }
-
-  section.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .preview {
-    width: 100%;
-    max-width: 480px;
-    height: 270px;
-    background-color: #222;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #999;
-    font-style: italic;
-    border-radius: 6px;
-    margin: 0 auto 30px auto;
-  }
-
-  .tech-info {
-    background-color: #111;
-    padding: 15px 20px;
-    border-radius: 6px;
-    max-width: 600px;
-    margin: 0 auto 30px auto;
-  }
-
-  .packages {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-  }
-
-  .package {
-    background-color: #111;
-    padding: 15px 20px;
-    border-radius: 6px;
-    flex: 1 1 200px;
-  }
-
-  .price {
-    font-weight: bold;
-    margin-top: 10px;
-    font-size: 1.1em;
-    color: #1e90ff;
-  }
-
-  a {
-    color: #1e90ff;
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archive</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <header>
+    <div class="logo fade-in">Stylish Horizon</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Index</a></li>
+        <li><a href="manifest.html">Manifest</a></li>
+        <li class="active"><a href="archive.html">Archive</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<header>
-  <div class="logo">Stylish Horizon</div>
-  <nav>
-    <a href="#preview" id="nav-preview">Preview</a>
-    <a href="#tech-info" id="nav-tech">Technical Info</a>
-    <a href="#packages" id="nav-packages">Packages</a>
-  </nav>
-</header>
+  <main>
+    <section class="archive-block">
+      <h2>Archive 01</h2>
+      <div class="video-pair">
+        <div class="video-item">
+          <p>Before</p>
+          <a href="https://youtube.com/..." target="_blank">YouTube Link</a>
+          <video src="github-hosted-before-01.mp4" controls></video>
+        </div>
+        <div class="video-item">
+          <p>After</p>
+          <a href="https://youtube.com/..." target="_blank">YouTube Link</a>
+          <video src="github-hosted-after-01.mp4" controls></video>
+        </div>
+      </div>
+      <div class="frame-comparison">
+        <img src="frame-before-01.jpg" alt="Before frame">
+        <img src="frame-after-01.jpg" alt="After frame">
+      </div>
+    </section>
 
-<main>
-  <section id="preview">
-    <div class="preview">[Video Preview / 5 sec]</div>
-  </section>
+    <section class="archive-block">
+      <h2>Archive 02</h2>
+      <div class="video-pair">
+        <div class="video-item">
+          <p>Before</p>
+          <a href="https://youtube.com/..." target="_blank">YouTube Link</a>
+          <video src="github-hosted-before-02.mp4" controls></video>
+        </div>
+        <div class="video-item">
+          <p>After</p>
+          <a href="https://youtube.com/..." target="_blank">YouTube Link</a>
+          <video src="github-hosted-after-02.mp4" controls></video>
+        </div>
+      </div>
+      <div class="frame-comparison">
+        <img src="frame-before-02.jpg" alt="Before frame">
+        <img src="frame-after-02.jpg" alt="After frame">
+      </div>
+    </section>
+  </main>
 
-  <section id="tech-info" class="tech-info">
-    <p><strong>Type:</strong> DV / <strong>Info:</strong> Example / <strong>Mbps:</strong> 3.14 / <strong>FPS:</strong> 25 / <strong>Codec:</strong> ProRes 422 / <strong>Resolution:</strong> 720×576 / <strong>PAR:</strong> 1.067</p>
-    <p><a href="#">Watch on YouTube</a></p>
-  </section>
-
-  <section id="packages" class="packages">
-    <div class="package">
-      <h3>Package 1</h3>
-      <p>Basic restoration, minor color correction, deinterlace only.</p>
-      <div class="price">$50</div>
-    </div>
-    <div class="package">
-      <h3>Package 2</h3>
-      <p>Full restoration, noise reduction, frame interpolation, detail recovery.</p>
-      <div class="price">$120</div>
-    </div>
-  </section>
-</main>
-
-<script>
-  const sections = document.querySelectorAll("section");
-  const navLinks = {
-    preview: document.getElementById("nav-preview"),
-    techInfo: document.getElementById("nav-tech"),
-    packages: document.getElementById("nav-packages")
-  };
-
-  function updateActiveNav() {
-    let current = "";
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - 100;
-      if (pageYOffset >= sectionTop) {
-        current = section.id;
-      }
-    });
-
-    for (const key in navLinks) {
-      navLinks[key].classList.remove("active");
-    }
-
-    if (current === "preview") navLinks.preview.classList.add("active");
-    else if (current === "tech-info") navLinks.techInfo.classList.add("active");
-    else if (current === "packages") navLinks.packages.classList.add("active");
-  }
-
-  function revealSections() {
-    sections.forEach(section => {
-      const sectionTop = section.getBoundingClientRect().top;
-      const windowHeight = window.innerHeight;
-      if (sectionTop < windowHeight - 100) {
-        section.classList.add("visible");
-      }
-    });
-  }
-
-  window.addEventListener("scroll", () => {
-    updateActiveNav();
-    revealSections();
-  });
-
-  // при загрузке страницы
-  window.addEventListener("load", () => {
-    revealSections();
-    updateActiveNav();
-  });
-</script>
-
+  <footer>
+    <p>© Stylish Horizon. All rights reserved.</p>
+  </footer>
 </body>
 </html>
