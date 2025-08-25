@@ -1,36 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Stylish Horizon</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/css/style.css">">
-</head>
-<body>
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  <header>
-    Stylish Horizon — digital memory, not noise
-  </header>
+/* Base */
+body {
+  background-color: #000;
+  color: #eee;
+  font-family: sans-serif;
+  overflow-x: hidden;
+}
 
-  <main>
-    <section>
-      <video autoplay muted loop playsinline>
-        <source src="memory.mp4" type="video/mp4">
-      </video>
-      <h1>Memory as Witness</h1>
-      <p>We don’t archive for nostalgia. We preserve to resist forgetting. Every pixel, every frame — a testimony.</p>
-    </section>
+/* Header */
+header {
+  position: sticky;
+  top: 0;
+  background-color: #000;
+  height: 64px;
+  border-bottom: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
 
-    <section>
-      <h2>Minimalism ≠ Emptiness</h2>
-      <p>What remains when we remove the noise? Clarity. Honesty. Space to breathe.</p>
-      <p><a href="#continue">→ Continue</a></p>
-    </section>
-  </main>
+.logo {
+  height: 32px;
+  max-width: 160px;
+  object-fit: contain;
+}
 
-  <footer id="continue">
-    Stylish Horizon © 2025 — Built without compromise
-  </footer>
+/* Main */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 1rem;
+  gap: 4rem;
+}
 
-</body>
-</html>
+/* Sections */
+.hero,
+.content {
+  width: 100%;
+  max-width: 960px;
+  height: 240px;
+  background-color: #111;
+  border: 1px solid #333;
+}
