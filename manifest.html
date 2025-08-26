@@ -6,26 +6,21 @@
   <title>Stylish Horizon</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" />
   <style>
-    /* = БАЗА (твоя) + живой фон = */
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
       color: #f5f5f5;
-      scroll-behavior: smooth;
-      line-height: 1.6;
-      /* вместо статичного #0a0a0a — мягкий «дышащий» фон */
       background: radial-gradient(1200px 800px at 20% 20%, #0f0f0f 0%, #0a0a0a 40%, #050505 100%);
       background-attachment: fixed;
       animation: bgMove 24s ease-in-out infinite;
-      position: relative;
       overflow-x: hidden;
+      line-height: 1.6;
     }
     @keyframes bgMove {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    /* Тонкий шум поверх фона (еле заметный premium-эффект) */
     body::before {
       content: "";
       position: fixed;
@@ -37,12 +32,11 @@
       mix-blend-mode: overlay;
       z-index: 0;
     }
-    /* = Навигация (как у тебя) + лёгкий blur и active = */
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      background-color: rgba(10,10,10,0.85);
+      background-color: rgba(10, 10, 10, 0.85);
       backdrop-filter: blur(6px);
       display: flex;
       justify-content: center;
@@ -55,16 +49,16 @@
       margin: 0 1rem;
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s, text-shadow 0.3s;
       position: relative;
+      transition: color 0.3s, text-shadow 0.3s;
     }
     nav a:hover {
       color: #ddd;
-      text-shadow: 0 0 6px rgba(255,255,255,0.35);
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.35);
     }
     nav a.active {
-      color: #ffffff;
-      text-shadow: 0 0 10px rgba(255,255,255,0.45);
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.45);
     }
     nav a.active::after {
       content: "";
@@ -77,7 +71,6 @@
       background: #f5f5f5;
       border-radius: 2px;
     }
-    /* = Хедер и лого (твоё) + breathing после fade-in = */
     header {
       display: flex;
       justify-content: center;
@@ -88,18 +81,9 @@
     }
     header img {
       max-width: 220px;
-      opacity: 0.2;
-      animation: fadeInLogo 2s forwards, breathe 10s ease-in-out 2s infinite;
+      opacity: 1;
       will-change: transform, opacity;
     }
-    @keyframes fadeInLogo {
-      to { opacity: 1; }
-    }
-    @keyframes breathe {
-      0%, 100% { transform: scale(1); }
-      50%      { transform: scale(1.03); }
-    }
-    /* = Секции (твоё) + чуть современнее reveal = */
     section {
       padding: 2rem;
       max-width: 900px;
@@ -123,8 +107,8 @@
     .hero p {
       font-size: 1.2rem;
       color: #bbb;
-      max-width: 700px;
       white-space: pre-line;
+      max-width: 700px;
     }
     .section-title {
       font-size: 2rem;
@@ -189,14 +173,11 @@
       border-radius: 6px;
       border: none;
       font-size: 1rem;
-    }
-    .contact input, .contact textarea {
       background-color: #222;
       color: #f5f5f5;
     }
     .contact button {
       background-color: #444;
-      color: #fff;
       cursor: pointer;
       transition: background-color 0.3s;
     }
@@ -210,8 +191,12 @@
       color: #555;
     }
     @media (max-width: 768px) {
-      .comparison { grid-template-columns: 1fr; }
-      nav a { margin: 0 0.5rem; }
+      .comparison {
+        grid-template-columns: 1fr;
+      }
+      nav a {
+        margin: 0 0.5rem;
+      }
     }
   </style>
 </head>
@@ -273,27 +258,40 @@ That restoration is not a service — it’s a responsibility.</p>
   <p>© 2025 Stylish Horizon</p>
 </footer>
 <script>
+  // Плавное появление секций с использованием IntersectionObserver
   const sections = document.querySelectorAll('section');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+
+      if (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= viewportHeight &&
+        rect.right <= viewportWidth
+      ) {
+        // Секция видна при загрузке страницы
+        section.classList.add('visible');
+      } else {
+        observer.observe(section);
       }
     });
-  }, { threshold: 0.2 });
-  sections.forEach(section => observer.observe(section));
-  (function highlightActiveNav(){
-    const path = location.pathname.split('/').pop() || 'index.html';
-    const links = document.querySelectorAll('nav a');
-    links.forEach(a => {
-      const href = a.getAttribute('href');
-      if ((path === 'index.html' && /(^|\\/)index\\.html$/.test(href)) ||
-          (path && href.endsWith(path))) {
-        a.classList.add('active');
-      }
-    });
-  })();
+  } else {
+    // fallback: для старых браузеров показать сразу все секции
+    sections.forEach(section => section.classList.add('visible'));
+  }
 </script>
 </body>
 </html>
