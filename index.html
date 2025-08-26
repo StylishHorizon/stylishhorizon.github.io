@@ -4,239 +4,125 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stylish Horizon</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
+  <link rel="stylesheet" href="style.css">
   <style>
+    /* Живой фон */
     body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #0a0a0a;
-      color: #f5f5f5;
-      scroll-behavior: smooth;
-      line-height: 1.6;
+      background: radial-gradient(circle at 20% 20%, #0a0a0a, #000000);
+      background-size: 200% 200%;
+      animation: bgMove 20s ease infinite;
+      position: relative;
+      overflow-x: hidden;
     }
-    nav {
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Слой с шумом */
+    body::before {
+      content: "";
       position: fixed;
-      top: 0;
-      width: 100%;
-      background-color: #0a0a0a;
-      display: flex;
-      justify-content: center;
-      padding: 0.5rem 0;
-      z-index: 1000;
-      border-bottom: 1px solid #222;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.12'/></svg>");
+      background-size: 200px 200px;
+      opacity: 0.15;
+      mix-blend-mode: overlay;
+      z-index: 0;
     }
-    nav a {
-      color: #f5f5f5;
-      margin: 0 1rem;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
+
+    /* breathing-эффект для логотипа */
+    .logo img {
+      animation: breathing 6s ease-in-out infinite;
+      position: relative;
+      z-index: 1;
     }
-    nav a:hover {
-      color: #ccc;
+    @keyframes breathing {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.95; }
     }
-    header {
-      display: flex;
-      justify-content: center;
-      padding: 0.5rem 0;
-      margin-top: 50px;
+
+    /* Активное меню */
+    nav ul li a.active {
+      color: #fff;
+      text-shadow: 0 0 8px rgba(255,255,255,0.8);
+      backdrop-filter: blur(4px);
+      border-radius: 8px;
+      padding: 4px 8px;
+      z-index: 1;
+      position: relative;
     }
-    header img {
-      max-width: 220px;
-      opacity: 0.2;
-      animation: fadeInLogo 2s forwards;
-    }
-    @keyframes fadeInLogo {
-      to { opacity: 1; }
-    }
-    section {
-      padding: 2rem 2rem 2rem 2rem;
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: left;
+
+    /* Scroll reveal */
+    .reveal {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      transform: translateY(40px) scale(0.98);
+      transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+      position: relative;
+      z-index: 1;
     }
-    section.visible {
+    .reveal.active {
       opacity: 1;
-      transform: translateY(0);
-    }
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      font-weight: 700;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      color: #bbb;
-      max-width: 700px;
-    }
-    .section-title {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    .comparison {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-    .comparison .block {
-      text-align: left;
-    }
-    iframe {
-      width: 100%;
-      height: 315px;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-    }
-    .service .package {
-      background-color: #111;
-      padding: 1.5rem;
-      margin: 1rem 0;
-      border-radius: 12px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .service .package:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.5);
-    }
-    .service .package h3 {
-      margin-top: 0;
-      color: #fff;
-    }
-    .contact form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-    .contact input, .contact textarea, .contact button {
-      padding: 0.8rem;
-      border-radius: 6px;
-      border: none;
-      font-size: 1rem;
-    }
-    .contact input, .contact textarea {
-      background-color: #222;
-      color: #f5f5f5;
-    }
-    .contact button {
-      background-color: #444;
-      color: #fff;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    .contact button:hover {
-      background-color: #666;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #555;
-    }
-    @media (max-width: 768px) {
-      .comparison {
-        grid-template-columns: 1fr;
-      }
-      nav a {
-        margin: 0 0.5rem;
-      }
+      transform: translateY(0) scale(1);
     }
   </style>
 </head>
 <body>
-
-<nav>
-  <a href="index.html">Home</a>
-  <a href="manifest.html">Manifest</a>
-  <a href="archive.html">Archive</a>
-  <a href="contact.html">Contact</a>
-</nav>
-
-<header>
-  <img src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon Logo">
-</header>
-
-<section class="hero">
-  <h1>Digital restoration with integrity</h1>
-  <p>No hype. No noise. Just memory.<br>We restore MiniDV, VHS, Hi8, and forgotten drives. Every file is reviewed manually. Not filters, not nostalgia — just truth.</p>
-</section>
-
-<section class="manifest">
-  <h2 class="section-title">Manifesto</h2>
-  <p>We don’t restore formats. We restore memory.<br>Stylish Horizon exists to preserve what matters — not what sells. MiniDV, VHS, Hi8, forgotten drives — each one holds fragments of truth. We treat them with care, not nostalgia.<br>No filters. No enhancement. No storytelling. Just clarity, context, and quiet respect. We believe memory should be accessible, not monetized. Restoration is not a service — it’s a responsibility.</p>
-</section>
-
-<section class="archive">
-  <h2 class="section-title">Archive</h2>
-  <div class="comparison">
-    <div class="block">
-      <h3>Before</h3>
-      <iframe src="https://www.youtube.com/embed/rjS13daTnKc?start=15" allowfullscreen></iframe>
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="Stylish Horizon Logo">
     </div>
-    <div class="block">
-      <h3>After</h3>
-      <iframe src="https://www.youtube.com/embed/aSduAKdM_zk?start=15" allowfullscreen></iframe>
-    </div>
-  </div>
-</section>
+    <nav>
+      <ul>
+        <li><a href="#home" class="menu-link">Home</a></li>
+        <li><a href="#about" class="menu-link">About</a></li>
+        <li><a href="#projects" class="menu-link">Projects</a></li>
+        <li><a href="#contact" class="menu-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<section class="service">
-  <h2 class="section-title">Restoration Services</h2>
-  <div class="package">
-    <h3>Package 1: Legacy</h3>
-    <ul>
-      <li>Deinterlacing: Removes combing artifacts for smoother playback</li>
-      <li>Basic Color Correction: Restores faded tones</li>
-      <li>Noise Reduction: Cleans digital grain and artifacts</li>
-      <li>Output: Standard Definition (SD)</li>
-    </ul>
-  </div>
-  <div class="package">
-    <h3>Package 2: Ultimate Restoration</h3>
-    <ul>
-      <li>All Legacy features</li>
-      <li>Advanced Color Grading: Cinematic tone mapping</li>
-      <li>Detail Enhancement: Sharpening & texture recovery</li>
-      <li>Artifact Removal: Frame-by-frame cleanup</li>
-      <li>Upscaling: Full HD or optional 4K</li>
-      <li>Output: High Definition (HD/4K)</li>
-    </ul>
-  </div>
-</section>
+  <main>
+    <section id="home" class="reveal">Welcome to Stylish Horizon</section>
+    <section id="about" class="reveal">About Us</section>
+    <section id="projects" class="reveal">Our Projects</section>
+    <section id="contact" class="reveal">Contact Info</section>
+  </main>
 
-<section class="contact">
-  <h2 class="section-title">Contact</h2>
-  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <textarea name="message" placeholder="Describe your tapes or request" rows="5" required></textarea>
-    <button type="submit">Send Request</button>
-  </form>
-  <p style="text-align:center; margin-top:1rem; color:#888;">Minimalist chat placeholder (Tawk.to/Crisp can be integrated)</p>
-</section>
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll(".reveal");
+    window.addEventListener("scroll", () => {
+      for (let el of reveals) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          el.classList.add("active");
+        }
+      }
+    });
 
-<footer>
-  <p>© 2025 Stylish Horizon</p>
-</footer>
+    // Active menu
+    const sections = document.querySelectorAll("section");
+    const menuLinks = document.querySelectorAll(".menu-link");
 
-<script>
-// Анимация появления блоков при скролле
-const sections = document.querySelectorAll('section');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.2 });
-sections.forEach(section => observer.observe(section));
-</script>
-
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute("id");
+        }
+      });
+      menuLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href").includes(current)) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
 </body>
 </html>
