@@ -1,242 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Stylish Horizon</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background-color: #0a0a0a;
+      background: linear-gradient(135deg, #0a0a0a, #111);
+      background-size: 200% 200%;
+      animation: gradientMove 20s ease infinite;
       color: #f5f5f5;
       scroll-behavior: smooth;
       line-height: 1.6;
     }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Навигация */
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      background-color: #0a0a0a;
+      background-color: rgba(10,10,10,0.7);
+      backdrop-filter: blur(6px);
       display: flex;
       justify-content: center;
       padding: 0.5rem 0;
       z-index: 1000;
       border-bottom: 1px solid #222;
     }
+
     nav a {
       color: #f5f5f5;
       margin: 0 1rem;
       text-decoration: none;
       font-weight: 500;
+      position: relative;
       transition: color 0.3s;
     }
-    nav a:hover {
-      color: #ccc;
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -4px;
+      width: 0%;
+      height: 2px;
+      background: #f5f5f5;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
     }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a.active {
+      color: #fff;
+    }
+    nav a.active::after {
+      width: 100%;
+    }
+
+    /* Лого */
     header {
       display: flex;
       justify-content: center;
-      padding: 0.5rem 0;
-      margin-top: 50px;
+      padding: 4rem 0 2rem;
+      margin-top: 60px;
     }
+
     header img {
       max-width: 220px;
-      opacity: 0.2;
-      animation: fadeInLogo 2s forwards;
+      opacity: 0;
+      animation: fadeInLogo 2s forwards, breathe 6s ease-in-out infinite;
     }
+
     @keyframes fadeInLogo {
       to { opacity: 1; }
     }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+
+    /* Секции */
     section {
-      padding: 2rem 2rem 2rem 2rem;
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: left;
+      padding: 4rem 10%;
+      min-height: 100vh;
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      transition: all 0.8s ease-out;
     }
+
     section.visible {
       opacity: 1;
       transform: translateY(0);
     }
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      font-weight: 700;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      color: #bbb;
-      max-width: 700px;
-    }
-    .section-title {
-      font-size: 2rem;
+
+    h1, h2 {
       margin-bottom: 1rem;
     }
-    .comparison {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-    .comparison .block {
-      text-align: left;
-    }
-    iframe {
-      width: 100%;
-      height: 315px;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-    }
-    .service .package {
-      background-color: #111;
-      padding: 1.5rem;
-      margin: 1rem 0;
-      border-radius: 12px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .service .package:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.5);
-    }
-    .service .package h3 {
-      margin-top: 0;
-      color: #fff;
-    }
-    .contact form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-    .contact input, .contact textarea, .contact button {
-      padding: 0.8rem;
-      border-radius: 6px;
-      border: none;
-      font-size: 1rem;
-    }
-    .contact input, .contact textarea {
-      background-color: #222;
-      color: #f5f5f5;
-    }
-    .contact button {
-      background-color: #444;
-      color: #fff;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    .contact button:hover {
-      background-color: #666;
-    }
+
     footer {
       text-align: center;
       padding: 2rem;
+      border-top: 1px solid #222;
       font-size: 0.9rem;
-      color: #555;
-    }
-    @media (max-width: 768px) {
-      .comparison {
-        grid-template-columns: 1fr;
-      }
-      nav a {
-        margin: 0 0.5rem;
-      }
+      opacity: 0.7;
     }
   </style>
 </head>
 <body>
+  <nav>
+    <a href="#home" class="active">Home</a>
+    <a href="#services">Services</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="manifest.html">Manifest</a>
-  <a href="archive.html">Archive</a>
-  <a href="contact.html">Contact</a>
-</nav>
+  <header id="home">
+    <img src="logo.png" alt="Logo"/>
+  </header>
 
-<header>
-  <img src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon Logo">
-</header>
+  <main>
+    <section id="services">
+      <h2>Our Services</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec est id neque dapibus malesuada.</p>
+    </section>
 
-<section class="hero">
-  <h1>Digital restoration with integrity</h1>
-  <p>No hype. No noise. Just memory.<br>We restore MiniDV, VHS, Hi8, and forgotten drives. Every file is reviewed manually. Not filters, not nostalgia — just truth.</p>
-</section>
+    <section id="portfolio">
+      <h2>Portfolio</h2>
+      <p>Some showcase projects with visual emphasis.</p>
+    </section>
 
-<section class="manifest">
-  <h2 class="section-title">Manifesto</h2>
-  <p>We don’t restore formats. We restore memory.<br>Stylish Horizon exists to preserve what matters — not what sells. MiniDV, VHS, Hi8, forgotten drives — each one holds fragments of truth. We treat them with care, not nostalgia.<br>No filters. No enhancement. No storytelling. Just clarity, context, and quiet respect. We believe memory should be accessible, not monetized. Restoration is not a service — it’s a responsibility.</p>
-</section>
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Get in touch with us: email@example.com</p>
+    </section>
+  </main>
 
-<section class="archive">
-  <h2 class="section-title">Archive</h2>
-  <div class="comparison">
-    <div class="block">
-      <h3>Before</h3>
-      <iframe src="https://www.youtube.com/embed/rjS13daTnKc?start=15" allowfullscreen></iframe>
-    </div>
-    <div class="block">
-      <h3>After</h3>
-      <iframe src="https://www.youtube.com/embed/aSduAKdM_zk?start=15" allowfullscreen></iframe>
-    </div>
-  </div>
-</section>
+  <footer>
+    © 2025 Stylish Horizon
+  </footer>
 
-<section class="service">
-  <h2 class="section-title">Restoration Services</h2>
-  <div class="package">
-    <h3>Package 1: Legacy</h3>
-    <ul>
-      <li>Deinterlacing: Removes combing artifacts for smoother playback</li>
-      <li>Basic Color Correction: Restores faded tones</li>
-      <li>Noise Reduction: Cleans digital grain and artifacts</li>
-      <li>Output: Standard Definition (SD)</li>
-    </ul>
-  </div>
-  <div class="package">
-    <h3>Package 2: Ultimate Restoration</h3>
-    <ul>
-      <li>All Legacy features</li>
-      <li>Advanced Color Grading: Cinematic tone mapping</li>
-      <li>Detail Enhancement: Sharpening & texture recovery</li>
-      <li>Artifact Removal: Frame-by-frame cleanup</li>
-      <li>Upscaling: Full HD or optional 4K</li>
-      <li>Output: High Definition (HD/4K)</li>
-    </ul>
-  </div>
-</section>
+  <script>
+    // Scroll reveal
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, { threshold: 0.2 });
+    sections.forEach(sec => observer.observe(sec));
 
-<section class="contact">
-  <h2 class="section-title">Contact</h2>
-  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <textarea name="message" placeholder="Describe your tapes or request" rows="5" required></textarea>
-    <button type="submit">Send Request</button>
-  </form>
-  <p style="text-align:center; margin-top:1rem; color:#888;">Minimalist chat placeholder (Tawk.to/Crisp can be integrated)</p>
-</section>
-
-<footer>
-  <p>© 2025 Stylish Horizon</p>
-</footer>
-
-<script>
-// Анимация появления блоков при скролле
-const sections = document.querySelectorAll('section');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.2 });
-sections.forEach(section => observer.observe(section));
-</script>
-
+    // Active link highlight
+    const navLinks = document.querySelectorAll("nav a");
+    const opts = { threshold: 0.6 };
+    const secObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => link.classList.remove("active"));
+          const activeLink = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+          if (activeLink) activeLink.classList.add("active");
+        }
+      });
+    }, opts);
+    document.querySelectorAll("header, section").forEach(sec => secObserver.observe(sec));
+  </script>
 </body>
 </html>
