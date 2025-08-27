@@ -4,28 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stylish Horizon</title>
-
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Inter -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
-
-  <!-- === CSS === -->
   <style>
-    /* === Базовый стиль + фон === */
+    /* === БАЗА + ДЫШАЩИЙ ФОН === */
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
       color: #f5f5f5;
-      line-height: 1.6;
       scroll-behavior: smooth;
+      line-height: 1.6;
       background: radial-gradient(1200px 800px at 20% 20%, #0f0f0f 0%, #0a0a0a 40%, #050505 100%);
       background-attachment: fixed;
       animation: bgMove 24s ease-in-out infinite;
-      overflow-x: hidden;
       position: relative;
+      overflow-x: hidden;
     }
     @keyframes bgMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
     body::before {
@@ -40,39 +37,31 @@
       z-index: 0;
     }
 
-    /* === Меню === */
+    /* === Навигация === */
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.5rem 2rem;
-      z-index: 1000;
       background-color: rgba(10,10,10,0.85);
       backdrop-filter: blur(6px);
-      border-bottom: 1px solid #222;
-    }
-    nav .menu-links {
       display: flex;
+      justify-content: center;
+      padding: 0.5rem 0;
+      z-index: 1000;
+      border-bottom: 1px solid #222;
+      transition: top 0.3s ease;
     }
+    nav.hidden { top: -70px; }
     nav a {
       color: #f5f5f5;
       margin: 0 1rem;
       text-decoration: none;
       font-weight: 500;
+      transition: color 0.3s, text-shadow 0.3s, transform 0.3s;
       position: relative;
-      transition: color 0.3s, text-shadow 0.3s;
     }
-    nav a:hover {
-      color: #ddd;
-      text-shadow: 0 0 6px rgba(255,255,255,0.35);
-    }
-    nav a.active {
-      color: #fff;
-      text-shadow: 0 0 10px rgba(255,255,255,0.45);
-    }
+    nav a:hover { color: #ddd; text-shadow: 0 0 6px rgba(255,255,255,0.35); transform: scale(1.02);}
+    nav a.active { color: #ffffff; text-shadow: 0 0 10px rgba(255,255,255,0.45);}
     nav a.active::after {
       content: "";
       position: absolute;
@@ -85,238 +74,174 @@
       border-radius: 2px;
     }
 
-    /* === Лого и название === */
-    .logo-link {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      color: #f5f5f5;
-    }
-    .logo-img {
-      height: 40px;
-      margin-right: 0.6rem;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeSlideInLogo 1.2s forwards;
-    }
-    .logo-text {
-      font-size: 1.5rem;
-      font-weight: 700;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeSlideInText 2.3s forwards;
-    }
-    @keyframes fadeSlideInLogo {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeSlideInText {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* === Hero Section === */
-    .hero {
-      height: 100vh;
+    /* === Header: logo + title === */
+    header {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      text-align: center;
-      padding: 0 2rem;
+      justify-content: center;
+      padding-top: 60px;
       z-index: 1;
       position: relative;
     }
-    .hero h1 {
-      font-size: 2.5rem;
+    .logo-title {
+      display: flex;
+      align-items: center;
+      opacity: 0;
+      transform: scale(0.98);
+      animation: fadeInLogo 1.2s forwards;
+    }
+    .logo-title h1 {
+      font-size: 2.8rem;
       font-weight: 700;
-      margin-bottom: 1rem;
+      margin-left: 1rem;
       opacity: 0;
-      transform: translateY(20px);
-      animation: fadeSlideInHero 1.5s forwards 0.5s;
+      animation: fadeInTitle 2.3s forwards;
     }
-    .hero p {
-      font-size: 1.2rem;
-      color: #bbb;
-      max-width: 700px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeSlideInHero 1.5s forwards 1s;
+    .logo-title img {
+      max-width: 120px;
+      display: block;
     }
-    @keyframes fadeSlideInHero {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .scroll-down {
-      position: absolute;
-      bottom: 2rem;
-      font-size: 2rem;
-      color: #f5f5f5;
-      opacity: 0;
-      animation: bounceArrow 2s infinite 2s;
-    }
-    @keyframes bounceArrow {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
+    @keyframes fadeInLogo { to { opacity: 1; transform: scale(1); } }
+    @keyframes fadeInTitle { to { opacity: 1; } }
 
-    /* === Content Sections === */
+    /* Scroll hint */
+    .scroll-hint {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      opacity: 0.3;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100% {opacity:0.3;} 50% {opacity:0.6;} }
+
+    /* === Секции текста === */
     section {
-      padding: 4rem 2rem;
+      padding: 2rem 2rem;
       max-width: 900px;
-      margin: 0 auto;
+      margin: 2rem auto;
+      text-align: left;
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(24px) scale(0.985);
       transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.19,1,0.22,1);
       position: relative;
       z-index: 1;
+      background-color: rgba(0,0,0,0.5);
+      border-radius: 12px;
+      backdrop-filter: blur(4px);
     }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .section-title {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
+    section.visible { opacity: 1; transform: translateY(0) scale(1); }
+    section p { margin: 0.5rem 0; transition: opacity 0.6s ease; }
+
+    section:hover { transform: scale(1.02); }
 
     /* === Footer === */
     footer {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
       text-align: center;
       padding: 2rem;
       font-size: 0.9rem;
       color: #555;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
       opacity: 0;
-      animation: fadeInFooter 1s forwards 0.5s;
+      transform: translateY(10px);
+      transition: opacity 1s, transform 1s;
     }
-    footer .footer-logo {
-      height: 20px;
-      opacity: 0.5;
-    }
-    @keyframes fadeInFooter {
-      to { opacity: 1; }
-    }
+    footer.visible { opacity: 1; transform: translateY(0); }
+    footer img { max-width: 24px; }
 
     /* === Responsive === */
-    @media (max-width: 768px) {
-      .logo-text { font-size: 1.2rem; }
-      nav .menu-links { display: none; }
-      nav .burger {
-        display: block;
-        cursor: pointer;
-        font-size: 1.5rem;
-      }
+    @media (max-width: 768px){
+      nav { justify-content: space-between; padding: 0.5rem 1rem; }
+      nav a { margin: 0 0.5rem; }
+      .logo-title { flex-direction: row; }
     }
-    @media (min-width: 769px) {
-      nav .burger { display: none; }
-    }
+
   </style>
 </head>
 <body>
 
-  <!-- === Navigation === -->
-  <nav>
-    <a href="index.html" class="logo-link">
-      <img src="assets/media/StylishHorizon_Clear.png" alt="Stylish Horizon Logo" class="logo-img">
-      <span class="logo-text">Stylish Horizon</span>
-    </a>
-    <div class="menu-links">
-      <a href="index.html">Home</a>
-      <a href="manifest.html">Manifest</a>
-      <a href="archive.html">Archive</a>
-      <a href="contact.html">Contact</a>
-    </div>
-    <div class="burger">&#9776;</div>
-  </nav>
+<nav id="nav">
+  <a href="index.html">Home</a>
+  <a href="manifest.html">Manifest</a>
+  <a href="archive.html">Archive</a>
+  <a href="contact.html">Contact</a>
+</nav>
 
-  <!-- === Hero Section === -->
-  <section class="hero">
-    <h1>Digital restoration with integrity</h1>
-    <p>No hype. No noise. Just memory.<br>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
-    <div class="scroll-down">&#x2193;</div>
-  </section>
+<header>
+  <div class="logo-title">
+    <img src="assets/media/StylishHorizon_Clear.png" alt="Stylish Horizon Logo">
+    <h1>Stylish Horizon</h1>
+  </div>
+  <div class="scroll-hint">↓</div>
+</header>
 
-  <!-- === What We Do === -->
-  <section id="what-we-do">
-    <h2 class="section-title">What we do</h2>
-    <p>If it still breathes — we help it speak again.<br>
-    Every file is reviewed manually. Not filters, not nostalgia — just truth.</p>
-  </section>
+<section class="hero visible">
+  <p>Digital restoration with integrity</p>
+  <p>No hype. No noise. Just memory.</p>
+  <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
+</section>
 
-  <!-- === How We Work === -->
-  <section id="how-we-work">
-    <h2 class="section-title">How we work</h2>
-    <p>No shipping. We find trusted studios near you.<br>
-       No subscriptions. You pay for what you need — nothing more.</p>
-  </section>
+<section class="what" data-delay="1.5">
+  <h2>What we do</h2>
+  <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
+  <p>If it still breathes — we help it speak again.</p>
+  <p>Every file is reviewed manually. Not filters, not nostalgia — just truth.</p>
+</section>
 
-  <!-- === Why It Matters === -->
-  <section id="why-it-matters">
-    <h2 class="section-title">Why it matters</h2>
-    <p>We believe memory deserves clarity.<br>
-       Not filters, not nostalgia — just truth.</p>
-  </section>
+<section class="how" data-delay="0.5">
+  <h2>How we work</h2>
+  <p>No shipping. We find trusted studios near you.</p>
+  <p>No subscriptions. You pay for what you need — nothing more.</p>
+</section>
 
-  <!-- === Footer === -->
-  <footer>
-    <img src="assets/media/StylishHorizon_Clear.png" alt="Logo" class="footer-logo">
-    <span>© 2025 Stylish Horizon</span>
-  </footer>
+<section class="why" data-delay="3.5">
+  <h2>Why it matters</h2>
+  <p>We believe memory deserves clarity.</p>
+  <p>Not filters, not nostalgia — just truth.</p>
+</section>
 
-  <!-- === JS === -->
-  <script>
-    // Fade in sections on scroll
-    const sections = document.querySelectorAll('section');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
-    sections.forEach(section => observer.observe(section));
+<footer>
+  <img src="assets/media/StylishHorizon_Clear.png" alt="Logo">
+  <p>© 2025 Stylish Horizon</p>
+</footer>
 
-    // Highlight active nav
-    (function highlightActiveNav(){
-      const path = location.pathname.split('/').pop() || 'index.html';
-      const links = document.querySelectorAll('nav a');
-      links.forEach(a => {
-        const href = a.getAttribute('href');
-        if ((path === 'index.html' && /(^|\/)index\.html$/.test(href)) ||
-            (path && href.endsWith(path))) {
-          a.classList.add('active');
-        }
-      });
-    })();
-
-    // Burger toggle for mobile
-    const burger = document.querySelector('.burger');
-    const menuLinks = document.querySelector('.menu-links');
-    burger.addEventListener('click', () => {
-      menuLinks.style.display = menuLinks.style.display === 'flex' ? 'none' : 'flex';
-      menuLinks.style.flexDirection = 'column';
-      menuLinks.style.position = 'absolute';
-      menuLinks.style.top = '100%';
-      menuLinks.style.right = '0';
-      menuLinks.style.backgroundColor = 'rgba(10,10,10,0.95)';
-      menuLinks.style.padding = '1rem';
-      menuLinks.style.borderBottomLeftRadius = '8px';
-      menuLinks.style.borderBottomRightRadius = '8px';
+<script>
+  // === Intersection Observer для секций ===
+  const sections = document.querySelectorAll('section');
+  const footer = document.querySelector('footer');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const delay = parseFloat(entry.target.dataset.delay) || 0;
+        setTimeout(()=> entry.target.classList.add('visible'), delay*1000);
+        observer.unobserve(entry.target);
+      }
     });
+  }, { threshold: 0.2 });
+  sections.forEach(section => observer.observe(section));
+  observer.observe(footer);
+  footer.classList.add('visible');
 
-    // === GA + Meta Pixel placeholders ===
-    // Google Analytics 4
-    (function(){
-      console.log("GA4 placeholder — insert your GA4 ID");
-    })();
+  // === Scroll-показываю/скрываю меню ===
+  let lastScrollTop = 0;
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    let st = window.pageYOffset || document.documentElement.scrollTop;
+    if(st > lastScrollTop){ nav.classList.add('hidden'); }
+    else{ nav.classList.remove('hidden'); }
+    lastScrollTop = st <= 0 ? 0 : st;
+  });
 
-    // Meta Pixel
-    (function(){
-      console.log("Meta Pixel placeholder — insert your Pixel ID");
-    })();
-  </script>
+  // === Активный пункт меню ===
+  const path = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('nav a').forEach(a => {
+    if((path === 'index.html' && a.getAttribute('href').endsWith('index.html')) || a.getAttribute('href').endsWith(path)){
+      a.classList.add('active');
+    }
+  });
+</script>
 
 </body>
 </html>
