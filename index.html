@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stylish Horizon</title>
-  <!-- Google Fonts: Inter -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
   <style>
     /* === БАЗА + ДЫШАЩИЙ ФОН === */
@@ -20,144 +19,54 @@
       position: relative;
       overflow-x: hidden;
     }
-    @keyframes bgMove {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+    @keyframes bgMove {0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
     body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.10'/></svg>");
-      background-size: 160px 160px;
-      opacity: 0.07;
-      mix-blend-mode: overlay;
-      z-index: 0;
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.10'/></svg>");
+      background-size:160px 160px;
+      opacity:0.07;
+      mix-blend-mode:overlay;
+      z-index:0;
     }
 
     /* === Навигация === */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background-color: rgba(10,10,10,0.85);
-      backdrop-filter: blur(6px);
-      display: flex;
-      justify-content: center;
-      padding: 0.5rem 0;
-      z-index: 1000;
-      border-bottom: 1px solid #222;
-      transition: top 0.3s ease;
-    }
-    nav.hidden { top: -70px; }
-    nav a {
-      color: #f5f5f5;
-      margin: 0 1rem;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s, text-shadow 0.3s, transform 0.3s;
-      position: relative;
-    }
-    nav a:hover { color: #ddd; text-shadow: 0 0 6px rgba(255,255,255,0.35); transform: scale(1.02);}
-    nav a.active { color: #ffffff; text-shadow: 0 0 10px rgba(255,255,255,0.45);}
-    nav a.active::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -6px;
-      transform: translateX(-50%);
-      width: 100%;
-      height: 2px;
-      background: #f5f5f5;
-      border-radius: 2px;
-    }
+    nav {position:fixed; top:0; width:100%; background-color:rgba(10,10,10,0.85); backdrop-filter:blur(6px); display:flex; justify-content:center; padding:0.5rem 0; z-index:1000; border-bottom:1px solid #222; transition:top 0.3s ease;}
+    nav.hidden {top:-70px;}
+    nav a {color:#f5f5f5; margin:0 1rem; text-decoration:none; font-weight:500; transition: color 0.3s, text-shadow 0.3s, transform 0.3s; position:relative;}
+    nav a:hover {color:#ddd; text-shadow:0 0 6px rgba(255,255,255,0.35); transform:scale(1.02);}
+    nav a.active {color:#fff; text-shadow:0 0 10px rgba(255,255,255,0.45);}
+    nav a.active::after {content:""; position:absolute; left:50%; bottom:-6px; transform:translateX(-50%); width:100%; height:2px; background:#f5f5f5; border-radius:2px;}
 
     /* === Header: logo + title === */
-    header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding-top: 60px;
-      z-index: 1;
-      position: relative;
-    }
-    .logo-title {
-      display: flex;
-      align-items: center;
-      opacity: 0;
-      transform: scale(0.98);
-      animation: fadeInLogo 1.2s forwards;
-    }
-    .logo-title h1 {
-      font-size: 2.8rem;
-      font-weight: 700;
-      margin-left: 1rem;
-      opacity: 0;
-      animation: fadeInTitle 2.3s forwards;
-    }
-    .logo-title img {
-      max-width: 120px;
-      display: block;
-    }
-    @keyframes fadeInLogo { to { opacity: 1; transform: scale(1); } }
-    @keyframes fadeInTitle { to { opacity: 1; } }
+    header {display:flex; flex-direction:column; align-items:center; justify-content:center; padding-top:60px; z-index:1; position:relative;}
+    .logo-title {display:flex; align-items:center; opacity:0; transform:scale(0.98); animation:fadeInLogo 1.2s forwards;}
+    .logo-title h1 {font-size:2.8rem; font-weight:700; margin-left:1rem; opacity:0; animation:fadeInTitle 2.3s forwards;}
+    .logo-title img {max-width:120px; display:block;}
+    @keyframes fadeInLogo {to{opacity:1; transform:scale(1);}}
+    @keyframes fadeInTitle {to{opacity:1;}}
 
-    /* Scroll hint */
-    .scroll-hint {
-      margin-top: 20px;
-      font-size: 1.5rem;
-      opacity: 0.3;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse { 0%,100% {opacity:0.3;} 50% {opacity:0.6;} }
+    .scroll-hint {margin-top:20px; font-size:1.5rem; opacity:0.3; animation:pulse 2s infinite;}
+    @keyframes pulse {0%,100%{opacity:0.3;}50%{opacity:0.6;}}
 
     /* === Секции текста === */
-    section {
-      padding: 2rem 2rem;
-      max-width: 900px;
-      margin: 2rem auto;
-      text-align: left;
-      opacity: 0;
-      transform: translateY(24px) scale(0.985);
-      transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.19,1,0.22,1);
-      position: relative;
-      z-index: 1;
-      background-color: rgba(0,0,0,0.5);
-      border-radius: 12px;
-      backdrop-filter: blur(4px);
-    }
-    section.visible { opacity: 1; transform: translateY(0) scale(1); }
-    section p { margin: 0.5rem 0; transition: opacity 0.6s ease; }
+    section {padding:2rem; max-width:900px; margin:2rem auto; text-align:left; opacity:0; transform:translateY(24px) scale(0.985); transition:opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.19,1,0.22,1); position:relative; z-index:1; background-color:rgba(0,0,0,0.5); border-radius:12px; backdrop-filter:blur(4px);}
+    section.visible {opacity:1; transform:translateY(0) scale(1);}
+    section p {margin:0.5rem 0;}
+    section:hover {transform:scale(1.02);}
 
-    section:hover { transform: scale(1.02); }
+    /* === Микро-анимация строк === */
+    .line {opacity:0; transform:translateY(10px); display:block;}
+    .line.visible {opacity:1; transform:translateY(0); transition:opacity 0.6s ease, transform 0.6s ease;}
 
     /* === Footer === */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #555;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 1s, transform 1s;
-    }
-    footer.visible { opacity: 1; transform: translateY(0); }
-    footer img { max-width: 24px; }
+    footer {text-align:center; padding:2rem; font-size:0.9rem; color:#555; display:flex; justify-content:center; align-items:center; gap:0.5rem; opacity:0; transform:translateY(10px); transition:opacity 1s, transform 1s;}
+    footer.visible {opacity:1; transform:translateY(0);}
+    footer img {max-width:24px;}
 
-    /* === Responsive === */
-    @media (max-width: 768px){
-      nav { justify-content: space-between; padding: 0.5rem 1rem; }
-      nav a { margin: 0 0.5rem; }
-      .logo-title { flex-direction: row; }
-    }
-
+    @media(max-width:768px){nav{justify-content:space-between; padding:0.5rem 1rem;} nav a{margin:0 0.5rem;} .logo-title{flex-direction:row;}}
   </style>
 </head>
 <body>
@@ -178,28 +87,28 @@
 </header>
 
 <section class="hero visible">
-  <p>Digital restoration with integrity</p>
-  <p>No hype. No noise. Just memory.</p>
-  <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
+  <p class="line">Digital restoration with integrity</p>
+  <p class="line">No hype. No noise. Just memory.</p>
+  <p class="line">We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
 </section>
 
 <section class="what" data-delay="1.5">
-  <h2>What we do</h2>
-  <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
-  <p>If it still breathes — we help it speak again.</p>
-  <p>Every file is reviewed manually. Not filters, not nostalgia — just truth.</p>
+  <h2 class="line">What we do</h2>
+  <p class="line">We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
+  <p class="line">If it still breathes — we help it speak again.</p>
+  <p class="line">Every file is reviewed manually. Not filters, not nostalgia — just truth.</p>
 </section>
 
 <section class="how" data-delay="0.5">
-  <h2>How we work</h2>
-  <p>No shipping. We find trusted studios near you.</p>
-  <p>No subscriptions. You pay for what you need — nothing more.</p>
+  <h2 class="line">How we work</h2>
+  <p class="line">No shipping. We find trusted studios near you.</p>
+  <p class="line">No subscriptions. You pay for what you need — nothing more.</p>
 </section>
 
 <section class="why" data-delay="3.5">
-  <h2>Why it matters</h2>
-  <p>We believe memory deserves clarity.</p>
-  <p>Not filters, not nostalgia — just truth.</p>
+  <h2 class="line">Why it matters</h2>
+  <p class="line">We believe memory deserves clarity.</p>
+  <p class="line">Not filters, not nostalgia — just truth.</p>
 </section>
 
 <footer>
@@ -208,40 +117,31 @@
 </footer>
 
 <script>
-  // === Intersection Observer для секций ===
+  // === Intersection Observer для секций и строк ===
   const sections = document.querySelectorAll('section');
   const footer = document.querySelector('footer');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
       if(entry.isIntersecting){
         const delay = parseFloat(entry.target.dataset.delay) || 0;
-        setTimeout(()=> entry.target.classList.add('visible'), delay*1000);
+        setTimeout(()=>{
+          entry.target.classList.add('visible');
+          entry.target.querySelectorAll('.line').forEach((line,i)=>{
+            setTimeout(()=>line.classList.add('visible'),i*200);
+          });
+        }, delay*1000);
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.2 });
-  sections.forEach(section => observer.observe(section));
-  observer.observe(footer);
+  }, {threshold:0.2});
+  sections.forEach(section=>observer.observe(section));
   footer.classList.add('visible');
 
-  // === Scroll-показываю/скрываю меню ===
-  let lastScrollTop = 0;
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    let st = window.pageYOffset || document.documentElement.scrollTop;
-    if(st > lastScrollTop){ nav.classList.add('hidden'); }
-    else{ nav.classList.remove('hidden'); }
-    lastScrollTop = st <= 0 ? 0 : st;
-  });
-
-  // === Активный пункт меню ===
-  const path = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('nav a').forEach(a => {
-    if((path === 'index.html' && a.getAttribute('href').endsWith('index.html')) || a.getAttribute('href').endsWith(path)){
-      a.classList.add('active');
-    }
-  });
-</script>
-
-</body>
-</html>
+  // === Scroll hide/show menu ===
+  let lastScrollTop=0;
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{
+    let st=window.pageYOffset||document.documentElement.scrollTop;
+    if(st>lastScrollTop){nav.classList.add('hidden');} 
+    else{nav.classList.remove('hidden');}
+   
