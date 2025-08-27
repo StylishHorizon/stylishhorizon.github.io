@@ -4,158 +4,85 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stylish Horizon</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      color: #f5f5f5;
-      line-height: 1.6;
-      background: radial-gradient(1200px 800px at 20% 20%, #0f0f0f 0%, #0a0a0a 40%, #050505 100%);
-      background-attachment: fixed;
-      overflow-x: hidden;
+    @keyframes fadeZoom {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
-
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: transparent;
-      display: flex;
-      justify-content: center;
-      padding: 0.8rem 0;
-      z-index: 1000;
+    .animate-fadeZoom {
+      animation: fadeZoom 1.2s ease-out forwards;
+      animation-delay: 0.3s;
     }
-    nav a {
-      color: #f5f5f5;
-      margin: 0 1rem;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    nav a:hover {
-      color: #ddd;
-    }
-    nav a.active {
-      border-bottom: 2px solid #f5f5f5;
-    }
-
-    header {
-      display: flex;
-      justify-content: center;
-      padding: 2rem 0;
-      margin-top: 50px;
-    }
-    header img {
-      max-width: 220px;
-      opacity: 0.9;
-    }
-
-    section {
-      padding: 3rem 2rem;
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: left;
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      font-weight: 700;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      color: #bbb;
-    }
-
-    .section-title {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #555;
-    }
-
-    @media (max-width: 768px) {
-      nav a { margin: 0 0.5rem; }
+    .animate-fadeInUp {
+      animation: fadeInUp 1s ease-out forwards;
     }
   </style>
 </head>
-<body>
+<body class="bg-black text-white font-sans">
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="manifest.html">Manifest</a>
-  <a href="archive.html">Archive</a>
-  <a href="contact.html">Contact</a>
-</nav>
+  <!-- Header -->
+  <header class="fixed w-full z-50 transition-colors duration-500 bg-black/40 backdrop-blur-md">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+      <a href="index.html" class="text-white text-2xl font-bold tracking-wide opacity-0 animate-fadeZoom">
+        Stylish Horizon
+      </a>
+      <nav class="space-x-6 text-white text-lg hidden md:block">
+        <a href="index.html" class="hover:text-gray-300 transition">Home</a>
+        <a href="manifest.html" class="hover:text-gray-300 transition">Manifest</a>
+        <a href="contact.html" class="hover:text-gray-300 transition">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-<header>
-  <img src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon Logo">
-</header>
+  <!-- Hero -->
+  <section class="min-h-screen flex flex-col justify-center items-center text-center px-6">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4 opacity-0 animate-fadeInUp" style="animation-delay:0.6s">
+      Digital restoration with integrity
+    </h1>
+    <p class="text-lg md:text-2xl text-gray-300 mb-12 opacity-0 animate-fadeInUp" style="animation-delay:1s">
+      No hype. No noise. Just memory.
+    </p>
+  </section>
 
-<section class="hero">
-  <h1>Digital restoration with integrity</h1>
-  <p>No hype. No noise. Just memory.<br>
-  We restore MiniDV, VHS, Hi8, and forgotten drives.<br>
-  Every file is reviewed manually. Not filters, not nostalgia — just truth.</p>
-</section>
+  <!-- What we do -->
+  <section class="max-w-3xl mx-auto px-6 py-16 text-center">
+    <h2 class="text-3xl font-semibold mb-6">What we do</h2>
+    <p class="text-lg text-gray-300">
+      We restore MiniDV, VHS, Hi8, and forgotten drives.<br>
+      If it still breathes — we help it speak again.
+    </p>
+    <p class="text-lg text-gray-300 mt-4">
+      Every file is reviewed manually. Not filters, not nostalgia — just truth.
+    </p>
+  </section>
 
-<section>
-  <h2 class="section-title">What we do</h2>
-  <p>We restore MiniDV, VHS, Hi8, and forgotten drives.<br>
-  If it still breathes — we help it speak again.</p>
-</section>
+  <!-- How we work -->
+  <section class="max-w-3xl mx-auto px-6 py-16 text-center">
+    <h2 class="text-3xl font-semibold mb-6">How we work</h2>
+    <p class="text-lg text-gray-300">
+      No shipping. We find trusted studios near you.<br>
+      No subscriptions. You pay for what you need — nothing more.
+    </p>
+  </section>
 
-<section>
-  <h2 class="section-title">How we work</h2>
-  <p>No shipping. We find trusted studios near you.<br>
-  No subscriptions. You pay for what you need — nothing more.<br><br>
-  Every file is reviewed manually. No batch processing.</p>
-</section>
+  <!-- Why it matters -->
+  <section class="max-w-3xl mx-auto px-6 py-16 text-center">
+    <h2 class="text-3xl font-semibold mb-6">Why it matters</h2>
+    <p class="text-lg text-gray-300">
+      We believe memory deserves clarity.<br>
+      Not filters, not nostalgia — just truth.
+    </p>
+  </section>
 
-<section>
-  <h2 class="section-title">Why it matters</h2>
-  <p>We believe memory deserves clarity.<br>
-  Not filters, not nostalgia — just truth.</p>
-</section>
-
-<footer>
-  <p>© 2025 Stylish Horizon</p>
-</footer>
-
-<script>
-  const sections = document.querySelectorAll('section');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
-  sections.forEach(section => observer.observe(section));
-
-  (function highlightActiveNav(){
-    const path = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('nav a').forEach(a => {
-      if (path && a.getAttribute('href').endsWith(path)) {
-        a.classList.add('active');
-      }
-    });
-  })();
-</script>
+  <!-- Footer -->
+  <footer class="bg-black/70 py-6 mt-12 text-center text-gray-400 text-sm">
+    <p>&copy; 2025 Stylish Horizon. All rights reserved.</p>
+  </footer>
 
 </body>
 </html>
