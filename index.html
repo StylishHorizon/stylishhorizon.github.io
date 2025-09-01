@@ -4,8 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stylish Horizon</title>
+
   <!-- Google Fonts: Inter -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" as="style">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/media/favicon.webp" type="image/webp">
+  <link rel="icon" href="assets/media/favicon.png" type="image/png">
+
+  <!-- SEO / Social -->
+  <meta name="description" content="Digital restoration with integrity — MiniDV, VHS, Hi8, forgotten drives.">
+  <meta property="og:title" content="Stylish Horizon">
+  <meta property="og:description" content="Digital restoration with integrity">
+  <meta property="og:image" content="assets/media/StylishHorizon_Clear.webp">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MN6WG3K6');
+  </script>
+
   <style>
     /* === БАЗА + ДЫШАЩИЙ ФОН === */
     body {
@@ -44,34 +67,39 @@
       width: 100%;
       background-color: rgba(10,10,10,0.85);
       backdrop-filter: blur(6px);
-      display: flex;
-      justify-content: center;
-      padding: 0.5rem 0;
       z-index: 1000;
       border-bottom: 1px solid #222;
       transition: top 0.3s ease;
     }
     nav.hidden { top: -70px; }
-    nav a {
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+    .nav-links a {
       color: #f5f5f5;
-      margin: 0 1rem;
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s, text-shadow 0.3s, transform 0.3s;
+      transition: color 0.3s, opacity 0.3s, transform 0.3s;
+      opacity: 1;
       position: relative;
     }
-    nav a:hover { color: #ddd; text-shadow: 0 0 6px rgba(255,255,255,0.35); transform: scale(1.02);}
-    nav a.active { color: #ffffff; text-shadow: 0 0 10px rgba(255,255,255,0.45);}
-    nav a.active::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -6px;
-      transform: translateX(-50%);
-      width: 100%;
-      height: 2px;
-      background: #f5f5f5;
-      border-radius: 2px;
+    .nav-links a:hover { color: #ddd; transform: scale(1.02); }
+    .nav-links a.active { opacity: 0.6; }
+
+    /* Бургер меню */
+    #burger { display: none; background: none; border: none; font-size: 1.8rem; color: #f5f5f5; cursor: pointer; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; background: rgba(10,10,10,0.95); position: absolute; top: 100%; left: 0; width: 100%; }
+      .nav-links.show { display: flex; }
+      #burger { display: block; }
     }
 
     /* === Header: logo + title === */
@@ -116,9 +144,9 @@
 
     /* === Секции текста === */
     section {
-      padding: 2rem 2rem;
+      padding: 1.5rem 1.5rem; /* уменьшено расстояние */
       max-width: 900px;
-      margin: 2rem auto;
+      margin: 1.5rem auto; /* уменьшено расстояние */
       text-align: left;
       opacity: 0;
       transform: translateY(24px) scale(0.985);
@@ -131,7 +159,6 @@
     }
     section.visible { opacity: 1; transform: translateY(0) scale(1); }
     section p { margin: 0.5rem 0; transition: opacity 0.6s ease; }
-
     section:hover { transform: scale(1.02); }
 
     /* === Footer === */
@@ -149,29 +176,29 @@
       transition: opacity 1s, transform 1s;
     }
     footer.visible { opacity: 1; transform: translateY(0); }
-    footer img { max-width: 26px; }
-/* Планшеты и телефоны: меню компактнее */
-
-    @media (max-width: 768px){
-      nav { justify-content: space-between; padding: 0.5rem 1rem; }
-      nav a { margin: 0 0.5rem; }
-      .logo-title { flex-direction: row; }
-    }
-
+    footer img { max-width: 24px; }
   </style>
 </head>
 <body>
 
 <nav id="nav">
-  <a href="index.html">Home</a>
-  <a href="manifest.html">Manifest</a>
-  <a href="archive.html">Archive</a>
-  <a href="contact.html">Contact</a>
+  <div class="nav-container">
+    <div class="logo">
+      <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon Logo">
+    </div>
+    <button id="burger" aria-label="Toggle menu">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="manifest.html">Manifest</a>
+      <a href="archive.html">Archive</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
 </nav>
 
 <header>
   <div class="logo-title">
-    <img src="StylishHorizon_Clear.webp" alt="Stylish Horizon Logo">
+    <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon Logo">
     <h1>Stylish Horizon</h1>
   </div>
   <div class="scroll-hint">↓</div>
@@ -203,7 +230,7 @@
 </section>
 
 <footer>
-  <img src="StylishHorizon_Clear.webp" alt="Logo">
+  <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo">
   <p>© 2025 Stylish Horizon</p>
 </footer>
 
@@ -226,20 +253,27 @@
 
   // === Scroll-показываю/скрываю меню ===
   let lastScrollTop = 0;
-  const nav = document.getElementById('nav');
+  const navEl = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     let st = window.pageYOffset || document.documentElement.scrollTop;
-    if(st > lastScrollTop){ nav.classList.add('hidden'); }
-    else{ nav.classList.remove('hidden'); }
+    if(st > lastScrollTop){ navEl.classList.add('hidden'); }
+    else{ navEl.classList.remove('hidden'); }
     lastScrollTop = st <= 0 ? 0 : st;
   });
 
   // === Активный пункт меню ===
   const path = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('nav a').forEach(a => {
+  document.querySelectorAll('.nav-links a').forEach(a => {
     if((path === 'index.html' && a.getAttribute('href').endsWith('index.html')) || a.getAttribute('href').endsWith(path)){
       a.classList.add('active');
     }
+  });
+
+  // === Бургер меню ===
+  const burger = document.getElementById('burger');
+  const navLinks = document.querySelector('.nav-links');
+  burger.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
   });
 </script>
 
