@@ -108,8 +108,8 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 60px;
-  padding-bottom: 60px; /* Добавлен отступ снизу */
+  padding-top: 20px;
+  padding-bottom: 20px; /* Добавлен отступ снизу */
   z-index: 1;
   position: relative;
 }
@@ -123,21 +123,22 @@ header {
   animation: fadeInLogo 1.2s forwards;
 }
 
-.logo-title h1 {
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin-left: 1rem;
+.logo-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0;
-  animation: fadeInTitle 2.3s forwards;
+  transform: scale(0.98);
+  animation: fadeInLogo 1.2s forwards;
 }
 
 .logo-title img {
-  max-width: 60px; /* Ограничена максимальная ширина */
-  width: 100%;
+  max-width: 200px; /* максимальная ширина */
+  max-height: 100%;  /* не превышать высоту контейнера */
   height: auto;
+  width: auto;
   display: block;
 }
-
 @keyframes fadeInLogo {
   to {
     opacity: 1;
