@@ -61,16 +61,16 @@
     }
 
     /* === Навигация === */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background-color: rgba(10,10,10,0.85);
-      backdrop-filter: blur(6px);
-      z-index: 1000;
-      border-bottom: 1px solid #222;
-      transition: top 0.3s ease;
-    }
+  nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgba(10,10,10,0.85);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0;
+  z-index: 1000; /* чуть ниже лого */
     nav.hidden { top: -70px; }
     .nav-container {
       display: flex;
@@ -104,32 +104,24 @@
 
     /* === Header: logo + title === */
 header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-top: 20px;
-  padding-bottom: 20px; /* Добавлен отступ снизу */
-  z-index: 1;
-  position: relative;
+  max-height: 50vh; /* не выше половины окна */
 }
 
+
 .logo-title {
+  position: fixed;
+  top: 10px;
+  left: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  transform: scale(0.98);
-  animation: fadeInLogo 1.2s forwards;
+  z-index: 1001; /* выше меню */
 }
 
 .logo-title img {
-  max-width: 200px; /* максимальная ширина */
-  max-height: 100%;  /* не превышать высоту контейнера */
+  max-width: 120px;
   height: auto;
-  width: auto;
-  display: block;
-}
+
 @keyframes fadeInLogo {
   to {
     opacity: 1;
