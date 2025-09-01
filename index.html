@@ -48,8 +48,10 @@
       justify-content: center;
       padding: 0.5rem 0;
       z-index: 1000;
-      border-bottom: 1px solid #222;
       transition: top 0.3s ease;
+    }
+     nav a.active {
+   opacity: 0.6;
     }
     nav.hidden { top: -70px; }
     nav a {
@@ -164,8 +166,7 @@
 
 <nav id="nav">
 
-  #nav a.active {
-  opacity: 0.6;
+ 
 }
   <a href="index.html" class="active">Home</a>
   <a href="manifest.html">Manifest</a>
