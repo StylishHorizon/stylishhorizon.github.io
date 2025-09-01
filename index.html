@@ -103,36 +103,54 @@
     }
 
     /* === Header: logo + title === */
-    header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding-top: 60px;
-      z-index: 1;
-      position: relative;
-    }
-    .logo-title {
-      display: flex;
-      align-items: center;
-      opacity: 0;
-      transform: scale(0.98);
-      animation: fadeInLogo 1.2s forwards;
-    }
-    .logo-title h1 {
-      font-size: 2.8rem;
-      font-weight: 700;
-      margin-left: 1rem;
-      opacity: 0;
-      animation: fadeInTitle 2.3s forwards;
-    }
-    .logo-title img {
-      max-width: 120px;
-      display: block;
-    }
-    @keyframes fadeInLogo { to { opacity: 1; transform: scale(1); } }
-    @keyframes fadeInTitle { to { opacity: 1; } }
+    /* === Header: logo + title === */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 60px;
+  padding-bottom: 60px; /* Добавлен отступ снизу */
+  z-index: 1;
+  position: relative;
+}
 
+.logo-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.98);
+  animation: fadeInLogo 1.2s forwards;
+}
+
+.logo-title h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-left: 1rem;
+  opacity: 0;
+  animation: fadeInTitle 2.3s forwards;
+}
+
+.logo-title img {
+  max-width: 200px; /* Ограничена максимальная ширина */
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes fadeInLogo {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInTitle {
+  to {
+    opacity: 1;
+  }
+}
     /* Scroll hint */
     .scroll-hint {
       margin-top: 20px;
