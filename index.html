@@ -16,7 +16,6 @@
       line-height: 1.6;
       background: radial-gradient(1200px 800px at 20% 20%, #0f0f0f 0%, #0a0a0a 40%, #050505 100%);
       background-attachment: fixed;
-      background-position: 0% 50%;
       animation: bgMove 24s ease-in-out infinite;
       position: relative;
       overflow-x: hidden;
@@ -26,15 +25,14 @@
       50%  { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    /* overlay шум */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.2'/></svg>");
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.10'/></svg>");
       background-size: 160px 160px;
-      opacity: 0.12;
+      opacity: 0.07;
       mix-blend-mode: overlay;
       z-index: 0;
     }
@@ -47,7 +45,10 @@
       background-color: rgba(10,10,10,0.85);
       backdrop-filter: blur(6px);
       z-index: 1000;
+      transition: top 0.3s ease;
     }
+    nav.hidden { top: -70px; }
+
     .nav-container {
       display: flex;
       align-items: center;
@@ -56,6 +57,7 @@
       max-width: 1200px;
       margin: 0 auto;
     }
+
     .nav-links {
       display: flex;
       gap: 1rem;
@@ -69,11 +71,9 @@
       position: relative;
     }
     .nav-links a.active { opacity: 0.6; }
-    .nav-links a:hover { 
-      transform: scale(1.02); 
-      text-shadow: 0 0 6px rgba(255,255,255,0.3); 
-    }
+    .nav-links a:hover { transform: scale(1.02); text-shadow: 0 0 6px rgba(255,255,255,0.3); }
 
+    /* Бургер меню */
     #burger { display: none; background: none; border: none; font-size: 1.8rem; color: #f5f5f5; cursor: pointer; }
     @media (max-width: 768px) {
       .nav-links { display: none; flex-direction: column; background: rgba(10,10,10,0.95); position: absolute; top: 100%; left: 0; width: 100%; padding: 1rem 0; }
@@ -82,11 +82,8 @@
     }
 
     /* === Header: logo + title === */
-    header {
-      max-height: 50vh;
-      position: relative;
-      z-index: 1;
-    }
+    header { max-height: 50vh; position: relative; z-index: 1; }
+
     .logo-title {
       position: fixed;
       top: 10px;
@@ -96,9 +93,10 @@
       justify-content: center;
       z-index: 1001;
       cursor: pointer;
-      transition: transform 0.3s;
+      transition: transform 0.3s, opacity 0.3s;
     }
     .logo-title:hover { transform: scale(1.05) rotate(1deg); }
+
     .logo-title img {
       max-width: 120px;
       height: auto;
@@ -147,29 +145,28 @@
     }
     footer.visible { opacity: 1; transform: translateY(0); }
 
-    /* === Scroll hint отключен === */
+    /* Scroll hint отключен */
     .scroll-hint { display: none; }
 
-    /* Адаптивные отступы */
+    /* Адаптивные отступы для маленьких экранов */
     @media (max-width: 768px) {
       section { margin: 1rem auto; padding: 1rem; }
       .logo-title img { max-width: 100px; }
       .logo-title h1 { font-size: 1.2rem; }
     }
-
   </style>
 </head>
 <body>
 
 <!-- Google Tag Manager (noscript) -->
-<noscript>
-  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-</noscript>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <nav>
   <div class="nav-container">
     <div class="logo-title" onclick="window.location='index.html'">
-      <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon Logo">
+      <img src="assets/media/StylishHorizon.png" alt="Stylish Horizon Logo">
       <h1>Stylish Horizon</h1>
     </div>
     <button id="burger">&#9776;</button>
@@ -210,16 +207,19 @@
 </section>
 
 <footer>
-  <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" style="max-width:24px;">
+  <img src="assets/media/StylishHorizon.png" alt="Logo" style="max-width:24px;">
   <p>© <span id="year"></span> Stylish Horizon</p>
 </footer>
 
 <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-MN6WG3K6');</script>
+})(window,document,'script','dataLayer','GTM-MN6WG3K6');
+</script>
+<!-- End Google Tag Manager -->
 
 <script>
   // === Intersection Observer для секций ===
@@ -238,18 +238,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   observer.observe(footer);
   footer.classList.add('visible');
 
-  // === Scroll-показываю/скрываю меню + плавное смещение фона ===
+  // === Scroll-показываю/скрываю меню + фоновое смещение ===
   let lastScrollTop = 0;
   const nav = document.querySelector('nav');
+  const logo = document.querySelector('.logo-title');
   window.addEventListener('scroll', () => {
-    const st = window.pageYOffset || document.documentElement.scrollTop;
-    if(st > lastScrollTop){ nav.classList.add('hidden'); }
-    else{ nav.classList.remove('hidden'); }
+    let st = window.pageYOffset || document.documentElement.scrollTop;
+    if(st > lastScrollTop){ nav.classList.add('hidden'); logo.style.opacity=0; }
+    else{ nav.classList.remove('hidden'); logo.style.opacity=1; }
     lastScrollTop = st <= 0 ? 0 : st;
 
-    // плавное смещение фона (ограничено)
-    const bgPos = Math.min(100, 5 + st/150);
-    document.body.style.backgroundPosition = `${bgPos}% 50%`;
+    // Плавное смещение фона
+    document.body.style.backgroundPosition = `${Math.min(100, 5 + st/150)}% 50%`;
   });
 
   // === Активный пункт меню ===
@@ -268,7 +268,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   // === Динамический год в футере ===
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // === Плавная инерционная прокрутка с проверкой target ===
+  // === Плавная инерционная прокрутка ===
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e){
       e.preventDefault();
@@ -277,6 +277,5 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     });
   });
 </script>
-
 </body>
 </html>
