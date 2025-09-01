@@ -1,187 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stylish Horizon</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
-<style>
-/* === БАЗА + ДЫШАЩИЙ ФОН === */
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  color: #f5f5f5;
-  scroll-behavior: smooth;
-  line-height: 1.6;
-  background: radial-gradient(1200px 800px at 20% 20%, #0f0f0f 0%, #0a0a0a 40%, #050505 100%);
-  background-attachment: fixed;
-  animation: bgMove 24s ease-in-out infinite;
-  position: relative;
-  overflow-x: hidden;
-}
-@keyframes bgMove {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.10'/></svg>");
-  background-size: 160px 160px;
-  opacity: 0.07;
-  mix-blend-mode: overlay;
-  z-index: 0;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stylish Horizon</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
+  <style>
+    /* === БАЗА + ДЫШАЩИЙ ФОН === */
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: #f5f5f5;
+      scroll-behavior: smooth;
+      line-height: 1.6;
+      background: radial-gradient(1200px 800px at 20% 20%, #0f0f0f 0%, #0a0a0a 40%, #050505 100%);
+      background-attachment: fixed;
+      animation: bgMove 24s ease-in-out infinite;
+      position: relative;
+      overflow-x: hidden;
+    }
+    @keyframes bgMove {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.10'/></svg>");
+      background-size: 160px 160px;
+      opacity: 0.07;
+      mix-blend-mode: overlay;
+      z-index: 0;
+    }
 
-/* === Навигация === */
-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: rgba(10,10,10,0.85);
-  backdrop-filter: blur(6px);
-  z-index: 1000;
-  border-bottom: 1px solid #222;
-  transition: top 0.3s ease;
-}
-nav.hidden { top: -70px; }
+    /* === Навигация === */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(10,10,10,0.85);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+    }
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+    .nav-links a {
+      color: #f5f5f5;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s, opacity 0.3s, transform 0.3s, text-shadow 0.3s;
+      opacity: 1;
+      position: relative;
+    }
+    .nav-links a.active { opacity: 0.6; }
+    .nav-links a:hover { transform: scale(1.02); text-shadow: 0 0 6px rgba(255,255,255,0.3); }
 
-.nav-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  position: relative;
-}
-.nav-links {
-  display: flex;
-  gap: 1rem;
-}
-.nav-links a {
-  color: #f5f5f5;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s, opacity 0.3s, transform 0.3s, text-shadow 0.3s;
-  opacity: 1;
-  position: relative;
-}
-.nav-links a.active { opacity: 0.6; }
-.nav-links a:hover {
-  color: #fff;
-  text-shadow: 0 0 8px rgba(255,255,255,0.4);
-  transform: scale(1.05);
-}
+    /* Бургер меню */
+    #burger { display: none; background: none; border: none; font-size: 1.8rem; color: #f5f5f5; cursor: pointer; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; background: rgba(10,10,10,0.95); position: absolute; top: 100%; left: 0; width: 100%; padding: 1rem 0; }
+      .nav-links.show { display: flex; }
+      #burger { display: block; }
+    }
 
-/* Бургер меню */
-#burger {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.8rem;
-  color: #f5f5f5;
-  cursor: pointer;
-}
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    background: rgba(10,10,10,0.95);
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-  }
-  .nav-links.show { display: flex; }
-  #burger { display: block; }
-}
+    /* === Header: logo + title === */
+    header {
+      max-height: 50vh;
+      position: relative;
+      z-index: 1;
+    }
+    .logo-title {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1001;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .logo-title:hover { transform: scale(1.05) rotate(1deg); }
+    .logo-title img {
+      max-width: 120px;
+      height: auto;
+      display: block;
+    }
+    .logo-title h1 {
+      margin-left: 0.5rem;
+      font-size: 1.5rem;
+      color: #f5f5f5;
+      opacity: 0.9;
+    }
 
-/* === Header: logo + title === */
-header {
-  position: relative;
-  padding-top: 60px;
-  padding-bottom: 20px;
-  max-height: 50vh;
-}
+    /* === Секции текста === */
+    section {
+      padding: 2rem 2rem;
+      max-width: 900px;
+      margin: 2rem auto;
+      text-align: left;
+      opacity: 0;
+      transform: translateY(24px) rotateY(0deg) scale(0.985);
+      transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.19,1,0.22,1);
+      position: relative;
+      z-index: 1;
+      background-color: rgba(0,0,0,0.5);
+      border-radius: 12px;
+      backdrop-filter: blur(4px);
+    }
+    section.visible { opacity: 1; transform: translateY(0) rotateY(0deg) scale(1); }
+    section p { margin: 0.5rem 0; transition: opacity 0.6s ease; }
+    section:hover { transform: scale(1.02) rotateY(1deg); }
 
-.logo-title {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  display: flex;
-  align-items: center;
-  z-index: 1001;
-  animation: fadeInLogo 1.2s forwards;
-}
-.logo-title img {
-  max-width: 120px;
-  height: auto;
-  display: block;
-}
-.logo-title h1 { display: none; } /* скрываем текст, оставляем только картинку */
+    /* === Footer === */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #555;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 1s, transform 1s;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    footer.visible { opacity: 1; transform: translateY(0); }
 
-/* === Scroll hint (скрыт) === */
-/* .scroll-hint { display: none; } */
+    /* === Scroll hint отключен === */
+    .scroll-hint { display: none; }
 
-/* === Секции текста === */
-section {
-  padding: 2rem 2rem;
-  max-width: 900px;
-  margin: 2rem auto;
-  text-align: left;
-  opacity: 0;
-  transform: translateY(24px) scale(0.985);
-  transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.19,1,0.22,1);
-  position: relative;
-  z-index: 1;
-  background-color: rgba(0,0,0,0.5);
-  border-radius: 12px;
-  backdrop-filter: blur(4px);
-}
-section.visible { opacity: 1; transform: translateY(0) scale(1); }
+    /* Адаптивные отступы для маленьких экранов */
+    @media (max-width: 768px) {
+      section { margin: 1rem auto; padding: 1rem; }
+      .logo-title img { max-width: 100px; }
+      .logo-title h1 { font-size: 1.2rem; }
+    }
 
-/* Micro-анимация секций при hover */
-section:hover { transform: scale(1.02); }
-
-/* === Footer === */
-footer {
-  text-align: center;
-  padding: 1.5rem;
-  font-size: 0.9rem;
-  color: #555;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 1s, transform 1s;
-  border-top: 1px solid #333;
-}
-footer.visible { opacity: 1; transform: translateY(0); }
-footer img { max-width: 24px; animation: float 3s infinite; }
-@keyframes float { 0%,100% { transform: translateY(0);} 50% {transform: translateY(-3px);} }
-
-/* Адаптивные отступы */
-@media (max-width: 768px) {
-  section { margin: 1.2rem auto; padding: 1rem 1rem; }
-  .nav-links a { font-size: 0.9rem; }
-}
-
-/* === Анимации === */
-@keyframes fadeInLogo { to { opacity: 1; transform: scale(1);} }
-@keyframes fadeInTitle { to { opacity: 1;} }
-</style>
+    /* Плавное смещение цвета фона */
+    body.scrolled { background-position: 5% 50%; }
+  </style>
 </head>
 <body>
 
-<nav id="nav">
+<nav>
   <div class="nav-container">
-    <button id="burger">☰</button>
+    <div class="logo-title" onclick="window.location='index.html'">
+      <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon Logo">
+      <h1>Stylish Horizon</h1>
+    </div>
+    <button id="burger">&#9776;</button>
     <div class="nav-links">
-      <a href="index.html">Home</a>
+      <a href="index.html" class="active">Home</a>
       <a href="manifest.html">Manifest</a>
       <a href="archive.html">Archive</a>
       <a href="contact.html">Contact</a>
@@ -189,12 +175,7 @@ footer img { max-width: 24px; animation: float 3s infinite; }
   </div>
 </nav>
 
-<header>
-  <div class="logo-title">
-    <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon Logo">
-    <h1>Stylish Horizon</h1>
-  </div>
-</header>
+<header></header>
 
 <section class="hero visible">
   <p>Digital restoration with integrity</p>
@@ -222,53 +203,68 @@ footer img { max-width: 24px; animation: float 3s infinite; }
 </section>
 
 <footer>
-  <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo">
+  <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" style="max-width:24px;">
   <p>© <span id="year"></span> Stylish Horizon</p>
 </footer>
 
 <script>
-// === Intersection Observer для секций ===
-const sections = document.querySelectorAll('section');
-const footer = document.querySelector('footer');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      const delay = parseFloat(entry.target.dataset.delay) || 0;
-      setTimeout(()=> entry.target.classList.add('visible'), delay*1000);
-      observer.unobserve(entry.target);
+  // === Intersection Observer для секций ===
+  const sections = document.querySelectorAll('section');
+  const footer = document.querySelector('footer');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const delay = parseFloat(entry.target.dataset.delay) || 0;
+        setTimeout(()=> entry.target.classList.add('visible'), delay*1000);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  sections.forEach(section => observer.observe(section));
+  observer.observe(footer);
+  footer.classList.add('visible');
+
+  // === Scroll-показываю/скрываю меню ===
+  let lastScrollTop = 0;
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    let st = window.pageYOffset || document.documentElement.scrollTop;
+    if(st > lastScrollTop){ nav.classList.add('hidden'); }
+    else{ nav.classList.remove('hidden'); }
+    lastScrollTop = st <= 0 ? 0 : st;
+
+    // Плавное смещение фона
+    document.body.style.backgroundPosition = `${5 + st/150}% 50%`;
+  });
+
+  // === Активный пункт меню ===
+  const path = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    if((path === 'index.html' && a.getAttribute('href').endsWith('index.html')) || a.getAttribute('href').endsWith(path)){
+      a.classList.add('active');
     }
   });
-}, { threshold: 0.2 });
-sections.forEach(section => observer.observe(section));
-observer.observe(footer);
-footer.classList.add('visible');
 
-// === Scroll меню ===
-let lastScrollTop = 0;
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  let st = window.pageYOffset || document.documentElement.scrollTop;
-  if(st > lastScrollTop){ nav.classList.add('hidden'); }
-  else{ nav.classList.remove('hidden'); }
-  lastScrollTop = st <= 0 ? 0 : st;
-});
+  // === Бургер меню ===
+  const burger = document.getElementById('burger');
+  const navLinks = document.querySelector('.nav-links');
+  burger.addEventListener('click', () => { navLinks.classList.toggle('show'); });
 
-// === Активный пункт меню ===
-const path = location.pathname.split('/').pop() || 'index.html';
-document.querySelectorAll('.nav-links a').forEach(a => {
-  if((path === 'index.html' && a.getAttribute('href').endsWith('index.html')) || a.getAttribute('href').endsWith(path)){
-    a.classList.add('active');
-  }
-});
+  // === Динамический год в футере ===
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-// === Бургер меню ===
-const burger = document.getElementById('burger');
-const navLinks = document.querySelector('.nav-links');
-burger.addEventListener('click', ()=> navLinks.classList.toggle('show'));
+  // === Плавная инерционная прокрутка ===
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e){
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
 
-// === Динамический год в футере ===
-document.getElementById('year').textContent = new Date().getFullYear();
 </script>
+<!-- Google Tag Manager -->
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MN6WG3K6"></script>
 
 </body>
 </html>
