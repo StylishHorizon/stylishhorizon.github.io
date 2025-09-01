@@ -126,6 +126,58 @@
     </section>
   </main>
 
+  <!-- Stylish CTA Buttons -->
+<div class="cta-buttons-stylish">
+  <a href="manifest.html" class="cta-btn-stylish">More info</a>
+  <a href="archive.html" class="cta-btn-stylish">Watch Results</a>
+</div>
+
+<style>
+  .cta-buttons-stylish {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 40px;
+  }
+
+  .cta-btn-stylish {
+    padding: 10px 22px;
+    background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+    color: #00ccff;
+    font-family: 'Courier New', monospace;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid #00ccff;
+    border-radius: 6px;
+    text-align: center;
+    min-width: 140px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .cta-btn-stylish:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 8px #00ccff;
+  }
+
+  @media (max-width: 600px) {
+    .cta-buttons-stylish {
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .cta-btn-stylish {
+      width: 80%;
+    }
+  }
+</style>
+
+    <!-- Здесь вставляем CTA кнопки -->
+  <div class="cta-buttons-stylish">
+    <a href="manifest.html" class="cta-btn-stylish">More info</a>
+    <a href="archive.html" class="cta-btn-stylish">Watch Results</a>
+  </div>
+  
   <footer>
     <p>&copy; Stylish Horizon. All rights reserved.</p>
   </footer>
