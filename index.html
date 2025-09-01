@@ -1,152 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stylish Horizon</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
-  <style>
-    /* Header */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(6px);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.5rem 1rem;
-      z-index: 1000;
-    }
-    .logo-title {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .logo-title img {
-      height: 40px;
-      width: auto;
-      max-width: 100%;
-    }
-    .logo-title h1 {
-      font-size: 1.2rem;
-      margin: 0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stylish Horizon</title>
+<!-- Google Fonts: Inter -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
+<!-- Google Tag Manager -->
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MN6WG3K6"></script>
+<style>
+  /* === БАЗА + ДЫШАЩИЙ ФОН === */
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: #f5f5f5;
+    scroll-behavior: smooth;
+    line-height: 1.6;
+    background: radial-gradient(1200px 800px at 20% 20%, #0f0f0f 0%, #0a0a0a 40%, #050505 100%);
+    background-attachment: fixed;
+    animation: bgMove 24s ease-in-out infinite;
+    position: relative;
+    overflow-x: hidden;
+  }
+  @keyframes bgMove {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.10'/></svg>");
+    background-size: 160px 160px;
+    opacity: 0.07;
+    mix-blend-mode: overlay;
+    z-index: 0;
+  }
 
-    /* Navigation */
-    nav {
-      position: relative;
-    }
-    .nav-links {
-      display: flex;
-      gap: 1rem;
-    }
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      transition: opacity 0.3s;
-    }
-    .nav-links a.active,
-    .nav-links a[aria-current="page"] {
-      opacity: 0.6;
-    }
+  /* === Навигация === */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(10,10,10,0.85);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+  }
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+  }
+  .nav-links {
+    display: flex;
+    gap: 1rem;
+  }
+  .nav-links a {
+    color: #f5f5f5;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s, opacity 0.3s, transform 0.3s, text-shadow 0.3s;
+    opacity: 1;
+    position: relative;
+  }
+  .nav-links a:hover {
+    color: #ddd;
+    text-shadow: 0 0 6px rgba(255,255,255,0.35);
+    transform: scale(1.02);
+  }
+  .nav-links a.active {
+    opacity: 0.6;
+  }
 
-    /* Burger menu */
-    .burger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      gap: 4px;
-    }
-    .burger span {
-      display: block;
-      width: 25px;
-      height: 3px;
-      background: white;
-      border-radius: 2px;
-    }
+  /* Бургер меню */
+  #burger { display: none; background: none; border: none; font-size: 1.8rem; color: #f5f5f5; cursor: pointer; }
+  @media (max-width: 768px) {
+    .nav-links { display: none; flex-direction: column; background: rgba(10,10,10,0.95); position: absolute; top: 100%; left: 0; width: 100%; }
+    .nav-links.show { display: flex; }
+    #burger { display: block; }
+  }
 
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        background: rgba(0,0,0,0.9);
-        position: absolute;
-        right: 0;
-        top: 100%;
-        width: 200px;
-        padding: 1rem;
-      }
-      .nav-links.show {
-        display: flex;
-      }
-      .burger {
-        display: flex;
-      }
-    }
+  /* === Header: logo + title === */
+  header {
+    max-height: 50vh;
+  }
+  .logo-title {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+  }
+  .logo-title img {
+    max-width: 120px;
+    height: auto;
+    display: block;
+    transition: transform 0.3s;
+  }
+  .logo-title img:hover {
+    transform: scale(1.05);
+  }
 
-    /* Page content spacing (since header is fixed) */
-    main {
-      padding-top: 80px;
-    }
-  </style>
+  /* === Секции текста === */
+  section {
+    padding: 1.5rem 2rem;
+    max-width: 900px;
+    margin: 2rem auto;
+    text-align: left;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    position: relative;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+  }
+
+  /* === Footer === */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.9rem;
+    color: #555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  footer img { max-width: 24px; }
+
+</style>
 </head>
 <body>
-  <header>
-    <div class="logo-title">
-      <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon Logo">
-      <h1>Stylish Horizon</h1>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<nav>
+  <div class="nav-container">
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="manifest.html">Manifest</a>
+      <a href="archive.html">Archive</a>
+      <a href="contact.html">Contact</a>
     </div>
-    <nav>
-      <div class="burger" id="burger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <div class="nav-links" id="nav-links">
-        <a href="index.html">Home</a>
-        <a href="manifest.html">Manifest</a>
-        <a href="archive.html">Archive</a>
-        <a href="contact.html">Contact</a>
-      </div>
-    </nav>
-  </header>
+    <button id="burger">☰</button>
+  </div>
+</nav>
 
-  <main>
-    <!-- Здесь остаётся весь твой текст и контент без изменений -->
-    <section>
-      <h2>Welcome to Stylish Horizon</h2>
-      <p>… (твой текст) …</p>
-    </section>
-  </main>
+<header>
+  <div class="logo-title">
+    <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon Logo">
+    <h1>Stylish Horizon</h1>
+  </div>
+</header>
 
-  <script>
-    // Burger toggle
-    document.getElementById('burger').addEventListener('click', function() {
-      document.getElementById('nav-links').classList.toggle('show');
-    });
+<section class="hero">
+  <p>Digital restoration with integrity</p>
+  <p>No hype. No noise. Just memory.</p>
+  <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
+</section>
 
-    // Active menu highlight
-    (function() {
-      const links = document.querySelectorAll('.nav-links a');
-      if (!links.length) return;
+<section class="what">
+  <h2>What we do</h2>
+  <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
+  <p>If it still breathes — we help it speak again.</p>
+  <p>Every file is reviewed manually. Not filters, not nostalgia — just truth.</p>
+</section>
 
-      const here = new URL(location.href);
-      const norm = p => p.replace(/\/$/, '/index.html');
-      const herePath = norm(here.pathname);
+<section class="how">
+  <h2>How we work</h2>
+  <p>No shipping. We find trusted studios near you.</p>
+  <p>No subscriptions. You pay for what you need — nothing more.</p>
+</section>
 
-      links.forEach(a => {
-        const url = new URL(a.getAttribute('href'), here);
-        const path = norm(url.pathname);
-        if (path === herePath) {
-          a.classList.add('active');
-          a.setAttribute('aria-current', 'page');
-        }
-      });
-    })();
-  </script>
+<section class="why">
+  <h2>Why it matters</h2>
+  <p>We believe memory deserves clarity.</p>
+  <p>Not filters, not nostalgia — just truth.</p>
+</section>
+
+<footer>
+  <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo">
+  <p>© <span id="year"></span> Stylish Horizon</p>
+</footer>
+
+<script>
+  // === Активный пункт меню ===
+  const path = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    if((path === 'index.html' && a.getAttribute('href').endsWith('index.html')) || a.getAttribute('href').endsWith(path)){
+      a.classList.add('active');
+    }
+  });
+
+  // === Бургер меню ===
+  const burger = document.getElementById('burger');
+  const navLinks = document.querySelector('.nav-links');
+  burger.addEventListener('click', ()=> navLinks.classList.toggle('show'));
+
+  // === Динамический год в футере ===
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
