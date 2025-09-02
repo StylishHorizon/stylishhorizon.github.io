@@ -148,45 +148,6 @@
   color: #000;
 }
 
-/* Вариант 2: Ghost */
-.btn-ghost {
-  color: #fff;
-  text-decoration: none;
-  position: relative;
-  padding: 10px 20px;
-}
-
-.btn-ghost::after {
-  content: "";
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 4px;
-  height: 1px;
-  background: #fff;
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.btn-ghost:hover::after {
-  transform: scaleX(1);
-}
-
-/* Вариант 3: Capsule */
-.btn-capsule {
-  display: inline-block;
-  padding: 10px 24px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  text-decoration: none;
-  transition: background 0.3s ease;
-}
-
-.btn-capsule:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
   <section>
   <h2>Try buttons</h2>
   <p>Minimalist styles to test:</p>
