@@ -44,75 +44,68 @@
       width: 100%;
       background-color: rgba(10,10,10,0.85);
       backdrop-filter: blur(6px);
-      display: flex;
-      justify-content: center;
-      padding: 0.5rem 0;
       z-index: 1000;
-      border-bottom: 1px solid #222;
-      transition: top 0.3s ease;
     }
-    nav.hidden { top: -70px; }
-    nav a {
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+    .nav-links a {
       color: #f5f5f5;
-      margin: 0 1rem;
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s, text-shadow 0.3s, transform 0.3s;
+      transition: color 0.3s, opacity 0.3s, transform 0.3s, text-shadow 0.3s;
+      opacity: 1;
       position: relative;
     }
-    nav a:hover { color: #ddd; text-shadow: 0 0 6px rgba(255,255,255,0.35); transform: scale(1.02);}
-    nav a.active { color: #ffffff; text-shadow: 0 0 10px rgba(255,255,255,0.45);}
-    nav a.active::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -6px;
-      transform: translateX(-50%);
-      width: 100%;
-      height: 2px;
-      background: #f5f5f5;
-      border-radius: 2px;
+    .nav-links a.active { opacity: 0.6; }
+    .nav-links a:hover { transform: scale(1.02); text-shadow: 0 0 6px rgba(255,255,255,0.3); }
+
+    /* Бургер меню */
+    #burger { display: none; background: none; border: none; font-size: 1.8rem; color: #f5f5f5; cursor: pointer; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; background: rgba(10,10,10,0.95); position: absolute; top: 100%; left: 0; width: 100%; padding: 1rem 0; }
+      .nav-links.show { display: flex; }
+      #burger { display: block; }
     }
 
     /* === Header: logo + title === */
     header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding-top: 60px;
-      z-index: 1;
+      max-height: 50vh;
       position: relative;
+      z-index: 1;
     }
     .logo-title {
+      position: fixed;
+      top: 10px;
+      left: 10px;
       display: flex;
       align-items: center;
-      opacity: 0;
-      transform: scale(0.98);
-      animation: fadeInLogo 1.2s forwards;
+      justify-content: center;
+      z-index: 1001;
+      cursor: pointer;
+      transition: transform 0.3s;
     }
-    .logo-title h1 {
-      font-size: 2.8rem;
-      font-weight: 700;
-      margin-left: 1rem;
-      opacity: 0;
-      animation: fadeInTitle 2.3s forwards;
-    }
+    .logo-title:hover { transform: scale(1.05) rotate(1deg); }
     .logo-title img {
       max-width: 120px;
+      height: auto;
       display: block;
     }
-    @keyframes fadeInLogo { to { opacity: 1; transform: scale(1); } }
-    @keyframes fadeInTitle { to { opacity: 1; } }
-
-    /* Scroll hint */
-    .scroll-hint {
-      margin-top: 20px;
+    .logo-title h1 {
+      margin-left: 0.5rem;
       font-size: 1.5rem;
-      opacity: 0.3;
-      animation: pulse 2s infinite;
+      color: #f5f5f5;
+      opacity: 0.9;
     }
-    @keyframes pulse { 0%,100% {opacity:0.3;} 50% {opacity:0.6;} }
 
     /* === Секции текста === */
     section {
@@ -121,7 +114,7 @@
       margin: 2rem auto;
       text-align: left;
       opacity: 0;
-      transform: translateY(24px) scale(0.985);
+      transform: translateY(24px) rotateY(0deg) scale(0.985);
       transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.19,1,0.22,1);
       position: relative;
       z-index: 1;
@@ -129,10 +122,9 @@
       border-radius: 12px;
       backdrop-filter: blur(4px);
     }
-    section.visible { opacity: 1; transform: translateY(0) scale(1); }
+    section.visible { opacity: 1; transform: translateY(0) rotateY(0deg) scale(1); }
     section p { margin: 0.5rem 0; transition: opacity 0.6s ease; }
-
-    section:hover { transform: scale(1.02); }
+    section:hover { transform: scale(1.02) rotateY(1deg); }
 
     /* === Footer === */
     footer {
@@ -147,35 +139,43 @@
       opacity: 0;
       transform: translateY(10px);
       transition: opacity 1s, transform 1s;
+      border-top: 1px solid rgba(255,255,255,0.1);
     }
     footer.visible { opacity: 1; transform: translateY(0); }
-    footer img { max-width: 24px; }
-/* Планшеты и телефоны: меню компактнее */
-@media (max-width: 768px) {
-  nav a {
-    margin: 0 0.4rem !important;
-    font-size: 0.9rem !important;
-  }
-}
 
+    /* === Scroll hint отключен === */
+    .scroll-hint { display: none; }
+
+    /* Адаптивные отступы для маленьких экранов */
+    @media (max-width: 768px) {
+      section { margin: 1rem auto; padding: 1rem; }
+      .logo-title img { max-width: 100px; }
+      .logo-title h1 { font-size: 1.2rem; }
+    }
+
+    /* Плавное смещение цвета фона */
+    body.scrolled { background-position: 5% 50%; }
   </style>
 </head>
 <body>
 
-<nav id="nav">
-  <a href="index.html">Home</a>
-  <a href="manifest.html">Manifest</a>
-  <a href="archive.html">Archive</a>
-  <a href="contact.html">Contact</a>
+<nav>
+  <div class="nav-container">
+    <div class="logo-title" onclick="window.location='index.html'">
+      <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon Logo">
+      <h1>Stylish Horizon</h1>
+    </div>
+    <button id="burger">&#9776;</button>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="manifest.html">Manifest</a>
+      <a href="archive.html">Archive</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
 </nav>
 
-<header>
-  <div class="logo-title">
-    <img src="assets/media/StylishHorizon_Clear.png" alt="Stylish Horizon Logo">
-    <h1>Stylish Horizon</h1>
-  </div>
-  <div class="scroll-hint">↓</div>
-</header>
+<header></header>
 
 <section class="hero visible">
   <p>Digital restoration with integrity</p>
@@ -203,8 +203,8 @@
 </section>
 
 <footer>
-  <img src="assets/media/StylishHorizon_Clear.png" alt="Logo">
-  <p>© 2025 Stylish Horizon</p>
+  <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" style="max-width:24px;">
+  <p>© <span id="year"></span> Stylish Horizon</p>
 </footer>
 
 <script>
@@ -226,346 +226,45 @@
 
   // === Scroll-показываю/скрываю меню ===
   let lastScrollTop = 0;
-  const nav = document.getElementById('nav');
+  const nav = document.querySelector('nav');
   window.addEventListener('scroll', () => {
     let st = window.pageYOffset || document.documentElement.scrollTop;
     if(st > lastScrollTop){ nav.classList.add('hidden'); }
     else{ nav.classList.remove('hidden'); }
     lastScrollTop = st <= 0 ? 0 : st;
+
+    // Плавное смещение фона
+    document.body.style.backgroundPosition = `${5 + st/150}% 50%`;
   });
 
   // === Активный пункт меню ===
   const path = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('nav a').forEach(a => {
+  document.querySelectorAll('.nav-links a').forEach(a => {
     if((path === 'index.html' && a.getAttribute('href').endsWith('index.html')) || a.getAttribute('href').endsWith(path)){
       a.classList.add('active');
     }
   });
-</script>
 
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stylish Horizon</title>
-  <!-- Google Fonts: Inter (как у тебя было) -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
-  <style>
-    /* === БАЗА (твоя) + живой фон === */
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      color: #f5f5f5;
-      scroll-behavior: smooth;
-      line-height: 1.6;
+  // === Бургер меню ===
+  const burger = document.getElementById('burger');
+  const navLinks = document.querySelector('.nav-links');
+  burger.addEventListener('click', () => { navLinks.classList.toggle('show'); });
 
-      /* вместо статичного #0a0a0a — мягкий «дышащий» фон */
-      background: radial-gradient(1200px 800px at 20% 20%, #0f0f0f 0%, #0a0a0a 40%, #050505 100%);
-      background-attachment: fixed;
-      animation: bgMove 24s ease-in-out infinite;
-      position: relative;
-      overflow-x: hidden;
-    }
-    @keyframes bgMove {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+  // === Динамический год в футере ===
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-    /* Тонкий шум поверх фона (еле заметный premium-эффект) */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.10'/></svg>");
-      background-size: 160px 160px;
-      opacity: 0.07;
-      mix-blend-mode: overlay;
-      z-index: 0;
-    }
-
-    /* === Навигация (как у тебя) + лёгкий blur и active === */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background-color: rgba(10,10,10,0.85); /* чуть прозрачный + blur */
-      backdrop-filter: blur(6px);
-      display: flex;
-      justify-content: center;
-      padding: 0.5rem 0;
-      z-index: 1000;
-      border-bottom: 1px solid #222;
-    }
-    nav a {
-      color: #f5f5f5;
-      margin: 0 1rem;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s, text-shadow 0.3s;
-      position: relative;
-    }
-    nav a:hover {
-      color: #ddd;
-      text-shadow: 0 0 6px rgba(255,255,255,0.35);
-    }
-    /* активный пункт меню (информационно, на какой странице) */
-    nav a.active {
-      color: #ffffff;
-      text-shadow: 0 0 10px rgba(255,255,255,0.45);
-    }
-    nav a.active::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -6px;
-      transform: translateX(-50%);
-      width: 100%;
-      height: 2px;
-      background: #f5f5f5;
-      border-radius: 2px;
-    }
-
-    /* === Хедер и лого (твоё) + breathing после fade-in === */
-    header {
-      display: flex;
-      justify-content: center;
-      padding: 0.5rem 0;
-      margin-top: 50px;
-      position: relative;
-      z-index: 1; /* чтобы быть над шумом */
-    }
-    header img {
-      max-width: 220px;
-      opacity: 0.2;
-      animation: fadeInLogo 2s forwards, breathe 10s ease-in-out 2s infinite; /* добавил breathing */
-      will-change: transform, opacity;
-    }
-    @keyframes fadeInLogo {
-      to { opacity: 1; }
-    }
-    @keyframes breathe {
-      0%, 100% { transform: scale(1); }
-      50%      { transform: scale(1.03); }
-    }
-
-    /* === Секции (твоё) + чуть современнее reveal === */
-    section {
-      padding: 2rem 2rem 2rem 2rem;
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: left;
-      opacity: 0;
-      transform: translateY(24px) scale(0.985); /* добавил лёгкий scale */
-      transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.19,1,0.22,1);
-      position: relative;
-      z-index: 1; /* над шумовым слоем */
-    }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      font-weight: 700;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      color: #bbb;
-      max-width: 700px;
-    }
-    .section-title {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .comparison {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-    .comparison .block {
-      text-align: left;
-    }
-
-    /* iframe (твоё) + мягкий hover-glow */
-    iframe {
-      width: 100%;
-      height: 315px;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      will-change: transform;
-    }
-    iframe:hover {
-      transform: translateY(-2px) scale(1.01);
-      box-shadow: 0 10px 28px rgba(0,0,0,0.65), 0 0 24px rgba(255,255,255,0.06);
-    }
-
-    .service .package {
-      background-color: #111;
-      padding: 1.5rem;
-      margin: 1rem 0;
-      border-radius: 12px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .service .package:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.5);
-    }
-    .service .package h3 {
-      margin-top: 0;
-      color: #fff;
-    }
-
-    .contact form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-    .contact input, .contact textarea, .contact button {
-      padding: 0.8rem;
-      border-radius: 6px;
-      border: none;
-      font-size: 1rem;
-    }
-    .contact input, .contact textarea {
-      background-color: #222;
-      color: #f5f5f5;
-    }
-    .contact button {
-      background-color: #444;
-      color: #fff;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    .contact button:hover {
-      background-color: #666;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #555;
-    }
-
-    @media (max-width: 768px) {
-      .comparison { grid-template-columns: 1fr; }
-      nav a { margin: 0 0.5rem; }
-    }
-  </style>
-</head>
-<body>
-
-<nav>
-  <a href="index.html">Home</a>
-  <a href="manifest.html">Manifest</a>
-  <a href="archive.html">Archive</a>
-  <a href="contact.html">Contact</a>
-</nav>
-
-<header>
-  <img src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon Logo">
-</header>
-
-<section class="hero">
-  <h1>Digital restoration with integrity</h1>
-  <p>No hype. No noise. Just memory.<br>We restore MiniDV, VHS, Hi8, and forgotten drives. Every file is reviewed manually. Not filters, not nostalgia — just truth.</p>
-</section>
-
-<section class="manifest">
-  <h2 class="section-title">Manifesto</h2>
-  <p>We don’t restore formats. We restore memory.<br>Stylish Horizon exists to preserve what matters — not what sells. MiniDV, VHS, Hi8, forgotten drives — each one holds fragments of truth. We treat them with care, not nostalgia.<br>No filters. No enhancement. No storytelling. Just clarity, context, and quiet respect. We believe memory should be accessible, not monetized. Restoration is not a service — it’s a responsibility.</p>
-</section>
-
-<section class="archive">
-  <h2 class="section-title">Archive</h2>
-  <div class="comparison">
-    <div class="block">
-      <h3>Before</h3>
-      <iframe src="https://www.youtube.com/embed/rjS13daTnKc?start=15" allowfullscreen></iframe>
-    </div>
-    <div class="block">
-      <h3>After</h3>
-      <iframe src="https://www.youtube.com/embed/aSduAKdM_zk?start=15" allowfullscreen></iframe>
-    </div>
-  </div>
-</section>
-
-<section class="service">
-  <h2 class="section-title">Restoration Services</h2>
-  <div class="package">
-    <h3>Package 1: Legacy</h3>
-    <ul>
-      <li>Deinterlacing: Removes combing artifacts for smoother playback</li>
-      <li>Basic Color Correction: Restores faded tones</li>
-      <li>Noise Reduction: Cleans digital grain and artifacts</li>
-      <li>Output: Standard Definition (SD)</li>
-    </ul>
-  </div>
-  <div class="package">
-    <h3>Package 2: Ultimate Restoration</h3>
-    <ul>
-      <li>All Legacy features</li>
-      <li>Advanced Color Grading: Cinematic tone mapping</li>
-      <li>Detail Enhancement: Sharpening & texture recovery</li>
-      <li>Artifact Removal: Frame-by-frame cleanup</li>
-      <li>Upscaling: Full HD or optional 4K</li>
-      <li>Output: High Definition (HD/4K)</li>
-    </ul>
-  </div>
-</section>
-
-<section class="contact">
-  <h2 class="section-title">Contact</h2>
-  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <textarea name="message" placeholder="Describe your tapes or request" rows="5" required></textarea>
-    <button type="submit">Send Request</button>
-  </form>
-  <p style="text-align:center; margin-top:1rem; color:#888;">Minimalist chat placeholder (Tawk.to/Crisp can be integrated)</p>
-</section>
-
-<footer>
-  <p>© 2025 Stylish Horizon</p>
-</footer>
-
-<script>
-  // === Твой reveal для секций (оставил как есть) ===
-  const sections = document.querySelectorAll('section');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
+  // === Плавная инерционная прокрутка ===
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e){
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
-  }, { threshold: 0.2 });
-  sections.forEach(section => observer.observe(section));
+  });
 
-  // === Активный пункт меню по текущей странице (index.html) ===
-  (function highlightActiveNav(){
-    const path = location.pathname.split('/').pop() || 'index.html';
-    const links = document.querySelectorAll('nav a');
-    links.forEach(a => {
-      const href = a.getAttribute('href');
-      if ((path === 'index.html' && /(^|\/)index\.html$/.test(href)) ||
-          (path && href.endsWith(path))) {
-        a.classList.add('active');
-      }
-    });
-  })();
 </script>
+<!-- Google Tag Manager -->
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MN6WG3K6"></script>
 
 </body>
 </html>
