@@ -45,10 +45,7 @@
       background-color: rgba(10,10,10,0.85);
       backdrop-filter: blur(6px);
       z-index: 1000;
-      transition: top 0.3s ease;
     }
-    nav.hidden { top: -70px; }
-
     .nav-container {
       display: flex;
       align-items: center;
@@ -57,7 +54,6 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-
     .nav-links {
       display: flex;
       gap: 1rem;
@@ -82,8 +78,11 @@
     }
 
     /* === Header: logo + title === */
-    header { max-height: 50vh; position: relative; z-index: 1; }
-
+    header {
+      max-height: 50vh;
+      position: relative;
+      z-index: 1;
+    }
     .logo-title {
       position: fixed;
       top: 10px;
@@ -93,10 +92,9 @@
       justify-content: center;
       z-index: 1001;
       cursor: pointer;
-      transition: transform 0.3s, opacity 0.3s;
+      transition: transform 0.3s;
     }
     .logo-title:hover { transform: scale(1.05) rotate(1deg); }
-
     .logo-title img {
       max-width: 120px;
       height: auto;
@@ -145,7 +143,7 @@
     }
     footer.visible { opacity: 1; transform: translateY(0); }
 
-    /* Scroll hint отключен */
+    /* === Scroll hint отключен === */
     .scroll-hint { display: none; }
 
     /* Адаптивные отступы для маленьких экранов */
@@ -154,19 +152,17 @@
       .logo-title img { max-width: 100px; }
       .logo-title h1 { font-size: 1.2rem; }
     }
+
+    /* Плавное смещение цвета фона */
+    body.scrolled { background-position: 5% 50%; }
   </style>
 </head>
 <body>
 
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
 <nav>
   <div class="nav-container">
     <div class="logo-title" onclick="window.location='index.html'">
-      <img src="assets/media/StylishHorizon.png" alt="Stylish Horizon Logo">
+      <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon Logo">
       <h1>Stylish Horizon</h1>
     </div>
     <button id="burger">&#9776;</button>
@@ -205,25 +201,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p>We believe memory deserves clarity.</p>
   <p>Not filters, not nostalgia — just truth.</p>
 </section>
- <!-- CTA кнопки -->
-  <div class="cta-buttons-stylish">
-    <a href="manifest.html" class="cta-btn-stylish">More info</a>
-    <a href="archive.html" class="cta-btn-stylish">Watch Results</a>
-  </div>
+
 <footer>
-  <img src="assets/media/StylishHorizon.png" alt="Logo" style="max-width:24px;">
+  <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" style="max-width:24px;">
   <p>© <span id="year"></span> Stylish Horizon</p>
 </footer>
-
-<!-- Google Tag Manager -->
-<script>
-(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-MN6WG3K6');
-</script>
-<!-- End Google Tag Manager -->
 
 <script>
   // === Intersection Observer для секций ===
@@ -242,18 +224,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   observer.observe(footer);
   footer.classList.add('visible');
 
-  // === Scroll-показываю/скрываю меню + фоновое смещение ===
+  // === Scroll-показываю/скрываю меню ===
   let lastScrollTop = 0;
   const nav = document.querySelector('nav');
-  const logo = document.querySelector('.logo-title');
   window.addEventListener('scroll', () => {
     let st = window.pageYOffset || document.documentElement.scrollTop;
-    if(st > lastScrollTop){ nav.classList.add('hidden'); logo.style.opacity=0; }
-    else{ nav.classList.remove('hidden'); logo.style.opacity=1; }
+    if(st > lastScrollTop){ nav.classList.add('hidden'); }
+    else{ nav.classList.remove('hidden'); }
     lastScrollTop = st <= 0 ? 0 : st;
 
     // Плавное смещение фона
-    document.body.style.backgroundPosition = `${Math.min(100, 5 + st/150)}% 50%`;
+    document.body.style.backgroundPosition = `${5 + st/150}% 50%`;
   });
 
   // === Активный пункт меню ===
@@ -277,9 +258,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     anchor.addEventListener('click', function(e){
       e.preventDefault();
       const target = document.querySelector(this.getAttribute('href'));
-      if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
+
 </script>
+<!-- Google Tag Manager -->
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MN6WG3K6"></script>
+
 </body>
 </html>
