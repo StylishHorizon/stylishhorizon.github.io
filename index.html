@@ -73,19 +73,36 @@
   filter:drop-shadow(0 2px 8px rgba(0,0,0,.35));
 }
 .site-title {
-  margin:0; font-size:1.25rem; letter-spacing:.2px; opacity:.92;
-  background: linear-gradient(90deg, #00d4ff, #8e2de2, #ff8c00, #00d4ff);
+  margin: 0;
+  font-size: 1.25rem;
+  letter-spacing: .2px;
+  opacity: .92;
+
+  /* fallback */
+  color: #f5f5f5;
+
+  /* shine gradient */
+  background: linear-gradient(
+    90deg, 
+    #00d4ff, 
+    #8e2de2, 
+    #ff8c00, 
+    #00d4ff
+  );
   background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
+
   animation: shine 8s linear infinite;
 }
 
 @keyframes shine {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
 
     .site-title{ margin:0; font-size:1.25rem; letter-spacing:.2px; opacity:.92 }
 
