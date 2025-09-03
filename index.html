@@ -61,22 +61,30 @@
       display:flex; align-items:center; justify-content:space-between; gap:1rem;
     }
 
-    /* Лого + заголовок */
-   .logo-title h1 {
-  margin-left: 0.5rem;
-  font-size: 1.5rem;
-  background: linear-gradient(90deg, #ffffff, #00d4ff, #ffffff);
-  background-size: 200% auto;
-  color: transparent;
+/* Лого + заголовок */
+.logo-title {
+  display:flex; align-items:center; gap:.5rem; cursor:pointer; user-select:none;
+  transform:translateZ(0); transition:transform .3s ease;
+  perspective:800px;
+}
+.logo-title:hover { transform:rotateY(1.2deg) scale(1.03); }
+.logo {
+  width:120px; height:auto; display:block;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.35));
+}
+.site-title {
+  margin:0; font-size:1.25rem; letter-spacing:.2px; opacity:.92;
+  background: linear-gradient(90deg, #00d4ff, #8e2de2, #ff8c00, #00d4ff);
+  background-size: 300% 300%;
   -webkit-background-clip: text;
-  background-clip: text;
-  animation: shine 6s linear infinite;
+  -webkit-text-fill-color: transparent;
+  animation: shine 8s linear infinite;
 }
 
 @keyframes shine {
-  to {
-    background-position: 200% center;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
     .site-title{ margin:0; font-size:1.25rem; letter-spacing:.2px; opacity:.92 }
