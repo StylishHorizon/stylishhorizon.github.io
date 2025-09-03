@@ -62,16 +62,23 @@
     }
 
     /* Лого + заголовок */
-    .logo-title{
-      display:flex; align-items:center; gap:.5rem; cursor:pointer; user-select:none;
-      transform:translateZ(0); transition:transform .3s ease;
-      perspective:800px;
-    }
-    .logo-title:hover{ transform:rotateY(1.2deg) scale(1.03); }
-    .logo{
-      width:120px; height:auto; display:block;
-      filter:drop-shadow(0 2px 8px rgba(0,0,0,.35));
-    }
+   .logo-title h1 {
+  margin-left: 0.5rem;
+  font-size: 1.5rem;
+  background: linear-gradient(90deg, #ffffff, #00d4ff, #ffffff);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 6s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
     .site-title{ margin:0; font-size:1.25rem; letter-spacing:.2px; opacity:.92 }
 
     /* Ссылки меню */
