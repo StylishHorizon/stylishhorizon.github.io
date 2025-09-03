@@ -1,270 +1,315 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Stylish Horizon</title>
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MN6WG3K6');
+  </script>
+  <!-- End Google Tag Manager -->
+
   <!-- Google Fonts: Inter -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
+
   <style>
-    /* === БАЗА + ДЫШАЩИЙ ФОН === */
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      color: #f5f5f5;
-      scroll-behavior: smooth;
-      line-height: 1.6;
-      background: radial-gradient(1200px 800px at 20% 20%, #0f0f0f 0%, #0a0a0a 40%, #050505 100%);
-      background-attachment: fixed;
-      animation: bgMove 24s ease-in-out infinite;
-      position: relative;
-      overflow-x: hidden;
+    /* ====== БАЗА + ДЫШАЩИЙ ФОН ====== */
+    :root{
+      --bg-a:#0f0f0f; --bg-b:#0a0a0a; --bg-c:#050505;
+      --glass: rgba(10,10,10,0.85);
+      --glass-menu: rgba(10,10,10,0.95);
+      --txt:#f5f5f5; --muted:#9aa0a6;
+      --ring: rgba(255,255,255,.35);
+      --shadow: 0 8px 28px rgba(0,0,0,.35);
     }
-    @keyframes bgMove {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--txt); line-height:1.6; background-attachment:fixed; overflow-x:hidden;
+      background: radial-gradient(1200px 800px at 20% 20%, var(--bg-a) 0%, var(--bg-b) 40%, var(--bg-c) 100%);
+      animation:bgMove 24s ease-in-out infinite;
+      scroll-behavior:smooth; position:relative;
     }
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.25'/></svg>");
-      background-size: 160px 160px;
-      opacity: 0.07;
-      mix-blend-mode: overlay;
-      z-index: 0;
+    @keyframes bgMove{
+      0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
+    }
+    body::before{
+      content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+      background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.10'/></svg>");
+      background-size:160px 160px; opacity:.07; mix-blend-mode:overlay;
     }
 
-    /* === Навигация === */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background-color: rgba(10,10,10,0.85);
-      backdrop-filter: blur(6px);
-      z-index: 1000;
+    /* ====== НАВИГАЦИЯ ====== */
+    nav{
+      position:fixed; top:0; left:0; right:0; z-index:1000;
+      background:var(--glass); backdrop-filter:blur(6px);
+      transform:translateY(0); opacity:1;
+      transition:transform .5s ease, opacity .5s ease;
+      will-change:transform,opacity;
+      box-shadow:0 1px 0 rgba(255,255,255,.08);
     }
-    .nav-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.5rem 1rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .nav-links {
-  display: flex;
-  gap: 1rem;
-  margin-left: auto; /* прижимает к правому краю */
-    .nav-links a {
-      color: #f5f5f5;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s, opacity 0.3s, transform 0.3s, text-shadow 0.3s;
-      opacity: 1;
-      position: relative;
-    }
-    .nav-links a.active { opacity: 0.6; }
-    .nav-links a:hover { transform: scale(1.02); text-shadow: 0 0 6px rgba(255,255,255,0.3); }
-
-    /* Бургер меню */
-    #burger { display: none; background: none; border: none; font-size: 1.8rem; color: #f5f5f5; cursor: pointer; }
-    @media (max-width: 768px) {
-      .nav-links { display: none; flex-direction: column; background: rgba(10,10,10,0.95); position: absolute; top: 100%; left: 0; width: 100%; padding: 1rem 0; }
-      .nav-links.show { display: flex; }
-      #burger { display: block; }
+    nav.hidden{ transform:translateY(-100%); opacity:0; pointer-events:none; }
+    .nav-container{
+      max-width:1200px; margin:0 auto; padding:.5rem 1rem;
+      display:flex; align-items:center; justify-content:space-between; gap:1rem;
     }
 
-    /* === Header: logo + title === */
-    header {
-      max-height: 50vh;
-      position: relative;
-      z-index: 1;
+    /* Лого + заголовок */
+    .logo-title{
+      display:flex; align-items:center; gap:.5rem; cursor:pointer; user-select:none;
+      transform:translateZ(0); transition:transform .3s ease;
+      perspective:800px;
     }
-    .logo-title {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1001;
-      cursor: pointer;
-      transition: transform 0.3s;
+    .logo-title:hover{ transform:rotateY(1.2deg) scale(1.03); }
+    .logo{
+      width:120px; height:auto; display:block;
+      filter:drop-shadow(0 2px 8px rgba(0,0,0,.35));
     }
-    .logo-title:hover { transform: scale(1.05) rotate(1deg); }
-    .logo-title img {
-      max-width: 120px;
-      height: auto;
-      display: block;
+    .site-title{ margin:0; font-size:1.25rem; letter-spacing:.2px; opacity:.92 }
+
+    /* Ссылки меню */
+    .nav-links{ display:flex; gap:1rem; align-items:center }
+    .nav-links a{
+      color:var(--txt); text-decoration:none; font-weight:500; opacity:1; position:relative;
+      padding:.4rem .6rem; border-radius:.5rem; transition:opacity .25s, transform .25s, text-shadow .25s, background .25s;
     }
-    .logo-title h1 {
-      margin-left: 0.5rem;
-      font-size: 1.5rem;
-      color: #f5f5f5;
-      opacity: 0.9;
+    .nav-links a:hover{ transform:translateY(-1px); text-shadow:0 0 6px rgba(255,255,255,.28); background:rgba(255,255,255,.04) }
+    .nav-links a.active{ opacity:.62; }
+
+    /* Бургер */
+    #burger{
+      display:none; background:none; border:0; color:var(--txt); font-size:1.8rem; cursor:pointer; line-height:1; padding:.25rem .5rem; border-radius:.5rem;
+    }
+    #burger:focus-visible{ outline:2px solid var(--ring); outline-offset:3px }
+
+    /* Мобильная навигация */
+    @media (max-width:768px){
+      .nav-links{
+        position:absolute; top:100%; left:0; right:0;
+        background:var(--glass-menu); backdrop-filter:blur(8px);
+        display:flex; flex-direction:column; gap:.25rem; padding:.75rem .5rem;
+        transform-origin:top; transform:scaleY(0.98); opacity:0; pointer-events:none;
+        transition:opacity .25s ease, transform .25s ease;
+      }
+      .nav-links.show{ opacity:1; transform:scaleY(1); pointer-events:auto; }
+      #burger{ display:block }
+      .site-title{ font-size:1.05rem }
+      .logo{ width:100px }
     }
 
-    /* === Секции текста === */
-    section {
-      padding: 2rem 2rem;
-      max-width: 900px;
-      margin: 2rem auto;
-      text-align: left;
-      opacity: 0;
-      transform: translateY(24px) rotateY(0deg) scale(0.985);
-      transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.19,1,0.22,1);
-      position: relative;
-      z-index: 1;
-      background-color: rgba(0,0,0,0.5);
-      border-radius: 12px;
-      backdrop-filter: blur(4px);
+    /* ====== СЕКЦИИ ====== */
+    main{ padding-top:64px } /* чтобы контент не заезжал под nav */
+    section{
+      position:relative; z-index:1; max-width:900px; margin:2rem auto; padding:2rem;
+      text-align:left; background:rgba(0,0,0,.5); border-radius:12px; backdrop-filter:blur(4px);
+      box-shadow: var(--shadow);
+      opacity:0; transform:translateY(24px) scale(.985);
+      transition:opacity .8s ease-out, transform .8s cubic-bezier(.19,1,.22,1);
+      will-change:transform,opacity;
     }
-    section.visible { opacity: 1; transform: translateY(0) rotateY(0deg) scale(1); }
-    section p { margin: 0.5rem 0; transition: opacity 0.6s ease; }
-    section:hover { transform: scale(1.02) rotateY(1deg); }
+    section.visible{ opacity:1; transform:translateY(0) scale(1) }
+    section h2{ margin-top:0 }
+    section p{ margin:.5rem 0 }
+    section:hover{ transform:translateY(-1px) scale(1.02) }
 
-    /* === Footer === */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #555;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 1s, transform 1s;
-      border-top: 1px solid rgba(255,255,255,0.1);
+    /* ====== FOOTER ====== */
+    footer{
+      display:flex; justify-content:center; align-items:center; gap:.5rem;
+      padding:2rem; font-size:.9rem; color:#bbb; border-top:1px solid rgba(255,255,255,.1);
+      opacity:0; transform:translateY(10px); transition:opacity 1s, transform 1s;
     }
-    footer.visible { opacity: 1; transform: translateY(0); }
+    footer.visible{ opacity:1; transform:translateY(0) }
+    footer img{ width:24px; height:auto; filter:drop-shadow(0 1px 4px rgba(0,0,0,.5)) }
 
-    /* === Scroll hint отключен === */
-    .scroll-hint { display: none; }
-
-    /* Адаптивные отступы для маленьких экранов */
-    @media (max-width: 768px) {
-      section { margin: 1rem auto; padding: 1rem; }
-      .logo-title img { max-width: 100px; }
-      .logo-title h1 { font-size: 1.2rem; }
+    /* Адаптивные отступы */
+    @media (max-width:768px){
+      section{ margin:1rem auto; padding:1rem }
     }
 
-    /* Плавное смещение цвета фона */
-    body.scrolled { background-position: 5% 50%; }
+    /* ====== ПРЕДПОЧТЕНИЕ МЕНЬШЕ ДВИЖЕНИЯ ====== */
+    @media (prefers-reduced-motion: reduce){
+      *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important }
+      body{ animation:none }
+      .logo-title:hover, section:hover{ transform:none !important }
+    }
   </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-container">
-    <div class="logo-title" onclick="window.location='index.html'">
-      <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon Logo">
-      <h1>Stylish Horizon</h1>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <nav id="site-nav">
+    <div class="nav-container">
+      <a class="logo-title" href="index.html" aria-label="Go to home">
+        <picture>
+          <!-- современный webp -->
+          <source srcset="assets/media/StylishHorizon_Clear.webp" type="image/webp">
+          <!-- fallback для старых устройств -->
+          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon Logo" width="120" height="40" />
+        </picture>
+        <h1 class="site-title">Stylish Horizon</h1>
+      </a>
+
+      <button id="burger" aria-label="Open menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
+
+      <div id="primary-navigation" class="nav-links" role="navigation" aria-label="Primary">
+        <a href="index.html" class="active" aria-current="page">Home</a>
+        <a href="manifest.html">Manifest</a>
+        <a href="archive.html">Archive</a>
+        <a href="contact.html">Contact</a>
+      </div>
     </div>
-    <button id="burger">&#9776;</button>
-    <div class="nav-links">
-      <a href="index.html" class="active">Home</a>
-      <a href="manifest.html">Manifest</a>
-      <a href="archive.html">Archive</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </div>
-</nav>
+  </nav>
 
-<header></header>
+  <main>
+    <header aria-hidden="true"></header>
 
-<section class="hero visible">
-  <p>Digital restoration with integrity</p>
-  <p>No hype. No noise. Just memory.</p>
-  <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
-</section>
+    <section class="hero">
+      <p>Digital restoration with integrity</p>
+      <p>No hype. No noise. Just memory.</p>
+      <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
+    </section>
 
-<section class="what" data-delay="1.5">
-  <h2>What we do</h2>
-  <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
-  <p>If it still breathes — we help it speak again.</p>
-  <p>Every file is reviewed manually. Not filters, not nostalgia — just truth.</p>
-</section>
+    <section class="what">
+      <h2>What we do</h2>
+      <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
+      <p>If it still breathes — we help it speak again.</p>
+      <p>Every file is reviewed manually. Not filters, not nostalgia — just truth.</p>
+    </section>
 
-<section class="how" data-delay="0.5">
-  <h2>How we work</h2>
-  <p>No shipping. We find trusted studios near you.</p>
-  <p>No subscriptions. You pay for what you need — nothing more.</p>
-</section>
+    <section class="how">
+      <h2>How we work</h2>
+      <p>No shipping. We find trusted studios near you.</p>
+      <p>No subscriptions. You pay for what you need — nothing more.</p>
+    </section>
 
-<section class="why" data-delay="3.5">
-  <h2>Why it matters</h2>
-  <p>We believe memory deserves clarity.</p>
-  <p>Not filters, not nostalgia — just truth.</p>
-</section>
+    <section class="why">
+      <h2>Why it matters</h2>
+      <p>We believe memory deserves clarity.</p>
+      <p>Not filters, not nostalgia — just truth.</p>
+    </section>
 
-<footer>
-  <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" style="max-width:24px;">
-  <p>© <span id="year"></span> Stylish Horizon</p>
-</footer>
+    <!-- Контейнер-заглушка под будущие элементы (кнопки/слайдер/видео и т.д.) -->
+    <section class="placeholder">
+      <h2>Placeholder</h2>
+      <p>Reserved area for future modules (buttons, sliders, YouTube, etc.).</p>
+    </section>
+  </main>
 
-<script>
-  // === Intersection Observer для секций ===
-  const sections = document.querySelectorAll('section');
-  const footer = document.querySelector('footer');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        const delay = parseFloat(entry.target.dataset.delay) || 0;
-        setTimeout(()=> entry.target.classList.add('visible'), delay*1000);
-        observer.unobserve(entry.target);
+  <footer>
+    <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" />
+    <p>© <span id="year"></span> Stylish Horizon</p>
+  </footer>
+
+  <script>
+    /* ====== Intersection Observer: «случайное» проявление секций ====== */
+    const sections = Array.from(document.querySelectorAll('main section'));
+    const footer = document.querySelector('footer');
+
+    // Ставим первую секцию (hero) первой, остальные — перемешиваем для лёгкой «дисгармонии»
+    const [first, ...rest] = sections;
+    const shuffled = rest
+      .map(s => ({ s, r: Math.random() }))
+      .sort((a,b) => a.r - b.r)
+      .map(x => x.s);
+    const ordered = [first, ...shuffled];
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const idx = ordered.indexOf(entry.target);
+        const base = idx === 0 ? 0.12 : 0.18;    // первая — минимальная задержка
+        const jitter = Math.random() * 0.25;     // случайная добавка
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, (base + jitter) * 1000);
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.2 });
+
+    ordered.forEach(sec => io.observe(sec));
+    io.observe(footer);
+
+    // Сразу проявим футер, когда попадёт в зону видимости
+    const footerIO = new IntersectionObserver((e)=>{
+      e.forEach(x=>{ if(x.isIntersecting){ footer.classList.add('visible'); footerIO.disconnect(); } });
+    }, {threshold:.2});
+    footerIO.observe(footer);
+
+    /* ====== Навигация: скрывать вниз / показывать вверх (после ~70px) ====== */
+    const nav = document.getElementById('site-nav');
+    let lastY = window.pageYOffset || document.documentElement.scrollTop;
+    let revealLock = 0; // накапливаем, чтобы вернуть после 70px
+    window.addEventListener('scroll', () => {
+      const y = window.pageYOffset || document.documentElement.scrollTop;
+      const delta = y - lastY;
+      if (delta > 0) { // скроллим вниз — прячем
+        nav.classList.add('hidden');
+        revealLock = 0;
+      } else if (delta < 0) { // скроллим вверх — накапливаем расстояние
+        revealLock += Math.abs(delta);
+        if (revealLock >= 70) {
+          nav.classList.remove('hidden');
+          revealLock = 0;
+        }
       }
+      lastY = y <= 0 ? 0 : y;
+    }, { passive: true });
+
+    /* ====== Бургер-меню с ARIA ====== */
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('primary-navigation');
+
+    burger?.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('show');
+      burger.setAttribute('aria-expanded', String(open));
     });
-  }, { threshold: 0.2 });
-  sections.forEach(section => observer.observe(section));
-  observer.observe(footer);
-  footer.classList.add('visible');
 
-  // === Scroll-показываю/скрываю меню ===
-  let lastScrollTop = 0;
-  const nav = document.querySelector('nav');
-  window.addEventListener('scroll', () => {
-    let st = window.pageYOffset || document.documentElement.scrollTop;
-    if(st > lastScrollTop){ nav.classList.add('hidden'); }
-    else{ nav.classList.remove('hidden'); }
-    lastScrollTop = st <= 0 ? 0 : st;
-
-    // Плавное смещение фона
-    document.body.style.backgroundPosition = `${5 + st/150}% 50%`;
-  });
-
-  // === Активный пункт меню ===
-  const path = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-links a').forEach(a => {
-    if((path === 'index.html' && a.getAttribute('href').endsWith('index.html')) || a.getAttribute('href').endsWith(path)){
-      a.classList.add('active');
-    }
-  });
-
-  // === Бургер меню ===
-  const burger = document.getElementById('burger');
-  const navLinks = document.querySelector('.nav-links');
-  burger.addEventListener('click', () => { navLinks.classList.toggle('show'); });
-
-  // === Динамический год в футере ===
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // === Плавная инерционная прокрутка ===
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e){
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Закрытие меню по клику на ссылку (мобилка)
+    navLinks?.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click', () => {
+        if (window.matchMedia('(max-width: 768px)').matches) {
+          navLinks.classList.remove('show');
+          burger.setAttribute('aria-expanded','false');
+        }
+      });
     });
-  });
 
-</script>
-<!-- Google Tag Manager -->
-<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MN6WG3K6"></script>
+    /* ====== Активный пункт меню ====== */
+    (function markActive(){
+      const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+      document.querySelectorAll('.nav-links a').forEach(a=>{
+        const href = a.getAttribute('href')?.toLowerCase() || '';
+        if ((path === 'index.html' && href.endsWith('index.html')) || href.endsWith(path)) {
+          a.classList.add('active'); a.setAttribute('aria-current','page');
+        }
+      });
+    })();
 
+    /* ====== Динамический год ====== */
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ====== Smooth scroll по якорям (если появятся) ====== */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+      anchor.addEventListener('click', (e)=>{
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+
+    /* ВАЖНО: убран обработчик, меняющий background-position на scroll.
+       Фон «дышит» ТОЛЬКО через @keyframes bgMove — без коллизий и нагрузки на CPU. */
+  </script>
 </body>
 </html>
