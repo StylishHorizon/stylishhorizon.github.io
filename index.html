@@ -30,13 +30,14 @@
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{
-      margin:0; font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--txt); line-height:1.6; background-attachment:fixed; overflow-x:hidden;
-      background: radial-gradient(1200px 800px at 20% 20%, var(--bg-a) 0%, var(--bg-b) 40%, var(--bg-c) 100%);
-      animation:bgMove 24s ease-in-out infinite;
-      scroll-behavior:smooth; position:relative;
-    }
+    body {
+  margin:0; font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--txt); line-height:1.6; background-attachment:fixed; overflow-x:hidden;
+  background: radial-gradient(1600px 1200px at 50% 50%, var(--bg-a) 0%, var(--bg-b) 40%, var(--bg-c) 100%);
+  background-size: 200% 200%;
+  animation:bgMove 24s ease-in-out infinite;
+  scroll-behavior:smooth; position:relative;
+}
     @keyframes bgMove{
       0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
     }
