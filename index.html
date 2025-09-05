@@ -166,11 +166,22 @@ section:hover{ transform:translateY(-1px) scale(1.02) }
     }
 
     /* ====== ПРЕДПОЧТЕНИЕ МЕНЬШЕ ДВИЖЕНИЯ ====== */
-    @media (prefers-reduced-motion: reduce){
-      *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important }
-      body{ animation:none }
-      .logo-title:hover, section:hover{ transform:none !important }
-    }
+   @media (prefers-reduced-motion: reduce){
+  * {
+    animation-duration:0.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  body {
+    animation:none !important;
+    background-position: 50% 50% !important; /* статичный фон */
+  }
+  .logo-title:hover, section:hover {
+    transform:none !important;
+  }
+}
+
   </style>
 </head>
 <body>
