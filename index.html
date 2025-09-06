@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Stylish Horizon</title>
   <meta name="description" content="Digital restoration with integrity. No hype. No noise. Just memory.">
   <link rel="icon" href="assets/media/favicon.ico" type="image/x-icon">
@@ -12,18 +12,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-a: #0f0f0f;
-      --bg-b: #0a0a0a;
-      --bg-c: #050505;
-      --glass: rgba(10,10,10,0.87);
-      --glass-menu: rgba(10,10,10,0.97);
-      --txt: #f5f5f5;
-      --muted: #9aa0a6;
-      --accent: #00d4ff;
-      --accent2: #ff8c00;
+      --bg-a: #111217;
+      --bg-b: #0a0b0f;
+      --bg-c: #050609;
+      --glass: rgba(14,18,20,0.87);
+      --txt: #f3f3f3;
+      --muted: #b8bec6;
+      --accent: #6cb6ff;
       --shadow: 0 8px 28px rgba(0,0,0,.32);
       --nav-shadow: 0 1px 0 rgba(255,255,255,.08);
-      --border: 1px solid rgba(255,255,255,.07);
     }
     * { box-sizing: border-box; }
     html, body { height: 100%; }
@@ -55,17 +52,15 @@
       opacity: .07;
       mix-blend-mode: overlay;
     }
-
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
       background: var(--glass);
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(7px);
       box-shadow: var(--nav-shadow);
       transition: transform .5s, opacity .5s;
       will-change: transform, opacity;
-      border-bottom: var(--border);
     }
     nav.hidden { transform: translateY(-100%); opacity: 0; pointer-events: none; }
 
@@ -87,12 +82,12 @@
       text-decoration: none;
     }
     .logo {
-      width: 120px;
+      width: 108px;
       height: auto;
       display: block;
       filter: drop-shadow(0 2px 8px rgba(0,0,0,.32));
       opacity: 0;
-      transform: scale(0.96);
+      transform: scale(0.95);
       animation: fadeInLogo 2.2s cubic-bezier(.19,1,.22,1) forwards;
     }
     @keyframes fadeInLogo {
@@ -100,21 +95,11 @@
     }
     .site-title {
       margin: 0;
-      font-size: 1.28rem;
+      font-size: 1.22rem;
       font-weight: 500;
       letter-spacing: .2px;
       opacity: .89;
-      background: linear-gradient(90deg, var(--accent), #8e2de2, var(--accent2), var(--accent));
-      background-size: 300% 300%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shine 8s linear infinite;
-    }
-    @keyframes shine {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      color: var(--muted);
     }
     .nav-links {
       display: flex;
@@ -129,16 +114,17 @@
       border-radius: .5rem;
       transition: background .22s, color .22s, box-shadow .2s;
       position: relative;
+      opacity: .93;
     }
     .nav-links a:hover {
-      background: rgba(0,212,255,.09);
+      background: rgba(108,182,255,.09);
       color: var(--accent);
-      box-shadow: 0 0 6px rgba(0,212,255,.12);
+      box-shadow: 0 0 6px rgba(108,182,255,.12);
     }
     .nav-links a.active {
-      color: var(--accent2);
-      background: rgba(255,140,0,.08);
-      opacity: .82;
+      color: var(--accent);
+      background: rgba(108,182,255,.07);
+      opacity: .96;
     }
     #burger {
       display: none;
@@ -155,22 +141,19 @@
     #burger:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 2px;
-      background: rgba(0,212,255,.13);
+      background: rgba(108,182,255,.13);
     }
 
     /* Мобильная навигация */
     @media (max-width: 900px) {
-      .nav-container {
-        gap: 1rem;
-        padding: .5rem 1rem;
-      }
+      .nav-container { gap: 1rem; padding: .5rem 1rem; }
     }
     @media (max-width: 768px) {
       .nav-links {
         position: absolute;
         top: 100%; left: 0; right: 0;
-        background: var(--glass-menu);
-        backdrop-filter: blur(8px);
+        background: var(--glass);
+        backdrop-filter: blur(10px);
         flex-direction: column;
         gap: .5rem;
         padding: 1rem .5rem;
@@ -190,7 +173,18 @@
       }
       #burger { display: block; }
       .site-title { font-size: 1.07rem; }
-      .logo { width: 96px; }
+      .logo { width: 84px; }
+    }
+    /* Fullscreen в landscape на мобилах */
+    @media (max-width: 768px) and (orientation: landscape) {
+      html, body {
+        min-height: 100vw;
+        height: 100vw;
+        background: var(--bg-b);
+      }
+      nav, main, footer {
+        max-width: 100vw;
+      }
     }
 
     main {
@@ -202,15 +196,17 @@
       padding-left: 24px;
       padding-right: 24px;
     }
+    .spacer { height: 6vw; min-height: 32px; }
     section {
       position: relative;
       z-index: 1;
-      margin: 2.2rem auto;
+      margin: 0 auto;
+      margin-bottom: 0;
       padding: 2rem 1.5rem;
-      text-align: left;
       background: transparent;
       border-radius: 12px;
-      box-shadow: var(--shadow);
+      /* без border, только тень если надо */
+      box-shadow: none;
       opacity: 0;
       transform: translateY(24px) scale(.985);
       transition: opacity .7s cubic-bezier(.19,1,.22,1), transform .7s;
@@ -222,22 +218,16 @@
     }
     section h2 {
       margin-top: 0;
-      font-size: 2rem;
+      font-size: 2.1rem;
       font-weight: 700;
-      color: var(--accent2);
+      color: var(--accent);
       letter-spacing: .5px;
       margin-bottom: .8rem;
-      border-bottom: 2px solid rgba(255,140,0,.12);
-      padding-bottom: .25rem;
-      background: linear-gradient(90deg, var(--accent2) 20%, var(--accent) 90%);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-fill-color: transparent;
+      background: none;
+      border: none;
     }
     section p { margin: .7rem 0; font-size: 1.13rem; }
     section:hover { transform: translateY(-1px) scale(1.018); }
-    /* Placeholder скрыт */
     .placeholder { display: none; }
 
     footer {
@@ -248,7 +238,6 @@
       padding: 2rem;
       font-size: .98rem;
       color: #bbb;
-      border-top: var(--border);
       opacity: 0;
       transform: translateY(10px);
       transition: opacity 1s, transform 1s;
@@ -263,7 +252,7 @@
       filter: drop-shadow(0 1px 4px rgba(0,0,0,.5));
     }
     @media (max-width: 768px) {
-      section { margin: 1.2rem auto; padding: 1.1rem .5rem; }
+      section { padding: 1.1rem .5rem; }
       main { padding-left: 8px; padding-right: 8px; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -284,7 +273,7 @@
       <a class="logo-title" href="index.html" aria-label="Go to home">
         <picture>
           <source srcset="assets/media/StylishHorizon_Clear.webp" type="image/webp">
-          <img class="logo" src="assets/media/StylishHorizon_Black.png" loading="lazy" alt="Stylish Horizon Logo" width="120" height="40" />
+          <img class="logo" src="assets/media/StylishHorizon_Black.png" loading="lazy" alt="Stylish Horizon Logo" width="108" height="40" />
         </picture>
         <p class="site-title">Stylish Horizon</p>
       </a>
@@ -299,64 +288,85 @@
   </nav>
   <main>
     <header aria-hidden="true"></header>
-    <section class="hero">
+    <section class="hero" data-order="1">
       <p>Digital restoration with integrity</p>
       <p>No hype. No noise. Just memory.</p>
       <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
     </section>
-    <section class="what">
+    <div class="spacer"></div>
+    <section class="how" data-order="3">
+      <h2>How we work</h2>
+      <!-- Только заголовок при первом появлении, текст позже -->
+      <div class="how-content" style="opacity:0;transition:opacity .7s;"></div>
+    </section>
+    <div class="spacer"></div>
+    <section class="what" data-order="2">
       <h2>What we do</h2>
       <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
       <p>If it still breathes — we help it speak again.</p>
       <p>Every file is reviewed manually. Not filters, not nostalgia — just truth.</p>
     </section>
-    <section class="how">
-      <h2>How we work</h2>
-      <p>No shipping. We find trusted studios near you.</p>
-      <p>No subscriptions. You pay for what you need — nothing more.</p>
-    </section>
-    <section class="why">
+    <div class="spacer"></div>
+    <section class="why" data-order="5">
       <h2>Why it matters</h2>
       <p>We believe memory deserves clarity.</p>
       <p>Not filters, not nostalgia — just truth.</p>
     </section>
-    <!-- Placeholder скрыт -->
-    <!-- <section class="placeholder">
-      <h2>Placeholder</h2>
-      <p>Reserved area for future modules (buttons, sliders, YouTube, etc.).</p>
-    </section> -->
+    <!-- Placeholder для будущей CTA -->
+    <section class="cta" data-order="4" style="display:none;">
+      <h2>Private restoration session</h2>
+      <p>Contact for details. (CTA placeholder)</p>
+    </section>
   </main>
   <footer>
     <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" />
     <p>© <span id="year"></span> Stylish Horizon</p>
   </footer>
   <script>
-    // Intersection Observer: проявление секций
-    const sections = Array.from(document.querySelectorAll('main section'));
+    // Управление порядком проявления секций
+    const hero = document.querySelector('.hero');
+    const how = document.querySelector('.how');
+    const howContent = how.querySelector('.how-content');
+    const what = document.querySelector('.what');
+    const why = document.querySelector('.why');
+    const cta = document.querySelector('.cta');
     const footer = document.querySelector('footer');
-    const [first, ...rest] = sections;
-    const shuffled = rest.map(s => ({s, r: Math.random()})).sort((a,b) => a.r - b.r).map(x => x.s);
-    const ordered = [first, ...shuffled];
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const idx = ordered.indexOf(entry.target);
-        const base = idx === 0 ? 0.1 : 0.18;
-        const jitter = Math.random() * 0.21;
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, (base + jitter) * 1000);
-        io.unobserve(entry.target);
-      });
-    }, { threshold: 0.2 });
-    ordered.forEach(sec => io.observe(sec));
-    io.observe(footer);
 
-    // Footer проявление
-    const footerIO = new IntersectionObserver((e)=>{
-      e.forEach(x=>{ if(x.isIntersecting){ footer.classList.add('visible'); footerIO.disconnect(); } });
-    }, {threshold:.2});
-    footerIO.observe(footer);
+    // Секции только заголовки, потом контент
+    const howText = `
+      <p>No shipping. We find trusted studios near you.</p>
+      <p>No subscriptions. You pay for what you need — nothing more.</p>
+    `;
+
+    function reveal(el, delay = 0, content = null) {
+      setTimeout(() => {
+        el.classList.add('visible');
+        if (content && el.querySelector('.how-content')) {
+          setTimeout(() => {
+            el.querySelector('.how-content').style.opacity = 1;
+            el.querySelector('.how-content').innerHTML = content;
+          }, 500);
+        }
+      }, delay);
+    }
+
+    // Порядок проявления: hero → how (только заголовок) → what → how (контент) → why → футер → cta (через 2 сек после простоя)
+    reveal(hero, 200);
+    reveal(how, 700);
+    reveal(what, 1400);
+    setTimeout(() => {
+      howContent.innerHTML = howText;
+      howContent.style.opacity = 1;
+    }, 2100);
+    reveal(why, 2700);
+    setTimeout(() => {
+      footer.classList.add('visible');
+    }, 3200);
+    // CTA появляется через 2 сек после футера
+    setTimeout(() => {
+      cta.style.display = '';
+      cta.classList.add('visible');
+    }, 5200);
 
     // Навигация: скрывать вниз / показывать вверх (после ~70px)
     const nav = document.getElementById('site-nav');
@@ -424,7 +434,7 @@
       });
     })();
 
-    // Динамический год
+    // Динамический год в футере
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // Smooth scroll по якорям (если появятся)
