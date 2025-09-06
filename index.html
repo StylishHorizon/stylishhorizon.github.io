@@ -4,210 +4,291 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Stylish Horizon</title>
-
-  <!-- Google Tag Manager -->
-  <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-MN6WG3K6');
-  </script>
-  <!-- End Google Tag Manager -->
-
+  <meta name="description" content="Digital restoration with integrity. No hype. No noise. Just memory.">
+  <link rel="icon" href="assets/media/favicon.ico" type="image/x-icon">
   <!-- Google Fonts: Inter -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
-    /* ====== БАЗА + ДЫШАЩИЙ ФОН ====== */
-    :root{
-      --bg-a:#0f0f0f; --bg-b:#0a0a0a; --bg-c:#050505;
-      --glass: rgba(10,10,10,0.85);
-      --glass-menu: rgba(10,10,10,0.95);
-      --txt:#f5f5f5; --muted:#9aa0a6;
-      --ring: rgba(255,255,255,.35);
-      --shadow: 0 8px 28px rgba(0,0,0,.35);
+    :root {
+      --bg-a: #0f0f0f;
+      --bg-b: #0a0a0a;
+      --bg-c: #050505;
+      --glass: rgba(10,10,10,0.87);
+      --glass-menu: rgba(10,10,10,0.97);
+      --txt: #f5f5f5;
+      --muted: #9aa0a6;
+      --accent: #00d4ff;
+      --accent2: #ff8c00;
+      --shadow: 0 8px 28px rgba(0,0,0,.32);
+      --nav-shadow: 0 1px 0 rgba(255,255,255,.08);
+      --border: 1px solid rgba(255,255,255,.07);
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
-  margin:0; font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-  color:var(--txt); line-height:1.6; background-attachment:fixed; overflow-x:hidden;
-  background: radial-gradient(1600px 1200px at 50% 50%, var(--bg-a) 0%, var(--bg-b) 40%, var(--bg-c) 100%);
-  background-size: 200% 200%;
-  animation:bgMove 24s ease-in-out infinite;
-  scroll-behavior:smooth; position:relative;
-}
-    @keyframes bgMove{
-      0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--txt);
+      line-height: 1.75;
+      background: radial-gradient(1600px 1200px at 50% 50%, var(--bg-a) 0%, var(--bg-b) 40%, var(--bg-c) 100%);
+      background-attachment: fixed;
+      background-size: 200% 200%;
+      animation: bgMove 24s ease-in-out infinite;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
     }
-    body::before{
-      content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
-      background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves[...]
-      background-size:160px 160px; opacity:.07; mix-blend-mode:overlay;
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-
-    /* ====== НАВИГАЦИЯ ====== */
-    nav{
-      position:fixed; top:0; left:0; right:0; z-index:1000;
-      background:var(--glass); backdrop-filter:blur(6px);
-      transform:translateY(0); opacity:1;
-      transition:transform .5s ease, opacity .5s ease;
-      will-change:transform,opacity;
-      box-shadow:0 1px 0 rgba(255,255,255,.08);
-    }
-    nav.hidden{ transform:translateY(-100%); opacity:0; pointer-events:none; }
-    .nav-container{
-      max-width:1200px; margin:0 auto; padding:.5rem 1rem;
-      display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.11'/></svg>");
+      background-size: 160px 160px;
+      opacity: .07;
+      mix-blend-mode: overlay;
     }
 
-  /* Лого + заголовок */
-  .logo-title {
-    display:flex; align-items:center; gap:.5rem; cursor:pointer; user-select:none;
-    transform:translateZ(0); transition:transform .3s ease;
-    perspective:800px;
-  }
-  .logo-title:hover { transform:rotateY(1.2deg) scale(1.03); }
-  .logo {
-    width:120px; height:auto; display:block;
-    filter:drop-shadow(0 2px 8px rgba(0,0,0,.35));
-  }
-
-     .logo {
-    width:120px; height:auto; display:block;
-    filter:drop-shadow(0 2px 8px rgba(0,0,0,.35));
-    opacity:0; transform:scale(0.95);
-    animation: fadeInLogo 3.2s ease forwards;
-  }
-
-  @keyframes fadeInLogo {
-    to {
-      opacity:1;
-      transform:scale(1);
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--glass);
+      backdrop-filter: blur(6px);
+      box-shadow: var(--nav-shadow);
+      transition: transform .5s, opacity .5s;
+      will-change: transform, opacity;
+      border-bottom: var(--border);
     }
-  } 
-      
-  .site-title {
-    margin: 0;
-    font-size: 1.25rem;
-    letter-spacing: .2px;
-    opacity: .92;
-    color: #f5f5f5; /* fallback */
+    nav.hidden { transform: translateY(-100%); opacity: 0; pointer-events: none; }
 
-    background: linear-gradient(90deg, #00d4ff, #8e2de2, #ff8c00, #00d4ff);
-    background-size: 300% 300%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: .5rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      cursor: pointer;
+      user-select: none;
+      text-decoration: none;
+    }
+    .logo {
+      width: 120px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,.32));
+      opacity: 0;
+      transform: scale(0.96);
+      animation: fadeInLogo 2.2s cubic-bezier(.19,1,.22,1) forwards;
+    }
+    @keyframes fadeInLogo {
+      to { opacity: 1; transform: scale(1); }
+    }
+    .site-title {
+      margin: 0;
+      font-size: 1.28rem;
+      font-weight: 500;
+      letter-spacing: .2px;
+      opacity: .89;
+      background: linear-gradient(90deg, var(--accent), #8e2de2, var(--accent2), var(--accent));
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shine 8s linear infinite;
+    }
+    @keyframes shine {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--txt);
+      text-decoration: none;
+      font-weight: 500;
+      padding: .4rem .8rem;
+      border-radius: .5rem;
+      transition: background .22s, color .22s, box-shadow .2s;
+      position: relative;
+    }
+    .nav-links a:hover {
+      background: rgba(0,212,255,.09);
+      color: var(--accent);
+      box-shadow: 0 0 6px rgba(0,212,255,.12);
+    }
+    .nav-links a.active {
+      color: var(--accent2);
+      background: rgba(255,140,0,.08);
+      opacity: .82;
+    }
+    #burger {
+      display: none;
+      background: none;
+      border: 0;
+      color: var(--txt);
+      font-size: 2.1rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: .25rem .7rem;
+      border-radius: .7rem;
+      transition: background .15s;
+    }
+    #burger:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      background: rgba(0,212,255,.13);
+    }
 
-    animation: shine 8s linear infinite;
-  }
-  @keyframes shine {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-      /* Ссылки меню */
-      .nav-links{ display:flex; gap:1rem; align-items:center }
-      .nav-links a{
-        color:var(--txt); text-decoration:none; font-weight:500; opacity:1; position:relative;
-        padding:.4rem .6rem; border-radius:.5rem; transition:opacity .25s, transform .25s, text-shadow .25s, background .25s;
+    /* Мобильная навигация */
+    @media (max-width: 900px) {
+      .nav-container {
+        gap: 1rem;
+        padding: .5rem 1rem;
       }
-      .nav-links a:hover{ transform:translateY(-1px); text-shadow:0 0 6px rgba(255,255,255,.28); background:rgba(255,255,255,.04) }
-      .nav-links a.active{ opacity:.62; }
-
-      /* Бургер */
-      #burger{
-        display:none; background:none; border:0; color:var(--txt); font-size:1.8rem; cursor:pointer; line-height:1; padding:.25rem .5rem; border-radius:.5rem;
-      }
-      #burger:focus-visible{ outline:2px solid var(--ring); outline-offset:3px }
-
-      /* Мобильная навигация */
-      @media (max-width:768px){
-        .nav-links{
-          position:absolute; top:100%; left:0; right:0;
-          background:var(--glass-menu); backdrop-filter:blur(8px);
-          display:flex; flex-direction:column; gap:.25rem; padding:.75rem .5rem;
-          transform-origin:top; transform:scaleY(0.98); opacity:0; pointer-events:none;
-          transition:opacity .25s ease, transform .25s ease;
-        }
-        .nav-links.show{ opacity:1; transform:scaleY(1); pointer-events:auto; }
-        #burger{ display:block }
-        .site-title{ font-size:1.05rem }
-        .logo{ width:100px }
-      }
-
-      /* ====== СЕКЦИИ ====== */
-     main{ padding-top:64px } /* чтобы контент не заезжал под nav */
-  section{
-    position:relative; z-index:1; max-width:900px; margin:2rem auto; padding:2rem;
-    text-align:left; background:transparent; border-radius:12px; backdrop-filter:none;
-    box-shadow: var(--shadow);
-    opacity:0; transform:translateY(24px) scale(.985);
-    transition:opacity .8s ease-out, transform .8s cubic-bezier(.19,1,.22,1);
-    will-change:transform,opacity;
-  }
-  section.visible{ opacity:1; transform:translateY(0) scale(1) }
-  section h2{ margin-top:0 }
-  section p{ margin:.5rem 0 }
-  section:hover{ transform:translateY(-1px) scale(1.02) }
-      /* ====== FOOTER ====== */
-      footer{
-        display:flex; justify-content:center; align-items:center; gap:.5rem;
-        padding:2rem; font-size:.9rem; color:#bbb; border-top:1px solid rgba(255,255,255,.1);
-        opacity:0; transform:translateY(10px); transition:opacity 1s, transform 1s;
-      }
-      footer.visible{ opacity:1; transform:translateY(0) }
-      footer img{ width:24px; height:auto; filter:drop-shadow(0 1px 4px rgba(0,0,0,.5)) }
-
-      /* Адаптивные отступы */
-      @media (max-width:768px){
-        section{ margin:1rem auto; padding:1rem }
-      }
-
-      /* ====== ПРЕДПОЧТЕНИЕ МЕНЬШЕ ДВИЖЕНИЯ ====== */
-     @media (prefers-reduced-motion: reduce){
-    * {
-      animation-duration:0.001ms !important;
-      animation-iteration-count:1 !important;
-      transition-duration:0.001ms !important;
-      scroll-behavior:auto !important;
     }
-    body {
-      animation:none !important;
-      background-position: 50% 50% !important; /* статичный фон */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: var(--glass-menu);
+        backdrop-filter: blur(8px);
+        flex-direction: column;
+        gap: .5rem;
+        padding: 1rem .5rem;
+        transform-origin: top;
+        transform: scaleY(0.97);
+        opacity: 0;
+        pointer-events: none;
+        box-shadow: var(--shadow);
+        border-bottom-left-radius: 14px;
+        border-bottom-right-radius: 14px;
+        transition: opacity .25s, transform .25s;
+      }
+      .nav-links.show {
+        opacity: 1;
+        transform: scaleY(1);
+        pointer-events: auto;
+      }
+      #burger { display: block; }
+      .site-title { font-size: 1.07rem; }
+      .logo { width: 96px; }
     }
-    .logo-title:hover, section:hover {
-      transform:none !important;
+
+    main {
+      padding-top: 68px;
+      min-height: 100vh;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding-left: 24px;
+      padding-right: 24px;
     }
-  }
-  
+    section {
+      position: relative;
+      z-index: 1;
+      margin: 2.2rem auto;
+      padding: 2rem 1.5rem;
+      text-align: left;
+      background: transparent;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(24px) scale(.985);
+      transition: opacity .7s cubic-bezier(.19,1,.22,1), transform .7s;
+      will-change: transform, opacity;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    section h2 {
+      margin-top: 0;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent2);
+      letter-spacing: .5px;
+      margin-bottom: .8rem;
+      border-bottom: 2px solid rgba(255,140,0,.12);
+      padding-bottom: .25rem;
+      background: linear-gradient(90deg, var(--accent2) 20%, var(--accent) 90%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-fill-color: transparent;
+    }
+    section p { margin: .7rem 0; font-size: 1.13rem; }
+    section:hover { transform: translateY(-1px) scale(1.018); }
+    /* Placeholder скрыт */
+    .placeholder { display: none; }
+
+    footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: .7rem;
+      padding: 2rem;
+      font-size: .98rem;
+      color: #bbb;
+      border-top: var(--border);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 1s, transform 1s;
+    }
+    footer.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    footer img {
+      width: 26px;
+      height: auto;
+      filter: drop-shadow(0 1px 4px rgba(0,0,0,.5));
+    }
+    @media (max-width: 768px) {
+      section { margin: 1.2rem auto; padding: 1.1rem .5rem; }
+      main { padding-left: 8px; padding-right: 8px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+      body { animation: none !important; background-position: 50% 50% !important; }
+      .logo-title:hover, section:hover { transform: none !important; }
+    }
   </style>
 </head>
 <body>
-
-  <!-- Google Tag Manager (noscript) -->
-  <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-  </noscript>
-  <!-- End Google Tag Manager (noscript) -->
-
   <nav id="site-nav">
     <div class="nav-container">
       <a class="logo-title" href="index.html" aria-label="Go to home">
         <picture>
-          <!-- современный webp -->
           <source srcset="assets/media/StylishHorizon_Clear.webp" type="image/webp">
-          <!-- fallback для старых устройств -->
-          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon Logo" width="120" height="40" />
+          <img class="logo" src="assets/media/StylishHorizon_Black.png" loading="lazy" alt="Stylish Horizon Logo" width="120" height="40" />
         </picture>
         <p class="site-title">Stylish Horizon</p>
       </a>
-
       <button id="burger" aria-label="Open menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
-
       <div id="primary-navigation" class="nav-links" role="navigation" aria-label="Primary">
         <a href="index.html" class="active" aria-current="page">Home</a>
         <a href="manifest.html">Manifest</a>
@@ -216,93 +297,78 @@
       </div>
     </div>
   </nav>
-
   <main>
     <header aria-hidden="true"></header>
-
     <section class="hero">
       <p>Digital restoration with integrity</p>
       <p>No hype. No noise. Just memory.</p>
       <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
     </section>
-
     <section class="what">
       <h2>What we do</h2>
       <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
       <p>If it still breathes — we help it speak again.</p>
       <p>Every file is reviewed manually. Not filters, not nostalgia — just truth.</p>
     </section>
-
     <section class="how">
       <h2>How we work</h2>
       <p>No shipping. We find trusted studios near you.</p>
       <p>No subscriptions. You pay for what you need — nothing more.</p>
     </section>
-
     <section class="why">
       <h2>Why it matters</h2>
       <p>We believe memory deserves clarity.</p>
       <p>Not filters, not nostalgia — just truth.</p>
     </section>
-
-    <!-- Контейнер-заглушка под будущие элементы (кнопки/слайдер/видео и т.д.) -->
-    <section class="placeholder">
+    <!-- Placeholder скрыт -->
+    <!-- <section class="placeholder">
       <h2>Placeholder</h2>
       <p>Reserved area for future modules (buttons, sliders, YouTube, etc.).</p>
-    </section>
+    </section> -->
   </main>
-
   <footer>
     <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" />
     <p>© <span id="year"></span> Stylish Horizon</p>
   </footer>
-
   <script>
-    /* ====== Intersection Observer: «случайное» проявление секций ====== */
+    // Intersection Observer: проявление секций
     const sections = Array.from(document.querySelectorAll('main section'));
     const footer = document.querySelector('footer');
-
-    // Ставим первую секцию (hero) первой, остальные — перемешиваем для лёгкой «дисгармонии»
     const [first, ...rest] = sections;
-    const shuffled = rest
-      .map(s => ({ s, r: Math.random() }))
-      .sort((a,b) => a.r - b.r)
-      .map(x => x.s);
+    const shuffled = rest.map(s => ({s, r: Math.random()})).sort((a,b) => a.r - b.r).map(x => x.s);
     const ordered = [first, ...shuffled];
-
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
         const idx = ordered.indexOf(entry.target);
-        const base = idx === 0 ? 0.12 : 0.18;    // первая — минимальная задержка
-        const jitter = Math.random() * 0.25;     // случайная добавка
+        const base = idx === 0 ? 0.1 : 0.18;
+        const jitter = Math.random() * 0.21;
         setTimeout(() => {
           entry.target.classList.add('visible');
         }, (base + jitter) * 1000);
         io.unobserve(entry.target);
       });
     }, { threshold: 0.2 });
-
     ordered.forEach(sec => io.observe(sec));
     io.observe(footer);
 
-    // Сразу проявим футер, когда попадёт в зону видимости
+    // Footer проявление
     const footerIO = new IntersectionObserver((e)=>{
       e.forEach(x=>{ if(x.isIntersecting){ footer.classList.add('visible'); footerIO.disconnect(); } });
     }, {threshold:.2});
     footerIO.observe(footer);
 
-    /* ====== Навигация: скрывать вниз / показывать вверх (после ~70px) ====== */
+    // Навигация: скрывать вниз / показывать вверх (после ~70px)
     const nav = document.getElementById('site-nav');
     let lastY = window.pageYOffset || document.documentElement.scrollTop;
-    let revealLock = 0; // накапливаем, чтобы вернуть после 70px
+    let revealLock = 0;
     window.addEventListener('scroll', () => {
       const y = window.pageYOffset || document.documentElement.scrollTop;
       const delta = y - lastY;
-      if (delta > 0) { // скроллим вниз — прячем
+      if (delta > 0) {
         nav.classList.add('hidden');
         revealLock = 0;
-      } else if (delta < 0) { // скроллим вверх — накапливаем расстояние
+      } else if (delta < 0) {
         revealLock += Math.abs(delta);
         if (revealLock >= 70) {
           nav.classList.remove('hidden');
@@ -312,25 +378,21 @@
       lastY = y <= 0 ? 0 : y;
     }, { passive: true });
 
-    /* ====== Бургер-меню с ARIA и UX-обработчиками ====== */
+    // Бургер-меню с ARIA и UX-обработчиками
     const burger = document.getElementById('burger');
     const navLinks = document.getElementById('primary-navigation');
-
     function closeMenu() {
       navLinks.classList.remove('show');
       burger.setAttribute('aria-expanded', 'false');
       document.removeEventListener('keydown', handleEsc);
       document.removeEventListener('click', handleClickOutside, true);
     }
-
     function handleEsc(e) {
       if (e.key === 'Escape') closeMenu();
     }
-
     function handleClickOutside(e) {
       if (!navLinks.contains(e.target) && e.target !== burger) closeMenu();
     }
-
     burger?.addEventListener('click', () => {
       const isOpen = navLinks.classList.toggle('show');
       burger.setAttribute('aria-expanded', String(isOpen));
@@ -342,8 +404,6 @@
         document.removeEventListener('click', handleClickOutside, true);
       }
     });
-
-    // Закрытие меню по клику на ссылку (мобилка)
     navLinks?.querySelectorAll('a').forEach(a=>{
       a.addEventListener('click', () => {
         if (window.matchMedia('(max-width: 768px)').matches) {
@@ -353,7 +413,7 @@
       });
     });
 
-    /* ====== Активный пункт меню ====== */
+    // Активный пункт меню
     (function markActive(){
       const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
       document.querySelectorAll('.nav-links a').forEach(a=>{
@@ -364,10 +424,10 @@
       });
     })();
 
-    /* ====== Динамический год ====== */
+    // Динамический год
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    /* ====== Smooth scroll по якорям (если появятся) ====== */
+    // Smooth scroll по якорям (если появятся)
     document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
       anchor.addEventListener('click', (e)=>{
         const target = document.querySelector(anchor.getAttribute('href'));
@@ -375,8 +435,7 @@
       });
     });
 
-    /* ВАЖНО: убран обработчик, меняющий background-position на scroll.
-       Фон «дышит» ТОЛЬКО через @keyframes bgMove — без коллизий и нагрузки на CPU. */
+    // ВАЖНО: фон «дышит» только через @keyframes bgMove
   </script>
 </body>
 </html>
