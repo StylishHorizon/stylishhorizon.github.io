@@ -139,7 +139,35 @@
       .logo{ width:100px }
     }
 
+// === Улучшенное закрытие бургер-меню ===
+function closeMenu() {
+  navLinks.classList.remove('show');
+  burger.setAttribute('aria-expanded', 'false');
+  document.removeEventListener('keydown', handleEsc);
+  document.removeEventListener('click', handleClickOutside, true);
+}
 
+function handleEsc(e) {
+  if (e.key === 'Escape') closeMenu();
+}
+
+function handleClickOutside(e) {
+  // Закрываем, если клик вне меню и вне кнопки бургера
+  if (!navLinks.contains(e.target) && e.target !== burger) closeMenu();
+}
+
+burger?.addEventListener('click', () => {
+  const isOpen = navLinks.classList.toggle('show');
+  burger.setAttribute('aria-expanded', String(isOpen));
+  if (isOpen) {
+    document.addEventListener('keydown', handleEsc);
+    document.addEventListener('click', handleClickOutside, true);
+  } else {
+    document.removeEventListener('keydown', handleEsc);
+    document.removeEventListener('click', handleClickOutside, true);
+  }
+});
+    
     /* ====== СЕКЦИИ ====== */
    main{ padding-top:64px } /* чтобы контент не заезжал под nav */
 section{
