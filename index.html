@@ -159,16 +159,49 @@
       margin-bottom:2rem;
       color: rgba(0, 212, 255, 0.8); /* ИЗМЕНЕНИЕ: Единый цвет с прозрачностью */
     }
-    .hero{
-      text-align:center;
-      font-size:1.5rem;
-      font-weight:500;
-      min-height:70vh;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      gap:1rem;
-    }
+   .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    min-height: 70vh;
+}
+.hero-content {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+.quick-links {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+}
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.button {
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    color: var(--font-color-main);
+    border: 1px solid var(--highlight-color);
+    border-radius: 50px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+.button:hover {
+    background-color: rgba(0, 212, 255, 0.2);
+}
+.button:active {
+    transform: scale(0.98);
+}
     
     /* ====== НОВЫЕ СТИЛИ ДЛЯ КНОПОК БЫСТРОЙ НАВИГАЦИИ ====== */
     .quick-links{
@@ -228,11 +261,20 @@
   <main>
     <header aria-hidden="true"></header>
 
-    <section class="hero">
-      <p>Digital restoration with integrity</p>
-      <p>No hype. No noise. Just memory.</p>
-      <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
-    </section>
+  <section class="hero">
+    <div class="hero-content">
+        <p>Digital restoration with integrity</p>
+        <p>No hype. No noise. Just memory.</p>
+        <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
+    </div>
+    <div class="quick-links">
+        <div class="button-group">
+            <a href="#how" class="button">How it works?</a>
+            <a href="#cost" class="button">How much?</a>
+            <a href="#examples" class="button">See examples</a>
+        </div>
+    </div>
+</section>
 
     <section class="quick-links">
       <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
