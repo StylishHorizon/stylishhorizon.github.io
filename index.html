@@ -162,25 +162,21 @@
    .hero {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    position: relative;
     min-height: 70vh;
+    padding: 2rem 1rem; /* Добавляем отступ, чтобы контент не прилипал к краям */
 }
 .hero-content {
     text-align: center;
     font-size: 1.5rem;
     font-weight: 500;
     line-height: 1.6;
-    margin-bottom: 2rem;
+    margin-bottom: auto; /* Это отталкивает кнопки вниз */
 }
 .quick-links {
-    position: absolute;
-    bottom: 15%;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: 2rem; /* Создает отступ между текстом и кнопками */
     width: 100%;
-    text-align: center;
 }
 .button-group {
     display: flex;
@@ -261,20 +257,20 @@
   <main>
     <header aria-hidden="true"></header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <p>Digital restoration with integrity</p>
-            <p>No hype. No noise. Just memory.</p>
-            <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
+  <section class="hero">
+    <div class="hero-content">
+        <p>Digital restoration with integrity</p>
+        <p>No hype. No noise. Just memory.</p>
+        <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
+    </div>
+    <div class="quick-links">
+        <div class="button-group">
+            <a href="#how" class="button">How it works?</a>
+            <a href="#cost" class="button">How much?</a>
+            <a href="#examples" class="button">See examples</a>
         </div>
-        <div class="quick-links">
-            <div class="button-group">
-                <a href="#how" class="button">How it works?</a>
-                <a href="#cost" class="button">How much?</a>
-                <a href="#examples" class="button">See examples</a>
-            </div>
-        </div>
-    </section>
+    </div>
+</section>
 
     <section id="what" class="what">
       <h2>What we do</h2>
