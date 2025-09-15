@@ -17,7 +17,8 @@
   <style>
     /* ====== BASE + BREATHING BACKGROUND ====== */
     :root{
-      --bg-a:#0f0f0f; --bg-b:#0a0a0a; --bg-c:#050505;
+      --bg-a:#0f0f0f;
+      --bg-b:#0a0a0a; --bg-c:#050505;
       --font-color-main: #f0f0f0; --font-color-secondary: #aaaaaa;
       --highlight-color: #00d4ff;
       --color-a: #00d4ff;
@@ -98,7 +99,8 @@
       font-size:2rem;
       cursor:pointer;
     }
-    .nav-links{display:flex; gap:1.5rem;}
+    .nav-links{display:flex;
+      gap:1.5rem;}
     .nav-links a{
       color:var(--font-color-main);
       text-decoration:none;
@@ -124,7 +126,7 @@
     @media(max-width:768px){
       #burger{display:block;}
       .nav-links{
-        display:none; /* Hidden by default */
+        display:none;
         flex-direction:column;
         position:absolute;
         top:100%;
@@ -140,21 +142,15 @@
 
     /* ====== CONTENT SECTIONS ====== */
     main{
-      padding-top: 80px; /* Default padding for fixed header */
+      padding-top: 80px;
     }
     section{
       max-width:800px;
       margin:4rem auto;
       padding:0 1rem;
-      
-      /* Visibility and transition setup */
-      opacity: 1; /* Visible by default */
-      transform: translateY(0); /* Default position */
-      transition: opacity 0.8s ease-in, transform 0.8s ease-in; /* Smooth transition */
-      
-      /* Initial state for fade-in effect */
-      opacity: 0;
-      transform: translateY(20px);
+      opacity: 1; /* Ошибка: изменено с 0 на 1 для начальной видимости */
+      transform: translateY(0); /* Ошибка: изменено с 20px на 0 */
+      transition: opacity 0.8s ease-in, transform 0.8s ease-in;
     }
     section.visible{
       opacity:1;
@@ -171,20 +167,20 @@
     /* ====== MEDIA QUERY FOR MOBILE/SMALL SCREENS ====== */
     @media(max-width: 768px) {
       main {
-        padding-top: 100px; /* Increased padding for main content to clear fixed header, which might be taller on mobile */
+        padding-top: 100px; /* Увеличено для фиксации исчезающего контента */
       }
 
       section {
-        margin-top: 2rem; /* Adjust margins for better fit on smaller screens */
+        margin-top: 2rem;
         margin-bottom: 2rem;
       }
       
       .archive-item {
-          padding: 1rem; /* Slightly less padding on small screens for items */
+          padding: 1rem;
       }
 
       h2 {
-        font-size: 2rem; /* Slightly smaller heading on mobile */
+        font-size: 2rem;
         margin-bottom: 1.5rem;
       }
     }
@@ -198,62 +194,6 @@
     }
     footer img{height:30px;opacity:0.6;}
     
-    /* Additional styles for contact.html (kept for consistency, though this is archive.html) */
-    .contact-container {
-        display: flex;
-        flex-direction: column;
-        gap: 3rem;
-    }
-    .contact-item {
-        background: var(--bg-b);
-        padding: 2rem;
-        border-radius: 10px;
-    }
-    .contact-item h3 {
-        color: var(--highlight-color);
-        margin-top: 0;
-        margin-bottom: 1rem;
-        font-size: 1.8rem;
-    }
-    .contact-item p {
-        margin-bottom: 1.5rem;
-    }
-    .contact-item form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-    .contact-item label {
-        display: block;
-        margin-bottom: 0.5rem;
-        color: var(--font-color-secondary);
-    }
-    .contact-item input,
-    .contact-item textarea {
-        width: 100%;
-        padding: 0.8rem;
-        background: var(--bg-a);
-        border: 1px solid rgba(255,255,255,0.2);
-        color: var(--font-color-main);
-        border-radius: 5px;
-    }
-    .contact-item textarea {
-        resize: vertical;
-        min-height: 150px;
-    }
-    .contact-item button {
-        padding: 0.8rem 1.5rem;
-        background: var(--highlight-color);
-        border: none;
-        color: var(--bg-a);
-        font-weight: 700;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-    .contact-item button:hover {
-        background: #00a0c4;
-    }
     /* Styles specific to archive.html */
     .archive-container {
         display: flex;
@@ -349,17 +289,6 @@
     <p>© <span id="year"></span> Stylish Horizon</p>
   </footer>
 
-  <script type="text/javascript">
-  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-  (function(){
-  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-  s1.async=true;
-  s1.src='https://embed.tawk.to/68c85460aac9d419267b8757/1j578j6hq';
-  s1.charset='UTF-8';
-  s1.setAttribute('crossorigin','*');
-  s0.parentNode.insertBefore(s1,s0);
-  })();
-  </script>
   <script>
     /* ====== JS FOR HIDING HEADER ====== */
     let lastScrollY = window.scrollY;
@@ -372,11 +301,9 @@
       }
       lastScrollY = window.scrollY;
     });
-
     /* ====== JS FOR BURGER (SIMPLIFIED) ====== */
     const navLinks = document.getElementById('primary-navigation');
     const burger = document.getElementById('burger');
-    
     document.addEventListener('click', (event) => {
         const isClickInsideNav = navLinks.contains(event.target);
         const isClickOnBurger = burger.contains(event.target);
@@ -386,12 +313,10 @@
             burger.setAttribute('aria-expanded', 'false');
         }
     });
-
     burger.addEventListener('click', () => {
         const isExpanded = navLinks.classList.toggle('show');
         burger.setAttribute('aria-expanded', String(isExpanded));
     });
-
     /* ====== VISIBILITY OF SECTIONS ON SCROLL ====== */
     const sections = document.querySelectorAll('section');
     const observer = new IntersectionObserver((entries) => {
@@ -412,7 +337,6 @@
     sections.forEach(section => {
       observer.observe(section);
     });
-
     /* ====== ACTIVE MENU ITEM ====== */
     (function markActive(){
       const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
@@ -423,7 +347,6 @@
         }
       });
     })();
-
     /* ====== DYNAMIC YEAR ====== */
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
