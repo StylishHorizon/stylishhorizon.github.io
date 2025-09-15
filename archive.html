@@ -1,5 +1,3 @@
-HTML
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +19,8 @@ HTML
     :root{
       --bg-a:#0f0f0f;
       --bg-b:#0a0a0a; --bg-c:#050505;
-      --font-color-main: #f0f0f0; --font-color-secondary: #aaaaaa;
+      --font-color-main: #fafafa; --font-color-secondary: #aaaaaa;
+      --font-color-bright: #00d4ff;
       --highlight-color: #00d4ff;
       --color-a: #00d4ff;
     }
@@ -163,7 +162,10 @@ HTML
       font-weight:700;
       text-align:center;
       margin-bottom:2rem;
-      color: rgba(0, 212, 255, 0.8);
+      color: var(--font-color-bright);
+    }
+    h3 {
+      color: var(--highlight-color);
     }
 
     /* ====== MEDIA QUERY FOR MOBILE/SMALL SCREENS ====== */
@@ -206,6 +208,11 @@ HTML
         background: rgba(0,0,0,0.5); /* Фон стал полупрозрачным */
         padding: 2rem;
         border-radius: 10px;
+        transition: transform 0.3s ease-in-out; /* Плавный переход для масштаба */
+    }
+    /* Добавляем эффект увеличения при наведении */
+    .archive-item:hover {
+        transform: scale(1.02);
     }
     /* Ограничение ширины текста */
     .archive-item p {
