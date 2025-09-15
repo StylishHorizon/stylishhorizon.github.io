@@ -178,10 +178,17 @@
         gap: 3rem;
     }
     .contact-item {
-        background: var(--bg-b);
+        background: rgba(0,0,0,0.5); /* Фон стал полупрозрачным */
         padding: 2rem;
         border-radius: 10px;
     }
+    /* Ограничение ширины текста */
+    .contact-item p, .contact-item form {
+      max-width: 65ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     .contact-item h3 {
         color: var(--highlight-color);
         margin-top: 0;
