@@ -17,7 +17,8 @@
   <style>
     /* ====== BASE + BREATHING BACKGROUND ====== */
     :root{
-      --bg-a:#0f0f0f; --bg-b:#0a0a0a; --bg-c:#050505;
+      --bg-a:#0f0f0f;
+      --bg-b:#0a0a0a; --bg-c:#050505;
       --font-color-main: #f0f0f0; --font-color-secondary: #aaaaaa;
       --highlight-color: #00d4ff;
       --color-a: #00d4ff;
@@ -98,7 +99,8 @@
       font-size:2rem;
       cursor:pointer;
     }
-    .nav-links{display:flex; gap:1.5rem;}
+    .nav-links{display:flex;
+      gap:1.5rem;}
     .nav-links a{
       color:var(--font-color-main);
       text-decoration:none;
@@ -241,7 +243,8 @@
         </picture>
         <p class="site-title">Stylish Horizon</p>
       </a>
-      <button id="burger" aria-label="Open menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
+      <button 
+      id="burger" aria-label="Open menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
       <div id="primary-navigation" class="nav-links" role="navigation" aria-label="Primary">
         <a href="index.html">Home</a>
         <a href="manifest.html">Manifest</a>
@@ -272,7 +275,7 @@
                 
                 <button type="submit">Send Message</button>
             </form>
-            </div>
+        </div>
         
         <div class="contact-item">
             <h3>Join the Discussion</h3>
@@ -281,16 +284,28 @@
             <div style="text-align: center; color: var(--font-color-secondary);">
                 <p>Insert your chat or forum embed code here.</p>
             </div>
-            </div>
+        </div>
     </section>
 
   </main>
 
   <footer>
-    <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" />
+    <img src="assets/media/StylishHorizon_Clear.webp" 
+    alt="Logo" />
     <p>© <span id="year"></span> Stylish Horizon</p>
   </footer>
 
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/68c85460aac9d419267b8757/1j578j6hq';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
   <script>
     /* ====== JS FOR HIDING HEADER ====== */
     let lastScrollY = window.scrollY;
@@ -303,11 +318,9 @@
       }
       lastScrollY = window.scrollY;
     });
-
     /* ====== JS FOR BURGER (SIMPLIFIED) ====== */
     const navLinks = document.getElementById('primary-navigation');
     const burger = document.getElementById('burger');
-    
     document.addEventListener('click', (event) => {
         const isClickInsideNav = navLinks.contains(event.target);
         const isClickOnBurger = burger.contains(event.target);
@@ -317,12 +330,10 @@
             burger.setAttribute('aria-expanded', 'false');
         }
     });
-
     burger.addEventListener('click', () => {
         const isExpanded = navLinks.classList.toggle('show');
         burger.setAttribute('aria-expanded', String(isExpanded));
     });
-
     /* ====== VISIBILITY OF SECTIONS ON SCROLL ====== */
     const sections = document.querySelectorAll('section');
     const observer = new IntersectionObserver((entries) => {
@@ -340,7 +351,6 @@
     sections.forEach(section => {
       observer.observe(section);
     });
-
     /* ====== ACTIVE MENU ITEM ====== */
     (function markActive(){
       const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
@@ -351,7 +361,6 @@
         }
       });
     })();
-
     /* ====== DYNAMIC YEAR ====== */
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
