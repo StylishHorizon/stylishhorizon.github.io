@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
 
   <style>
-    /* ====== БАЗА + ДЫШАЩИЙ ФОН ====== */
+    /* ====== BASE + BREATHING BACKGROUND ====== */
     :root{
       --bg-a:#0f0f0f; --bg-b:#0a0a0a; --bg-c:#050505;
       --font-color-main: #f0f0f0; --font-color-secondary: #aaaaaa;
@@ -119,10 +119,12 @@
     }
     .nav-links a:hover::after,
     .nav-links a.active::after{width:100%;}
+    
+    /* ====== MEDIA QUERY FOR MOBILE NAVIGATION ====== */
     @media(max-width:768px){
       #burger{display:block;}
       .nav-links{
-        display:none;
+        display:none; /* Hidden by default */
         flex-direction:column;
         position:absolute;
         top:100%;
@@ -136,17 +138,23 @@
       .nav-links.show{display:flex;}
     }
 
-    /* ====== СЕКЦИИ КОНТЕНТА ====== */
+    /* ====== CONTENT SECTIONS ====== */
     main{
-      padding-top: 80px;
+      padding-top: 80px; /* Default padding for fixed header */
     }
     section{
       max-width:800px;
       margin:4rem auto;
       padding:0 1rem;
-      opacity:0;
-      transform:translateY(20px);
-      transition:opacity 0.6s ease-out, transform 0.6s ease-out;
+      
+      /* Visibility and transition setup */
+      opacity: 1; /* Visible by default */
+      transform: translateY(0); /* Default position */
+      transition: opacity 0.8s ease-in, transform 0.8s ease-in; /* Smooth transition */
+      
+      /* Initial state for fade-in effect */
+      opacity: 0;
+      transform: translateY(20px);
     }
     section.visible{
       opacity:1;
@@ -160,6 +168,27 @@
       color: rgba(0, 212, 255, 0.8);
     }
 
+    /* ====== MEDIA QUERY FOR MOBILE/SMALL SCREENS ====== */
+    @media(max-width: 768px) {
+      main {
+        padding-top: 100px; /* Increased padding for main content to clear fixed header, which might be taller on mobile */
+      }
+
+      section {
+        margin-top: 2rem; /* Adjust margins for better fit on smaller screens */
+        margin-bottom: 2rem;
+      }
+      
+      .archive-item {
+          padding: 1rem; /* Slightly less padding on small screens for items */
+      }
+
+      h2 {
+        font-size: 2rem; /* Slightly smaller heading on mobile */
+        margin-bottom: 1.5rem;
+      }
+    }
+
     /* ====== Footer ====== */
     footer{
       text-align:center;
@@ -169,7 +198,63 @@
     }
     footer img{height:30px;opacity:0.6;}
     
-    /* Дополнительные стили для archive.html */
+    /* Additional styles for contact.html (kept for consistency, though this is archive.html) */
+    .contact-container {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+    .contact-item {
+        background: var(--bg-b);
+        padding: 2rem;
+        border-radius: 10px;
+    }
+    .contact-item h3 {
+        color: var(--highlight-color);
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: 1.8rem;
+    }
+    .contact-item p {
+        margin-bottom: 1.5rem;
+    }
+    .contact-item form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .contact-item label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--font-color-secondary);
+    }
+    .contact-item input,
+    .contact-item textarea {
+        width: 100%;
+        padding: 0.8rem;
+        background: var(--bg-a);
+        border: 1px solid rgba(255,255,255,0.2);
+        color: var(--font-color-main);
+        border-radius: 5px;
+    }
+    .contact-item textarea {
+        resize: vertical;
+        min-height: 150px;
+    }
+    .contact-item button {
+        padding: 0.8rem 1.5rem;
+        background: var(--highlight-color);
+        border: none;
+        color: var(--bg-a);
+        font-weight: 700;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .contact-item button:hover {
+        background: #00a0c4;
+    }
+    /* Styles specific to archive.html */
     .archive-container {
         display: flex;
         flex-direction: column;
@@ -189,7 +274,7 @@
     .video-container {
         position: relative;
         width: 100%;
-        padding-bottom: 56.25%; /* Соотношение сторон 16:9 */
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
         height: 0;
         margin-bottom: 1rem;
     }
@@ -242,7 +327,7 @@
         
         <div class="archive-item">
             <h3>Package 2: Ultimate - Professional Quality</h3>
-            <p>This is what makes our service unique. We not only digitized the video but also upscaled it to Full HD. Your old recordings will look sharp and detailed on modern screens.</p>
+            <p>This is what makes our service unique. We not only digitized the video but also upscaled it to Full HD. Your old recordings will look sharp and detailed on modern screens. Even after YouTube's compression, the quality remains high thanks to the VP9 codec.</p>
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/PH5Ap0-exNw" allowfullscreen></iframe>
             </div>
@@ -250,7 +335,7 @@
 
         <div class="archive-item">
             <h3>Additional: UHD - Maximum Detail</h3>
-            <p>This example is for the most demanding clients. We upscaled the resolution to UHD to show the full potential of your memories. The smallest details are restored for a premium viewing experience.</p>
+            <p>This example is for our most demanding clients. We upscaled the resolution to UHD to show the full potential of your memories. The result is maximum detail that remains noticeable even after YouTube converts the video to the VP9 format.</p>
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/aSduAKdM_zk" allowfullscreen></iframe>
             </div>
@@ -264,8 +349,19 @@
     <p>© <span id="year"></span> Stylish Horizon</p>
   </footer>
 
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/68c85460aac9d419267b8757/1j578j6hq';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
   <script>
-    /* ====== JS ДЛЯ СКРЫТИЯ ХЕДЕРА ====== */
+    /* ====== JS FOR HIDING HEADER ====== */
     let lastScrollY = window.scrollY;
     const nav = document.getElementById('site-nav');
     window.addEventListener('scroll', () => {
@@ -277,7 +373,7 @@
       lastScrollY = window.scrollY;
     });
 
-    /* ====== JS ДЛЯ БУРГЕРА (УПРОЩЁННЫЙ) ====== */
+    /* ====== JS FOR BURGER (SIMPLIFIED) ====== */
     const navLinks = document.getElementById('primary-navigation');
     const burger = document.getElementById('burger');
     
@@ -296,14 +392,17 @@
         burger.setAttribute('aria-expanded', String(isExpanded));
     });
 
-    /* ====== Видимость секций при прокрутке ====== */
+    /* ====== VISIBILITY OF SECTIONS ON SCROLL ====== */
     const sections = document.querySelectorAll('section');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         } else {
-          entry.target.classList.remove('visible');
+          // Removed this else block to prevent sections from disappearing if they go out of view
+          // If you want them to fade out when scrolling up, uncomment the lines below
+          // entry.target.classList.remove('visible');
+          // entry.target.style.opacity = '0'; // Ensure it starts fading out
         }
       });
     }, {
@@ -314,7 +413,7 @@
       observer.observe(section);
     });
 
-    /* ====== Активный пункт меню ====== */
+    /* ====== ACTIVE MENU ITEM ====== */
     (function markActive(){
       const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
       document.querySelectorAll('.nav-links a').forEach(a=>{
@@ -325,7 +424,7 @@
       });
     })();
 
-    /* ====== Динамический год ====== */
+    /* ====== DYNAMIC YEAR ====== */
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
