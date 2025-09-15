@@ -1,3 +1,5 @@
+HTML
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -148,9 +150,9 @@
       max-width:800px;
       margin:4rem auto;
       padding:0 1rem;
-      opacity: 1; /* Ошибка: изменено с 0 на 1 для начальной видимости */
-      transform: translateY(0); /* Ошибка: изменено с 20px на 0 */
-      transition: opacity 0.8s ease-in, transform 0.8s ease-in;
+      opacity:0;
+      transform:translateY(20px);
+      transition:opacity 0.6s ease-out, transform 0.6s ease-out;
     }
     section.visible{
       opacity:1;
@@ -167,7 +169,7 @@
     /* ====== MEDIA QUERY FOR MOBILE/SMALL SCREENS ====== */
     @media(max-width: 768px) {
       main {
-        padding-top: 100px; /* Увеличено для фиксации исчезающего контента */
+        padding-top: 100px;
       }
 
       section {
@@ -201,10 +203,16 @@
         gap: 3rem;
     }
     .archive-item {
-        background: var(--bg-b);
+        background: rgba(0,0,0,0.5); /* Фон стал полупрозрачным */
         padding: 2rem;
         border-radius: 10px;
     }
+    /* Ограничение ширины текста */
+    .archive-item p {
+      max-width: 65ch;
+      margin: 0 auto 1rem;
+    }
+
     .archive-item h3 {
         color: var(--highlight-color);
         margin-top: 0;
@@ -253,7 +261,7 @@
   </nav>
 
   <main>
-    <section class="archive-container visible">
+    <section class="archive-container">
         <h2>Archive</h2>
         <p>This is not a gallery of magic. This is a collection of truthful transformations. We show you the difference between what was and what can be.</p>
         
@@ -324,10 +332,7 @@
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         } else {
-          // Removed this else block to prevent sections from disappearing if they go out of view
-          // If you want them to fade out when scrolling up, uncomment the lines below
-          // entry.target.classList.remove('visible');
-          // entry.target.style.opacity = '0'; // Ensure it starts fading out
+          entry.target.classList.remove('visible');
         }
       });
     }, {
