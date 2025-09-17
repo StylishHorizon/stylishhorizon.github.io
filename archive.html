@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Stylish Horizon - Archive</title>
+  <title>Professional Video Restoration & Digital Conversion | Stylish Horizon</title>
+  <meta name="description" content="Preserve your precious memories with our expert video restoration and digital conversion services. We specialize in deinterlacing, color grading, and upscaling old MiniDV and VHS footage to high-quality ProRes files." />
+  <meta name="keywords" content="video restoration, video transfer, MiniDV to digital, VHS to digital, digital conversion, video archiving, ProRes, deinterlace, video upscaling, 4K restoration, home video rescue" />
 
   <script>
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -15,13 +17,12 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
 
   <style>
-    /* ====== BASE + BREATHING BACKGROUND ====== */
+    /* ... сюда вставляй все стили, которые мы уже обсуждали ... */
     :root{
       --bg-a:#0f0f0f; --bg-b:#0a0a0a; --bg-c:#050505;
       --font-color-main: #f0f0f0; --font-color-secondary: #aaaaaa;
       --highlight-color:#ff69b4;
     }
-
     body {
       margin: 0; padding: 0;
       font-family: 'Inter', sans-serif;
@@ -30,7 +31,6 @@
       overflow-x: hidden;
       display: flex; flex-direction: column;
     }
-
     .background-circles {
       position: fixed;
       top: 0; left: 0;
@@ -38,14 +38,12 @@
       z-index: -1;
       overflow: hidden;
     }
-
     .circle {
       position: absolute;
       border-radius: 50%;
       background: rgba(255, 105, 180, 0.05);
       animation: breathe ease-in-out infinite;
     }
-
     .circle-1 {
       width: 400px; height: 400px;
       top: 10%; left: 20%;
@@ -66,7 +64,6 @@
       top: 60%; right: 10%;
       animation-duration: 22s;
     }
-
     @keyframes breathe {
       0%, 100% {
         transform: scale(1);
@@ -77,8 +74,6 @@
         box-shadow: 0 0 40px rgba(255, 105, 180, 0.4);
       }
     }
-
-    /* ====== HEADER ====== */
     header {
       width: 100%;
       padding: 20px;
@@ -104,7 +99,6 @@
     .logo:hover {
       color: var(--highlight-color);
     }
-
     .nav-links {
       display: none;
     }
@@ -118,7 +112,6 @@
     .nav-links a:hover, .nav-links a.active {
       color: var(--highlight-color);
     }
-
     .menu-toggle {
       background: none;
       border: none;
@@ -127,11 +120,9 @@
       cursor: pointer;
       display: block;
     }
-
     .menu-icon {
       font-size: 24px;
     }
-
     .nav-mobile {
       position: fixed;
       top: 60px; right: 0;
@@ -159,8 +150,6 @@
     .nav-mobile a:hover {
       background-color: rgba(255, 255, 255, 0.1);
     }
-
-    /* ====== SECTION STYLES ====== */
     section {
       padding: 60px 20px;
       color: var(--font-color-main);
@@ -168,22 +157,18 @@
       transition: opacity 0.5s ease;
       text-align: center;
     }
-
     section.visible {
       opacity: 1;
     }
-
     .intro-container {
       background: var(--bg-b);
       padding: 60px 20px;
     }
-
     .intro-container h1 {
       font-size: 2.5em;
       font-weight: 700;
       margin-bottom: 20px;
     }
-
     .intro-container p {
       font-size: 1.2em;
       line-height: 1.6;
@@ -191,17 +176,14 @@
       max-width: 800px;
       margin: 0 auto;
     }
-
     .archive-container {
       background: var(--bg-c);
     }
-
     .archive-container h2 {
       font-size: 2.5em;
       font-weight: 700;
       margin-bottom: 20px;
     }
-
     .archive-container p {
       font-size: 1em;
       line-height: 1.6;
@@ -209,9 +191,6 @@
       max-width: 800px;
       margin: 0 auto;
     }
-    /* === END OF USER STYLES === */
-    
-    /* ====== PRICE SECTION ====== */
     .price-container {
       padding: 60px 20px;
       background: var(--bg-b);
@@ -256,8 +235,6 @@
       line-height: 1.6;
       color: var(--font-color-secondary);
     }
-
-    /* ====== BEFORE & AFTER SLIDER ====== */
     .comparison-container {
       padding: 60px 20px;
       background: var(--bg-c);
@@ -280,7 +257,7 @@
     .slider-container {
       position: relative;
       width: 100%;
-      max-width: 900px; /* Adjust as needed */
+      max-width: 900px;
       aspect-ratio: 16 / 9;
       overflow: hidden;
       cursor: grab;
@@ -301,7 +278,7 @@
       object-fit: cover;
     }
     .slider-image-after {
-      width: 50%; /* Default state */
+      width: 50%;
     }
     .slider-bar {
       position: absolute;
@@ -332,8 +309,6 @@
       z-index: 3;
       pointer-events: none;
     }
-
-    /* ====== RESPONSIVE DESIGN ====== */
     @media (min-width: 768px) {
       .nav-links {
         display: flex;
@@ -535,3 +510,4 @@
   </script>
 </body>
 </html>
+
