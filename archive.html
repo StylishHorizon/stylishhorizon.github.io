@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Professional Video Restoration & Digital Conversion | Stylish Horizon</title>
-  <meta name="description" content="Preserve your precious memories with our expert video restoration and digital conversion services. We specialize in deinterlacing, color grading, and upscaling old MiniDV and VHS footage to high-quality ProRes files." />
-  <meta name="keywords" content="video restoration, video transfer, MiniDV to digital, VHS to digital, digital conversion, video archiving, ProRes, deinterlace, video upscaling, 4K restoration, home video rescue" />
+  <title>Stylish Horizon - Archive</title>
 
   <script>
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -19,237 +17,292 @@
   <style>
     /* ====== BASE + BREATHING BACKGROUND ====== */
     :root{
-      --bg-a:#0f0f0f; --bg-b:#0a0a0a; --bg-c:#050505;
-      --font-color-main: #f0f0f0; --font-color-secondary: #aaaaaa;
-      --highlight-color:#ff69b4;
+      --bg-a:#0f0f0f;
+      --bg-b:#0a0a0a; --bg-c:#050505;
+      --font-color-main: #fafafa; --font-color-secondary: #aaaaaa;
+      --font-color-bright: #00d4ff;
+      --highlight-color: #00d4ff;
+      --color-a: #00d4ff;
     }
 
-    body {
-      margin: 0; padding: 0;
-      font-family: 'Inter', sans-serif;
+    html {
+      scroll-behavior: smooth;
+    }
+    body{
+      font-family:'Inter',sans-serif;
+      font-weight:300;
+      line-height:1.6;
+      background: var(--bg-a);
       color: var(--font-color-main);
-      background-color: var(--bg-a);
-      overflow-x: hidden;
-      display: flex; flex-direction: column;
+      margin:0;
+      animation:breathing-bg 30s ease-in-out infinite;
     }
-
-    .background-circles {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
-      overflow: hidden;
+    @keyframes breathing-bg{
+      0%,100%{background:var(--bg-a);}
+      50%{background:var(--bg-b);}
+      75%{background:var(--bg-c);}
     }
-
-    .circle {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 105, 180, 0.05);
-      animation: breathe ease-in-out infinite;
-    }
-
-    .circle-1 {
-      width: 400px; height: 400px;
-      top: 10%; left: 20%;
-      animation-duration: 20s;
-    }
-    .circle-2 {
-      width: 600px; height: 600px;
-      bottom: -10%; right: -20%;
-      animation-duration: 25s;
-    }
-    .circle-3 {
-      width: 300px; height: 300px;
-      top: 50%; left: 5%;
-      animation-duration: 18s;
-    }
-    .circle-4 {
-      width: 500px; height: 500px;
-      top: 60%; right: 10%;
-      animation-duration: 22s;
-    }
-
-    @keyframes breathe {
-      0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 0 10px rgba(255, 105, 180, 0.2);
-      }
-      50% {
-        transform: scale(1.1);
-        box-shadow: 0 0 40px rgba(255, 105, 180, 0.4);
-      }
-    }
+    @media(prefers-reduced-motion){body{animation:none;}}
 
     /* ====== HEADER ====== */
-    #site-nav {
-      position: fixed; top: 0; left: 0; width: 100%;
-      background: rgba(10, 10, 10, 0.8); z-index: 1000;
-      backdrop-filter: blur(5px); transition: transform 0.3s ease-in-out;
+    #site-nav{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      background:rgba(0,0,0,0.8);
+      z-index:1000;
+      backdrop-filter:blur(5px);
+      -webkit-backdrop-filter:blur(5px);
+      transition:transform 0.3s ease-in-out;
     }
-    #site-nav.hidden { transform: translateY(-100%); }
-    .nav-container {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1rem 2rem; max-width: 1200px; margin: 0 auto;
+    #site-nav.hidden{transform:translateY(-100%);}
+    .nav-container{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:1rem 2rem;
+      max-width:1200px;
+      margin:0 auto;
     }
-    .logo-title {
-      display: flex; align-items: center; text-decoration: none; gap: 1rem;
+    .logo-title{
+      display:flex;
+      align-items:center;
+      text-decoration:none;
+      gap:1rem;
     }
-    .logo-title .site-title {
-      font-size: 1.5rem; font-weight: 700;
-      background: linear-gradient(90deg, #ff69b4, #ff8c00, #ff69b4);
-      -webkit-background-clip: text; background-clip: text;
-      color: transparent; background-size: 200% 100%;
-      animation: slide-bg 5s linear infinite;
+    .logo-title .site-title{
+      font-size:1.5rem;
+      font-weight:700;
+      background:linear-gradient(90deg, #00d4ff, #8e2de2, #ff8c00, #00d4ff);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      background-size:200% 100%;
+      animation:slide-bg 5s linear infinite;
     }
-    @keyframes slide-bg {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 200% 50%; }
+    @keyframes slide-bg{
+      0% {background-position:0% 50%;}
+      100% {background-position:200% 50%;}
     }
-    .logo-title .logo {
-      height: 40px; transition: opacity 0.5s ease-in-out; animation: appear 1s ease-in-out;
+    .logo-title .logo{
+      height:40px;
+      transition:opacity 0.5s ease-in-out;
+      animation:appear 1s ease-in-out;
     }
-    .logo-title:hover .logo { opacity: 0.8; }
-    @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
-    #burger {
-      display: none; background: transparent; border: none; color: var(--font-color-main);
-      font-size: 2rem; cursor: pointer;
+    .logo-title:hover .logo{opacity:0.8;}
+    @keyframes appear{from{opacity:0;}to{opacity:1;}}
+    #burger{
+      display:none;
+      background:transparent;
+      border:none;
+      color:var(--font-color-main);
+      font-size:2rem;
+      cursor:pointer;
     }
-    .nav-links { display: flex; gap: 1.5rem; }
-    .nav-links a {
-      color: var(--font-color-main); text-decoration: none; transition: color 0.3s ease-in-out;
-      position: relative;
+    .nav-links{display:flex;
+      gap:1.5rem;}
+    .nav-links a{
+      color:var(--font-color-main);
+      text-decoration:none;
+      transition:color 0.3s ease-in-out;
+      position:relative;
     }
-    .nav-links a:hover { color: var(--highlight-color); }
-    .nav-links a::after {
-      content: ''; display: block; width: 0; height: 2px;
-      background: var(--highlight-color); transition: width 0.3s ease-in-out;
-      position: absolute; bottom: -5px; left: 0;
+    .nav-links a:hover{color:var(--highlight-color);}
+    .nav-links a::after{
+      content:'';
+      display:block;
+      width:0;
+      height:2px;
+      background:var(--highlight-color);
+      transition:width 0.3s ease-in-out;
+      position:absolute;
+      bottom:-5px;
+      left:0;
     }
-    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-
-    @media(max-width: 768px) {
-      #burger { display: block; }
-      .nav-links {
-        display: none; flex-direction: column; position: absolute;
-        top: 100%; left: 0; width: 100%; background: rgba(0, 0, 0, 0.95);
-        border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 1rem 0;
-      }
-      .nav-links a { padding: 0.5rem 2rem; }
-      .nav-links.show { display: flex; }
-    }
-
-    /* ====== SECTION STYLES ====== */
-    main { padding-top: 80px; }
-    section {
-      max-width: 800px; margin: 4rem auto; padding: 0 1rem;
-      opacity: 0; transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    section.visible {
-      opacity: 1; transform: translateY(0);
-    }
-    h2 {
-      font-size: 2.5rem; font-weight: 700; text-align: center;
-      margin-bottom: 2rem; color: var(--highlight-color);
-    }
-    h3 { color: var(--highlight-color); }
-
-    /* ====== ARCHIVE SECTION WITH VIDEO ====== */
-    .archive-container {
-      display: flex; flex-direction: column; gap: 3rem;
-    }
-    .archive-item {
-      background: rgba(0, 0, 0, 0.5); padding: 2rem; border-radius: 10px;
-      transition: transform 0.3s ease-in-out;
-    }
-    .archive-item:hover { transform: scale(1.02); }
-    .archive-item p {
-      max-width: 65ch; margin: 0 auto 1rem; text-align: left;
-    }
-    .video-container {
-      position: relative; width: 100%; padding-bottom: 56.25%;
-      height: 0; margin-bottom: 1rem;
-    }
-    .video-container iframe {
-      position: absolute; top: 0; left: 0;
-      width: 100%; height: 100%; border: none;
-    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after{width:100%;}
 
     /* ====== PRICE SECTION ====== */
+.price-container {
+    padding: 60px 20px;
+    background: var(--bg-b);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: var(--font-color-main);
+    transition: opacity 0.5s ease;
+    opacity: 0;
+}
+
+.price-container.visible {
+    opacity: 1;
+}
+
+.price-container h2 {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.price-container .package-card {
+    background: var(--bg-a);
+    padding: 30px;
+    margin: 20px 0;
+    border-radius: 10px;
+    border: 1px solid var(--font-color-secondary);
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.price-container .package-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.price-container .package-card h3 {
+    font-size: 1.8em;
+    font-weight: 500;
+    margin-top: 0;
+    color: var(--highlight-color, #f0f0f0);
+}
+
+.price-container .package-card p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: var(--font-color-secondary);
+}
+
+/* ====== RESPONSIVE DESIGN ====== */
+@media (min-width: 768px) {
     .price-container {
-      padding: 60px 20px; background: var(--bg-b);
-      display: flex; flex-direction: column; align-items: center;
-      text-align: center; color: var(--font-color-main);
+        padding: 80px 40px;
     }
-    .price-container h2 {
-      font-size: 2.5em; font-weight: 700; margin-bottom: 20px;
-    }
+
     .price-container .package-card {
-      background: var(--bg-a); padding: 30px; margin: 20px 0;
-      border-radius: 10px; border: 1px solid var(--font-color-secondary);
-      max-width: 600px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin: 20px 20px;
     }
-    .price-container .package-card:hover {
-      transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+    
+    /* ====== MEDIA QUERY FOR MOBILE NAVIGATION ====== */
+    @media(max-width:768px){
+      #burger{display:block;}
+      .nav-links{
+        display:none;
+        flex-direction:column;
+        position:absolute;
+        top:100%;
+        left:0;
+        width:100%;
+        background:rgba(0,0,0,0.95);
+        border-top:1px solid rgba(255,255,255,0.1);
+        padding:1rem 0;
+      }
+      .nav-links a{padding:0.5rem 2rem;}
+      .nav-links.show{display:flex;}
     }
-    .price-container .package-card h3 {
-      font-size: 1.8em; font-weight: 500; margin-top: 0;
+
+    /* ====== CONTENT SECTIONS ====== */
+    main{
+      padding-top: 80px;
+    }
+    section{
+      max-width:800px;
+      margin:4rem auto;
+      padding:0 1rem;
+      opacity:0;
+      transform:translateY(20px);
+      transition:opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    section.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+    h2{
+      font-size:2.5rem;
+      font-weight:700;
+      text-align:center;
+      margin-bottom:2rem;
+      color: var(--font-color-bright);
+    }
+    h3 {
       color: var(--highlight-color);
     }
-    .price-container .package-card p {
-      font-size: 1em; line-height: 1.6; color: var(--font-color-secondary);
+
+    /* ====== MEDIA QUERY FOR MOBILE/SMALL SCREENS ====== */
+    @media(max-width: 768px) {
+      main {
+        padding-top: 100px;
+      }
+
+      section {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+      }
+      
+      .archive-item {
+          padding: 1rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+      }
     }
 
-    /* ====== BEFORE & AFTER SLIDER ====== */
-    .comparison-container {
-      padding: 60px 20px; background: var(--bg-c);
-      display: flex; flex-direction: column; align-items: center;
-      text-align: center; color: var(--font-color-main);
-    }
-    .comparison-container h2 {
-      font-size: 2.5em; font-weight: 700; margin-bottom: 20px;
-    }
-    .slider-container {
-      position: relative; width: 100%; max-width: 900px;
-      aspect-ratio: 16 / 9; overflow: hidden; cursor: grab;
-    }
-    .slider-container:active { cursor: grabbing; }
-    .slider-image-before, .slider-image-after {
-      position: absolute; width: 100%; height: 100%; top: 0; left: 0;
-    }
-    .slider-image-before img, .slider-image-after img {
-      display: block; width: 100%; height: 100%; object-fit: cover;
-    }
-    .slider-image-after { width: 50%; }
-    .slider-bar {
-      position: absolute; width: 100%; top: 50%;
-      transform: translateY(-50%); cursor: pointer; opacity: 0; z-index: 2;
-    }
-    .slider-line {
-      position: absolute; top: 0; left: 50%;
-      transform: translateX(-50%); height: 100%; width: 2px;
-      background-color: var(--highlight-color); z-index: 1;
-    }
-    .slider-handle {
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%); width: 40px; height: 40px;
-      border-radius: 50%; background-color: var(--highlight-color);
-      border: 3px solid var(--font-color-main); z-index: 3;
-      pointer-events: none;
-    }
-
-    /* ====== FOOTER ====== */
+    /* ====== Footer ====== */
     footer{
-      text-align:center; padding:2rem 0;
-      border-top:1px solid rgba(255,255,255,0.1); margin-top:4rem;
+      text-align:center;
+      padding:2rem 0;
+      border-top:1px solid rgba(255,255,255,0.1);
+      margin-top:4rem;
+    }
+    footer img{height:30px;opacity:0.6;}
+    
+    /* Styles specific to archive.html */
+    .archive-container {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+    .archive-item {
+        background: rgba(0,0,0,0.5); /* Фон стал полупрозрачным */
+        padding: 2rem;
+        border-radius: 10px;
+        transition: transform 0.3s ease-in-out; /* Плавный переход для масштаба */
+    }
+    /* Добавляем эффект увеличения при наведении */
+    .archive-item:hover {
+        transform: scale(1.02);
+    }
+    /* Ограничение ширины текста */
+    .archive-item p {
+      max-width: 65ch;
+      margin: 0 auto 1rem;
     }
 
-    @media (max-width: 768px) {
-      main { padding-top: 100px; }
-      section { margin-top: 2rem; margin-bottom: 2rem; }
-      .archive-item { padding: 1rem; }
-      h2 { font-size: 2rem; margin-bottom: 1.5rem; }
+    .archive-item h3 {
+        color: var(--highlight-color);
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: 1.8rem;
+    }
+    .video-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        height: 0;
+        margin-bottom: 1rem;
+    }
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
     }
   </style>
 </head>
@@ -258,7 +311,6 @@
   <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </noscript>
-
   <nav id="site-nav">
     <div class="nav-container">
       <a class="logo-title" href="index.html" aria-label="Go to home">
@@ -279,7 +331,7 @@
   </nav>
 
   <main>
-    <section class="archive-container visible">
+    <section class="archive-container">
         <h2>Archive</h2>
         <p>This is not a gallery of magic. This is a collection of truthful transformations. We show you the difference between what was and what can be.</p>
         
@@ -309,43 +361,97 @@
     </section>
 
     <section class="price-container visible">
-        <h2>Price</h2>
-        <p>We price by the final minute of restored footage. Every tape is unique — we assess quality, damage, and goals before quoting.</p>
-        
-        <div class="package-card">
-            <h3>Package 1: Legacy</h3>
-            <p><b>For:</b> Those who want to rescue aging footage and restore basic clarity.</p>
-            <p><b>What we do:</b> We deinterlace the original video (25/30 fps, interlaced) to achieve smooth 50 fps, restore color, and remove digital noise.</p>
-            <p><b>The output:</b> A professional video file with a 114 Mbps bitrate, using the ProRes 422 std codec at 720p resolution. The video is ready for immediate editing or color correction.</p>
-            <p><b>Price:</b> $5–15 per minute.</p>
-        </div>
-        
-        <div class="package-card">
-            <h3>Package 2: Ultimate Restoration</h3>
-            <p><b>For:</b> Clients seeking the highest fidelity for personal or professional use.</p>
-            <p><b>What we do:</b> Everything in the Legacy package, plus: deeper color grading, sharpening, detail restoration, and upscaling to Full HD (1080p).</p>
-            <p><b>The output:</b> A professional video file with a ProRes 422 std codec at Full HD (1080p) resolution.</p>
-            <p><b>Price:</b> $20–50 per minute.</p>
-        </div>
-        
-        <div class="package-card">
-            <h3>Additional: UHD</h3>
-            <p><b>For:</b> The most demanding clients.</p>
-            <p><b>What we do:</b> The highest level of restoration, with video upscaled to stunning UHD (3840x2400) resolution.</p>
-            <p><b>The output:</b> A professional video file with a ProRes 422 std codec at UHD (3840x2400) resolution.</p>
-            <p><b>Price:</b> Quoted individually.</p>
-        </div>
-    </section>
+    <h2>Price</h2>
+    <p>We price by the final minute of restored footage. Every tape is unique — we assess quality, damage, and goals before quoting.</p>
 
-    <section class="comparison-container visible">
-        <h2>Before & After</h2>
-        <div class="slider-container">
-            <div class="slider-image-before">
-                <img src="path/to/your/image-before.jpg" alt="Original footage">
-            </div>
-            <div class="slider-image-after">
-                <img src="path/to/your/image-after.jpg" alt="Restored footage">
-            </div>
-            <input type="range" min="0" max="100" value="50" class="slider-bar" aria-label="Image slider">
-            <div class="slider-line"></div>
-            <div class="slider-handle"></div>
+    <div class="package-card">
+        <h3>Package 1: Legacy</h3>
+        <p><b>For:</b> Those who want to rescue aging footage and restore basic clarity.</p>
+        <p><b>What we do:</b> We deinterlace the original video (25/30 fps, interlaced) to achieve smooth 50 fps, restore color, and remove digital noise.</p>
+        <p><b>The output:</b> A professional video file with a 114 Mbps bitrate, using the ProRes 422 std codec at 720p resolution. The video is ready for immediate editing or color correction.</p>
+        <p><b>Price:</b> $5–15 per minute.</p>
+    </div>
+
+    <div class="package-card">
+        <h3>Package 2: Ultimate Restoration</h3>
+        <p><b>For:</b> Clients seeking the highest fidelity for personal or professional use.</p>
+        <p><b>What we do:</b> Everything in the Legacy package, plus: deeper color grading, sharpening, detail restoration, and upscaling to Full HD (1080p).</p>
+        <p><b>The output:</b> A professional video file with a ProRes 422 std codec at Full HD (1080p) resolution.</p>
+        <p><b>Price:</b> $20–50 per minute.</p>
+    </div>
+
+    <div class="package-card">
+        <h3>Additional: UHD</h3>
+        <p><b>For:</b> The most demanding clients.</p>
+        <p><b>What we do:</b> The highest level of restoration, with video upscaled to stunning UHD (3840x2400) resolution.</p>
+        <p><b>The output:</b> A professional video file with a ProRes 422 std codec at UHD (3840x2400) resolution.</p>
+        <p><b>Price:</b> Quoted individually.</p>
+    </div>
+</section>
+      </main>
+
+  <footer>
+    <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" />
+    <p>© <span id="year"></span> Stylish Horizon</p>
+  </footer>
+
+  <script>
+    /* ====== JS FOR HIDING HEADER ====== */
+    let lastScrollY = window.scrollY;
+    const nav = document.getElementById('site-nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > lastScrollY && window.scrollY > 100) {
+        nav.classList.add('hidden');
+      } else {
+        nav.classList.remove('hidden');
+      }
+      lastScrollY = window.scrollY;
+    });
+    /* ====== JS FOR BURGER (SIMPLIFIED) ====== */
+    const navLinks = document.getElementById('primary-navigation');
+    const burger = document.getElementById('burger');
+    document.addEventListener('click', (event) => {
+        const isClickInsideNav = navLinks.contains(event.target);
+        const isClickOnBurger = burger.contains(event.target);
+
+        if (navLinks.classList.contains('show') && !isClickInsideNav && !isClickOnBurger) {
+            navLinks.classList.remove('show');
+            burger.setAttribute('aria-expanded', 'false');
+        }
+    });
+    burger.addEventListener('click', () => {
+        const isExpanded = navLinks.classList.toggle('show');
+        burger.setAttribute('aria-expanded', String(isExpanded));
+    });
+    /* ====== VISIBILITY OF SECTIONS ON SCROLL ====== */
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, {
+      rootMargin: '0px',
+      threshold: 0.2
+    });
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+    /* ====== ACTIVE MENU ITEM ====== */
+    (function markActive(){
+      const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+      document.querySelectorAll('.nav-links a').forEach(a=>{
+        const href = a.getAttribute('href')?.toLowerCase() || '';
+        if ((path === 'index.html' && href.endsWith('index.html')) || href.endsWith(path)) {
+          a.classList.add('active'); a.setAttribute('aria-current','page');
+        }
+      });
+    })();
+    /* ====== DYNAMIC YEAR ====== */
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
