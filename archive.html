@@ -17,12 +17,13 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
 
   <style>
-    /* ... сюда вставляй все стили, которые мы уже обсуждали ... */
+    /* ====== BASE + BREATHING BACKGROUND ====== */
     :root{
       --bg-a:#0f0f0f; --bg-b:#0a0a0a; --bg-c:#050505;
       --font-color-main: #f0f0f0; --font-color-secondary: #aaaaaa;
       --highlight-color:#ff69b4;
     }
+
     body {
       margin: 0; padding: 0;
       font-family: 'Inter', sans-serif;
@@ -31,6 +32,7 @@
       overflow-x: hidden;
       display: flex; flex-direction: column;
     }
+
     .background-circles {
       position: fixed;
       top: 0; left: 0;
@@ -38,12 +40,14 @@
       z-index: -1;
       overflow: hidden;
     }
+
     .circle {
       position: absolute;
       border-radius: 50%;
       background: rgba(255, 105, 180, 0.05);
       animation: breathe ease-in-out infinite;
     }
+
     .circle-1 {
       width: 400px; height: 400px;
       top: 10%; left: 20%;
@@ -64,6 +68,7 @@
       top: 60%; right: 10%;
       animation-duration: 22s;
     }
+
     @keyframes breathe {
       0%, 100% {
         transform: scale(1);
@@ -74,6 +79,8 @@
         box-shadow: 0 0 40px rgba(255, 105, 180, 0.4);
       }
     }
+
+    /* ====== HEADER ====== */
     header {
       width: 100%;
       padding: 20px;
@@ -99,6 +106,7 @@
     .logo:hover {
       color: var(--highlight-color);
     }
+
     .nav-links {
       display: none;
     }
@@ -112,6 +120,7 @@
     .nav-links a:hover, .nav-links a.active {
       color: var(--highlight-color);
     }
+
     .menu-toggle {
       background: none;
       border: none;
@@ -120,9 +129,11 @@
       cursor: pointer;
       display: block;
     }
+
     .menu-icon {
       font-size: 24px;
     }
+
     .nav-mobile {
       position: fixed;
       top: 60px; right: 0;
@@ -150,6 +161,8 @@
     .nav-mobile a:hover {
       background-color: rgba(255, 255, 255, 0.1);
     }
+
+    /* ====== SECTION STYLES ====== */
     section {
       padding: 60px 20px;
       color: var(--font-color-main);
@@ -157,18 +170,22 @@
       transition: opacity 0.5s ease;
       text-align: center;
     }
+
     section.visible {
       opacity: 1;
     }
+
     .intro-container {
       background: var(--bg-b);
       padding: 60px 20px;
     }
+
     .intro-container h1 {
       font-size: 2.5em;
       font-weight: 700;
       margin-bottom: 20px;
     }
+
     .intro-container p {
       font-size: 1.2em;
       line-height: 1.6;
@@ -176,14 +193,17 @@
       max-width: 800px;
       margin: 0 auto;
     }
+
     .archive-container {
       background: var(--bg-c);
     }
+
     .archive-container h2 {
       font-size: 2.5em;
       font-weight: 700;
       margin-bottom: 20px;
     }
+
     .archive-container p {
       font-size: 1em;
       line-height: 1.6;
@@ -191,6 +211,42 @@
       max-width: 800px;
       margin: 0 auto;
     }
+
+    /* ====== VIDEO CONTAINERS ====== */
+    .archive-item {
+        margin-bottom: 40px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+    }
+
+    .archive-item h3 {
+        font-size: 1.8em;
+        font-weight: 500;
+        margin-top: 0;
+        color: var(--highlight-color, #f0f0f0);
+    }
+
+    .video-container {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        height: 0;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    /* ====== PRICE SECTION ====== */
     .price-container {
       padding: 60px 20px;
       background: var(--bg-b);
@@ -235,6 +291,8 @@
       line-height: 1.6;
       color: var(--font-color-secondary);
     }
+
+    /* ====== BEFORE & AFTER SLIDER ====== */
     .comparison-container {
       padding: 60px 20px;
       background: var(--bg-c);
@@ -367,6 +425,27 @@
     <section class="archive-container visible">
       <h2>Archive</h2>
       <p>The core of this work is in the professional handling of each individual tape. We offer several service packages to meet your needs.</p>
+      <div class="archive-item">
+          <h3>Package 1: Legacy - Basic Restoration</h3>
+          <p>This video is a demonstration of our basic, honest restoration. We removed the "noise" and restored clarity, leaving the memory exactly as it was meant to be seen.</p>
+          <div class="video-container">
+              <iframe src="https://www.youtube.com/embed/rjS13daTnKc" allowfullscreen></iframe>
+          </div>
+      </div>
+      <div class="archive-item">
+          <h3>Package 2: Ultimate - Professional Quality</h3>
+          <p>This is what makes our service unique. We not only digitized the video but also upscaled it to Full HD. Your old recordings will look sharp and detailed on modern screens. Even after YouTube's compression, the quality remains high thanks to the VP9 codec.</p>
+          <div class="video-container">
+              <iframe src="https://www.youtube.com/embed/PH5Ap0-exNw" allowfullscreen></iframe>
+          </div>
+      </div>
+      <div class="archive-item">
+          <h3>Additional: UHD - Maximum Detail</h3>
+          <p>This example is for our most demanding clients. We upscaled the resolution to UHD to show the full potential of your memories. The result is maximum detail that remains noticeable even after YouTube converts the video to the VP9 format.</p>
+          <div class="video-container">
+              <iframe src="https://www.youtube.com/embed/aSduAKdM_zk" allowfullscreen></iframe>
+          </div>
+      </div>
     </section>
 
     <section class="price-container visible">
@@ -412,7 +491,6 @@
             <div class="slider-handle"></div>
         </div>
     </section>
-
   </main>
 
   <footer>
@@ -434,10 +512,6 @@
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         } else {
-          // Removed this else block to prevent sections from disappearing if they go out of view
-          // If you want them to fade out when scrolling up, uncomment the lines below
-          // entry.target.classList.remove('visible');
-          // entry.target.style.opacity = '0'; // Ensure it starts fading out
         }
       });
     }, {
@@ -510,4 +584,3 @@
   </script>
 </body>
 </html>
-
