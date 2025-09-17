@@ -8,7 +8,7 @@
   <meta property="og:description" content="Collection of truthful video transformations. See Legacy, Ultimate, and UHD restorations.">
   <meta property="og:image" content="assets/media/StylishHorizon_Clear.webp">
   <meta property="og:url" content="https://your-site.com/archive.html">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.youtube.com https://youtube.com; frame-src https://www.youtube.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.youtube.com https://youtube.com; frame-src https://www.youtube.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com;">
   <title>Stylish Horizon - Archive</title>
 
   <!-- Google Tag Manager -->
@@ -75,6 +75,7 @@
       backdrop-filter: blur(5px);
       -webkit-backdrop-filter: blur(5px);
       transition: transform 0.3s ease-in-out;
+      opacity: 0.95; /* Fallback for no-blur browsers */
     }
 
     #site-nav.hidden {
@@ -398,7 +399,7 @@
   </nav>
 
   <main>
-    <section class="archive-container" aria-labelledby="archive-title">
+    <section class="archive-container visible" aria-labelledby="archive-title">
       <h2 id="archive-title">Archive</h2>
       <p>This is not a gallery of magic. This is a collection of truthful transformations. We show you the difference between what was and what can be.</p>
 
