@@ -18,26 +18,26 @@
 
   <style>
     /* ====== BASE + BREATHING BACKGROUND ====== */
-    :root {
-      --bg-a: #0f0f0f;
-      --bg-b: #0a0a0a;
-      --bg-c: #050505;
-      --font-color-main: #fafafa;
+    :root{
+      --bg-a:#0f0f0f;
+      --bg-b:#0a0a0a;
+      --bg-c:#050505;
+      --font-color-main: #f0f0f0;
       --font-color-secondary: #aaaaaa;
-      --highlight-color: #ff69b4;
+      --highlight-color: #00d4ff;
     }
-
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       margin: 0;
       padding: 0;
       font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      background: var(--bg-a);
       color: var(--font-color-main);
-      background-color: var(--bg-a);
-      overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
     }
-
     .background-circles {
       position: fixed;
       top: 0;
@@ -51,7 +51,7 @@
     .circle {
       position: absolute;
       border-radius: 50%;
-      background: rgba(255, 105, 180, 0.05);
+      background: rgba(0, 212, 255, 0.05);
       animation: breathe ease-in-out infinite;
     }
 
@@ -86,15 +86,14 @@
       right: 10%;
       animation-duration: 22s;
     }
-
     @keyframes breathe {
       0%, 100% {
         transform: scale(1);
-        box-shadow: 0 0 10px rgba(255, 105, 180, 0.2);
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
       }
       50% {
         transform: scale(1.1);
-        box-shadow: 0 0 40px rgba(255, 105, 180, 0.4);
+        box-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
       }
     }
 
@@ -104,7 +103,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      background: rgba(10, 10, 10, 0.8);
+      background: rgba(0, 0, 0, 0.8);
       z-index: 1000;
       backdrop-filter: blur(5px);
       transition: transform 0.3s ease-in-out;
@@ -133,7 +132,7 @@
     .logo-title .site-title {
       font-size: 1.5rem;
       font-weight: 700;
-      background: linear-gradient(90deg, #ff69b4, #ff8c00, #ff69b4);
+      background: linear-gradient(90deg, #00d4ff, #8e2de2, #ff8c00, #00d4ff);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -142,12 +141,8 @@
     }
 
     @keyframes slide-bg {
-      0% {
-        background-position: 0% 50%;
-      }
-      100% {
-        background-position: 200% 50%;
-      }
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
     }
 
     .logo-title .logo {
@@ -161,12 +156,8 @@
     }
 
     @keyframes appear {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     #burger {
@@ -258,7 +249,7 @@
       font-weight: 700;
       text-align: center;
       margin-bottom: 2rem;
-      color: var(--highlight-color);
+      color: rgba(0, 212, 255, 0.8);
     }
 
     h3 {
@@ -445,6 +436,7 @@
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       margin-top: 4rem;
     }
+    footer img{height:30px;opacity:0.6;}
 
     @media (max-width: 768px) {
       main {
@@ -566,11 +558,35 @@
   </main>
 
   <footer>
-    <p>© <span id="current-year"></span> Stylish Horizon. All Rights Reserved.</p>
+    <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" />
+    <p>© <span id="year"></span> Stylish Horizon</p>
   </footer>
 
+  <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/68c85460aac9d419267b8757/1j578j6hq';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+  </script>
   <script>
-    /* ====== TOGGLE MOBILE MENU ====== */
+    /* ====== JS FOR HIDING HEADER ====== */
+    let lastScrollY = window.scrollY;
+    const nav = document.getElementById('site-nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > lastScrollY && window.scrollY > 100) {
+        nav.classList.add('hidden');
+      } else {
+        nav.classList.remove('hidden');
+      }
+      lastScrollY = window.scrollY;
+    });
+
+    /* ====== JS FOR BURGER (SIMPLIFIED) ====== */
     const navLinks = document.getElementById('primary-navigation');
     const burger = document.getElementById('burger');
     document.addEventListener('click', (event) => {
@@ -615,7 +631,7 @@
     })();
 
     /* ====== DYNAMIC YEAR ====== */
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+    document.getElementById('year').textContent = new Date().getFullYear();
 
     /* ====== SLIDER FUNCTIONALITY ====== */
     document.addEventListener('DOMContentLoaded', () => {
