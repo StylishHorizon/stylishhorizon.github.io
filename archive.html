@@ -122,6 +122,69 @@
     }
     .nav-links a:hover::after,
     .nav-links a.active::after{width:100%;}
+
+    /* ====== PRICE SECTION ====== */
+.price-container {
+    padding: 60px 20px;
+    background: var(--bg-b);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: var(--font-color-main);
+    transition: opacity 0.5s ease;
+    opacity: 0;
+}
+
+.price-container.visible {
+    opacity: 1;
+}
+
+.price-container h2 {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.price-container .package-card {
+    background: var(--bg-a);
+    padding: 30px;
+    margin: 20px 0;
+    border-radius: 10px;
+    border: 1px solid var(--font-color-secondary);
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.price-container .package-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.price-container .package-card h3 {
+    font-size: 1.8em;
+    font-weight: 500;
+    margin-top: 0;
+    color: var(--highlight-color, #f0f0f0);
+}
+
+.price-container .package-card p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: var(--font-color-secondary);
+}
+
+/* ====== RESPONSIVE DESIGN ====== */
+@media (min-width: 768px) {
+    .price-container {
+        padding: 80px 40px;
+    }
+
+    .price-container .package-card {
+        margin: 20px 20px;
+    }
+}
     
     /* ====== MEDIA QUERY FOR MOBILE NAVIGATION ====== */
     @media(max-width:768px){
@@ -297,7 +360,35 @@
         </div>
     </section>
 
-  </main>
+    <section class="price-container visible">
+    <h2>Price</h2>
+    <p>We price by the final minute of restored footage. Every tape is unique — we assess quality, damage, and goals before quoting.</p>
+
+    <div class="package-card">
+        <h3>Package 1: Legacy</h3>
+        <p><b>For:</b> Those who want to rescue aging footage and restore basic clarity.</p>
+        <p><b>What we do:</b> We deinterlace the original video (25/30 fps, interlaced) to achieve smooth 50 fps, restore color, and remove digital noise.</p>
+        <p><b>The output:</b> A professional video file with a 114 Mbps bitrate, using the ProRes 422 std codec at 720p resolution. The video is ready for immediate editing or color correction.</p>
+        <p><b>Price:</b> $5–15 per minute.</p>
+    </div>
+
+    <div class="package-card">
+        <h3>Package 2: Ultimate Restoration</h3>
+        <p><b>For:</b> Clients seeking the highest fidelity for personal or professional use.</p>
+        <p><b>What we do:</b> Everything in the Legacy package, plus: deeper color grading, sharpening, detail restoration, and upscaling to Full HD (1080p).</p>
+        <p><b>The output:</b> A professional video file with a ProRes 422 std codec at Full HD (1080p) resolution.</p>
+        <p><b>Price:</b> $20–50 per minute.</p>
+    </div>
+
+    <div class="package-card">
+        <h3>Additional: UHD</h3>
+        <p><b>For:</b> The most demanding clients.</p>
+        <p><b>What we do:</b> The highest level of restoration, with video upscaled to stunning UHD (3840x2400) resolution.</p>
+        <p><b>The output:</b> A professional video file with a ProRes 422 std codec at UHD (3840x2400) resolution.</p>
+        <p><b>Price:</b> Quoted individually.</p>
+    </div>
+</section>
+      </main>
 
   <footer>
     <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" />
@@ -364,3 +455,4 @@
   </script>
 </body>
 </html>
+
