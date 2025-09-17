@@ -207,11 +207,13 @@
       background: rgba(0,0,0,0.5);
       padding: 2rem;
       border-radius: 10px;
-      transition: transform 0.3s ease-in-out;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 212, 255, 0.1); /* Лёгкий glow */
     }
 
     .contact-form:hover {
       transform: scale(1.02);
+      box-shadow: 0 8px 16px rgba(0, 212, 255, 0.2); /* Усиленный glow */
     }
 
     .contact-form label {
@@ -219,6 +221,7 @@
       margin-bottom: 0.5rem;
       font-weight: 500;
       color: var(--font-color-main);
+      position: relative; /* Для анимации */
     }
 
     .contact-form input,
@@ -232,12 +235,14 @@
       color: var(--font-color-main);
       font-family: inherit;
       font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .contact-form input:focus,
     .contact-form textarea:focus {
       outline: none;
       border-color: var(--highlight-color);
+      box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2); /* Focus ring */
     }
 
     .contact-form textarea {
@@ -245,22 +250,51 @@
       min-height: 120px;
     }
 
+    .progress-container {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .progress-bar {
+      width: 0%;
+      background: var(--highlight-color);
+      height: 2px;
+      transition: width 0.3s ease;
+      border-radius: 1px;
+    }
+
     .contact-form button {
       width: 100%;
       padding: 1rem;
-      background: var(--highlight-color);
+      background: linear-gradient(90deg, var(--highlight-color), #00b8e6); /* Градиент */
       border: none;
       border-radius: 5px;
       color: var(--bg-a);
       font-weight: 500;
       font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background 0.3s ease, transform 0.2s ease;
     }
 
     .contact-form button:hover {
-      background: #00b8e6;
+      background: linear-gradient(90deg, #00b8e6, var(--highlight-color));
+      transform: translateY(-1px); /* Лёгкий lift */
     }
+
+    .contact-form button:active {
+      transform: translateY(0); /* Press эффект */
+    }
+
+    /* Анимация появления полей (CSS keyframes) */
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .contact-form label:nth-child(1) { animation: slideIn 0.5s ease forwards; }
+    .contact-form label:nth-child(2) { animation: slideIn 0.5s ease 0.1s forwards; }
+    .contact-form label:nth-child(3) { animation: slideIn 0.5s ease 0.2s forwards; }
+    .contact-form button { animation: slideIn 0.5s ease 0.3s forwards; }
 
     .tawk-widget {
       margin-top: 2rem;
@@ -286,6 +320,11 @@
 
       .contact-form {
         padding: 1rem;
+      }
+
+      .contact-form input,
+      .contact-form textarea {
+        font-size: 16px; /* iOS zoom fix */
       }
 
       h2 {
@@ -377,6 +416,9 @@
       <p>We believe in direct, honest communication. You can reach out to us using the form below or join our public forum.</p>
 
       <form class="contact-form" action="https://formspree.io/f/mrbawowv" method="POST">
+        <!-- Honeypot (скрытое поле для спам-ботов) -->
+        <input type="text" name="honeypot" style="display:none;">
+
         <label>
           Your name:
           <input type="text" name="name" required>
@@ -387,7 +429,10 @@
         </label>
         <label>
           Your message:
-          <textarea name="message" required></textarea>
+          <div class="progress-container">
+            <textarea name="message" required placeholder="Tell us about your project..."></textarea>
+            <div class="progress-bar"></div>
+          </div>
         </label>
         <button type="submit">Send</button>
       </form>
@@ -484,6 +529,51 @@
 
     /* ========== DYNAMIC YEAR IN FOOTER ========== */
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ========== SEMANTIC FORM VALIDATION + PROGRESS BAR ========== */
+    const form = document.querySelector('.contact-form');
+    const textarea = document.querySelector('textarea[name="message"]');
+    const progressBar = document.querySelector('.progress-bar');
+    const maxLength = 1000;
+
+    // Progress bar for textarea
+    textarea.addEventListener('input', function() {
+      const length = this.value.length;
+      const progress = (length / maxLength) * 100;
+      progressBar.style.width = progress + '%';
+    });
+
+    // Semantic validation on submit
+    form.addEventListener('submit', function(e) {
+      const message = textarea.value;
+      const email = document.querySelector('input[name="email"]').value;
+
+      // Length check
+      if (message.length < 10 || message.length > maxLength) {
+        alert('Message too short or too long — try again?');
+        e.preventDefault();
+        return;
+      }
+
+      // Email in message check (semantics)
+      const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g;
+      const emailsInMessage = message.match(emailRegex);
+      if (emailsInMessage && emailsInMessage.length > 0 && !emailsInMessage.includes(email)) {
+        alert('Hmm, extra email in message? Looks suspicious — edit and resend.');
+        e.preventDefault();
+        return;
+      }
+
+      // Honeypot check
+      const honeypot = document.querySelector('input[name="honeypot"]').value;
+      if (honeypot) {
+        e.preventDefault(); // Spam!
+        return;
+      }
+
+      // Success (for demo; Formspree handles real submit)
+      console.log('Form semantically valid!');
+    });
   </script>
 </body>
 </html>
