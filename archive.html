@@ -3,15 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Contact Stylish Horizon for video restoration services. Use our form or join the forum for direct communication.">
-  <meta property="og:title" content="Stylish Horizon - Contact">
-  <meta property="og:description" content="Reach out to us for honest video restoration consultations.">
-  <meta property="og:image" content="assets/media/StylishHorizon_Clear.webp">
-  <meta property="og:url" content="https://stylishhorizon.github.io/contact.html">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.youtube.com https://youtube.com https://embed.tawk.to; frame-src https://www.youtube.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com;">
-  <title>Stylish Horizon - Contact</title>
+  <title>Stylish Horizon - Archive</title>
 
-  <!-- Google Tag Manager -->
   <script>
     (function(w,d,s,l,i){
       w[l]=w[l]||[];
@@ -22,7 +15,6 @@
     })(window,document,'script','dataLayer','GTM-MN6WG3K6');
   </script>
 
-  <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
 
   <style>
@@ -35,14 +27,9 @@
       --font-color-main: #fafafa;
       --font-color-secondary: #aaaaaa;
       --font-color-bright: #00d4ff;
-
-      --highlight-color: #00d4ff;
-      --color-a: #00d4ff;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -55,15 +42,17 @@
     }
 
     @keyframes breathing-bg {
-      0%, 100% { background: var(--bg-a); }
+      0%, 100% { background: var(--bg-a);
+      }
       50% { background: var(--bg-b); }
-      75% { background: var(--bg-c); }
+      75% { background: var(--bg-c);
+      }
     }
 
     @media (prefers-reduced-motion) {
-      body { animation: none; }
+      body { animation: none;
+      }
     }
-
 
     /* ================== HEADER / NAVIGATION ================== */
     #site-nav {
@@ -76,10 +65,7 @@
       -webkit-backdrop-filter: blur(5px);
       transition: transform 0.3s ease-in-out;
     }
-
-    #site-nav.hidden {
-      transform: translateY(-100%);
-    }
+    #site-nav.hidden { transform: translateY(-100%); }
 
     .nav-container {
       max-width: 1200px;
@@ -92,9 +78,7 @@
 
     .logo-title {
       display: flex;
-      align-items: center;
-      gap: 1rem;
-      text-decoration: none;
+      align-items: center; gap: 1rem; text-decoration: none;
     }
 
     .logo-title .site-title {
@@ -109,8 +93,10 @@
     }
 
     @keyframes slide-bg {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 200% 50%; }
+      0% { background-position: 0% 50%;
+      }
+      100% { background-position: 200% 50%;
+      }
     }
 
     .logo-title .logo {
@@ -118,14 +104,11 @@
       animation: appear 1s ease-in-out;
       transition: opacity 0.5s ease-in-out;
     }
-
-    .logo-title:hover .logo {
-      opacity: 0.8;
+    .logo-title:hover .logo { opacity: 0.8;
     }
 
-    @keyframes appear {
-      from { opacity: 0; } to { opacity: 1; }
-    }
+    @keyframes appear { from { opacity: 0; } to { opacity: 1;
+    } }
 
     #burger {
       display: none;
@@ -147,11 +130,8 @@
       transition: color 0.3s ease-in-out;
       position: relative;
     }
-
-    .nav-links a:hover {
-      color: var(--highlight-color);
+    .nav-links a:hover { color: var(--highlight-color);
     }
-
     .nav-links a::after {
       content: '';
       display: block;
@@ -163,230 +143,104 @@
       background: var(--highlight-color);
       transition: width 0.3s ease-in-out;
     }
-
     .nav-links a:hover::after,
-    .nav-links a.active::after {
-      width: 100%;
+    .nav-links a.active::after { width: 100%;
     }
 
-
-    /* ================== CONTACT SECTION ================== */
-    .contact-container {
-      max-width: 800px;
+    /* ================== ARCHIVE SECTION ================== */
+    .archive-container {
+      max-width: 1000px;
       margin: 4rem auto;
       padding: 0 1rem;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
-
-    .contact-container.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .contact-container h2 {
-      font-size: 2.5rem;
-      font-weight: 700;
+    .archive-container h2 {
       text-align: center;
+      font-size: 2.5rem;
       margin-bottom: 2rem;
       color: var(--font-color-bright);
     }
 
-    .contact-container p {
-      text-align: center;
-      margin-bottom: 3rem;
-      color: var(--font-color-secondary);
-      max-width: 65ch;
-      margin-left: auto;
-      margin-right: auto;
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      justify-content: center;
     }
 
-    /* Contact Form Styles */
-    .contact-form {
+    .video-item {
       background: rgba(0,0,0,0.5);
-      padding: 2rem;
       border-radius: 10px;
-      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
-      box-shadow: 0 4px 8px rgba(0, 212, 255, 0.1); /* Лёгкий glow */
-    }
-
-    .contact-form:hover {
-      transform: scale(1.02);
-      box-shadow: 0 8px 16px rgba(0, 212, 255, 0.2); /* Усиленный glow */
-    }
-
-    .contact-form label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-      color: var(--font-color-main);
-      position: relative; /* Для анимации */
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 0.75rem;
-      margin-bottom: 1.5rem;
-      background: var(--bg-b);
-      border: 1px solid var(--font-color-secondary);
-      border-radius: 5px;
-      color: var(--font-color-main);
-      font-family: inherit;
-      font-size: 1rem;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      outline: none;
-      border-color: var(--highlight-color);
-      box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2); /* Focus ring */
-    }
-
-    .contact-form textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    .progress-container {
-      margin-bottom: 1.5rem;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
-    }
-
-    .progress-bar {
-      width: 0%;
-      background: var(--highlight-color);
-      height: 2px;
-      transition: width 0.3s ease;
-      border-radius: 1px;
-    }
-
-    .contact-form button {
-      width: 100%;
       padding: 1rem;
-      background: linear-gradient(90deg, var(--highlight-color), #00b8e6); /* Градиент */
-      border: none;
-      border-radius: 5px;
-      color: var(--bg-a);
-      font-weight: 500;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
-
-    .contact-form button:hover {
-      background: linear-gradient(90deg, #00b8e6, var(--highlight-color));
-      transform: translateY(-1px); /* Лёгкий lift */
+    .video-item.visible { opacity: 1; transform: translateY(0); }
+    .video-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
     }
-
-    .contact-form button:active {
-      transform: translateY(0); /* Press эффект */
+    .video-item h3 {
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
+      color: var(--font-color-main);
     }
-
-    /* Анимация появления полей (CSS keyframes) */
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateX(-10px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    .contact-form label:nth-child(1) { animation: slideIn 0.5s ease forwards; }
-    .contact-form label:nth-child(2) { animation: slideIn 0.5s ease 0.1s forwards; }
-    .contact-form label:nth-child(3) { animation: slideIn 0.5s ease 0.2s forwards; }
-    .contact-form button { animation: slideIn 0.5s ease 0.3s forwards; }
-
-    .tawk-widget {
-      margin-top: 2rem;
-      text-align: center;
+    .video-item p {
+      font-size: 0.9rem;
       color: var(--font-color-secondary);
+      margin-bottom: 1rem;
     }
 
-
-    /* ================== GENERAL LAYOUT ================== */
-    main {
-      padding-top: 80px;
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+      overflow: hidden;
     }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .video-details { padding: 1rem; }
 
-    /* ================== RESPONSIVE DESIGN ================== */
     @media (max-width: 768px) {
-      main {
-        padding-top: 100px;
-      }
-
-      .contact-container {
-        margin: 2rem auto;
-      }
-
-      .contact-form {
-        padding: 1rem;
-      }
-
-      .contact-form input,
-      .contact-form textarea {
-        font-size: 16px; /* iOS zoom fix */
-      }
-
-      h2 {
-        font-size: 2rem;
-        margin-bottom: 1.5rem;
-      }
-
-      #burger {
-        display: block;
-      }
-
+      .archive-container { margin: 2rem auto; }
+      h2 { font-size: 2rem; margin-bottom: 1.5rem; }
+      #burger { display: block; }
       .nav-links {
         display: none;
         flex-direction: column;
         position: absolute;
-        top: 100%;
-        left: 0;
+        top: 100%; left: 0;
         width: 100%;
         background: rgba(0,0,0,0.95);
         border-top: 1px solid rgba(255,255,255,0.1);
         padding: 1rem 0;
       }
-
-      .nav-links a {
-        padding: 0.5rem 2rem;
-      }
-
-      .nav-links.show {
-        display: flex;
-      }
+      .nav-links a { padding: 0.5rem 2rem; }
+      .nav-links.show { display: flex; }
     }
 
-
-    /* ================== FOOTER ================== */
     footer {
       text-align: center;
       padding: 2rem 0;
       border-top: 1px solid rgba(255,255,255,0.1);
       margin-top: 4rem;
     }
-
-    footer img {
-      height: 30px;
-      opacity: 0.6;
-    }
-
-    footer p {
-      margin: 0.5rem 0;
-    }
-
-    footer a {
-      color: var(--highlight-color);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
+    footer img { height: 30px; opacity: 0.6; }
+    footer p { margin: 0.5rem 0; }
+    footer a { color: var(--highlight-color);
+      text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
-
   <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </noscript>
@@ -400,58 +254,66 @@
         </picture>
         <p class="site-title">Stylish Horizon</p>
       </a>
+      
       <button id="burger" aria-label="Open menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
       <div id="primary-navigation" class="nav-links" role="navigation">
         <a href="index.html">Home</a>
         <a href="manifest.html">Manifest</a>
-        <a href="archive.html">Archive</a>
-        <a href="contact.html" class="active" aria-current="page">Contact</a>
+        <a href="archive.html" class="active" aria-current="page">Archive</a>
+        <a href="contact.html">Contact</a>
       </div>
     </div>
   </nav>
 
   <main>
-    <section class="contact-container visible" aria-labelledby="contact-title">
-      <h2 id="contact-title">Contact Us</h2>
-      <p>We believe in direct, honest communication. You can reach out to us using the form below or join our public forum.</p>
-
-      <form class="contact-form" action="https://formspree.io/f/mrbawowv" method="POST">
-        <!-- Honeypot (скрытое поле для спам-ботов) -->
-        <input type="text" name="honeypot" style="display:none;">
-
-        <label>
-          Your name:
-          <input type="text" name="name" required>
-        </label>
-        <label>
-          Your email:
-          <input type="email" name="email" required>
-        </label>
-        <label>
-          Your message:
-          <div class="progress-container">
-            <textarea name="message" required placeholder="Tell us about your project..."></textarea>
-            <div class="progress-bar"></div>
+    <section class="archive-container" aria-labelledby="archive-title">
+      <h2 id="archive-title">Archive</h2>
+      <div class="video-grid">
+        <div class="video-item">
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/56T-Y00eKGY?si=73n6s4J3p_gG3z4W"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
           </div>
-        </label>
-        <button type="submit">Send</button>
-      </form>
-
-      <div class="tawk-widget">
-        <p>Or chat with us live for quick FAQ answers:</p>
-        <!--Start of Tawk.to Script-->
-        <script type="text/javascript">
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/68c85460aac9d419267b8757/1j578j6hq';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
-        })();
-        </script>
-        <!--End of Tawk.to Script-->
+          <div class="video-details">
+            <h3>Retro Colorizer Pro: Colorize your videos with one click!</h3>
+            <p>1940s colorizer workflow demo</p>
+          </div>
+        </div>
+        <div class="video-item">
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/2-n-oJ_Qe8o?si=h2w31r_cO0m_4J7Z"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="video-details">
+            <h3>How to make a high quality video from an old movie</h3>
+            <p>1930s video restoration workflow demo</p>
+          </div>
+        </div>
+        <div class="video-item">
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/4yV_Y-V957A?si=mC8Y4K9Kz5-qgO62"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="video-details">
+            <h3>How to remove noise, scratches and grains with Retro Cleaner Pro</h3>
+            <p>1940s video restoration workflow demo</p>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -468,12 +330,8 @@
     const nav = document.getElementById('site-nav');
 
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 100) {
-        if (window.scrollY > lastScrollY) {
-          nav.classList.add('hidden');
-        } else {
-          nav.classList.remove('hidden');
-        }
+      if (window.scrollY > lastScrollY && window.scrollY > 100) {
+        nav.classList.add('hidden');
       } else {
         nav.classList.remove('hidden');
       }
@@ -483,7 +341,6 @@
     /* ========== BURGER MENU TOGGLE ========== */
     const navLinks = document.getElementById('primary-navigation');
     const burger = document.getElementById('burger');
-
     document.addEventListener('click', (event) => {
       const isClickInsideNav = navLinks.contains(event.target);
       const isClickOnBurger = burger.contains(event.target);
@@ -529,51 +386,6 @@
 
     /* ========== DYNAMIC YEAR IN FOOTER ========== */
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    /* ========== SEMANTIC FORM VALIDATION + PROGRESS BAR ========== */
-    const form = document.querySelector('.contact-form');
-    const textarea = document.querySelector('textarea[name="message"]');
-    const progressBar = document.querySelector('.progress-bar');
-    const maxLength = 1000;
-
-    // Progress bar for textarea
-    textarea.addEventListener('input', function() {
-      const length = this.value.length;
-      const progress = (length / maxLength) * 100;
-      progressBar.style.width = progress + '%';
-    });
-
-    // Semantic validation on submit
-    form.addEventListener('submit', function(e) {
-      const message = textarea.value;
-      const email = document.querySelector('input[name="email"]').value;
-
-      // Length check
-      if (message.length < 10 || message.length > maxLength) {
-        alert('Message too short or too long — try again?');
-        e.preventDefault();
-        return;
-      }
-
-      // Email in message check (semantics)
-      const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g;
-      const emailsInMessage = message.match(emailRegex);
-      if (emailsInMessage && emailsInMessage.length > 0 && !emailsInMessage.includes(email)) {
-        alert('Hmm, extra email in message? Looks suspicious — edit and resend.');
-        e.preventDefault();
-        return;
-      }
-
-      // Honeypot check
-      const honeypot = document.querySelector('input[name="honeypot"]').value;
-      if (honeypot) {
-        e.preventDefault(); // Spam!
-        return;
-      }
-
-      // Success (for demo; Formspree handles real submit)
-      console.log('Form semantically valid!');
-    });
   </script>
 </body>
 </html>
