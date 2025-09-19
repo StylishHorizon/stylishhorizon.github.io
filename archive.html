@@ -3,574 +3,359 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Professional Video Restoration & Digital Conversion | Stylish Horizon</title>
-  <meta name="description" content="Preserve your precious memories with our expert video restoration and digital conversion services. We specialize in deinterlacing, color grading, and upscaling old MiniDV and VHS footage to high-quality ProRes files." />
-  <meta name="keywords" content="video restoration, video transfer, MiniDV to digital, VHS to digital, digital conversion, video archiving, ProRes, deinterlace, video upscaling, 4K restoration, home video rescue" />
+  <meta name="description" content="Contact Stylish Horizon for video restoration services. Use our form or join the forum for direct communication.">
+  <meta property="og:title" content="Stylish Horizon - Contact">
+  <meta property="og:description" content="Reach out to us for honest video restoration consultations.">
+  <meta property="og:image" content="assets/media/StylishHorizon_Clear.webp">
+  <meta property="og:url" content="https://stylishhorizon.github.io/contact.html">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.youtube.com https://youtube.com https://embed.tawk.to; frame-src https://www.youtube.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com;">
+  <title>Stylish Horizon - Contact</title>
 
   <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    (function(w,d,s,l,i){
+    
+  w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-MN6WG3K6');
-  </script>
+</script>
+
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
 
   <style>
-    /* ====== BASE + BREATHING BACKGROUND ====== */
-    :root{
-      --bg-a:#0f0f0f;
-      --bg-b:#0a0a0a;
-      --bg-c:#050505;
-      --font-color-main: #f0f0f0;
+    /* ================== BASE COLORS AND TYPOGRAPHY ================== */
+    :root {
+      --bg-a: #0f0f0f;
+--bg-b: #0a0a0a;
+      --bg-c: #050505;
+
+      --font-color-main: #fafafa;
       --font-color-secondary: #aaaaaa;
+      --font-color-bright: #00d4ff;
+
       --highlight-color: #00d4ff;
-    }
-    html {
-      scroll-behavior: smooth;
-    }
+      --color-a: #00d4ff;
+}
+
+    html { scroll-behavior: smooth; }
+
     body {
-      margin: 0;
-      padding: 0;
       font-family: 'Inter', sans-serif;
-      font-weight: 300;
+font-weight: 300;
       line-height: 1.6;
-      background: var(--bg-a);
+      margin: 0;
       color: var(--font-color-main);
-      overflow-x: hidden;
-      /* Fix for rendering issues on some Android devices (e.g., Xiaomi T11) */
-      transform: translateZ(0);
-    }
-    .background-circles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
+      background: var(--bg-a);
+      animation: breathing-bg 30s ease-in-out infinite;
+}
+
+    @keyframes breathing-bg {
+      0%, 100% { background: var(--bg-a);
+}
+      50% { background: var(--bg-b); }
+      75% { background: var(--bg-c);
+}
     }
 
-    .circle {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(0, 212, 255, 0.05);
-      animation: breathe ease-in-out infinite;
+    @media (prefers-reduced-motion) {
+      body { animation: none;
+}
     }
 
-    .circle-1 {
-      width: 400px;
-      height: 400px;
-      top: 10%;
-      left: 20%;
-      animation-duration: 20s;
-    }
-
-    .circle-2 {
-      width: 600px;
-      height: 600px;
-      bottom: -10%;
-      right: -20%;
-      animation-duration: 25s;
-    }
-
-    .circle-3 {
-      width: 300px;
-      height: 300px;
-      top: 50%;
-      left: 5%;
-      animation-duration: 18s;
-    }
-
-    .circle-4 {
-      width: 500px;
-      height: 500px;
-      top: 60%;
-      right: 10%;
-      animation-duration: 22s;
-    }
-    @keyframes breathe {
-      0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
-      }
-      50% {
-        transform: scale(1.1);
-        box-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
-      }
-    }
-
-    /* ====== HEADER ====== */
+    /* ================== HEADER / NAVIGATION ================== */
     #site-nav {
       position: fixed;
-      top: 0;
-      left: 0;
+top: 0; left: 0;
       width: 100%;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0,0,0,0.8);
       z-index: 1000;
       backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
       transition: transform 0.3s ease-in-out;
-    }
-
-    #site-nav.hidden {
-      transform: translateY(-100%);
-    }
+}
+    #site-nav.hidden { transform: translateY(-100%); }
 
     .nav-container {
+      max-width: 1200px;
+margin: 0 auto;
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
     }
 
-    .logo-title {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      gap: 1rem;
-    }
+    .logo-title { display: flex;
+align-items: center; gap: 1rem; text-decoration: none; }
 
     .logo-title .site-title {
       font-size: 1.5rem;
-      font-weight: 700;
+font-weight: 700;
       background: linear-gradient(90deg, #00d4ff, #8e2de2, #ff8c00, #00d4ff);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       background-size: 200% 100%;
-      animation: slide-bg 5s linear infinite;
+animation: slide-bg 5s linear infinite;
     }
 
     @keyframes slide-bg {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 200% 50%; }
+      0% { background-position: 0% 50%;
+}
+      100% { background-position: 200% 50%;
+}
     }
 
     .logo-title .logo {
       height: 40px;
+animation: appear 1s ease-in-out;
       transition: opacity 0.5s ease-in-out;
-      animation: appear 1s ease-in-out;
     }
+    .logo-title:hover .logo { opacity: 0.8;
+}
 
-    .logo-title:hover .logo {
-      opacity: 0.8;
-    }
-
-    @keyframes appear {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    @keyframes appear { from { opacity: 0; } to { opacity: 1;
+} }
 
     #burger {
       display: none;
       background: transparent;
       border: none;
       color: var(--font-color-main);
-      font-size: 2rem;
+font-size: 2rem;
       cursor: pointer;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-    }
+    .nav-links { display: flex; gap: 1.5rem;
+}
 
     .nav-links a {
       color: var(--font-color-main);
       text-decoration: none;
       transition: color 0.3s ease-in-out;
-      position: relative;
+position: relative;
     }
-
-    .nav-links a:hover {
-      color: var(--highlight-color);
-    }
-
+    .nav-links a:hover { color: var(--highlight-color);
+}
     .nav-links a::after {
       content: '';
       display: block;
+      position: absolute;
+      bottom: -5px;
+left: 0;
       width: 0;
       height: 2px;
       background: var(--highlight-color);
       transition: width 0.3s ease-in-out;
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-    }
-
+}
     .nav-links a:hover::after,
-    .nav-links a.active::after {
-      width: 100%;
-    }
+    .nav-links a.active::after { width: 100%;
+}
 
-    @media(max-width: 768px) {
-      #burger {
-        display: block;
-      }
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: rgba(0, 0, 0, 0.95);
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 1rem 0;
-        /* Fix for mobile menu overlay on devices like Xiaomi */
-        z-index: 9999; 
-      }
-      .nav-links a {
-        padding: 0.5rem 2rem;
-      }
-      .nav-links.show {
-        display: flex;
-      }
-    }
-
-    /* ====== SECTION STYLES ====== */
-    main {
-      padding-top: 80px;
-    }
-
-    section {
+    /* ================== CONTACT SECTION ================== */
+    .contact-container {
       max-width: 800px;
-      margin: 4rem auto;
+margin: 4rem auto;
       padding: 0 1rem;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
+}
+    .contact-container.visible { opacity: 1; transform: translateY(0);
+}
 
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    h2 {
+    .contact-container h2 {
       font-size: 2.5rem;
       font-weight: 700;
       text-align: center;
       margin-bottom: 2rem;
-      color: rgba(0, 212, 255, 0.8);
+color: var(--font-color-bright);
+    }
+    .contact-container p {
+      text-align: center;
+      margin-bottom: 3rem;
+      color: var(--font-color-secondary);
+max-width: 65ch;
+      margin-left: auto; margin-right: auto;
     }
 
-    h3 {
-      color: var(--highlight-color);
-    }
-
-    /* ====== ARCHIVE SECTION WITH VIDEO ====== */
-    .archive-container {
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
-    }
-
-    .archive-item {
-      background: rgba(0, 0, 0, 0.5);
-      padding: 2rem;
+    .contact-form {
+      background: rgba(0,0,0,0.5);
+padding: 2rem;
       border-radius: 10px;
       transition: transform 0.3s ease-in-out;
     }
+    .contact-form:hover { transform: scale(1.02);
+}
 
-    .archive-item:hover {
-      transform: scale(1.02);
-    }
-
-    .archive-item p {
-      max-width: 65ch;
-      margin: 0 auto 1rem;
-      text-align: left;
-    }
-
-    .video-container {
-      position: relative;
+    .contact-form label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--font-color-main);
+}
+    .contact-form input,
+    .contact-form textarea {
       width: 100%;
-      padding-bottom: 56.25%;
-      height: 0;
-      margin-bottom: 1rem;
-    }
-
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* ====== PRICE SECTION ====== */
-    .price-container {
-      padding: 60px 20px;
+padding: 0.75rem;
+      margin-bottom: 1.5rem;
       background: var(--bg-b);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      color: var(--font-color-main);
-    }
-
-    .price-container h2 {
-      font-size: 2.5em;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    .price-container .package-card {
-      background: var(--bg-a);
-      padding: 30px;
-      margin: 20px 0;
-      border-radius: 10px;
       border: 1px solid var(--font-color-secondary);
-      max-width: 600px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 5px;
+      color: var(--font-color-main);
+      font-family: inherit;
+      font-size: 1rem;
+}
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+border-color: var(--highlight-color);
     }
+    .contact-form textarea { resize: vertical; min-height: 120px;
+}
 
-    .price-container .package-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    }
-
-    .price-container .package-card h3 {
-      font-size: 1.8em;
+    .contact-form button {
+      width: 100%; padding: 1rem;
+      background: var(--highlight-color);
+      border: none;
+border-radius: 5px;
+      color: var(--bg-a);
       font-weight: 500;
-      margin-top: 0;
-      color: var(--highlight-color);
-    }
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+}
+    .contact-form button:hover { background: #00b8e6; }
 
-    .price-container .package-card p {
-      font-size: 1em;
-      line-height: 1.6;
+    .tawk-widget {
+      margin-top: 2rem;
+text-align: center;
       color: var(--font-color-secondary);
     }
 
-    /* ====== BEFORE & AFTER SLIDER ====== */
-    .comparison-container {
-      padding: 60px 20px;
-      background: var(--bg-c);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      color: var(--font-color-main);
+    main { padding-top: 80px;
+}
+
+    @media (max-width: 768px) {
+      main { padding-top: 100px;
+}
+      .contact-container { margin: 2rem auto;
+}
+      .contact-form { padding: 1rem; }
+      h2 { font-size: 2rem;
+margin-bottom: 1.5rem; }
+      #burger { display: block;
+}
+      .nav-links {
+        display: none;
+        flex-direction: column;
+position: absolute;
+        top: 100%; left: 0;
+        width: 100%;
+        background: rgba(0,0,0,0.95);
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding: 1rem 0;
+}
+      .nav-links a { padding: 0.5rem 2rem;
+}
+      .nav-links.show { display: flex;
+}
     }
 
-    .comparison-container h2 {
-      font-size: 2.5em;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    .slider-container {
-      position: relative;
-      width: 100%;
-      max-width: 900px;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-      cursor: grab;
-    }
-
-    .slider-container:active {
-      cursor: grabbing;
-    }
-
-    .slider-image-before,
-    .slider-image-after {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-    }
-
-    .slider-image-before img,
-    .slider-image-after img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .slider-image-after {
-      width: 50%;
-    }
-
-    .slider-bar {
-      position: absolute;
-      width: 100%;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      opacity: 0;
-      z-index: 2;
-    }
-
-    .slider-line {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      height: 100%;
-      width: 2px;
-      background-color: var(--highlight-color);
-      z-index: 1;
-    }
-
-    .slider-handle {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background-color: var(--highlight-color);
-      border: 3px solid var(--font-color-main);
-      z-index: 3;
-      pointer-events: none;
-    }
-
-    /* ====== FOOTER ====== */
     footer {
       text-align: center;
       padding: 2rem 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+border-top: 1px solid rgba(255,255,255,0.1);
       margin-top: 4rem;
     }
-    footer img{height:30px;opacity:0.6;}
-
-    @media (max-width: 768px) {
-      main {
-        padding-top: 100px;
-      }
-      section {
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-      }
-      .archive-item {
-        padding: 1rem;
-      }
-      h2 {
-        font-size: 2rem;
-        margin-bottom: 1.5rem;
-      }
-    }
+    footer img { height: 30px; opacity: 0.6;
+}
+    footer p { margin: 0.5rem 0; }
+    footer a { color: var(--highlight-color);
+text-decoration: none; }
+    footer a:hover { text-decoration: underline;
+}
   </style>
 </head>
-
 <body>
-
   <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </noscript>
 
-  <nav id="site-nav">
+  <nav id="site-nav" aria-label="Primary Navigation">
     <div class="nav-container">
       <a class="logo-title" href="index.html" aria-label="Go to home">
         <picture>
-          <source srcset="assets/media/StylishHorizon_Clear.webp" type="image/webp">
+          <source srcset="assets/media/StylishHorizon_Clear.webp" type="image/webp" />
           <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon Logo" />
         </picture>
         <p class="site-title">Stylish Horizon</p>
       </a>
-      <button id="burger" aria-label="Open menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
-      <div id="primary-navigation" class="nav-links" role="navigation" aria-label="Primary">
+    
+  <button id="burger" aria-label="Open menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
+      <div id="primary-navigation" class="nav-links" role="navigation">
         <a href="index.html">Home</a>
         <a href="manifest.html">Manifest</a>
-        <a href="archive.html" class="active" aria-current="page">Archive</a>
-        <a href="contact.html">Contact</a>
+        <a href="archive.html">Archive</a>
+        <a href="contact.html" class="active" aria-current="page">Contact</a>
       </div>
     </div>
   </nav>
 
   <main>
-    <section class="archive-container visible">
-      <h2>Archive</h2>
-      <p>This is not a gallery of magic. This is a collection of truthful transformations. We show you the difference between what was and what can be.</p>
+    <section class="contact-container visible" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact Us</h2>
+      <p>We believe in direct, honest communication.
+You can reach out to us using the form below or join our public forum.</p>
 
-      <div class="archive-item">
-        <h3>Package 1: Legacy - Basic Restoration</h3>
-        <p>This video is a demonstration of our basic, honest restoration. We removed the "noise" and restored clarity, leaving the memory exactly as it was meant to be seen.</p>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/rjS13daTnKc" allowfullscreen></iframe>
+      <form class="contact-form" action="https://formspree.io/f/mrbawowv" method="POST">
+        <div style="display:none;">
+          <label>Leave this field empty:
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+          </label>
         </div>
-      </div>
 
-      <div class="archive-item">
-        <h3>Package 2: Ultimate - Professional Quality</h3>
-        <p>This is what makes our service unique. We not only digitized the video but also upscaled it to Full HD. Your old recordings will look sharp and detailed on modern screens. Even after YouTube's compression, the quality remains high thanks to the VP9 codec.</p>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/PH5Ap0-exNw" allowfullscreen></iframe>
+        <label>
+   
+        Your name:
+          <input type="text" name="name" required>
+        </label>
+        <label>
+          Your email:
+          <input type="email" name="email" required>
+        </label>
+        <label>
+          Your message:
+          <textarea name="message" 
+required></textarea>
+        </label>
+        <button type="submit">Send</button>
+      </form>
+
+      <div class="tawk-widget">
+        <p>Or chat with us live for quick FAQ answers:</p>
+        <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+          var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+          s1.async=true;
+          s1.src='https://embed.tawk.to/68c85460aac9d419267b8757/1j578j6hq';
+          s1.charset='UTF-8';
+          s1.setAttribute('crossorigin','*');
+          s0.parentNode.insertBefore(s1,s0);
+        })();
+</script>
         </div>
-      </div>
-
-      <div class="archive-item">
-        <h3>Additional: UHD - Maximum Detail</h3>
-        <p>This example is for our most demanding clients. We upscaled the resolution to UHD to show the full potential of your memories. The result is maximum detail that remains noticeable even after YouTube converts the video to the VP9 format.</p>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/aSduAKdM_zk" allowfullscreen></iframe>
-        </div>
-      </div>
-    </section>
-
-    <section class="price-container visible">
-      <h2>Price</h2>
-      <p>We price by the final minute of restored footage. Every tape is unique — we assess quality, damage, and goals before quoting.</p>
-
-      <div class="package-card">
-        <h3>Package 1: Legacy</h3>
-        <p><b>For:</b> Those who want to rescue aging footage and restore basic clarity.</p>
-        <p><b>What we do:</b> We deinterlace the original video (25/30 fps, interlaced) to achieve smooth 50 fps, restore color, and remove digital noise.</p>
-        <p><b>The output:</b> A professional video file with a 114 Mbps bitrate, using the ProRes 422 std codec at 720p resolution. The video is ready for immediate editing or color correction.</p>
-        <p><b>Price:</b> $5–15 per minute.</p>
-      </div>
-
-      <div class="package-card">
-        <h3>Package 2: Ultimate Restoration</h3>
-        <p><b>For:</b> Clients seeking the highest fidelity for personal or professional use.</p>
-        <p><b>What we do:</b> Everything in the Legacy package, plus: deeper color grading, sharpening, detail restoration, and upscaling to Full HD (1080p).</p>
-        <p><b>The output:</b> A professional video file with a ProRes 422 std codec at Full HD (1080p) resolution.</p>
-        <p><b>Price:</b> $20–50 per minute.</p>
-      </div>
-
-      <div class="package-card">
-        <h3>Additional: UHD</h3>
-        <p><b>For:</b> The most demanding clients.</p>
-        <p><b>What we do:</b> The highest level of restoration, with video upscaled to stunning UHD (3840x2120) resolution.</p>
-        <p><b>The output:</b> A professional video file with a ProRes 422 std codec at UHD (3840x2120) resolution.</p>
-        <p><b>Price:</b> Quoted individually.</p>
-      </div>
-    </section>
-
-    <section class="comparison-container visible">
-      <h2>Before & After</h2>
-      <div class="slider-container">
-        <div class="slider-image-before">
-          <img src="path/to/your/image-before.jpg" alt="Original footage">
-        </div>
-        <div class="slider-image-after">
-          <img src="path/to/your/image-after.jpg" alt="Restored footage">
-        </div>
-        <input type="range" min="0" max="100" value="50" class="slider-bar" aria-label="Image slider">
-        <div class="slider-line"></div>
-        <div class="slider-handle"></div>
-      </div>
     </section>
   </main>
 
   <footer>
     <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" />
     <p>© <span id="year"></span> Stylish Horizon</p>
+    <p>Subscribe to YouTube for new demos: <a href="https://www.youtube.com/@stylishhorizon" target="_blank" rel="noopener noreferrer">YouTube</a></p>
   </footer>
 
   <script>
-    /* ====== JS FOR HIDING HEADER ====== */
+    /* ========== HEADER HIDE ON SCROLL ========== */
     let lastScrollY = window.scrollY;
-    const nav = document.getElementById('site-nav');
+const nav = document.getElementById('site-nav');
+
     window.addEventListener('scroll', () => {
       if (window.scrollY > lastScrollY && window.scrollY > 100) {
         nav.classList.add('hidden');
@@ -579,40 +364,32 @@
       }
       lastScrollY = window.scrollY;
     });
-
-    /* ====== JS FOR BURGER (SIMPLIFIED) ====== */
+/* ========== BURGER MENU TOGGLE ========== */
     const navLinks = document.getElementById('primary-navigation');
     const burger = document.getElementById('burger');
-    document.addEventListener('click', (event) => {
-        const isClickInsideNav = navLinks.contains(event.target);
-        const isClickOnBurger = burger.contains(event.target);
-        if (navLinks.classList.contains('show') && !isClickInsideNav && !isClickOnBurger) {
-            navLinks.classList.remove('show');
-            burger.setAttribute('aria-expanded', 'false');
-        }
+document.addEventListener('click', (event) => {
+      const isClickInsideNav = navLinks.contains(event.target);
+      const isClickOnBurger = burger.contains(event.target);
+      if (navLinks.classList.contains('show') && !isClickInsideNav && !isClickOnBurger) {
+        navLinks.classList.remove('show');
+        burger.setAttribute('aria-expanded', 'false');
+      }
     });
-    burger.addEventListener('click', () => {
-        const isExpanded = navLinks.classList.toggle('show');
-        burger.setAttribute('aria-expanded', String(isExpanded));
+burger.addEventListener('click', () => {
+      const isExpanded = navLinks.classList.toggle('show');
+      burger.setAttribute('aria-expanded', String(isExpanded));
     });
-
-    /* ====== VISIBILITY OF SECTIONS ON SCROLL ====== */
+/* ========== SECTION VISIBILITY ON SCROLL ========== */
     const sections = document.querySelectorAll('section');
-    const observer = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+        else { entry.target.classList.remove('visible'); }
       });
-    }, {
-      rootMargin: '0px',
-      threshold: 0.2
-    });
-    sections.forEach(section => {
-      observer.observe(section);
-    });
+    }, { rootMargin: '0px', threshold: 0.2 });
+sections.forEach(section => observer.observe(section));
 
-    /* ====== ACTIVE MENU ITEM ====== */
+    /* ========== ACTIVE MENU ITEM HIGHLIGHT ========== */
     (function markActive() {
       const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
       document.querySelectorAll('.nav-links a').forEach(a => {
@@ -621,62 +398,23 @@
           a.classList.add('active');
           a.setAttribute('aria-current', 'page');
         }
-      });
+      
+});
     })();
 
-    /* ====== DYNAMIC YEAR ====== */
+    /* ========== DYNAMIC YEAR IN FOOTER ========== */
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    /* ====== SLIDER FUNCTIONALITY ====== */
-    document.addEventListener('DOMContentLoaded', () => {
-      const slider = document.querySelector('.slider-bar');
-      const sliderAfter = document.querySelector('.slider-image-after');
-      const sliderLine = document.querySelector('.slider-line');
-      const sliderHandle = document.querySelector('.slider-handle');
-      const sliderContainer = document.querySelector('.slider-container');
-
-      function updateSlider(value) {
-        sliderAfter.style.width = `${value}%`;
-        sliderLine.style.left = `${value}%`;
-        sliderHandle.style.left = `${value}%`;
+/* ========== FORM TIME VALIDATION ========== */
+    const form = document.querySelector('.contact-form');
+    const loadTime = Date.now();
+form.addEventListener('submit', (e) => {
+      const now = Date.now();
+      const elapsed = (now - loadTime) / 1000;
+      if (elapsed < 3) {
+        e.preventDefault();
+        alert("You filled the form too fast. Please try again.");
       }
-
-      let isDragging = false;
-      const getPosition = (e) => {
-        const rect = sliderContainer.getBoundingClientRect();
-        return (e.clientX - rect.left) / rect.width * 100;
-      };
-
-      sliderContainer.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        updateSlider(getPosition(e));
-      });
-      sliderContainer.addEventListener('mousemove', (e) => {
-        if (isDragging) {
-          updateSlider(getPosition(e));
-        }
-      });
-      sliderContainer.addEventListener('mouseup', () => {
-        isDragging = false;
-      });
-
-      // Mobile touch events
-      sliderContainer.addEventListener('touchstart', (e) => {
-        isDragging = true;
-        updateSlider(getPosition(e.touches[0]));
-      });
-      sliderContainer.addEventListener('touchmove', (e) => {
-        if (isDragging) {
-          updateSlider(getPosition(e.touches[0]));
-        }
-      });
-      sliderContainer.addEventListener('touchend', () => {
-        isDragging = false;
-      });
-
-      updateSlider(50);
     });
-  </script>
+</script>
 </body>
 </html>
-
