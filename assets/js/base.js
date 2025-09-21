@@ -51,4 +51,3 @@ document.querySelectorAll('.content-block').forEach(block => {
 
 // Динамический год
 document.getElementById('year').textContent = new Date().getFullYear();
-
