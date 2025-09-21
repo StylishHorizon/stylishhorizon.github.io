@@ -17,7 +17,7 @@ const navList = document.getElementById('nav-list');
 
 burger.addEventListener('click', () => {
   const expanded = burger.getAttribute('aria-expanded') === 'true';
-  burger.setAttribute('aria-expanded', !expanded);
+  burger.setAttribute('aria-expanded', String(!expanded));
   navList.classList.toggle('open');
 });
 
@@ -29,7 +29,7 @@ document.addEventListener('click', (e) => {
 });
 
 // Подсветка активного пункта
-const currentPage = location.pathname.split('/').pop();
+const currentPage = location.pathname.split('/').pop() || 'index.html';
 document.querySelectorAll('nav a').forEach(link => {
   if (link.getAttribute('href') === currentPage) {
     link.setAttribute('aria-current', 'page');
@@ -37,17 +37,22 @@ document.querySelectorAll('nav a').forEach(link => {
 });
 
 // Intersection Observer для анимации появления
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1 });
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
 
-document.querySelectorAll('.content-block').forEach(block => {
-  observer.observe(block);
-});
+  document.querySelectorAll('.content-block').forEach(block => {
+    observer.observe(block);
+  });
+}
 
 // Динамический год
-document.getElementById('year').textContent = new Date().getFullYear();
+const yearEl = document.getElementById('year');
+if (yearEl) {
+  yearEl.textContent = new Date().getFullYear();
+}
