@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stylish Horizon</title>
+  <meta name="description" content="Stylish Horizon - memory deserves clarity.">
+  
+  <!-- Open Graph / Twitter Cards -->
+  <meta property="og:title" content="Stylish Horizon">
+  <meta property="og:description" content="Stylish Horizon - memory deserves clarity.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
 
+  <!-- Canonical -->
+  <link rel="canonical" href="https://stylishhorizon.github.io/index.html">
+
+  <!-- Google Tag Manager -->
   <script>
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -12,376 +23,182 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-MN6WG3K6');
   </script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
 
   <style>
-    /* ====== БАЗА + ДЫШАЩИЙ ФОН ====== */
-    :root{
-      --bg-a:#0f0f0f; --bg-b:#0a0a0a; --bg-c:#050505;
-      --font-color-main: #f0f0f0; --font-color-secondary: #aaaaaa;
-      --highlight-color: #00d4ff;
-      --color-a: #00d4ff;
+    /* ===== Reset & base ===== */
+    * {margin:0; padding:0; box-sizing:border-box;}
+    html {scroll-behavior:smooth;}
+    body {font-family: Arial, sans-serif; background:#111; color:#fff; line-height:1.5; overflow-x:hidden;}
+
+    /* ===== Breathing background ===== */
+    body {
+      background: radial-gradient(circle at center, #222 0%, #000 100%);
+      animation: breathing 8s ease-in-out infinite alternate;
+    }
+    @keyframes breathing {
+      0% { background-size:100% 100%; }
+      100% { background-size:102% 102%; }
     }
 
-    html {
-      scroll-behavior: smooth;
+    /* ===== Header ===== */
+    header {
+      position: fixed; top:0; left:0; width:100%; display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; background:rgba(0,0,0,0.6); backdrop-filter:blur(10px); z-index:1000; transition:transform 0.3s ease;
     }
-    body{
-      font-family:'Inter',sans-serif;
-      font-weight:300;
-      line-height:1.6;
-      background: var(--bg-a);
-      color: var(--font-color-main);
-      margin:0;
-      animation:breathing-bg 30s ease-in-out infinite;
-    }
-    @keyframes breathing-bg{
-      0%,100%{background:var(--bg-a);}
-      50%{background:var(--bg-b);}
-      75%{background:var(--bg-c);}
-    }
-    @media(prefers-reduced-motion){body{animation:none;}}
+    header.hidden { transform: translateY(-120%); }
 
-    /* ====== HEADER ====== */
-    #site-nav{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      background:rgba(0,0,0,0.8);
-      z-index:1000;
-      backdrop-filter:blur(5px);
-      -webkit-backdrop-filter:blur(5px);
-      transition:transform 0.3s ease-in-out;
-    }
-    #site-nav.hidden{transform:translateY(-100%);}
-    .nav-container{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:1rem 2rem;
-      max-width:1200px;
-      margin:0 auto;
-    }
-    .logo-title{
-      display:flex;
-      align-items:center;
-      text-decoration:none;
-      gap:1rem;
-    }
-    .logo-title .site-title{
-      font-size:1.5rem;
-      font-weight:700;
-      background:linear-gradient(90deg, #00d4ff, #8e2de2, #ff8c00, #00d4ff);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      background-size:200% 100%;
-      animation:slide-bg 5s linear infinite;
-    }
-    @keyframes slide-bg{
-      0% {background-position:0% 50%;}
-      100% {background-position:200% 50%;}
-    }
-    .logo-title .logo{
-      height:40px;
-      transition:opacity 0.5s ease-in-out;
-      animation:appear 1s ease-in-out;
-    }
-    .logo-title:hover .logo{opacity:0.8;}
-    @keyframes appear{from{opacity:0;}to{opacity:1;}}
-    #burger{
-      display:none;
-      background:transparent;
-      border:none;
-      color:var(--font-color-main);
-      font-size:2rem;
-      cursor:pointer;
-    }
-    .nav-links{display:flex; gap:1.5rem;}
-    .nav-links a{
-      color:var(--font-color-main);
-      text-decoration:none;
-      transition:color 0.3s ease-in-out;
-      position:relative;
-    }
-    .nav-links a:hover{color:var(--highlight-color);}
-    .nav-links a::after{
-      content:'';
-      display:block;
-      width:0;
-      height:2px;
-      background:var(--highlight-color);
-      transition:width 0.3s ease-in-out;
-      position:absolute;
-      bottom:-5px;
-      left:0;
-    }
-    .nav-links a:hover::after,
-    .nav-links a.active::after{width:100%;}
+    .logo img { height:40px; }
+
+    nav { display:flex; gap:1.5rem; }
+    nav a { color:#fff; text-decoration:none; position:relative; }
+    nav a.active::after { content:""; position:absolute; bottom:-0.2rem; left:0; width:100%; height:2px; background:#0ff; }
+
+    /* ===== Burger menu ===== */
+    .burger { display:none; flex-direction:column; cursor:pointer; gap:5px; }
+    .burger span { width:25px; height:3px; background:#fff; transition:0.3s; }
+    .nav-open nav { display:flex; flex-direction:column; position:absolute; top:60px; right:2rem; background:rgba(0,0,0,0.85); padding:1rem; border-radius:8px; }
+
     @media(max-width:768px){
-      #burger{display:block;}
-      .nav-links{
-        display:none;
-        flex-direction:column;
-        position:absolute;
-        top:100%;
-        left:0;
-        width:100%;
-        background:rgba(0,0,0,0.95);
-        border-top:1px solid rgba(255,255,255,0.1);
-        padding:1rem 0;
-      }
-      .nav-links a{padding:0.5rem 2rem;}
-      .nav-links.show{display:flex;}
+      nav { display:none; }
+      .burger { display:flex; }
     }
 
-    /* ====== СЕКЦИИ КОНТЕНТА ====== */
-    main{
-      padding-top: 80px; /* ИЗМЕНЕНИЕ: Исправлен отступ от хедера */
+    /* ===== Hero ===== */
+    .hero { height:80vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; }
+    .hero h1 {
+      font-size:3rem; margin-bottom:1rem;
+      animation: flicker 2s infinite alternate;
     }
-    section{
-      max-width:800px;
-      margin:4rem auto;
-      padding:0 1rem;
-      opacity:0;
-      transform:translateY(20px);
-      transition:opacity 0.6s ease-out, transform 0.6s ease-out;
+    @keyframes flicker {
+      0%,19%,21%,23%,25%,54%,56%,100% { opacity:1; }
+      20%,22%,24%,55% { opacity:0.5; }
     }
-    section.visible{
-      opacity:1;
-      transform:translateY(0);
-    }
-    h2{
-      font-size:2.5rem;
-      font-weight:700;
-      text-align:center;
-      margin-bottom:2rem;
-      color: rgba(0, 212, 255, 0.8); /* ИЗМЕНЕНИЕ: Единый цвет с прозрачностью */
-    }
-   .hero {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 70vh;
-    padding: 2rem 1rem; /* Добавляем отступ, чтобы контент не прилипал к краям */
-}
-.hero-content {
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 500;
-    line-height: 1.6;
-    margin-bottom: auto; /* Это отталкивает кнопки вниз */
-}
-.quick-links {
-    margin-top: 2rem; /* Создает отступ между текстом и кнопками */
-    width: 100%;
-}
-.button-group {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-.button {
-    padding: 0.8rem 1.5rem;
-    text-decoration: none;
-    color: var(--font-color-main);
-    border: 1px solid var(--highlight-color);
-    border-radius: 50px;
-    transition: background-color 0.3s ease, transform 0.1s ease;
-}
-.button:hover {
-    background-color: rgba(0, 212, 255, 0.2);
-}
-.button:active {
-    transform: scale(0.98);
-}
-    
-    /* ====== НОВЫЕ СТИЛИ ДЛЯ КНОПОК БЫСТРОЙ НАВИГАЦИИ ====== */
-    .quick-links{
-        text-align: center;
-        margin: 2rem auto;
-    }
-    .button{
-      display: inline-block;
-      padding: 0.8rem 1.5rem;
-      text-decoration: none;
-      color: var(--font-color-main);
-      border: 1px solid var(--highlight-color);
-      border-radius: 50px;
-      transition: background-color 0.3s ease, transform 0.1s ease;
-    }
-    .button:hover{
-      background-color: rgba(0, 212, 255, 0.2);
-    }
-    .button:active{
-      transform: scale(0.98);
-    }
+    .hero p { font-size:1.5rem; }
 
-    /* ====== FOOTER ====== */
-    footer{
-      text-align:center;
-      padding:2rem 0;
-      border-top:1px solid rgba(255,255,255,0.1);
-      margin-top:4rem;
-    }
-    footer img{height:30px;opacity:0.6;}
+    /* ===== Sections ===== */
+    section { padding:5rem 2rem; backdrop-filter:blur(5px); background:rgba(0,0,0,0.4); margin:2rem 0; border-radius:12px; transition: transform 0.3s ease; }
+    section:hover { transform: scale(1.02); }
+
+    /* ===== Footer ===== */
+    footer { text-align:center; padding:2rem; background:rgba(0,0,0,0.6); backdrop-filter:blur(10px); }
+    footer a { margin:0 0.5rem; color:#0ff; text-decoration:none; }
+
+    /* ===== Media lazy loading ===== */
+    img, video { max-width:100%; border-radius:8px; }
+
+    /* ===== Scroll to top ===== */
+    #scrollTop { position:fixed; bottom:2rem; right:2rem; background:#0ff; color:#000; border:none; padding:0.5rem 1rem; border-radius:4px; cursor:pointer; display:none; z-index:1000; }
   </style>
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-  <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-  </noscript>
-  <nav id="site-nav">
-    <div class="nav-container">
-      <a class="logo-title" href="index.html" aria-label="Go to home">
-        <picture>
-          <source srcset="assets/media/StylishHorizon_Clear.webp" type="image/webp">
-          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon Logo" />
-        </picture>
-        <p class="site-title">Stylish Horizon</p>
-      </a>
-      <button id="burger" aria-label="Open menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
-      <div id="primary-navigation" class="nav-links" role="navigation" aria-label="Primary">
-        <a href="index.html" class="active" aria-current="page">Home</a>
-        <a href="manifest.html">Manifest</a>
-        <a href="archive.html">Archive</a>
-        <a href="contact.html">Contact</a>
-      </div>
+  <header>
+    <div class="logo">
+      <picture>
+        <source srcset="assets/media/logo.webp" type="image/webp">
+        <img src="assets/media/logo.png" alt="Stylish Horizon Logo">
+      </picture>
     </div>
-  </nav>
+    <nav>
+      <a href="#how" class="active">How</a>
+      <a href="#price">Price</a>
+      <a href="#examples">Examples</a>
+    </nav>
+    <div class="burger" aria-label="Toggle menu" aria-expanded="false" role="button" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
 
   <main>
-    <header aria-hidden="true"></header>
-
-  <section class="hero">
-    <div class="hero-content">
-        <p>Digital restoration with integrity</p>
-        <p>No hype. No noise. Just memory.</p>
-        <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
-    </div>
-    <div class="quick-links">
-    <div class="button-group">
-        <a href="#how" class="button">How it works?</a>
-        <a href="archive.html#price" class="button">Price</a>
-        <a href="archive.html" class="button">See examples</a>
-    </div>
-</div>
-
-</section>
-
-    <section id="what" class="what">
-      <h2>What we do</h2>
-      <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
-      <p>If it still breathes — we help it speak again.</p>
-      <p>Every file is reviewed manually. Not filters, not nostalgia — just truth.</p>
+    <section class="hero">
+      <h1>Stylish Horizon</h1>
+      <p>Memory deserves clarity</p>
     </section>
 
-    <section id="how" class="how">
-      <h2>How we work</h2>
-      <p>No shipping. We find trusted studios near you.</p>
-      <p>No subscriptions. You pay for what you need — nothing more.</p>
+    <section id="how">
+      <h2>How it works</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
     </section>
 
-    <section id="why" class="why">
-      <h2>Why it matters</h2>
-      <p>We believe memory deserves clarity.</p>
-      <p>Not filters, not nostalgia — just truth.</p>
+    <section id="price">
+      <h2>Pricing</h2>
+      <p>Choose the plan that suits you.</p>
     </section>
 
+    <section id="examples">
+      <h2>Examples</h2>
+      <p>Gallery of previous works.</p>
+      <img src="assets/media/example1.jpg" loading="lazy" alt="Example 1">
+      <img src="assets/media/example2.jpg" loading="lazy" alt="Example 2">
+    </section>
   </main>
 
   <footer>
-    <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" />
-    <p>© <span id="year"></span> Stylish Horizon</p>
+    &copy; <span id="year"></span> Stylish Horizon. All rights reserved.
+    <div>
+      <a href="#" aria-label="Facebook">FB</a>
+      <a href="#" aria-label="Twitter">TW</a>
+      <a href="#" aria-label="Instagram">IG</a>
+    </div>
   </footer>
 
-  <div id="cost" style="position: absolute; top: 0; left: 0;"></div>
-  <div id="examples" style="position: absolute; top: 0; left: 0;"></div>
+  <button id="scrollTop">↑ Top</button>
 
   <script>
-    /* ====== JS ДЛЯ СКРЫТИЯ ХЕДЕРА ====== */
-    let lastScrollY = window.scrollY;
-    const nav = document.getElementById('site-nav');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > lastScrollY && window.scrollY > 100) {
-        nav.classList.add('hidden');
-      } else {
-        nav.classList.remove('hidden');
-      }
-      lastScrollY = window.scrollY;
-    });
-
-    /* ====== JS ДЛЯ БУРГЕРА (УПРОЩЁННЫЙ) ====== */
-    const navLinks = document.getElementById('primary-navigation');
-    const burger = document.getElementById('burger');
-    
-    // ИЗМЕНЕНИЕ: Обработчик для закрытия меню по клику вне его
-    document.addEventListener('click', (event) => {
-        const isClickInsideNav = navLinks.contains(event.target);
-        const isClickOnBurger = burger.contains(event.target);
-
-        if (navLinks.classList.contains('show') && !isClickInsideNav && !isClickOnBurger) {
-            navLinks.classList.remove('show');
-            burger.setAttribute('aria-expanded', 'false');
-        }
-    });
-
-    burger.addEventListener('click', () => {
-        const isExpanded = navLinks.classList.toggle('show');
-        burger.setAttribute('aria-expanded', String(isExpanded));
-    });
-
-
-    /* ====== Видимость секций при прокрутке ====== */
-    const sections = document.querySelectorAll('section');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        } else {
-          entry.target.classList.remove('visible');
-        }
-      });
-    }, {
-      rootMargin: '0px',
-      threshold: 0.2
-    });
-
-    sections.forEach(section => {
-      observer.observe(section);
-    });
-
-    /* ====== Активный пункт меню ====== */
-    (function markActive(){
-      const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-      document.querySelectorAll('.nav-links a').forEach(a=>{
-        const href = a.getAttribute('href')?.toLowerCase() || '';
-        if ((path === 'index.html' && href.endsWith('index.html')) || href.endsWith(path)) {
-          a.classList.add('active'); a.setAttribute('aria-current','page');
-        }
-      });
-    })();
-
-    /* ====== Динамический год ====== */
+    // ===== Dynamic Year =====
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    /* ====== Smooth scroll по якорям ====== */
-    document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
-      anchor.addEventListener('click', (e)=>{
-        const target = document.querySelector(anchor.getAttribute('href'));
-        if (target){
-          e.preventDefault();
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
+    // ===== Burger Menu =====
+    const burger = document.querySelector('.burger');
+    const navContainer = document.querySelector('header');
+    burger.addEventListener('click', ()=> {
+      navContainer.classList.toggle('nav-open');
+      const expanded = burger.getAttribute('aria-expanded') === 'true';
+      burger.setAttribute('aria-expanded', !expanded);
     });
+    document.addEventListener('click', (e)=> {
+      if(!navContainer.contains(e.target) && navContainer.classList.contains('nav-open')){
+        navContainer.classList.remove('nav-open');
+        burger.setAttribute('aria-expanded', false);
+      }
+    });
+
+    // ===== Header auto hide on scroll =====
+    let lastScroll = 0;
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', ()=>{
+      const currentScroll = window.pageYOffset;
+      if(currentScroll <= 0) header.classList.remove('hidden');
+      else if(currentScroll > lastScroll) header.classList.add('hidden');
+      else header.classList.remove('hidden');
+      lastScroll = currentScroll;
+    });
+
+    // ===== Scroll to top button =====
+    const scrollBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', ()=>{
+      scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+    scrollBtn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+
+    // ===== Lazy-load video/images (example for future videos) =====
+    const lazyMedia = document.querySelectorAll('img, video');
+    if('IntersectionObserver' in window){
+      const observer = new IntersectionObserver((entries, obs)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            const el = entry.target;
+            if(el.dataset.src) el.src = el.dataset.src;
+            obs.unobserve(el);
+          }
+        });
+      });
+      lazyMedia.forEach(el => observer.observe(el));
+    }
 
   </script>
 </body>
