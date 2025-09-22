@@ -1,0 +1,57 @@
+/* =========================
+   script.js
+   ========================= */
+
+// Header auto-hide on scroll
+let lastScrollTop = 0;
+const header = document.querySelector('header');
+window.addEventListener('scroll', () => {
+  const st = window.pageYOffset || document.documentElement.scrollTop;
+  if(st > lastScrollTop){
+    header.style.top = '-100px'; // hide on scroll down
+  } else {
+    header.style.top = '0'; // show on scroll up
+  }
+  lastScrollTop = st <= 0 ? 0 : st;
+});
+
+// Burger menu toggle
+const burgerToggle = document.querySelector('.burger-toggle');
+const burgerMenu = document.querySelector('.burger-menu');
+burgerToggle.addEventListener('click', () => {
+  burgerMenu.classList.toggle('show');
+});
+
+// Close burger menu on click outside
+document.addEventListener('click', (e) => {
+  if(!burgerMenu.contains(e.target) && !burgerToggle.contains(e.target)) {
+    burgerMenu.classList.remove('show');
+  }
+});
+
+// Active link highlight
+const navLinks = document.querySelectorAll('.nav-links a, .burger-menu a');
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+    burgerMenu.classList.remove('show'); // close menu on link click
+  });
+});
+
+// Scroll to top button
+const scrollTopBtn = document.querySelector('.scroll-top');
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 300){
+    document.body.classList.add('show-scroll-top');
+  } else {
+    document.body.classList.remove('show-scroll-top');
+  }
+});
+scrollTopBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Dynamic footer year
+const yearEl = document.querySelector('.current-year');
+if(yearEl){ yearEl.textContent = new Date().getFullYear(); }
