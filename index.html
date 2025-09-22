@@ -4,81 +4,54 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stylish Horizon</title>
-  <meta name="description" content="Stylish Horizon – breathing background, transparent sections, modern navigation.">
+  <!-- Favicon -->
+  <link rel="icon" href="assets/media/favicon.png">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Stylish Horizon">
-  <meta property="og:description" content="Breathing background, transparent sections, modern navigation.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://stylishhorizon.github.io/">
-  <meta property="og:image" content="assets/media/logo.png">
-
-  <!-- Twitter Cards -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Stylish Horizon">
-  <meta name="twitter:description" content="Breathing background, transparent sections, modern navigation.">
-  <meta name="twitter:image" content="assets/media/logo.png">
-
-  <!-- CSS -->
+  <!-- Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
 
-  <!-- Fonts preload -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" as="style">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Manifest (PWA-ready) -->
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#111">
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MN6WG3K6');</script>
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-  <!-- Skip to content -->
-  <a href="#main-content" class="skip-link">Skip to content</a>
-
-  <!-- Header / Navigation -->
-  <header>
-    <a href="/" class="logo">
+  <!-- Header -->
+  <header id="site-header" class="header">
+    <div class="logo">
       <picture>
-        <source srcset="assets/media/logo.webp" type="image/webp">
-        <img src="assets/media/logo.png" alt="Stylish Horizon Logo">
+        <source srcset="assets/media/StylishHorizon_Black.webp" type="image/webp">
+        <img src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon Logo">
       </picture>
-    </a>
-
-    <nav>
+    </div>
+    <nav class="nav">
+      <button class="burger" aria-label="Toggle navigation" aria-expanded="false"></button>
       <ul class="nav-links">
-        <li><a href="#digital-restoration" class="active">Digital restoration</a></li>
-        <li><a href="#what-we-do">What we do</a></li>
-        <li><a href="#how-we-work">How we work</a></li>
-        <li><a href="#why-it-matters">Why it matters</a></li>
-      </ul>
-
-      <button class="burger-toggle" aria-label="Toggle menu" aria-expanded="false">
-        &#9776;
-      </button>
-
-      <ul class="burger-menu" aria-hidden="true">
-        <li><a href="#digital-restoration">Digital restoration</a></li>
-        <li><a href="#what-we-do">What we do</a></li>
-        <li><a href="#how-we-work">How we work</a></li>
-        <li><a href="#why-it-matters">Why it matters</a></li>
+        <li><a href="#what">What we do</a></li>
+        <li><a href="#how">How we work</a></li>
+        <li><a href="#why">Why it matters</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </header>
 
   <!-- Hero Section -->
-  <section class="hero" id="main-content">
-    <h1>Stylish Horizon</h1>
-    <p>Breathing background, transparent sections, modern navigation.</p>
-  </section>
-
-  <!-- Digital Restoration Section -->
-  <section id="digital-restoration" class="transparent-section">
-    <h2>Digital restoration with integrity</h2>
-    <p>No hype. No noise. Just memory.</p>
-    <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
+  <section class="hero transparent-section">
+    <h1>No hype. No noise. Just memory.</h1>
+    <p>Digital restoration with integrity</p>
   </section>
 
   <!-- What We Do Section -->
-  <section id="what-we-do" class="transparent-section">
+  <section id="what" class="transparent-section">
     <h2>What we do</h2>
     <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
     <p>If it still breathes — we help it speak again.</p>
@@ -86,14 +59,14 @@
   </section>
 
   <!-- How We Work Section -->
-  <section id="how-we-work" class="transparent-section">
+  <section id="how" class="transparent-section">
     <h2>How we work</h2>
     <p>No shipping. We find trusted studios near you.</p>
     <p>No subscriptions. You pay for what you need — nothing more.</p>
   </section>
 
   <!-- Why It Matters Section -->
-  <section id="why-it-matters" class="transparent-section">
+  <section id="why" class="transparent-section">
     <h2>Why it matters</h2>
     <p>We believe memory deserves clarity.</p>
     <p>Not filters, not nostalgia — just truth.</p>
@@ -101,33 +74,12 @@
 
   <!-- Footer -->
   <footer>
-    <p>&copy; <span class="year"></span> Stylish Horizon. All rights reserved.</p>
-    <div class="social">
-      <a href="#" rel="noopener noreferrer" target="_blank">FB</a>
-      <a href="#" rel="noopener noreferrer" target="_blank">TW</a>
-      <a href="#" rel="noopener noreferrer" target="_blank">IG</a>
-    </div>
+    <p>&copy; <span id="year"></span> Stylish Horizon</p>
+    <p>Follow us on social media</p>
+    <!-- Placeholder for social icons -->
   </footer>
 
-  <!-- Scroll to top -->
-  <button class="scroll-top" aria-label="Scroll to top">&#8679;</button>
-
-  <!-- JS -->
-  <script src="assets/js/script.js" defer></script>
-
-  <!-- Google Tag Manager -->
-  <script>
-    (function(w,d,s,l,i){
-      w[l]=w[l]||[];
-      w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-      var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),
-          dl=l!='dataLayer'?'&l='+l:'';
-      j.async=true;
-      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-      f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-MN6WG3K6');
-  </script>
-
+  <!-- Scripts -->
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>
