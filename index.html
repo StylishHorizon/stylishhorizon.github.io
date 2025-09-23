@@ -1,388 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Stylish Horizon</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Stylish Horizon</title>
+<link rel="icon" href="assets/media/favicon.png" />
+<meta name="description" content="Digital restoration with integrity — MiniDV, VHS, Hi8 and forgotten drives." />
+<!-- Open Graph (minimal) -->
+<meta property="og:title" content="Stylish Horizon" />
+<meta property="og:description" content="Digital restoration with integrity" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="assets/media/logo.png" />
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
+j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MN6WG3K6');
+</script>
+<!-- End Google Tag Manager -->
+<style>
+/* ===== Embedded CSS (dark) ===== */
+:root{
+  --bg:#0a0a0a;
+  --panel: rgba(255,255,255,0.04);
+  --muted:#9aa0a6;
+  --accent:#1e90ff;
+  --maxw:1100px;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,"Helvetica Neue",Arial;}
+html,body{height:100%}
+body{background:linear-gradient(180deg,#060606 0%,#0e0e0e 100%);color:#eef0f2;line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{color:var(--accent);text-decoration:none}
+a:focus{outline:2px dashed rgba(30,144,255,0.35);outline-offset:3px}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
 
-  <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-MN6WG3K6');
-  </script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
+/* skip link */
+.skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+.skip-link:focus{left:16px;top:16px;width:auto;height:auto;background:#111;padding:8px 12px;border-radius:6px;color:#fff;z-index:10000}
 
-  <style>
-    /* ====== БАЗА + ДЫШАЩИЙ ФОН ====== */
-    :root{
-      --bg-a:#0f0f0f; --bg-b:#0a0a0a; --bg-c:#050505;
-      --font-color-main: #f0f0f0; --font-color-secondary: #aaaaaa;
-      --highlight-color: #00d4ff;
-      --color-a: #00d4ff;
-    }
+/* header */
+header{position:fixed;left:0;top:0;width:100%;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(6,6,6,0.6);backdrop-filter:blur(8px);z-index:1200;transition:top .28s ease}
+header.hidden{top:-110px}
+.logo img{height:40px;display:block}
 
-    html {
-      scroll-behavior: smooth;
-    }
-    body{
-      font-family:'Inter',sans-serif;
-      font-weight:300;
-      line-height:1.6;
-      background: var(--bg-a);
-      color: var(--font-color-main);
-      margin:0;
-      animation:breathing-bg 30s ease-in-out infinite;
-    }
-    @keyframes breathing-bg{
-      0%,100%{background:var(--bg-a);}
-      50%{background:var(--bg-b);}
-      75%{background:var(--bg-c);}
-    }
-    @media(prefers-reduced-motion){body{animation:none;}}
+/* nav */
+nav{display:flex;align-items:center;gap:16px}
+.nav-links{display:flex;gap:18px;list-style:none}
+.nav-links a{padding:6px 8px;border-radius:6px;color:inherit}
+.nav-links a.active, .nav-links a:hover{background:rgba(255,255,255,0.03)}
 
-    /* ====== HEADER ====== */
-    #site-nav{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      background:rgba(0,0,0,0.8);
-      z-index:1000;
-      backdrop-filter:blur(5px);
-      -webkit-backdrop-filter:blur(5px);
-      transition:transform 0.3s ease-in-out;
-    }
-    #site-nav.hidden{transform:translateY(-100%);}
-    .nav-container{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:1rem 2rem;
-      max-width:1200px;
-      margin:0 auto;
-    }
-    .logo-title{
-      display:flex;
-      align-items:center;
-      text-decoration:none;
-      gap:1rem;
-    }
-    .logo-title .site-title{
-      font-size:1.5rem;
-      font-weight:700;
-      background:linear-gradient(90deg, #00d4ff, #8e2de2, #ff8c00, #00d4ff);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      background-size:200% 100%;
-      animation:slide-bg 5s linear infinite;
-    }
-    @keyframes slide-bg{
-      0% {background-position:0% 50%;}
-      100% {background-position:200% 50%;}
-    }
-    .logo-title .logo{
-      height:40px;
-      transition:opacity 0.5s ease-in-out;
-      animation:appear 1s ease-in-out;
-    }
-    .logo-title:hover .logo{opacity:0.8;}
-    @keyframes appear{from{opacity:0;}to{opacity:1;}}
-    #burger{
-      display:none;
-      background:transparent;
-      border:none;
-      color:var(--font-color-main);
-      font-size:2rem;
-      cursor:pointer;
-    }
-    .nav-links{display:flex; gap:1.5rem;}
-    .nav-links a{
-      color:var(--font-color-main);
-      text-decoration:none;
-      transition:color 0.3s ease-in-out;
-      position:relative;
-    }
-    .nav-links a:hover{color:var(--highlight-color);}
-    .nav-links a::after{
-      content:'';
-      display:block;
-      width:0;
-      height:2px;
-      background:var(--highlight-color);
-      transition:width 0.3s ease-in-out;
-      position:absolute;
-      bottom:-5px;
-      left:0;
-    }
-    .nav-links a:hover::after,
-    .nav-links a.active::after{width:100%;}
-    @media(max-width:768px){
-      #burger{display:block;}
-      .nav-links{
-        display:none;
-        flex-direction:column;
-        position:absolute;
-        top:100%;
-        left:0;
-        width:100%;
-        background:rgba(0,0,0,0.95);
-        border-top:1px solid rgba(255,255,255,0.1);
-        padding:1rem 0;
-      }
-      .nav-links a{padding:0.5rem 2rem;}
-      .nav-links.show{display:flex;}
-    }
+/* burger for mobile */
+.burger{display:none;width:36px;height:28px;border:none;background:transparent;flex-direction:column;justify-content:space-between;cursor:pointer}
+.burger span{display:block;height:3px;background:#eef0f2;border-radius:2px;transition:transform .2s,opacity .2s}
 
-    /* ====== СЕКЦИИ КОНТЕНТА ====== */
-    main{
-      padding-top: 80px; /* ИЗМЕНЕНИЕ: Исправлен отступ от хедера */
-    }
-    section{
-      max-width:800px;
-      margin:4rem auto;
-      padding:0 1rem;
-      opacity:0;
-      transform:translateY(20px);
-      transition:opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    section.visible{
-      opacity:1;
-      transform:translateY(0);
-    }
-    h2{
-      font-size:2.5rem;
-      font-weight:700;
-      text-align:center;
-      margin-bottom:2rem;
-      color: rgba(0, 212, 255, 0.8); /* ИЗМЕНЕНИЕ: Единый цвет с прозрачностью */
-    }
-   .hero {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 70vh;
-    padding: 2rem 1rem; /* Добавляем отступ, чтобы контент не прилипал к краям */
+/* responsive */
+@media (max-width:768px){
+  .nav-links{position:fixed;right:-100%;top:64px;height:calc(100% - 64px);width:260px;background:rgba(6,6,6,0.96);flex-direction:column;padding:20px;gap:12px;transition:right .28s}
+  .nav-links.open{right:0}
+  .burger{display:flex}
 }
-.hero-content {
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 500;
-    line-height: 1.6;
-    margin-bottom: auto; /* Это отталкивает кнопки вниз */
-}
-.quick-links {
-    margin-top: 2rem; /* Создает отступ между текстом и кнопками */
-    width: 100%;
-}
-.button-group {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-.button {
-    padding: 0.8rem 1.5rem;
-    text-decoration: none;
-    color: var(--font-color-main);
-    border: 1px solid var(--highlight-color);
-    border-radius: 50px;
-    transition: background-color 0.3s ease, transform 0.1s ease;
-}
-.button:hover {
-    background-color: rgba(0, 212, 255, 0.2);
-}
-.button:active {
-    transform: scale(0.98);
-}
-    
-    /* ====== НОВЫЕ СТИЛИ ДЛЯ КНОПОК БЫСТРОЙ НАВИГАЦИИ ====== */
-    .quick-links{
-        text-align: center;
-        margin: 2rem auto;
-    }
-    .button{
-      display: inline-block;
-      padding: 0.8rem 1.5rem;
-      text-decoration: none;
-      color: var(--font-color-main);
-      border: 1px solid var(--highlight-color);
-      border-radius: 50px;
-      transition: background-color 0.3s ease, transform 0.1s ease;
-    }
-    .button:hover{
-      background-color: rgba(0, 212, 255, 0.2);
-    }
-    .button:active{
-      transform: scale(0.98);
-    }
 
-    /* ====== FOOTER ====== */
-    footer{
-      text-align:center;
-      padding:2rem 0;
-      border-top:1px solid rgba(255,255,255,0.1);
-      margin-top:4rem;
-    }
-    footer img{height:30px;opacity:0.6;}
-  </style>
+/* sections */
+main{padding-top:84px}
+.section{max-width:var(--maxw);margin:40px auto;padding:36px;border-radius:12px;background:var(--panel);backdrop-filter:blur(8px);transition:transform .28s,box-shadow .28s}
+.section:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,0.5)}
+h1,h2{margin-bottom:12px}
+.hero p.lead{opacity:.95;color:#dfe6ea;font-size:1.05rem}
+
+/* hero title slight flicker */
+.hero-title{font-size:clamp(1.6rem,3.6vw,2.6rem);animation:blink 2.2s infinite}
+@keyframes blink{0%,60%,100%{opacity:1}30%{opacity:.6}}
+
+/* scroll-top */
+.scroll-top{position:fixed;right:20px;bottom:20px;width:44px;height:44px;border-radius:22px;border:none;background:var(--accent);color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s}
+.scroll-top.show{opacity:1;pointer-events:auto}
+
+/* footer */
+footer{padding:36px 20px;text-align:center;color:var(--muted);font-size:.95rem}
+
+/* accessibility prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important;transition:none !important}
+}
+</style>
 </head>
 <body>
+<!-- GTM noscript -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-  <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-  </noscript>
-  <nav id="site-nav">
-    <div class="nav-container">
-      <a class="logo-title" href="index.html" aria-label="Go to home">
-        <picture>
-          <source srcset="assets/media/StylishHorizon_Clear.webp" type="image/webp">
-          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon Logo" />
-        </picture>
-        <p class="site-title">Stylish Horizon</p>
-      </a>
-      <button id="burger" aria-label="Open menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
-      <div id="primary-navigation" class="nav-links" role="navigation" aria-label="Primary">
-        <a href="index.html" class="active" aria-current="page">Home</a>
-        <a href="manifest.html">Manifest</a>
-        <a href="archive.html">Archive</a>
-        <a href="contact.html">Contact</a>
-      </div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header id="site-header" role="banner" aria-label="Top navigation">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+    <div style="display:flex;align-items:center;gap:12px">
+      <picture class="logo">
+        <source srcset="assets/media/logo.webp" type="image/webp">
+        <img src="assets/media/logo.png" alt="Stylish Horizon logo">
+      </picture>
     </div>
-  </nav>
 
-  <main>
-    <header aria-hidden="true"></header>
+    <nav aria-label="Primary" style="display:flex;align-items:center;gap:12px">
+      <ul class="nav-links" role="menubar" aria-hidden="false">
+        <li role="none"><a role="menuitem" href="#digital">Digital restoration</a></li>
+        <li role="none"><a role="menuitem" href="#what">What we do</a></li>
+        <li role="none"><a role="menuitem" href="#how">How we work</a></li>
+        <li role="none"><a role="menuitem" href="#why">Why it matters</a></li>
+      </ul>
+      <button class="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
 
-  <section class="hero">
-    <div class="hero-content">
-        <p>Digital restoration with integrity</p>
-        <p>No hype. No noise. Just memory.</p>
-        <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
-    </div>
-    <div class="quick-links">
-    <div class="button-group">
-        <a href="#how" class="button">How it works?</a>
-        <a href="archive.html#price" class="button">Price</a>
-        <a href="archive.html" class="button">See examples</a>
-    </div>
-</div>
+<main id="main">
+  <section id="digital" class="section container" aria-labelledby="digital-title">
+    <h1 id="digital-title" class="hero-title">Digital restoration with integrity</h1>
+    <p class="lead">No hype. No noise. Just memory.</p>
+    <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
+  </section>
 
-</section>
+  <section id="what" class="section container" aria-labelledby="what-title">
+    <h2 id="what-title">What we do</h2>
+    <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
+    <p>If it still breathes — we help it speak again.</p>
+    <p>Every file is reviewed manually. Not filters, not nostalgia — just truth.</p>
+  </section>
 
-    <section id="what" class="what">
-      <h2>What we do</h2>
-      <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
-      <p>If it still breathes — we help it speak again.</p>
-      <p>Every file is reviewed manually. Not filters, not nostalgia — just truth.</p>
-    </section>
+  <section id="how" class="section container" aria-labelledby="how-title">
+    <h2 id="how-title">How we work</h2>
+    <p>No shipping. We find trusted studios near you.</p>
+    <p>No subscriptions. You pay for what you need — nothing more.</p>
+  </section>
 
-    <section id="how" class="how">
-      <h2>How we work</h2>
-      <p>No shipping. We find trusted studios near you.</p>
-      <p>No subscriptions. You pay for what you need — nothing more.</p>
-    </section>
+  <section id="why" class="section container" aria-labelledby="why-title">
+    <h2 id="why-title">Why it matters</h2>
+    <p>We believe memory deserves clarity.</p>
+    <p>Not filters, not nostalgia — just truth.</p>
+  </section>
+</main>
 
-    <section id="why" class="why">
-      <h2>Why it matters</h2>
-      <p>We believe memory deserves clarity.</p>
-      <p>Not filters, not nostalgia — just truth.</p>
-    </section>
+<footer>
+  <div class="container">
+    <p>&copy; <span id="year">2025</span> Stylish Horizon</p>
+  </div>
+</footer>
 
-  </main>
+<script>
+/* ===== Embedded JS ===== */
 
-  <footer>
-    <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" />
-    <p>© <span id="year"></span> Stylish Horizon</p>
-  </footer>
+/* set year */
+document.addEventListener('DOMContentLoaded', function(){
+  const y = document.getElementById('year');
+  if(y) y.textContent = new Date().getFullYear();
+});
 
-  <div id="cost" style="position: absolute; top: 0; left: 0;"></div>
-  <div id="examples" style="position: absolute; top: 0; left: 0;"></div>
+/* burger toggle and outside click */
+(function(){
+  const burger = document.querySelector('.burger');
+  const nav = document.querySelector('.nav-links');
+  if(!burger || !nav) return;
+  burger.addEventListener('click', function(e){
+    const expanded = burger.getAttribute('aria-expanded') === 'true';
+    burger.setAttribute('aria-expanded', String(!expanded));
+    nav.classList.toggle('open');
+  });
+  document.addEventListener('click', function(e){
+    if(!nav.contains(e.target) && !burger.contains(e.target)){
+      nav.classList.remove('open');
+      burger.setAttribute('aria-expanded','false');
+    }
+  });
+  // keyboard toggle (Enter/Space)
+  burger.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); burger.click(); }
+  });
+})();
 
-  <script>
-    /* ====== JS ДЛЯ СКРЫТИЯ ХЕДЕРА ====== */
-    let lastScrollY = window.scrollY;
-    const nav = document.getElementById('site-nav');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > lastScrollY && window.scrollY > 100) {
-        nav.classList.add('hidden');
-      } else {
-        nav.classList.remove('hidden');
-      }
-      lastScrollY = window.scrollY;
-    });
+/* header hide/show on scroll */
+(function(){
+  let last = 0;
+  const header = document.getElementById('site-header');
+  if(!header) return;
+  window.addEventListener('scroll', function(){
+    const cur = window.pageYOffset || document.documentElement.scrollTop;
+    if(cur > last && cur > 60){ header.classList.add('hidden'); }
+    else { header.classList.remove('hidden'); }
+    last = cur <= 0 ? 0 : cur;
+  }, {passive:true});
+})();
 
-    /* ====== JS ДЛЯ БУРГЕРА (УПРОЩЁННЫЙ) ====== */
-    const navLinks = document.getElementById('primary-navigation');
-    const burger = document.getElementById('burger');
-    
-    // ИЗМЕНЕНИЕ: Обработчик для закрытия меню по клику вне его
-    document.addEventListener('click', (event) => {
-        const isClickInsideNav = navLinks.contains(event.target);
-        const isClickOnBurger = burger.contains(event.target);
+/* scroll to top button */
+(function(){
+  const btn = document.createElement('button');
+  btn.className = 'scroll-top';
+  btn.setAttribute('aria-label','Scroll to top');
+  btn.innerText = '↑';
+  document.body.appendChild(btn);
+  btn.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 320) btn.classList.add('show'); else btn.classList.remove('show');
+  }, {passive:true});
+})();
 
-        if (navLinks.classList.contains('show') && !isClickInsideNav && !isClickOnBurger) {
-            navLinks.classList.remove('show');
-            burger.setAttribute('aria-expanded', 'false');
-        }
-    });
-
-    burger.addEventListener('click', () => {
-        const isExpanded = navLinks.classList.toggle('show');
-        burger.setAttribute('aria-expanded', String(isExpanded));
-    });
-
-
-    /* ====== Видимость секций при прокрутке ====== */
-    const sections = document.querySelectorAll('section');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        } else {
-          entry.target.classList.remove('visible');
-        }
-      });
-    }, {
-      rootMargin: '0px',
-      threshold: 0.2
-    });
-
-    sections.forEach(section => {
-      observer.observe(section);
-    });
-
-    /* ====== Активный пункт меню ====== */
-    (function markActive(){
-      const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-      document.querySelectorAll('.nav-links a').forEach(a=>{
-        const href = a.getAttribute('href')?.toLowerCase() || '';
-        if ((path === 'index.html' && href.endsWith('index.html')) || href.endsWith(path)) {
-          a.classList.add('active'); a.setAttribute('aria-current','page');
-        }
-      });
-    })();
-
-    /* ====== Динамический год ====== */
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    /* ====== Smooth scroll по якорям ====== */
-    document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
-      anchor.addEventListener('click', (e)=>{
-        const target = document.querySelector(anchor.getAttribute('href'));
-        if (target){
-          e.preventDefault();
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-  </script>
+/* accessibility improvements: highlight current section in nav (hash-based) */
+(function(){
+  const links = document.querySelectorAll('.nav-links a');
+  function setActive(){
+    const hash = location.hash || '#digital';
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === hash));
+  }
+  window.addEventListener('hashchange', setActive);
+  document.addEventListener('DOMContentLoaded', setActive);
+})();
+</script>
 </body>
 </html>
