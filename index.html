@@ -154,7 +154,7 @@ section em:hover {
     <div class="hero-content">
       <p>Digital restoration with integrity</p>
       <p>No hype. No noise. Just memory.</p>
-            <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
+      <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
     </div>
     <div class="quick-links">
       <div class="button-group">
@@ -194,94 +194,103 @@ section em:hover {
 <div id="examples" style="position: absolute; top: 0; left: 0;"></div>
 
 <script>
-/* ====== Скрытие хедера при скролле ====== */
-let lastScrollY = window.scrollY;
-const nav = document.getElementById('site-nav');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > lastScrollY && window.scrollY > 100) {
-    nav.classList.add('hidden');
-  } else {
-    nav.classList.remove('hidden');
-  }
-  lastScrollY = window.scrollY;
-});
-
-/* ====== Бургер ====== */
-const navLinks = document.getElementById('primary-navigation');
-const burger = document.getElementById('burger');
-document.addEventListener('click', (event) => {
-  const isClickInsideNav = navLinks.contains(event.target);
-  const isClickOnBurger = burger.contains(event.target);
-  if (navLinks.classList.contains('show') && !isClickInsideNav && !isClickOnBurger) {
-    navLinks.classList.remove('show');
-    burger.setAttribute('aria-expanded','false');
-  }
-});
-burger.addEventListener('click', () => {
-  const isExpanded = navLinks.classList.toggle('show');
-  burger.setAttribute('aria-expanded', String(isExpanded));
-});
-
-/* ====== Появление секций при скролле ====== */
-const sections = document.querySelectorAll('section');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    } else {
-      entry.target.classList.remove('visible');
+document.addEventListener("DOMContentLoaded", () => {
+  const App = {
+    init() {
+      this.cache();
+      this.bindEvents();
+      this.initYear();
+      this.initObserver();
+      this.initParallax();
+      this.markActive();
+    },
+    cache() {
+      this.nav = document.getElementById('site-nav');
+      this.navLinks = document.getElementById('primary-navigation');
+      this.burger = document.getElementById('burger');
+      this.sections = document.querySelectorAll('section');
+      this.yearEl = document.getElementById('year');
+      this.parallaxLayer = document.querySelector('.parallax-bg');
+      this.lastScrollY = window.scrollY;
+    },
+    bindEvents() {
+      window.addEventListener('scroll', () => this.onScroll());
+      document.addEventListener('click', e => this.onDocClick(e));
+      this.burger.addEventListener('click', () => this.toggleBurger());
+      document.querySelectorAll('a[href^="#"]').forEach(a =>
+        a.addEventListener('click', e => this.smoothScroll(e, a))
+      );
+    },
+    onScroll() {
+      if (window.scrollY > this.lastScrollY && window.scrollY > 100) {
+        this.nav.classList.add('hidden');
+      } else {
+        this.nav.classList.remove('hidden');
+      }
+      this.lastScrollY = window.scrollY;
+    },
+    onDocClick(e) {
+      if (this.navLinks.classList.contains('show') &&
+          !this.navLinks.contains(e.target) &&
+          !this.burger.contains(e.target)) {
+        this.navLinks.classList.remove('show');
+        this.burger.setAttribute('aria-expanded','false');
+      }
+    },
+    toggleBurger() {
+      const isExpanded = this.navLinks.classList.toggle('show');
+      this.burger.setAttribute('aria-expanded', String(isExpanded));
+    },
+    smoothScroll(e, anchor) {
+      const target = document.querySelector(anchor.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    },
+    initYear() {
+      if (this.yearEl) this.yearEl.textContent = new Date().getFullYear();
+    },
+    initObserver() {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          entry.target.classList.toggle('visible', entry.isIntersecting);
+        });
+      }, { threshold: 0.2 });
+      this.sections.forEach(sec => observer.observe(sec));
+    },
+    markActive() {
+      const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        const href = (a.getAttribute('href') || '').toLowerCase();
+        if ((path === 'index.html' && href.endsWith('index.html')) || href.endsWith(path)) {
+          a.classList.add('active');
+          a.setAttribute('aria-current','page');
+        }
+      });
+    },
+    initParallax() {
+      if (!this.parallaxLayer) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const MAX_SHIFT = 10;
+      let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+      window.addEventListener('mousemove', e => {
+        const nx = (e.clientX / window.innerWidth - 0.5) * 2;
+        const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+        targetX = nx * MAX_SHIFT;
+        targetY = ny * MAX_SHIFT;
+      });
+      const animate = () => {
+        currentX += (targetX - currentX) * 0.08;
+        currentY += (targetY - currentY) * 0.08;
+        this.parallaxLayer.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+        requestAnimationFrame(animate);
+      };
+      animate();
     }
-  });
-}, { rootMargin: '0px', threshold: 0.2 });
-sections.forEach(section => observer.observe(section));
-
-/* ====== Активный пункт меню ====== */
-(function markActive(){
-  const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-  document.querySelectorAll('.nav-links a').forEach(a=>{
-    const href = a.getAttribute('href')?.toLowerCase() || '';
-    if ((path === 'index.html' && href.endsWith('index.html')) || href.endsWith(path)) {
-      a.classList.add('active');
-      a.setAttribute('aria-current','page');
-    }
-  });
-})();
-
-/* ====== Динамический год ====== */
-document.getElementById('year').textContent = new Date().getFullYear();
-
-/* ====== Smooth scroll по якорям ====== */
-document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
-  anchor.addEventListener('click', (e)=>{
-    const target = document.querySelector(anchor.getAttribute('href'));
-    if (target){
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
+  };
+  App.init();
 });
-
-/* ====== Лёгкий параллакс фона (rAF + инерция) ====== */
-const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const parallaxLayer = document.querySelector('.parallax-bg');
-if (parallaxLayer && !prefersReduced) {
-  const MAX_SHIFT = 10;
-  let targetX = 0, targetY = 0;
-  let currentX = 0, currentY = 0;
-  window.addEventListener('mousemove', (e) => {
-    const nx = (e.clientX / window.innerWidth - 0.5) * 2;
-    const ny = (e.clientY / window.innerHeight - 0.5) * 2;
-    targetX = nx * MAX_SHIFT;
-    targetY = ny * MAX_SHIFT;
-  });
-  function animate() {
-    currentX += (targetX - currentX) * 0.08;
-    currentY += (targetY - currentY) * 0.08;
-    parallaxLayer.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
-    requestAnimationFrame(animate);
-  }
-  animate();
-}
 </script>
 </body>
 </html>
