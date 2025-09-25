@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/apple-touch-icon.png">
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/media/favicon-16x16.png">
+
+<link rel="shortcut icon" href="/assets/media/favicon.ico">
+
+<link rel="manifest" href="/assets/media/site.webmanifest">
+
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Stylish Horizon</title>
 
@@ -98,13 +107,9 @@ section{
 }
 section.visible{opacity:1; transform:translateY(0) scale(1);}
 h2{font-size:2.5rem; font-weight:700; text-align:center; margin-bottom:2rem; color: rgba(0, 212, 255, 0.8);}
-
-/* Стиль для нового контейнера, чтобы он выглядел как обычный текст */
 .text-block{
-  /* Добавляем небольшой отступ, чтобы блок не сливался с заголовком */
   margin-bottom: 1.6em;
 }
-
 .hero{display:flex; flex-direction:column; justify-content:space-between; align-items:center; min-height:70vh; padding:2rem 1rem;}
 .hero-content{text-align:center; font-size:1.5rem; font-weight:500; line-height:1.6; margin-bottom:auto;}
 .quick-links{margin-top:2rem; width:100%;}
@@ -115,7 +120,7 @@ h2{font-size:2.5rem; font-weight:700; text-align:center; margin-bottom:2rem; col
 footer{text-align:center; padding:2rem 0; border-top:1px solid rgba(255,255,255,0.1); margin-top:4rem;}
 footer img{height:30px;opacity:0.6;}
 
-/* ====== ОБНОВЛЕННЫЙ Hover-эффект "Дыхание" (h2 и логические блоки) ====== */
+/* Hover-эффект "Дыхание" (только h2 и логические блоки) */
 section h2:hover,
 section .text-block:hover {
   transform: scale(1.02);
@@ -156,15 +161,16 @@ section .text-block:hover {
     <div class="quick-links">
       <div class="button-group">
         <a href="#how" class="button">How it works?</a>
-        <a href="#cost" class="button">Price</a>
-        <a href="#examples" class="button">See examples</a>
+        <a href="archive.html#price" class="button">Price</a> 
+        <a href="archive.html" class="button">See examples</a>
       </div>
     </div>
   </section>
 
   <section id="what" class="what">
     <h2>What we do</h2>
-    <div class="text-block"> <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
+    <div class="text-block">
+      <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
       <p>If it still breathes — we help it speak again.</p>
       <p>Every file is reviewed manually. Not filters, not nostalgia — just truth.</p>
     </div>
@@ -172,28 +178,17 @@ section .text-block:hover {
 
   <section id="how" class="how">
     <h2>How we work</h2>
-    <div class="text-block"> <p>No shipping. We find trusted studios near you.</p>
+    <div class="text-block">
+      <p>No shipping. We find trusted studios near you.</p>
       <p>No subscriptions. You pay for what you need — nothing more.</p>
     </div>
   </section>
 
   <section id="why" class="why">
     <h2>Why it matters</h2>
-    <div class="text-block"> <p>We believe memory deserves clarity.</p>
+    <div class="text-block">
+      <p>We believe memory deserves clarity.</p>
       <p>Not filters, not nostalgia — just truth.</p>
-    </div>
-  </section>
-
-  <section id="cost" class="cost">
-    <h2>Price</h2>
-    <div class="text-block"> <p>Detailed pricing information will be here.</p>
-      <p>We offer transparent, per-project rates.</p>
-    </div>
-  </section>
-
-  <section id="examples" class="examples">
-    <h2>Examples</h2>
-    <div class="text-block"> <p>See the difference we make with before-and-after samples.</p>
     </div>
   </section>
 </main>
@@ -204,93 +199,70 @@ section .text-block:hover {
 </footer>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const App = {
-    init() {
-      this.cache();
-      this.bindEvents();
-      this.initYear();
-      this.initObserver();
-      this.initParallax();
-      this.markActive();
-    },
-    cache() {
-      this.nav = document.getElementById('site-nav');
-      this.navLinks = document.getElementById('primary-navigation');
-      this.burger = document.getElementById('burger');
-      this.sections = document.querySelectorAll('section');
-      this.yearEl = document.getElementById('year');
-      this.parallaxLayer = document.querySelector('.parallax-bg');
-      this.lastScrollY = window.scrollY;
-    },
-    bindEvents() {
-      window.addEventListener('scroll', () => this.onScroll());
-      document.addEventListener('click', e => this.onDocClick(e));
-      this.burger.addEventListener('click', () => this.toggleBurger());
-    },
-    onScroll() {
-      if (window.scrollY > this.lastScrollY && window.scrollY > 100) {
-        this.nav.classList.add('hidden');
+    /* ========== HEADER HIDE ON SCROLL (Чистая логика из archive.html) ========== */
+    let lastScrollY = window.scrollY;
+    const nav = document.getElementById('site-nav');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > lastScrollY && window.scrollY > 100) {
+        nav.classList.add('hidden');
       } else {
-        this.nav.classList.remove('hidden');
+        nav.classList.remove('hidden');
       }
-      this.lastScrollY = window.scrollY;
-    },
-    onDocClick(e) {
-      if (this.navLinks.classList.contains('show') &&
-          !this.navLinks.contains(e.target) &&
-          !this.burger.contains(e.target)) {
-        this.navLinks.classList.remove('show');
-        this.burger.setAttribute('aria-expanded','false');
+      lastScrollY = window.scrollY;
+    });
+
+    /* ========== BURGER MENU TOGGLE (Чистая логика из archive.html) ========== */
+    const navLinks = document.getElementById('primary-navigation');
+    const burger = document.getElementById('burger');
+
+    document.addEventListener('click', (event) => {
+      const isClickInsideNav = navLinks.contains(event.target);
+      const isClickOnBurger = burger.contains(event.target);
+      if (navLinks.classList.contains('show') && !isClickInsideNav && !isClickOnBurger) {
+        navLinks.classList.remove('show');
+        burger.setAttribute('aria-expanded', 'false');
       }
-    },
-    toggleBurger() {
-      const isExpanded = this.navLinks.classList.toggle('show');
-      this.burger.setAttribute('aria-expanded', String(isExpanded));
-    },
-    initYear() {
-      if (this.yearEl) this.yearEl.textContent = new Date().getFullYear();
-    },
-    initObserver() {
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          entry.target.classList.toggle('visible', entry.isIntersecting);
-        });
-      }, { threshold: 0.2 });
-      this.sections.forEach(sec => observer.observe(sec));
-    },
-    markActive() {
-      const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-      document.querySelectorAll('.nav-links a').forEach(a => {
-        const href = (a.getAttribute('href') || '').toLowerCase();
-        if (href.endsWith(path)) {
-          a.classList.add('active');
-          a.setAttribute('aria-current','page');
+    });
+
+    burger.addEventListener('click', () => {
+      const isExpanded = navLinks.classList.toggle('show');
+      burger.setAttribute('aria-expanded', String(isExpanded));
+    });
+
+    /* ========== SECTION VISIBILITY ON SCROLL (Оптимизировано: однократное появление) ========== */
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Опционально: можно прекратить наблюдение после первого появления для экономии ресурсов
+          // observer.unobserve(entry.target); 
         }
       });
-    },
-    initParallax() {
-      if (!this.parallaxLayer) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const MAX_SHIFT = 10;
-      let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
-      window.addEventListener('mousemove', e => {
-        const nx = (e.clientX / window.innerWidth - 0.5) * 2;
-        const ny = (e.clientY / window.innerHeight - 0.5) * 2;
-        targetX = nx * MAX_SHIFT;
-        targetY = ny * MAX_SHIFT;
+    }, {
+      rootMargin: '0px',
+      threshold: 0.2
+    });
+
+    sections.forEach(section => observer.observe(section));
+
+    /* ========== ACTIVE MENU ITEM HIGHLIGHT (Чистая логика из archive.html) ========== */
+    (function markActive() {
+      const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        const href = a.getAttribute('href')?.toLowerCase() || '';
+        // Логика учитывает, что навигационная ссылка на 'index.html' активна, 
+        // если мы находимся на главной странице, и игнорирует ссылки с якорями внутри
+        if (href.endsWith(path) && !href.includes('#')) {
+          a.classList.add('active');
+          a.setAttribute('aria-current', 'page');
+        }
       });
-      const animate = () => {
-        currentX += (targetX - currentX) * 0.08;
-        currentY += (targetY - currentY) * 0.08;
-        this.parallaxLayer.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
-        requestAnimationFrame(animate);
-      };
-      animate();
-    }
-  };
-  App.init();
-});
+    })();
+    
+    /* ========== DYNAMIC YEAR IN FOOTER (Чистая логика из archive.html) ========== */
+    document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
