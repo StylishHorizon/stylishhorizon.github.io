@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-  <meta name="robots" content="index, follow">
 <head>
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/apple-touch-icon.png">
 
@@ -15,6 +14,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Stylish Horizon</title>
 
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com;">
+
 <script>
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MN6WG3K6');
 </script>
@@ -22,6 +23,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
 
 <style>
+/* ================== BASE COLORS AND TYPOGRAPHY ================== */
 :root{
   --bg-a:#0f0f0f;
   --bg-b:#0a0a0a;
@@ -49,6 +51,7 @@ body{
 @media(prefers-reduced-motion){
   body{animation:none;}
 }
+/* ================== PARALLAX BACKGROUND ================== */
 .parallax-bg{
   position: fixed;
   inset: -20vh -20vw;
@@ -63,6 +66,7 @@ body{
 @media(prefers-reduced-motion){
   .parallax-bg{transition: none;}
 }
+/* ================== NAVIGATION ================== */
 #site-nav{
   position:fixed; top:0; left:0; width:100%;
   background:rgba(0,0,0,0.8);
@@ -99,6 +103,7 @@ body{
   .nav-links a{padding:0.5rem 2rem;}
   .nav-links.show{display:flex;}
 }
+/* ================== SECTIONS & LAYOUT ================== */
 main{ padding-top: 80px; }
 section{
   scroll-margin-top: 80px;
@@ -121,7 +126,7 @@ h2{font-size:2.5rem; font-weight:700; text-align:center; margin-bottom:2rem; col
 footer{text-align:center; padding:2rem 0; border-top:1px solid rgba(255,255,255,0.1); margin-top:4rem;}
 footer img{height:30px;opacity:0.6;}
 
-/* Hover-эффект "Дыхание" (только h2 и логические блоки) */
+/* Hover effect "Breathing" (h2 and logical blocks only) */
 section h2:hover,
 section .text-block:hover {
   transform: scale(1.02);
@@ -200,70 +205,108 @@ section .text-block:hover {
 </footer>
 
 <script>
-    /* ========== HEADER HIDE ON SCROLL (Чистая логика из archive.html) ========== */
+// ========== HEADER HIDE ON SCROLL ==========
+(function() {
     let lastScrollY = window.scrollY;
     const nav = document.getElementById('site-nav');
 
     window.addEventListener('scroll', () => {
-      if (window.scrollY > lastScrollY && window.scrollY > 100) {
-        nav.classList.add('hidden');
-      } else {
-        nav.classList.remove('hidden');
-      }
-      lastScrollY = window.scrollY;
+        if (window.scrollY > lastScrollY && window.scrollY > 100) {
+            nav.classList.add('hidden');
+        } else {
+            nav.classList.remove('hidden');
+        }
+        lastScrollY = window.scrollY;
     });
+})();
 
-    /* ========== BURGER MENU TOGGLE (Чистая логика из archive.html) ========== */
+// ========== BURGER MENU TOGGLE ==========
+(function() {
     const navLinks = document.getElementById('primary-navigation');
     const burger = document.getElementById('burger');
 
     document.addEventListener('click', (event) => {
-      const isClickInsideNav = navLinks.contains(event.target);
-      const isClickOnBurger = burger.contains(event.target);
-      if (navLinks.classList.contains('show') && !isClickInsideNav && !isClickOnBurger) {
-        navLinks.classList.remove('show');
-        burger.setAttribute('aria-expanded', 'false');
-      }
+        const isClickInsideNav = navLinks.contains(event.target);
+        const isClickOnBurger = burger.contains(event.target);
+        
+        if (navLinks.classList.contains('show') && !isClickInsideNav && !isClickOnBurger) {
+            navLinks.classList.remove('show');
+            burger.setAttribute('aria-expanded', 'false');
+        }
     });
 
     burger.addEventListener('click', () => {
-      const isExpanded = navLinks.classList.toggle('show');
-      burger.setAttribute('aria-expanded', String(isExpanded));
+        const isExpanded = navLinks.classList.toggle('show');
+        burger.setAttribute('aria-expanded', String(isExpanded));
     });
+})();
 
-    /* ========== SECTION VISIBILITY ON SCROLL (Оптимизировано: однократное появление) ========== */
+// ========== SECTION VISIBILITY ON SCROLL (Optimized: one-time appearance) ==========
+(function() {
     const sections = document.querySelectorAll('section');
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          // Опционально: можно прекратить наблюдение после первого появления для экономии ресурсов
-          // observer.unobserve(entry.target); 
-        }
-      });
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Optional: Stop observing after first appearance to save CPU
+                // observer.unobserve(entry.target); 
+            }
+        });
     }, {
-      rootMargin: '0px',
-      threshold: 0.2
+        rootMargin: '0px',
+        threshold: 0.2
     });
 
     sections.forEach(section => observer.observe(section));
+})();
 
-    /* ========== ACTIVE MENU ITEM HIGHLIGHT (Чистая логика из archive.html) ========== */
-    (function markActive() {
-      const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-      document.querySelectorAll('.nav-links a').forEach(a => {
+// ========== ACTIVE MENU ITEM HIGHLIGHT ==========
+(function markActive() {
+    const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    document.querySelectorAll('.nav-links a').forEach(a => {
         const href = a.getAttribute('href')?.toLowerCase() || '';
-        // Логика учитывает, что навигационная ссылка на 'index.html' активна, 
-        // если мы находимся на главной странице, и игнорирует ссылки с якорями внутри
+        
+        // Only mark 'index.html' as active if we are on the homepage 
+        // and ignore internal anchor links (like #how)
         if (href.endsWith(path) && !href.includes('#')) {
-          a.classList.add('active');
-          a.setAttribute('aria-current', 'page');
+            a.classList.add('active');
+            a.setAttribute('aria-current', 'page');
+        } else {
+            a.classList.remove('active');
+            a.removeAttribute('aria-current');
         }
-      });
-    })();
-    
-    /* ========== DYNAMIC YEAR IN FOOTER (Чистая логика из archive.html) ========== */
-    document.getElementById('year').textContent = new Date().getFullYear();
+    });
+})();
+
+// ========== PARALLAX EFFECT (Cleaned up from App object) ==========
+(function() {
+    const parallaxLayer = document.querySelector('.parallax-bg');
+    if (!parallaxLayer) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const MAX_SHIFT = 10;
+    let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+
+    window.addEventListener('mousemove', e => {
+        const nx = (e.clientX / window.innerWidth - 0.5) * 2;
+        const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+        targetX = nx * MAX_SHIFT;
+        targetY = ny * MAX_SHIFT;
+    });
+
+    const animate = () => {
+        // Simple linear interpolation for smooth movement
+        currentX += (targetX - currentX) * 0.08;
+        currentY += (targetY - currentY) * 0.08;
+        parallaxLayer.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+        requestAnimationFrame(animate);
+    };
+
+    animate();
+})();
+
+// ========== DYNAMIC YEAR IN FOOTER ==========
+document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
