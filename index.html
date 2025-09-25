@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Apple Touch Icon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/media/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/apple-touch-icon.png">
 
-<!-- PNG favicons -->
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/media/favicon-16x16.png">
 
-<!-- ICO -->
 <link rel="shortcut icon" href="/assets/media/favicon.ico">
 
-<!-- Web App Manifest -->
 <link rel="manifest" href="/assets/media/site.webmanifest">
 
 <meta charset="UTF-8" />
@@ -104,6 +100,8 @@ body{
 }
 main{ padding-top: 80px; }
 section{
+  /* Добавлено свойство для правильного смещения прокрутки под фиксированной навигацией */
+  scroll-margin-top: 80px;
   max-width:800px; margin:4rem auto; padding:0 1rem;
   opacity:0; transform:translateY(20px) scale(0.98);
   transition:opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -120,19 +118,10 @@ h2{font-size:2.5rem; font-weight:700; text-align:center; margin-bottom:2rem; col
 footer{text-align:center; padding:2rem 0; border-top:1px solid rgba(255,255,255,0.1); margin-top:4rem;}
 footer img{height:30px;opacity:0.6;}
 
-/* ====== "Дыхание" для всех текстовых элементов внутри секций ====== */
+/* ====== Обновленный Hover-эффект "Дыхание" (только h1, h2, p) ====== */
 section h1:hover,
 section h2:hover,
-section h3:hover,
-section h4:hover,
-section h5:hover,
-section h6:hover,
-section p:hover,
-section a:hover,
-section li:hover,
-section span:hover,
-section strong:hover,
-section em:hover {
+section p:hover {
   transform: scale(1.02);
   transition: transform 0.3s ease-in-out;
 }
@@ -162,7 +151,6 @@ section em:hover {
 </nav>
 
 <main>
-  <header aria-hidden="true"></header>
   <section class="hero">
     <div class="hero-content">
       <p>Digital restoration with integrity</p>
@@ -196,15 +184,23 @@ section em:hover {
     <p>We believe memory deserves clarity.</p>
     <p>Not filters, not nostalgia — just truth.</p>
   </section>
+
+  <section id="cost" class="cost">
+    <h2>Price</h2>
+    <p>Detailed pricing information will be here.</p>
+    <p>We offer transparent, per-project rates.</p>
+  </section>
+
+  <section id="examples" class="examples">
+    <h2>Examples</h2>
+    <p>See the difference we make with before-and-after samples.</p>
+  </section>
 </main>
 
 <footer>
   <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" />
   <p>© <span id="year"></span> Stylish Horizon</p>
 </footer>
-
-<div id="cost" style="position: absolute; top: 0; left: 0;"></div>
-<div id="examples" style="position: absolute; top: 0; left: 0;"></div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -216,6 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
       this.initObserver();
       this.initParallax();
       this.markActive();
+      // Логика smoothScroll удалена, так как теперь используется нативная прокрутка с CSS
     },
     cache() {
       this.nav = document.getElementById('site-nav');
@@ -230,9 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
       window.addEventListener('scroll', () => this.onScroll());
       document.addEventListener('click', e => this.onDocClick(e));
       this.burger.addEventListener('click', () => this.toggleBurger());
-      document.querySelectorAll('a[href^="#"]').forEach(a =>
-        a.addEventListener('click', e => this.smoothScroll(e, a))
-      );
+      // Событие smoothScroll удалено, так как теперь используется нативная прокрутка с CSS
     },
     onScroll() {
       if (window.scrollY > this.lastScrollY && window.scrollY > 100) {
@@ -254,13 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const isExpanded = this.navLinks.classList.toggle('show');
       this.burger.setAttribute('aria-expanded', String(isExpanded));
     },
-    smoothScroll(e, anchor) {
-      const target = document.querySelector(anchor.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    },
+    // smoothScroll метод УДАЛЕН
     initYear() {
       if (this.yearEl) this.yearEl.textContent = new Date().getFullYear();
     },
@@ -276,7 +265,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
       document.querySelectorAll('.nav-links a').forEach(a => {
         const href = (a.getAttribute('href') || '').toLowerCase();
-        if ((path === 'index.html' && href.endsWith('index.html')) || href.endsWith(path)) {
+        // ВАЖНО: активный класс должен устанавливаться, только если путь не пустой
+        if (href.endsWith(path)) {
           a.classList.add('active');
           a.setAttribute('aria-current','page');
         }
