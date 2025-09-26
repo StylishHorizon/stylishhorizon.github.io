@@ -1,219 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Stylish Horizon</title>
+// ========== HEADER HIDE ON SCROLL ==========
+(function() {
+    let lastScrollY = window.scrollY;
+    const nav = document.getElementById('site-nav');
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/media/favicon-16x16.png">
-  <link rel="shortcut icon" href="/assets/media/favicon.ico">
-  <link rel="manifest" href="/assets/media/site.webmanifest">
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > lastScrollY && window.scrollY > 100) {
+            nav.classList.add('hidden');
+        } else {
+            nav.classList.remove('hidden');
+        }
+        lastScrollY = window.scrollY;
+    });
+})();
 
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com;">
+// ========== BURGER MENU TOGGLE ==========
+(function() {
+    const navLinks = document.getElementById('primary-navigation');
+    const burger = document.getElementById('burger');
 
-  <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MN6WG3K6');
-  </script>
+    document.addEventListener('click', (event) => {
+        const isClickInsideNav = navLinks.contains(event.target);
+        const isClickOnBurger = burger.contains(event.target);
+        
+        if (navLinks.classList.contains('show') && !isClickInsideNav && !isClickOnBurger) {
+            navLinks.classList.remove('show');
+            burger.setAttribute('aria-expanded', 'false');
+        }
+    });
 
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://stylishhorizon.github.io/index.html">
-  <meta property="og:title" content="Stylish Horizon: Honest Digital Restoration">
-  <meta property="og:description" content="Digital restoration of MiniDV, VHS, Hi8, and forgotten drives. Preserving memory with integrity. No hype. No noise. Just truth.">
-  <meta property="og:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
-  
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://stylishhorizon.github.io/index.html">
-  <meta name="twitter:title" content="Stylish Horizon: Honest Digital Restoration">
-  <meta name="twitter:description" content="Digital restoration of MiniDV, VHS, Hi8, and forgotten drives. Preserving memory with integrity. No hype. No noise. Just truth.">
-  <meta name="twitter:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
-  <meta name="twitter:site" content="@yourhandle"> 
+    burger.addEventListener('click', () => {
+        const isExpanded = navLinks.classList.toggle('show');
+        burger.setAttribute('aria-expanded', String(isExpanded));
+    });
+})();
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
+// ========== SECTION VISIBILITY ON SCROLL (Optimized: one-time appearance) ==========
+(function() {
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Optional: Stop observing after first appearance to save CPU
+                // observer.unobserve(entry.target); 
+            }
+        });
+    }, {
+        rootMargin: '0px',
+        threshold: 0.2
+    });
 
-  <style>
-/* ================== BASE COLORS AND TYPOGRAPHY ================== */
-:root{
-  --bg-a:#0f0f0f;
-  --bg-b:#0a0a0a;
-  --bg-c:#050505;
-  --font-color-main: #f0f0f0;
-  --font-color-secondary: #aaaaaa;
-  --highlight-color: #00d4ff;
-  --color-a: #00d4ff;
-}
-html { scroll-behavior: smooth; }
-body{
-  font-family:'Inter',sans-serif;
-  font-weight:300;
-  line-height:1.6;
-  background: var(--bg-a);
-  color: var(--font-color-main);
-  margin:0;
-  animation:breathing-bg 30s ease-in-out infinite;
-}
-@keyframes breathing-bg{
-  0%,100%{background:var(--bg-a);}
-  50%{background:var(--bg-b);}
-  75%{background:var(--bg-c);}
-}
-@media(prefers-reduced-motion){
-  body{animation:none;}
-}
-/* ================== PARALLAX BACKGROUND ================== */
-.parallax-bg{
-  position: fixed;
-  inset: -20vh -20vw;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(900px circle at 50% 40%, rgba(0,212,255,0.08), transparent 60%),
-    linear-gradient(to bottom, rgba(255,255,255,0.02), transparent 35%);
-  transform: translate3d(0,0,0);
-  will-change: transform;
-}
-@media(prefers-reduced-motion){
-  .parallax-bg{transition: none;}
-}
-/* ================== NAVIGATION ================== */
-#site-nav{
-  position:fixed; top:0; left:0; width:100%;
-  background:rgba(0,0,0,0.8);
-  z-index:1000;
-  backdrop-filter:blur(5px);
-  -webkit-backdrop-filter:blur(5px);
-  transition:transform 0.3s ease-in-out;
-}
-#site-nav.hidden{transform:translateY(-100%);}
-.nav-container{
-  display:flex; justify-content:space-between; align-items:center;
-  padding:1rem 2rem; max-width:1200px; margin:0 auto;
-}
-.logo-title{display:flex; align-items:center; text-decoration:none; gap:1rem;}
-.logo-title .site-title{
-  font-size:1.5rem; font-weight:700;
-  background:linear-gradient(90deg, #00d4ff, #8e2de2, #ff8c00, #00d4ff);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-  background-size:200% 100%; animation:slide-bg 5s linear infinite;
-}
-@keyframes slide-bg{0%{background-position:0% 50%;}100%{background-position:200% 50%;}}
-.logo-title .logo{height:40px; transition:opacity 0.5s ease-in-out; animation:appear 1s ease-in-out;}
-.logo-title:hover .logo{opacity:0.8;}
-@keyframes appear{from{opacity:0;}to{opacity:1;}}
-#burger{display:none; background:transparent; border:none; color:var(--font-color-main); font-size:2rem; cursor:pointer;}
-.nav-links{display:flex; gap:1.5rem;}
-.nav-links a{color:var(--font-color-main); text-decoration:none; transition:color 0.3s ease-in-out; position:relative;}
-.nav-links a:hover{color:var(--highlight-color);}
-.nav-links a::after{content:''; display:block; width:0; height:2px; background:var(--highlight-color); transition:width 0.3s ease-in-out; position:absolute; bottom:-5px; left:0;}
-.nav-links a:hover::after, .nav-links a.active::after{width:100%;}
-@media(max-width:768px){
-  #burger{display:block;}
-  .nav-links{display:none; flex-direction:column; position:absolute; top:100%; left:0; width:100%; background:rgba(0,0,0,0.95); border-top:1px solid rgba(255,255,255,0.1); padding:1rem 0;}
-  .nav-links a{padding:0.5rem 2rem;}
-  .nav-links.show{display:flex;}
-}
-/* ================== SECTIONS & LAYOUT ================== */
-main{ padding-top: 80px; }
-section{
-  scroll-margin-top: 80px;
-  max-width:800px; margin:4rem auto; padding:0 1rem;
-  opacity:0; transform:translateY(20px) scale(0.98);
-  transition:opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-section.visible{opacity:1; transform:translateY(0) scale(1);}
-h2{font-size:2.5rem; font-weight:700; text-align:center; margin-bottom:2rem; color: rgba(0, 212, 255, 0.8);}
-.text-block{
-  margin-bottom: 1.6em;
-}
-.hero{display:flex; flex-direction:column; justify-content:space-between; align-items:center; min-height:70vh; padding:2rem 1rem;}
-.hero-content{text-align:center; font-size:1.5rem; font-weight:500; line-height:1.6; margin-bottom:auto;}
-.quick-links{margin-top:2rem; width:100%;}
-.button-group{display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;}
-.button{padding:0.8rem 1.5rem; text-decoration:none; color:var(--font-color-main); border:1px solid var(--highlight-color); border-radius:50px; transition:background-color 0.3s ease, transform 0.1s ease;}
-.button:hover{background-color:rgba(0,212,255,0.2);}
-.button:active{transform:scale(0.98);}
-footer{text-align:center; padding:2rem 0; border-top:1px solid rgba(255,255,255,0.1); margin-top:4rem;}
-footer img{height:30px;opacity:0.6;}
+    sections.forEach(section => observer.observe(section));
+})();
 
-/* Hover effect "Breathing" (h2 and logical blocks only) */
-section h2:hover,
-section .text-block:hover {
-  transform: scale(1.02);
-  transition: transform 0.3s ease-in-out;
-}
-</style>
-</head>
-<body>
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<div class="parallax-bg" aria-hidden="true"></div>
+// ========== ACTIVE MENU ITEM HIGHLIGHT ==========
+(function markActive() {
+    const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    document.querySelectorAll('.nav-links a').forEach(a => {
+        const href = a.getAttribute('href')?.toLowerCase() || '';
+        
+        // Only mark 'index.html' as active if we are on the homepage 
+        // and ignore internal anchor links (like #how)
+        if (href.endsWith(path) && !href.includes('#')) {
+            a.classList.add('active');
+            a.setAttribute('aria-current', 'page');
+        } else {
+            a.classList.remove('active');
+            a.removeAttribute('aria-current');
+        }
+    });
+})();
 
-<nav id="site-nav">
-  <div class="nav-container">
-    <a class="logo-title" href="index.html" aria-label="Go to home">
-      <picture>
-        <source srcset="assets/media/StylishHorizon_Clear.webp" type="image/webp">
-        <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon Logo" />
-      </picture>
-      <p class="site-title">Stylish Horizon</p>
-    </a>
-    <button id="burger" aria-label="Open menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
-    <div id="primary-navigation" class="nav-links" role="navigation" aria-label="Primary">
-      <a href="index.html" class="active" aria-current="page">Home</a>
-      <a href="manifest.html">Manifest</a>
-      <a href="archive.html">Archive</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </div>
-</nav>
+// ========== PARALLAX EFFECT (Cleaned up from App object) ==========
+(function() {
+    const parallaxLayer = document.querySelector('.parallax-bg');
+    if (!parallaxLayer) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-<main>
-  <section class="hero">
-    <div class="hero-content">
-      <p>Digital restoration with integrity</p>
-      <p>No hype. No noise. Just memory.</p>
-      <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
-    </div>
-    <div class="quick-links">
-      <div class="button-group">
-        <a href="#how" class="button">How it works?</a>
-        <a href="archive.html#price" class="button">Price</a> 
-        <a href="archive.html" class="button">See examples</a>
-      </div>
-    </div>
-  </section>
+    const MAX_SHIFT = 10;
+    let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
 
-  <section id="what" class="what">
-    <h2>What we do</h2>
-    <div class="text-block">
-      <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
-      <p>If it still breathes — we help it speak again.</p>
-      <p>Every file is reviewed manually. Not filters, not nostalgia — just truth.</p>
-    </div>
-  </section>
+    window.addEventListener('mousemove', e => {
+        const nx = (e.clientX / window.innerWidth - 0.5) * 2;
+        const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+        targetX = nx * MAX_SHIFT;
+        targetY = ny * MAX_SHIFT;
+    });
 
-  <section id="how" class="how">
-    <h2>How we work</h2>
-    <div class="text-block">
-      <p>No shipping. We find trusted studios near you.</p>
-      <p>No subscriptions. You pay for what you need — nothing more.</p>
-    </div>
-  </section>
+    const animate = () => {
+        // Simple linear interpolation for smooth movement
+        currentX += (targetX - currentX) * 0.08;
+        currentY += (targetY - currentY) * 0.08;
+        parallaxLayer.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+        requestAnimationFrame(animate);
+    };
 
-  <section id="why" class="why">
-    <h2>Why it matters</h2>
-    <div class="text-block">
-      <p>We believe memory deserves clarity.</p>
-      <p>Not filters, not nostalgia — just truth.</p>
-    </div>
-  </section>
-</main>
+    animate();
+})();
 
-<footer>
-  <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" />
-  <p>© <span id="year"></span> Stylish Horizon</p>
-</footer>
-
-<script src="script.js" defer></script> 
-</body>
-</html>
+// ========== DYNAMIC YEAR IN FOOTER ==========
+document.getElementById('year').textContent = new Date().getFullYear();
