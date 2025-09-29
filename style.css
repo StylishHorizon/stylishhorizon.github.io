@@ -157,3 +157,25 @@ section h2:hover, section .text-block:hover {
   }
   .button { font-size: 1rem; } /* Slightly larger on desktop */
 }
+
+/* Packages */
+.packages { max-width: 1200px; margin: 4rem auto; padding: 0 1rem; }
+.packages-table { width: 100%; border-collapse: collapse; background-color: rgba(255, 255, 255, 0.05); margin: 20px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); }
+.packages-table th, .packages-table td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.packages-table th { background-color: rgba(0, 212, 255, 0.2); color: var(--highlight-color); font-weight: 500; }
+.packages-table tr:hover { background-color: rgba(0, 212, 255, 0.1); transition: background-color 0.3s ease; }
+@media (max-width: 768px) { .packages-table { font-size: 14px; overflow-x: auto; display: block; white-space: nowrap; } .packages-table thead, .packages-table tbody, .packages-table th, .packages-table td, .packages-table tr { display: inline-block; } .packages-table th, .packages-table td { padding: 8px 12px; min-width: 120px; } }
+
+/* Examples */
+.examples { max-width: 1200px; margin: 4rem auto; padding: 0 1rem; }
+.videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0; }
+.video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.video-container:hover { transform: scale(1.02); box-shadow: 0 8px 16px rgba(0, 212, 255, 0.2); }
+.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px; }
+.video-container p { text-align: center; margin: 0.5rem 0 0; font-size: 0.9rem; color: var(--font-color-secondary); }
+@media (max-width: 768px) { .videos { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .video-container { transition: none; } .video-container:hover { transform: none; } }
+
+/* Process */
+.process { max-width: 800px; margin: 4rem auto; padding: 0 1rem; }
+
