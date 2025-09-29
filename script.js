@@ -99,3 +99,65 @@
 // ========== DYNAMIC YEAR IN FOOTER ==========
 const yearEl = document.getElementById('year');
 if (yearEl) { yearEl.textContent = new Date().getFullYear(); }
+
+// ... (previous code remains)
+
+// ========== FORM VALIDATION ==========
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('orderForm');
+    if (!form) return;
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        let isValid = true;
+        const errors = {
+            nameError: '',
+            emailError: '',
+            packageError: '',
+            tapesError: '',
+            rawLinkError: '',
+            understandError: ''
+        };
+
+        const name = document.getElementById('name').value.trim();
+        if (!name) { errors.nameError = 'Name required.'; isValid = false; }
+
+        const email = document.getElementById('email').value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email) { errors.emailError = 'Email required.'; isValid = false; }
+        else if (!emailRegex.test(email)) { errors.emailError = 'Invalid email.'; isValid = false; }
+
+        const pkg = document.getElementById('package').value;
+        if (!pkg) { errors.packageError = 'Select package.'; isValid = false; }
+
+        const tapes = parseInt(document.getElementById('tapes').value);
+        if (!tapes || tapes < 1) { errors.tapesError = 'Minutes >0.'; isValid = false; }
+
+        const rawLink = document.getElementById('rawLink').value.trim();
+        if (!rawLink) { errors.rawLinkError = 'Share link needed for start.'; isValid = false; }
+
+        const understand = document.getElementById('understand').checked;
+        if (!understand) { errors.understandError = 'Check to confirm process.'; isValid = false; }
+
+        Object.keys(errors).forEach(key => {
+            const errorEl = document.getElementById(key);
+            if (errorEl) errorEl.textContent = errors[key];
+        });
+
+        if (isValid) {
+            alert('Sent! Check email for next steps.');
+            // Real send: Use Formspree or similar (add action="https://formspree.io/f/your-id" method="POST")
+            this.reset();
+            Object.keys(errors).forEach(key => document.getElementById(key).textContent = '');
+        }
+    });
+
+    ['name', 'email', 'package', 'tapes', 'rawLink', 'understand'].forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+            input.addEventListener('input', function() { document.getElementById(id + 'Error').textContent = ''; });
+        }
+    });
+});
+
