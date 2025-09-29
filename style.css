@@ -179,3 +179,22 @@ section h2:hover, section .text-block:hover {
 /* Process */
 .process { max-width: 800px; margin: 4rem auto; padding: 0 1rem; }
 
+/* Order Form */
+.order { max-width: 600px; margin: 4rem auto; padding: 2rem; background-color: rgba(255, 255, 255, 0.05); border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); border: 1px solid rgba(0, 212, 255, 0.2); }
+.order-form { display: flex; flex-direction: column; gap: 1rem; }
+.order-form label { margin: 10px 0 5px; font-weight: 500; color: var(--font-color-main); }
+.order-form input, .order-form select { padding: 12px; background-color: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: var(--font-color-main); border-radius: 4px; font-size: 16px; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+.order-form input:focus, .order-form select:focus { outline: none; border-color: var(--highlight-color); box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2); }
+.order-form input::placeholder { color: var(--font-color-secondary); }
+.order-form button { background-color: var(--highlight-color); color: var(--bg-a); padding: 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: 500; margin-top: 10px; transition: background-color 0.3s ease, transform 0.1s ease; }
+.order-form button:hover, .order-form button:focus { background-color: #00b8e6; transform: translateY(-1px); outline: none; }
+.order-form button:active { transform: translateY(0); }
+.order-form .error { color: #ff6b6b; font-size: 14px; margin-top: 5px; min-height: 18px; transition: color 0.3s ease; }
+.order-form label input[type="checkbox"] { margin-right: 0.5rem; }
+@media (max-width: 768px) { .order { margin: 2rem 1rem; padding: 1.5rem; } }
+@media (prefers-reduced-motion: reduce) { .order-form input, .order-form select, .order-form button { transition: none; } }
+
+/* Chat */
+.chat { max-width: 800px; margin: 4rem auto; padding: 0 1rem; text-align: center; }
+
+
