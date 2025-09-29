@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Digital restoration of MiniDV, VHS, Hi8, and forgotten drives. Preserving memory with integrity. No hype. No noise. Just truth." />
-  <title>Stylish Horizon</title>
+  <meta name="description" content="Contact Stylish Horizon: Start your MiniDV restoration. Share details, get a quote, and preview link. Honest process, no commitments." />
+  <title>Contact | Stylish Horizon</title>
 
   <!-- Favicons and manifest for PWA -->
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/apple-touch-icon.png">
@@ -19,8 +19,8 @@
     img-src 'self' data: https://stylishhorizon.github.io;
     style-src 'self' https://fonts.googleapis.com; 
     font-src 'self' https://fonts.gstatic.com;
-    connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; 
-    script-src 'self' 'sha256-4Yf/8wQdJ8K+9f+kO+2W4jVqK5YVlU9o1pB0X6U9tQ=' https://www.googletagmanager.com;
+    connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://embed.tawk.to; 
+    script-src 'self' 'sha256-4Yf/8wQdJ8K+9f+kO+2W4jVqK5YVlU9o1pB0X6U9tQ=' https://www.googletagmanager.com https://embed.tawk.to;
   ">
 
   <!-- GTM async for perf -->
@@ -30,14 +30,14 @@
 
   <!-- OG and Twitter for sharing -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://stylishhorizon.github.io/index.html">
-  <meta property="og:title" content="Stylish Horizon: Honest Digital Restoration">
-  <meta property="og:description" content="Digital restoration of MiniDV, VHS, Hi8, and forgotten drives. Preserving memory with integrity. No hype. No noise. Just truth.">
+  <meta property="og:url" content="https://stylishhorizon.github.io/contact.html">
+  <meta property="og:title" content="Contact Stylish Horizon: Start Restoration">
+  <meta property="og:description" content="Share your details for MiniDV/VHS digitization. We'll scout a studio, send preview—pay only after approval.">
   <meta property="og:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://stylishhorizon.github.io/index.html">
-  <meta name="twitter:title" content="Stylish Horizon: Honest Digital Restoration">
-  <meta name="twitter:description" content="Digital restoration of MiniDV, VHS, Hi8, and forgotten drives. Preserving memory with integrity. No hype. No noise. Just truth.">
+  <meta name="twitter:url" content="https://stylishhorizon.github.io/contact.html">
+  <meta name="twitter:title" content="Contact Stylish Horizon: Start Restoration">
+  <meta name="twitter:description" content="Share your details for MiniDV/VHS digitization. We'll scout a studio, send preview—pay only after approval.">
   <meta name="twitter:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
   <meta name="twitter:site" content="@yourhandle">
 
@@ -62,10 +62,10 @@
       </a>
       <button id="burger" aria-label="Toggle navigation menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
       <ul id="primary-navigation" class="nav-links" role="navigation">
-        <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+        <li><a href="index.html">Home</a></li>
         <li><a href="manifest.html">Manifest</a></li>
         <li><a href="archive.html">Archive</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -73,50 +73,72 @@
   <main>
     <section class="hero" id="hero">
       <div class="hero-content">
-        <h1>Digital restoration with integrity</h1>
-        <p>No hype. No noise. Just memory.</p>
-        <p>We restore MiniDV tapes, VHS, Hi8, and forgotten drives—breathing life back into what time tried to erase.</p>
-      </div>
-      <div class="quick-links">
-        <div class="button-group">
-          <a href="#how" class="button" role="button">How it works?</a>
-          <a href="archive.html#price" class="button" role="button">Price</a>
-          <a href="archive.html" class="button" role="button">See examples</a>
-        </div>
+        <h1>Start Your Restoration</h1>
+        <p>Share basics—we'll scout a studio, send raw upload guide, and preview link. Pay after your approval. Or chat now.</p>
       </div>
     </section>
 
-    <section id="what" class="what">
-      <h2>What we do</h2>
-      <div class="text-block">
-        <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
-        <p>If it still breathes—we help it speak again.</p>
-        <p>Every frame is inspected manually. No filters. No nostalgia filters. Just the truth, frame by frame.</p>
-      </div>
+    <section id="form" class="order">
+      <h2>Tell Us About Your Tapes</h2>
+      <form id="orderForm" class="order-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <div class="error" id="nameError"></div>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <div class="error" id="emailError"></div>
+
+        <label for="package">Package:</label>
+        <select id="package" name="package" required>
+          <option value="">Select package</option>
+          <option value="legacy">Legacy (720p ProRes, 5–15$/min)</option>
+          <option value="ultimate">Ultimate (1080p, 20–50$/min)</option>
+          <option value="uhd">UHD (4K, on request)</option>
+        </select>
+        <div class="error" id="packageError"></div>
+
+        <label for="tapes">Estimated Minutes (total across tapes):</label>
+        <input type="number" id="tapes" name="tapes" min="1" required>
+        <div class="error" id="tapesError"></div>
+
+        <label for="rawLink">Raw Video Share Link (from studio or your scan):</label>
+        <input type="url" id="rawLink" name="rawLink" placeholder="e.g., https://we.tl/yourfile">
+        <div class="error" id="rawLinkError"></div>
+
+        <label>
+          <input type="checkbox" id="understand" name="understand" required>
+          I understand: Free preview on private YouTube, comments locked. Pay after my approval on final.
+        </label>
+        <div class="error" id="understandError"></div>
+
+        <button type="submit">Send & Get Started</button>
+      </form>
+      <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: var(--font-color-secondary);">We'll reply in 24h via email or Tawk chat below. No commitments.</p>
     </section>
 
-    <section id="how" class="how">
-      <h2>How it works</h2>
-      <div class="text-block">
-        <p>No shipping hassles. We connect you with trusted local studios for capture.</p>
-        <p>No subscriptions. You pay only for what you need—precise, transparent.</p>
-        <p>From there: hand-reviewed trims tailored to your story, gentle deinterlacing, natural color balance. Your memories, revived without distortion.</p>
-      </div>
-    </section>
-
-    <section id="why" class="why">
-      <h2>Why it matters</h2>
-      <div class="text-block">
-        <p>We believe memory deserves unfiltered clarity.</p>
-        <p>Not polished illusions, not faded echoes—just the raw truth of what was.</p>
-        <p>Because some stories are worth preserving exactly as they unfolded.</p>
-      </div>
+    <section id="chat" class="chat">
+      <h2>Chat Now</h2>
+      <p>Questions? Live chat—real answers, no bots.</p>
+      <!--Start of Tawk.to Script-->
+      <script type="text/javascript">
+      var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+      (function(){
+      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+      s1.async=true;
+      s1.src='https://embed.tawk.to/68c85460aac9d419267b8757/1j578j6hq';
+      s1.charset='UTF-8';
+      s1.setAttribute('crossorigin','*');
+      s0.parentNode.insertBefore(s1,s0);
+      })();
+      </script>
+      <!--End of Tawk.to Script-->
     </section>
   </main>
 
   <footer role="contentinfo">
     <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon footer logo" loading="lazy" />
-    <p>© <span id="year"></span> Stylish Horizon</p>
+    <p>© <span id="year"></span> Stylish Horizon | <a href="mailto:stylishhorizon@google.com">stylishhorizon@google.com</a></p>
   </footer>
 
   <script src="script.js" defer></script>
