@@ -6,35 +6,29 @@
   <meta name="description" content="Stylish Horizon Manifesto: Preserving your memories with honesty. No hype. Just the facts on tapes, risks, and real restoration." />
   <title>Manifest | Stylish Horizon</title>
 
-  <!-- Favicons and manifest -->
+  <!-- Favicons and manifest for PWA -->
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/media/favicon-16x16.png">
   <link rel="shortcut icon" href="/assets/media/favicon.ico">
   <link rel="manifest" href="/assets/media/site.webmanifest">
-  <meta name="theme-color" content="#0f0f0f">
 
-  <!-- CSP -->
- <meta http-equiv="Content-Security-Policy" content="
+    <!-- CSP for security (expanded img-src for assets) -->
+  <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
   img-src 'self' https://stylishhorizon.github.io;
   style-src 'self' https://fonts.googleapis.com;
   font-src 'self' https://fonts.gstatic.com;
-  connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://*.google-analytics.com;
+  connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com;
   script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
 ">
 
-
-
-  <!-- GTM async -->
+  <!-- GTM async for perf -->
   <script async>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
-    var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-    j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-MN6WG3K6');
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MN6WG3K6');
   </script>
 
-  <!-- OG/Twitter -->
+  <!-- OG and Twitter for sharing -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://stylishhorizon.github.io/manifest.html">
   <meta property="og:title" content="Stylish Horizon Manifesto: Honest Preservation">
@@ -47,14 +41,14 @@
   <meta name="twitter:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
   <meta name="twitter:site" content="@yourhandle">
 
-  <!-- Fonts + CSS -->
+  <!-- Preload fonts for faster load -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" as="style">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
   <div class="parallax-bg" aria-hidden="true"></div>
 
   <nav id="site-nav" aria-label="Main navigation">
@@ -62,7 +56,7 @@
       <a class="logo-title" href="index.html" aria-label="Stylish Horizon home page">
         <picture>
           <source srcset="assets/media/StylishHorizon_Clear.webp" type="image/webp">
-          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon logo" loading="lazy" />
+          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon logo: A horizon line with stylish elements representing digital restoration" loading="lazy" />
         </picture>
         <p class="site-title">Stylish Horizon</p>
       </a>
@@ -92,40 +86,49 @@
       <div class="text-block">
         <h2>You Are Not a Courier. You Are a Guardian</h2>
         <p>That tape in your drawer? It's your life, not a package. Shipping it cross-country—or worse, overseas—invites disaster: bends, customs snags, lost in transit. Why gamble?</p>
-        <p>We scout the closest trusted studio for you—vetted by real rep, like social proof from followers. You drop off, watch it happen, walk out with control intact. No handoffs to strangers.</p>
+        <p>We scout the closest trusted studio for you—vetted by real rep, like social proof from followers. You drop off, watch it happen, walk out with control intact. No handoffs to strangers. Ever wonder what "in-person" really means? It means you stay the boss.</p>
       </div>
 
       <div class="text-block">
         <h2>This Is Not for Everyone</h2>
-        <p>We're no wizards peddling "lilac-tinted nostalgia." If you geek out on Adobe Premiere or spot the diff between PCI and AGP slots, grab your IEEE-1394 cable and DIY. You're set.</p>
-        <p>But if tech talk makes your eyes glaze—and you just want those memories safe—we handle it. No lectures, no upsells. We find the studio, you supervise. Simple.</p>
+        <p>We're no wizards peddling "lilac-tinted nostalgia." If you geek out on Adobe Premiere 2020 vs. 2025, or spot the diff between PCI and AGP slots, grab your IEEE-1394 cable and DIY. You're set.</p>
+        <p>But if tech talk makes your eyes glaze—and you just want those memories safe—we handle it. No lectures, no upsells. We find the studio, you supervise. Simple. Who's this for, really? The ones who know: time's the enemy, not the details.</p>
       </div>
 
       <div class="text-block">
         <h2>We Work With Your Voice</h2>
         <p>You call the shots on cuts. Sure, 3/4 might be endless landscapes, but that "boring" pan could hide your big laugh. We don't play editor—we digitize it all, hand over full files via secure share.</p>
-        <p>You trim later, or not. We smooth scan lines (deinterlacing, no drama), balance colors naturally.</p>
+        <p>You trim later, or not. We smooth scan lines (deinterlacing, no drama), balance colors naturally. Question: What if the "filler" is the gold? That's why we give you everything.</p>
       </div>
 
       <div class="text-block">
         <h2>From Us - Only the Truth</h2>
-        <p>No fairy dust. We scrub noise, fix colors in tools like Premiere—but skip fake "vintage glow." Result? Clean files ready for your edit, true to the original vibe.</p>
-        <p>Upscale? Only if you say so, via something like Topaz—no auto-magic. Your story, unaltered.</p>
+        <p>No fairy dust. We scrub noise, fix colors in tools like Premiere—but skip fake "vintage glow." Result? Clean files ready for your edit, true to the original '98 vibe.</p>
+        <p>Upscale? Only if you say so, via something like Topaz—no auto-magic. Why fake it when the real thing hits harder? Your story, unaltered.</p>
       </div>
 
       <div class="text-block">
         <h2>Your Format, Your Rules</h2>
-        <p>ProRes for pros tweaking in post? Got it. VP9 for buttery YouTube playback? Yours. Or raw shares—no lock-in.</p>
-        <p>We match your setup, not ours.</p>
+        <p>ProRes for pros tweaking in post? Got it. VP9 for buttery YouTube playback (AV1 if you're TV-testing, but heads up: spotty on some screens)? Yours. Or raw shares—no lock-in.</p>
+        <p>We match your setup, not ours. Ever upload a file that chokes your player? Not here. What format keeps your drive spinning smooth?</p>
       </div>
 
       <div class="text-block">
         <h2>Beyond the Tape</h2>
-        <p>This ain't pixels for pixels' sake. It's handing back your unfiltered past—one tape, one truth at a time.</p>
+        <p>This ain't pixels for pixels' sake. It's handing back your unfiltered past—one tape, one truth at a time. Tapes bridge gaps; we make sure they don't break.</p>
         <p>Hit Contact.</p>
         <div class="quick-links">
           <a href="contact.html" class="button" role="button">Start Now</a>
         </div>
       </div>
+    </section>
+  </main>
 
+  <footer role="contentinfo">
+    <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon footer logo" loading="lazy" />
+    <p>© <span id="year"></span> Stylish Horizon</p>
+  </footer>
 
+  <script src="script.js" defer></script>
+</body>
+</html>
