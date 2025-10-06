@@ -19,11 +19,9 @@
   img-src 'self' https://stylishhorizon.github.io;
   style-src 'self' https://fonts.googleapis.com;
   font-src 'self' https://fonts.gstatic.com;
-  connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://*.google-analytics.com;
+  connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com;
   script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
 ">
-
-
   <!-- GTM async for perf -->
   <script async>
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MN6WG3K6');
@@ -145,7 +143,3 @@
   <script src="script.js" defer></script>
 </body>
 </html>
-
-
-
-
