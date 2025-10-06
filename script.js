@@ -1,163 +1,67 @@
-// ========== HEADER HIDE ON SCROLL (with throttle) ==========
-(function() {
-    let lastScrollY = window.scrollY;
-    const nav = document.getElementById('site-nav');
-    if (!nav) return; // Robust check
-
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                const currentScrollY = window.scrollY;
-                if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                    nav.classList.add('hidden');
-                } else {
-                    nav.classList.remove('hidden');
-                }
-                lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
-                ticking = false;
-            });
-            ticking = true;
-        }
-    });
-})();
-
-// ========== BURGER MENU TOGGLE ==========
-(function() {
-    const navLinks = document.getElementById('primary-navigation');
-    const burger = document.getElementById('burger');
-    if (!navLinks || !burger) return;
-
+document.addEventListener('DOMContentLoaded', () => {
+  // Навигация (бургер-меню)
+  const burger = document.getElementById('burger');
+  const nav = document.getElementById('primary-navigation');
+  if (burger && nav) {
     burger.addEventListener('click', () => {
-        const isExpanded = navLinks.classList.toggle('show');
-        burger.setAttribute('aria-expanded', String(isExpanded));
+      const expanded = burger.getAttribute('aria-expanded') === 'true';
+      burger.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('open');
     });
+  }
 
-    // Close on outside click
-    document.addEventListener('click', (event) => {
-        const isClickInsideNav = navLinks.contains(event.target);
-        const isClickOnBurger = burger.contains(event.target);
-        if (navLinks.classList.contains('show') && !isClickInsideNav && !isClickOnBurger) {
-            navLinks.classList.remove('show');
-            burger.setAttribute('aria-expanded', 'false');
-        }
-    });
+  // Год в футере
+  const yearEl = document.getElementById('year');
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
 
-    // Close on link click
-    navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('show');
-            burger.setAttribute('aria-expanded', 'false');
-        });
-    });
+  // Валидация формы (если есть)
+  const form = document.getElementById('contactForm');
+  if (form) {
+    const loadAt = Date.now();
 
-    // Close on Escape key (a11y)
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && navLinks.classList.contains('show')) {
-            navLinks.classList.remove('show');
-            burger.setAttribute('aria-expanded', 'false');
-            burger.focus();
-        }
-    });
-})();
-
-// ========== SECTION VISIBILITY ON SCROLL (Intersection Observer) ==========
-(function() {
-    const sections = document.querySelectorAll('section');
-    if (sections.length === 0) return;
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Stop observing after visible (perf)
-            }
-        });
-    }, {
-        rootMargin: '0px',
-        threshold: 0.2
-    });
-
-    sections.forEach(section => observer.observe(section));
-})();
-
-// ========== ACTIVE MENU ITEM HIGHLIGHT (Based on URL) ==========
-(function markActive() {
-    const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-    document.querySelectorAll('.nav-links a').forEach(a => {
-        const href = a.getAttribute('href')?.toLowerCase() || '';
-        if (href.endsWith(path) && !href.includes('#')) {
-            a.classList.add('active');
-            a.setAttribute('aria-current', 'page');
-        } else {
-            a.classList.remove('active');
-            a.removeAttribute('aria-current');
-        }
-    });
-})();
-
-// ========== DYNAMIC YEAR IN FOOTER ==========
-const yearEl = document.getElementById('year');
-if (yearEl) { yearEl.textContent = new Date().getFullYear(); }
-
-// ... (previous code remains)
-
-// ========== FORM VALIDATION ==========
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('orderForm');
-    if (!form) return;
-
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', function (e) {
+      // Honeypot
+      const honeypot = document.getElementById('cf-website');
+      if (honeypot && honeypot.value) {
         e.preventDefault();
+        return;
+      }
 
-        let isValid = true;
-        const errors = {
-            nameError: '',
-            emailError: '',
-            packageError: '',
-            tapesError: '',
-            rawLinkError: '',
-            understandError: ''
-        };
+      // Time-to-submit
+      const elapsed = (Date.now() - loadAt) / 1000;
+      if (elapsed < 10) {
+        e.preventDefault();
+        alert('Submitted too quickly. Please try again.');
+        return;
+      }
 
-        const name = document.getElementById('name').value.trim();
-        if (!name) { errors.nameError = 'Name required.'; isValid = false; }
+      let ok = true;
+      const setErr = (id, msg) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = msg || '';
+      };
 
-        const email = document.getElementById('email').value.trim();
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!email) { errors.emailError = 'Email required.'; isValid = false; }
-        else if (!emailRegex.test(email)) { errors.emailError = 'Invalid email.'; isValid = false; }
+      // Очистка ошибок
+      ['cf-nameError','cf-emailError','cf-packageError','cf-minutesError','cf-rawLinkError','cf-understandError']
+        .forEach(id => setErr(id, ''));
 
-        const pkg = document.getElementById('package').value;
-        if (!pkg) { errors.packageError = 'Select package.'; isValid = false; }
+      const name = document.getElementById('cf-name')?.value.trim();
+      const email = document.getElementById('cf-email')?.value.trim();
+      const pkg = document.getElementById('cf-package')?.value;
+      const mins = document.getElementById('cf-minutes')?.value;
+      const understand = document.getElementById('cf-understand')?.checked;
 
-        const tapes = parseInt(document.getElementById('tapes').value);
-        if (!tapes || tapes < 1) { errors.tapesError = 'Minutes >0.'; isValid = false; }
+      if (!name) { setErr('cf-nameError', 'Name required.'); ok = false; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setErr('cf-emailError', 'Valid email required.'); ok = false; }
+      if (!pkg) { setErr('cf-packageError', 'Select package.'); ok = false; }
+      if (!mins || parseInt(mins, 10) < 1) { setErr('cf-minutesError', 'Minutes must be > 0.'); ok = false; }
+      if (!understand) { setErr('cf-understandError', 'Please confirm you understand the process.'); ok = false; }
 
-        const rawLink = document.getElementById('rawLink').value.trim();
-        if (!rawLink) { errors.rawLinkError = 'Share link needed for start.'; isValid = false; }
-
-        const understand = document.getElementById('understand').checked;
-        if (!understand) { errors.understandError = 'Check to confirm process.'; isValid = false; }
-
-        Object.keys(errors).forEach(key => {
-            const errorEl = document.getElementById(key);
-            if (errorEl) errorEl.textContent = errors[key];
-        });
-
-        if (isValid) {
-            alert('Sent! Check email for next steps.');
-            // Real send: Use Formspree or similar (add action="https://formspree.io/f/your-id" method="POST")
-            this.reset();
-            Object.keys(errors).forEach(key => document.getElementById(key).textContent = '');
-        }
+      if (!ok) {
+        e.preventDefault();
+      }
     });
-
-    ['name', 'email', 'package', 'tapes', 'rawLink', 'understand'].forEach(id => {
-        const input = document.getElementById(id);
-        if (input) {
-            input.addEventListener('input', function() { document.getElementById(id + 'Error').textContent = ''; });
-        }
-    });
+  }
 });
-
