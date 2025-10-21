@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Stylish Horizon Archive: Packages for MiniDV restoration, real examples on YouTube, and how the process works—no surprises." />
-  <title>Archive | Stylish Horizon</title>
+  <meta name="description" content="Stylish Horizon Manifest: Why restore MiniDV/VHS now. No cloud risks, local truth, unfiltered clarity." />
+  <title>Manifest | Stylish Horizon</title>
 
   <!-- Favicons and manifest for PWA -->
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/apple-touch-icon.png">
@@ -13,18 +13,16 @@
   <link rel="shortcut icon" href="/assets/media/favicon.ico">
   <link rel="manifest" href="/assets/media/site.webmanifest">
 
-   <!-- CSP for security (expanded img-src for assets) -->
+  <!-- CSP -->
   <meta http-equiv="Content-Security-Policy" content="
-  default-src 'self';
-  img-src 'self' https://stylishhorizon.github.io https://i.ytimg.com;
-  style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
-  font-src 'self' https://fonts.gstatic.com;
-  connect-src 'self' https://*.google-analytics.com https://www.googletagmanager.com https://www.youtube.com https://*.youtube.com https://*.ytimg.com;
-  script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.youtube.com https://*.youtube.com;
-  frame-src 'self' https://www.youtube.com https://*.youtube.com;
-">
+    default-src 'self';
+    img-src 'self' https://stylishhorizon.github.io;
+    style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
+    font-src 'self' https://fonts.gstatic.com;
+    connect-src 'self' https://*.google-analytics.com https://www.googletagmanager.com;
+    script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+  ">
 
-  
   <!-- GTM async for perf -->
   <script async>
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MN6WG3K6');
@@ -32,16 +30,16 @@
 
   <!-- OG and Twitter for sharing -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://stylishhorizon.github.io/archive.html">
-  <meta property="og:title" content="Stylish Horizon Archive: Packages & Examples">
-  <meta property="og:description" content="See our packages for MiniDV/VHS restoration and real YouTube examples. Honest process, no hype.">
+  <meta property="og:url" content="https://stylishhorizon.github.io/manifest.html">
+  <meta property="og:title" content="Stylish Horizon Manifest: Preserve Without Illusion">
+  <meta property="og:description" content="Why your MiniDV/VHS memories fade—and how we restore them locally, unfiltered. No hype, just clarity.">
   <meta property="og:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://stylishhorizon.github.io/archive.html">
-  <meta name="twitter:title" content="Stylish Horizon Archive: Packages & Examples">
-  <meta name="twitter:description" content="See our packages for MiniDV/VHS restoration and real YouTube examples. Honest process, no hype.">
+  <meta name="twitter:url" content="https://stylishhorizon.github.io/manifest.html">
+  <meta name="twitter:title" content="Stylish Horizon Manifest: Preserve Without Illusion">
+  <meta name="twitter:description" content="Why your MiniDV/VHS memories fade—and how we restore them locally, unfiltered. No hype, just clarity.">
   <meta name="twitter:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
-  <meta name="twitter:site" content="@yourhandle">
+  <meta name="twitter:site" content="@StylishHorizon">
 
   <!-- Preload fonts for faster load -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" as="style">
@@ -65,8 +63,8 @@
       <button id="burger" aria-label="Toggle navigation menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
       <ul id="primary-navigation" class="nav-links" role="navigation">
         <li><a href="index.html">Home</a></li>
-        <li><a href="manifest.html">Manifest</a></li>
-        <li><a href="archive.html" class="active" aria-current="page">Archive</a></li>
+        <li><a href="manifest.html" class="active" aria-current="page">Manifest</a></li>
+        <li><a href="archive.html">Archive</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
@@ -75,84 +73,38 @@
   <main>
     <section class="hero" id="hero">
       <div class="hero-content">
-        <h1>Archive: Restored Truths</h1>
-        <p>No filters. No fakes. Just clean, honest revivals—packages below, examples to watch.</p>
+        <h1>Manifest: Preserve the Unfiltered</h1>
+        <p>Your memories are not pixels in the cloud—they're fragile tapes, fading frame by frame.</p>
       </div>
       <div class="quick-links">
         <div class="button-group">
-          <a href="#packages" class="button" role="button">Packages</a>
-          <a href="#examples" class="button" role="button">Examples</a>
+          <a href="#risks" class="button" role="button">The Risk</a>
+          <a href="#approach" class="button" role="button">Our Approach</a>
+          <a href="archive.html" class="button" role="button">Packages</a>
         </div>
       </div>
     </section>
 
-    <section id="packages" class="packages">
-      <h2>Choose Your Package</h2>
-      <table class="packages-table">
-        <thead>
-          <tr>
-            <th>Package</th>
-            <th>Quality</th>
-            <th>Price (per minute)</th>
-            <th>What You Get</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Legacy</td>
-            <td>720p ProRes</td>
-            <td>5–15$</td>
-            <td>Raw deinterlace + natural color balance. For pros editing originals. 4-6 weeks post-preview.</td>
-          </tr>
-          <tr>
-            <td>Ultimate</td>
-            <td>1080p</td>
-            <td>20–50$</td>
-            <td>Hand-trimmed review + upscale. Full control on cuts. 4-6 weeks post-preview.</td>
-          </tr>
-          <tr>
-            <td>UHD</td>
-            <td>4K (on request)</td>
-            <td>On request</td>
-            <td>Extended processing for archives. YouTube/VP9 or ProRes delivery. 4-6 weeks post-preview.</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section id="examples" class="examples">
-      <h2>Real Examples</h2>
-      <p style="text-align: center; margin-bottom: 2rem;">Same footage, different packages: Watch the difference in quality.</p>
-      <div class="videos">
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/rjS13daTnKc?rel=0" title="Same Tape: Legacy (720p ProRes)" frameborder="0" allowfullscreen></iframe>
-          <p>Same Tape: Legacy (720p ProRes)</p>
-        </div>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/PH5Ap0-exNw?rel=0" title="Same Tape: Ultimate (1080p)" frameborder="0" allowfullscreen></iframe>
-          <p>Same Tape: Ultimate (1080p Upscale)</p>
-        </div>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/aSduAKdM_zk?rel=0" title="Same Tape: UHD (4K)" frameborder="0" allowfullscreen></iframe>
-          <p>Same Tape: UHD (4K On Request)</p>
-        </div>
-      </div>
-      <p style="text-align: center; margin-top: 1rem;">These are unedited exports. Your preview works the same: full deinterlace on private YouTube link.</p>
-    </section>
-
-    <section id="process" class="process">
-      <h2>How It Flows</h2>
+    <section id="risks" class="risks">
+      <h2>The Risk: Time Waits for No Tape</h2>
       <div class="text-block">
-        <p>Upload raw files (unprocessed video from cassette) to a share link—studio scan or your own.</p>
-        <p>We deliver a free full preview: deinterlaced, on private YouTube. Comment timestamps there (e.g., "Keep full except 02:44-04:17"). Locked—can't edit or deny.</p>
-        <p>Approve? We finalize (people + tools for trim/upscale). 4-6 weeks. Pay after your ok on final length.</p>
-        <p>Private forever? Secure storage—no leaks, ever. Public archive? Add if you (and subjects) consent.</p>
+        <p>MiniDV, VHS, Hi8—the magnetic layers degrade in 10-15 years. Colors bleed, frames warp, audio hums into silence. Non-square pixels from PAL/NTSC distort proportions if untouched. Cloud "saves" mean copies, not cures—risking loss in hacks or obsolescence.</p>
+        <p>Why now? A wedding from 1998, first steps in 2002—they're not infinite. Delay, and echoes become ghosts.</p>
       </div>
     </section>
 
-    <div class="quick-links" style="text-align: center; margin: 4rem 0;">
-      <a href="contact.html" class="button" role="button">Ready? Contact</a>
-    </div>
+    <section id="approach" class="approach">
+      <h2>Our Approach: Local Truth, No Illusion</h2>
+      <div class="text-block">
+        <p>No shipping across borders. We connect you to trusted local studios for capture—your tapes stay close, handled with care.</p>
+        <p>First pass: Deinterlace PAL/NTSC to PAR=1.0—no distortions for YouTube or archives. Gentle fixes (denoise, colors, square pixels, 50fps, audio normalize) without nostalgia filters. Stabilization only if shaky. Uploads expire in 14 days—secure, no eternal storage.</p>
+        <p>Packages: Legacy (720p ProRes, $5-15/min—for editors) or Ultimate (1080p upscale to 1920x1080/1200 for YT/Vimeo, $20-50/min). UHD 4K? On request—premium for the bold (prices? Let's say it's for cinephiles with deep pockets).</p>
+        <p>Process: Raw upload → free private YouTube preview (PAR-fixed) → comment trims → approve → 4-6 weeks finalize → pay only then. Full files in ProRes/VP9. Unfiltered clarity—your story, as it was.</p>
+      </div>
+      <div class="quick-links" style="text-align: center; margin-top: 2rem;">
+        <a href="contact.html" class="button" role="button">Start Now</a>
+      </div>
+    </section>
   </main>
 
   <footer role="contentinfo">
@@ -163,5 +115,3 @@
   <script src="script.js" defer></script>
 </body>
 </html>
-
-
