@@ -13,10 +13,16 @@
   <link rel="shortcut icon" href="/assets/media/favicon.ico">
   <link rel="manifest" href="/assets/media/site.webmanifest">
 
-   <!-- CSP for security (expanded img-src for assets) -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://stylishhorizon.github.io https://i.ytimg.com https://s.ytimg.com https://embed.tawk.to https://*.tawk.to; style-src 'self' https://fonts.googleapis.com 'unsafe-inline' https://embed.tawk.to https://*.tawk.to https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://embed.tawk.to https://*.tawk.to https://cdn.jsdelivr.net; connect-src 'self' blob: https://*.google-analytics.com https://www.googletagmanager.com https://*.tawk.to wss://*.tawk.to; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://embed.tawk.to https://*.youtube.com https://s.ytimg.com https://cdn.jsdelivr.net; frame-src 'self' https://www.youtube.com https://*.youtube.com https://embed.tawk.to;">
-
-
+   <!-- CSP for security (tuned for Tidio + Vercel webhook) -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    img-src 'self' data: https://stylishhorizon.github.io https://i.ytimg.com https://s.ytimg.com https://code.tidio.co https://widget-v4.tidiochat.com https://cdnjs.cloudflare.com;
+    style-src 'self' https://fonts.googleapis.com 'unsafe-inline' https://code.tidio.co;
+    font-src 'self' https://fonts.gstatic.com https://code.tidio.co;
+    connect-src 'self' blob: https://*.google-analytics.com https://www.googletagmanager.com https://socket.tidio.co https://api-v2.tidio.co https://your-app.vercel.app wss://socket.tidio.co;
+    script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://code.tidio.co https://widget-v4.tidiochat.com https://*.youtube.com https://s.ytimg.com;
+    frame-src 'self' https://www.youtube.com https://*.youtube.com https://widget-v4.tidiochat.com;
+  ">
 
   <!-- GTM async for perf -->
   <script async>
@@ -109,25 +115,14 @@
 
         <button type="submit">Send & Get Started</button>
       </form>
-      <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: var(--font-color-secondary);">We'll reply in 24h via email or Tawk chat below. No commitments.</p>
+      <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: var(--font-color-secondary);">We'll reply in 24h via email or Tidio chat below. No commitments.</p>
     </section>
 
     <section id="chat" class="chat">
       <h2>Chat Now</h2>
-      <p>Questions? Live chat—real answers, no bots.</p>
-      <!--Start of Tawk.to Script-->
-      <script type="text/javascript">
-      var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-      (function(){
-      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-      s1.async=true;
-      s1.src='https://embed.tawk.to/68c85460aac9d419267b8757/1j578j6hq';
-      s1.charset='UTF-8';
-      s1.setAttribute('crossorigin','*');
-      s0.parentNode.insertBefore(s1,s0);
-      })();
-      </script>
-      <!--End of Tawk.to Script-->
+      <p>Questions? Live chat—AI-powered answers on packages, process, no bots (well, smart ones).</p>
+      <!-- Tidio Embed with your ID -->
+      <script src="//code.tidio.co/ll3cwv3s2bjkml6iqkz5xu0t4xmrm4yw.js" async></script>
     </section>
   </main>
 
@@ -139,9 +134,3 @@
   <script src="script.js" defer></script>
 </body>
 </html>
-
-
-
-
-
-
