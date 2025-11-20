@@ -1,21 +1,117 @@
-{
-  "name": "Stylish Horizon — Video Restoration",
-  "short_name": "Stylish Horizon",
-  "description": "Professional AI-powered video tape restoration service",
-  "start_url": "/index.html",
-  "display": "standalone",
-  "background_color": "#0f0f0f",
-  "theme_color": "#00d4ff",
-  "icons": [
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Stylish Horizon Manifest: Why restore MiniDV/VHS now. No cloud risks, local truth, unfiltered clarity." />
+  <title>Manifest | Stylish Horizon</title>
+
+  <!-- Favicons and manifest for PWA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/media/favicon-16x16.png">
+  <link rel="shortcut icon" href="/assets/media/favicon.ico">
+  <link rel="manifest" href="/assets/media/site.webmanifest">
+
+  <!-- CSP -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    img-src 'self' https://stylishhorizon.github.io;
+    style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
+    font-src 'self' https://fonts.gstatic.com;
+    connect-src 'self' https://*.google-analytics.com https://www.googletagmanager.com;
+    script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+  ">
+
+  <!-- GTM async for perf -->
+  <script async>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MN6WG3K6');
+  </script>
+
+  <!-- OG and Twitter for sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://stylishhorizon.github.io/manifest.html">
+  <meta property="og:title" content="Stylish Horizon Manifest: Preserve Without Illusion">
+  <meta property="og:description" content="Why your MiniDV/VHS memories fade—and how we restore them locally, unfiltered. No hype, just clarity.">
+  <meta property="og:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://stylishhorizon.github.io/manifest.html">
+  <meta name="twitter:title" content="Stylish Horizon Manifest: Preserve Without Illusion">
+  <meta name="twitter:description" content="Why your MiniDV/VHS memories fade—and how we restore them locally, unfiltered. No hype, just clarity.">
+  <meta name="twitter:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
+  <meta name="twitter:site" content="@StylishHorizon">
+
+  <!-- Preload fonts for faster load -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <div class="parallax-bg" aria-hidden="true"></div>
+
+  <nav id="site-nav" aria-label="Main navigation">
+    <div class="nav-container">
+      <a class="logo-title" href="index.html" aria-label="Stylish Horizon home page">
+        <picture>
+          <source srcset="assets/media/StylishHorizon_Clear.webp" type="image/webp">
+          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon logo: A horizon line with stylish elements representing digital restoration" loading="lazy" />
+        </picture>
+        <p class="site-title">Stylish Horizon</p>
+      </a>
+      <button id="burger" aria-label="Toggle navigation menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
+      <ul id="primary-navigation" class="nav-links" role="navigation">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="manifest.html" class="active" aria-current="page">Manifest</a></li>
+        <li><a href="archive.html">Archive</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <h1>Manifest: Preserve the Unfiltered</h1>
+        <p>Your memories are not pixels in the cloud—they're fragile tapes, fading frame by frame.</p>
+      </div>
+      <div class="quick-links">
+        <div class="button-group">
+          <a href="#risks" class="button" role="button">The Risk</a>
+          <a href="#approach" class="button" role="button">Our Approach</a>
+          <a href="archive.html" class="button" role="button">Packages</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="risks" class="risks">
+      <h2>The Risk: Time Waits for No Tape</h2>
+      <div class="text-block">
+        <p>MiniDV, VHS, Hi8—the magnetic layers degrade in 10-15 years. Colors bleed, frames warp, audio hums into silence. Non-square pixels from PAL/NTSC distort proportions if untouched. Cloud "saves" mean copies, not cures—risking loss in hacks or obsolescence.</p>
+        <p>Why now? A wedding from 1998, first steps in 2002—they're not infinite. Delay, and echoes become ghosts.</p>
+      </div>
+    </section>
+
+    <section id="approach" class="approach">
+      <h2>Our Approach: Local Truth, No Illusion</h2>
+      <div class="text-block">
+        <p>No shipping across borders. We connect you to trusted local studios for capture—your tapes stay close, handled with care.</p>
+        <p>First pass: Deinterlace PAL/NTSC to PAR=1.0—no distortions for YouTube or archives. Gentle fixes (denoise, colors, square pixels, 50fps, audio normalize) without nostalgia filters. Stabilization only if shaky. Uploads expire in 14 days—secure, no eternal storage.</p>
+        <p>Packages: Legacy (720p ProRes, $5-15/min—for editors) or Ultimate (1080p upscale to 1920x1080/1200 for YT/Vimeo, $20-50/min). UHD 4K? On request—premium for the bold (prices? Let's say it's for cinephiles with deep pockets).</p>
+        <p>Process: Raw upload → free private YouTube preview (PAR-fixed) → comment trims → approve → 4-6 weeks finalize → pay only then. Full files in ProRes/VP9. Unfiltered clarity—your story, as it was.</p>
+      </div>
+      <div class="quick-links" style="text-align: center; margin-top: 2rem;">
+        <a href="contact.html" class="button" role="button">Start Now</a>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon footer logo" loading="lazy" />
+    <p>© <span id="year"></span> Stylish Horizon</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
