@@ -1,10 +1,4 @@
-Sitemap: https://stylishhorizon.github.io/sitemap.xml
-
 User-agent: *
 Allow: /
 
-User-agent: GPTBot
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
+Sitemap: https://stylishhorizon.github.io/sitemap.xml
