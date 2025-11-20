@@ -1,69 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact — Stylish Horizon</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Contact Stylish Horizon: Start your MiniDV restoration. Share details, get a quote, and preview link. Honest process, no commitments." />
+  <title>Contact | Stylish Horizon</title>
+
+  <!-- Favicons and manifest for PWA -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/media/favicon-16x16.png">
+  <link rel="shortcut icon" href="/assets/media/favicon.ico">
+  <link rel="manifest" href="/assets/media/site.webmanifest">
+
+   <!-- CSP for security (tuned for Tidio + Vercel webhook) -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    img-src 'self' data: https://stylishhorizon.github.io https://i.ytimg.com https://s.ytimg.com https://code.tidio.co https://widget-v4.tidiochat.com https://cdnjs.cloudflare.com;
+    style-src 'self' https://fonts.googleapis.com 'unsafe-inline' https://code.tidio.co;
+    font-src 'self' https://fonts.gstatic.com https://code.tidio.co;
+    connect-src 'self' blob: https://*.google-analytics.com https://www.googletagmanager.com https://socket.tidio.co https://api-v2.tidio.co https://your-app.vercel.app wss://socket.tidio.co;
+    script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://code.tidio.co https://widget-v4.tidiochat.com https://*.youtube.com https://s.ytimg.com;
+    frame-src 'self' https://www.youtube.com https://*.youtube.com https://widget-v4.tidiochat.com;
+  ">
+
+  <!-- GTM async for perf -->
+  <script async>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MN6WG3K6');
+  </script>
+
+  <!-- OG and Twitter for sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://stylishhorizon.github.io/contact.html">
+  <meta property="og:title" content="Contact Stylish Horizon: Start Restoration">
+  <meta property="og:description" content="Share your details for MiniDV/VHS digitization. We'll scout a studio, send preview—pay only after approval.">
+  <meta property="og:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://stylishhorizon.github.io/contact.html">
+  <meta name="twitter:title" content="Contact Stylish Horizon: Start Restoration">
+  <meta name="twitter:description" content="Share your details for MiniDV/VHS digitization. We'll scout a studio, send preview—pay only after approval.">
+  <meta name="twitter:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
+  <meta name="twitter:site" content="@yourhandle">
+
+  <!-- Preload fonts for faster load -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
+
   <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.html">
 </head>
 <body>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <div class="parallax-bg" aria-hidden="true"></div>
 
-  <!-- ========== NAVIGATION ========== -->
-  <nav id="site-nav">
+  <nav id="site-nav" aria-label="Main navigation">
     <div class="nav-container">
-      <a href="index.html" class="logo">Stylish Horizon</a>
-      <div id="primary-navigation">
-        <a href="index.html">Home</a>
-        <a href="archive.html">Archive</a>
-        <a href="contact.html" class="active">Contact</a>
-      </div>
-      <div id="burger">☰</div>
+      <a class="logo-title" href="index.html" aria-label="Stylish Horizon home page">
+        <picture>
+          <source srcset="assets/media/StylishHorizon_Clear.webp" type="image/webp">
+          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon logo: A horizon line with stylish elements representing digital restoration" loading="lazy" />
+        </picture>
+        <p class="site-title">Stylish Horizon</p>
+      </a>
+      <button id="burger" aria-label="Toggle navigation menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
+      <ul id="primary-navigation" class="nav-links" role="navigation">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="manifest.html">Manifest</a></li>
+        <li><a href="archive.html">Archive</a></li>
+        <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
+      </ul>
     </div>
   </nav>
 
   <main>
-    <!-- ========== CONTACT FORM SECTION ========== -->
-    <section id="contact">
-      <h2>Order Restoration</h2>
-      <form id="orderForm" class="order-form" novalidate>
-        <label for="name">Your Name</label>
-        <input type="text" id="name" required>
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <h1>Start Your Restoration</h1>
+        <p>Share basics—we'll scout a studio, send raw upload guide, and preview link. Pay after your approval. Or chat now.</p>
+      </div>
+    </section>
+
+    <section id="form" class="order">
+      <h2>Tell Us About Your Tapes</h2>
+      <form id="orderForm" class="order-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
         <div class="error" id="nameError"></div>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
         <div class="error" id="emailError"></div>
 
-        <label for="package">Package</label>
-        <select id="package" required>
-          <option value="">— Select —</option>
-          <option value="standard">Standard — 1080p50</option>
-          <option value="premium">Premium — 4K60</option>
-          <option value="ultra">Ultra — 8K AI</option>
-        </select>
+<label for="package">Package (for VHS/Hi8/MiniDV):</label>
+<select id="package" name="package" required>
+  <option value="">Select package</option>
+  <option value="legacy">Legacy (720p ProRes, 5–15$/min)</option>
+  <option value="ultimate">Ultimate (1080p, 20–50$/min)</option>
+  <option value="uhd">UHD (4K, on request)</option>
+</select>
         <div class="error" id="packageError"></div>
 
-        <label for="tapes">Estimated minutes of footage</label>
-        <input type="number" id="tapes" min="1" required>
+        <label for="tapes">Estimated Minutes (total across tapes):</label>
+        <input type="number" id="tapes" name="tapes" min="1" required>
         <div class="error" id="tapesError"></div>
 
+        <label for="rawLink">Raw Video Share Link (from studio or your scan):</label>
+        <input type="url" id="rawLink" name="rawLink" placeholder="e.g., https://we.tl/yourfile">
+        <div class="error" id="rawLinkError"></div>
+
         <label>
-          <input type="checkbox" id="understand" required>
-          I understand the restoration process and pricing
+          <input type="checkbox" id="understand" name="understand" required>
+          I understand: Free preview on private YouTube, comments locked. Pay after my approval on final.
         </label>
         <div class="error" id="understandError"></div>
 
-        <button type="submit">Send Request</button>
+        <button type="submit">Send & Get Started</button>
       </form>
+      <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: var(--font-color-secondary);">We'll reply in 24h via email or Tidio chat below. No commitments.</p>
+    </section>
+
+    <section id="chat" class="chat">
+      <h2>Chat Now</h2>
+      <p>Questions? Live chat—AI-powered answers on packages, process, no bots (well, smart ones).</p>
+      <!-- Tidio Embed with your ID -->
+      <script src="//code.tidio.co/ll3cwv3s2bjkml6iqkz5xu0t4xmrm4yw.js" async></script>
     </section>
   </main>
 
-  <!-- ========== FOOTER ========== -->
-  <footer>
-    <p>© 2025 Stylish Horizon</p>
+  <footer role="contentinfo">
+    <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon footer logo" loading="lazy" />
+    <p>© <span id="year"></span> Stylish Horizon | <a href="mailto:stylishhorizon@google.com">stylishhorizon@google.com</a></p>
   </footer>
 
-  <script defer src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
