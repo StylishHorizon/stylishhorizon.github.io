@@ -218,7 +218,12 @@ h2{
   margin-bottom:auto;
   letter-spacing: 0.01em;
 }
-.quick-links{margin-top:2rem; width:100%;}
+.quick-links{
+  margin-top:2rem; 
+  width:100%;
+  display: flex;
+  justify-content: center;
+}
 .button-group{display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;}
 .button{
   padding:0.8rem 1.5rem; 
