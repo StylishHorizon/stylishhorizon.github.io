@@ -13,15 +13,16 @@
   <link rel="shortcut icon" href="/assets/media/favicon.ico">
   <link rel="manifest" href="/assets/media/site.webmanifest">
 
-   <!-- CSP for security (expanded img-src for assets) -->
+   <!-- CSP for security (expanded for archive.org) -->
   <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
-  img-src 'self' https://stylishhorizon.github.io https://i.ytimg.com;
+  img-src 'self' https://stylishhorizon.github.io https://i.ytimg.com https://archive.org;
   style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
   font-src 'self' https://fonts.gstatic.com;
-  connect-src 'self' https://*.google-analytics.com https://www.googletagmanager.com https://www.youtube.com https://*.youtube.com https://*.ytimg.com;
+  connect-src 'self' https://*.google-analytics.com https://www.googletagmanager.com https://www.youtube.com https://*.youtube.com https://*.ytimg.com https://archive.org;
   script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.youtube.com https://*.youtube.com;
   frame-src 'self' https://www.youtube.com https://*.youtube.com;
+  media-src 'self' https://archive.org;
 ">
 
   
@@ -48,6 +49,208 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
 
   <link rel="stylesheet" href="style.css">
+  
+  <style>
+    /* ========== COMPARISON SLIDER STYLES ========== */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .comparison-item {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 8px;
+      padding: 1rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 
+        0 8px 30px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(0, 212, 255, 0.1);
+    }
+
+    .comparison-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 
+        0 12px 50px rgba(0, 212, 255, 0.4),
+        0 8px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .comparison-item h3 {
+      color: var(--highlight-color);
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    .comparison-item p {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--font-color-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .comparison-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 4px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .comparison-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .comparison-after {
+      clip-path: inset(0 0 0 50%);
+    }
+
+    .comparison-slider {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 3px;
+      height: 100%;
+      background: var(--highlight-color);
+      transform: translateX(-50%);
+      cursor: ew-resize;
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+    }
+
+    .comparison-slider::before {
+      content: '⟨';
+      position: absolute;
+      top: 50%;
+      left: -15px;
+      transform: translateY(-50%);
+      background: var(--highlight-color);
+      color: #000;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
+    }
+
+    .comparison-slider::after {
+      content: '⟩';
+      position: absolute;
+      top: 50%;
+      right: -15px;
+      transform: translateY(-50%);
+      background: var(--highlight-color);
+      color: #000;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
+    }
+
+    .comparison-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--font-color-secondary);
+    }
+
+    /* ========== MODAL STYLES ========== */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      position: relative;
+      width: 90%;
+      max-width: 1400px;
+      max-height: 90vh;
+      background: rgba(15, 15, 15, 0.95);
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 20px 80px rgba(0, 212, 255, 0.4);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 2rem;
+      color: var(--font-color-main);
+      cursor: pointer;
+      z-index: 10;
+      transition: color 0.3s ease;
+    }
+
+    .modal-close:hover {
+      color: var(--highlight-color);
+    }
+
+    .modal-comparison {
+      position: relative;
+      width: 100%;
+      max-height: 70vh;
+      aspect-ratio: 16 / 9;
+    }
+
+    .modal-info {
+      text-align: center;
+      margin-top: 1rem;
+      color: var(--font-color-secondary);
+    }
+
+    /* ========== PROJECT SECTIONS ========== */
+    .project-section {
+      margin: 4rem 0;
+    }
+
+    .project-section h3 {
+      font-size: 1.8rem;
+      color: rgba(0, 212, 255, 0.8);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    @media(max-width: 768px) {
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-content {
+        width: 95%;
+        padding: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -58,7 +261,7 @@
       <a class="logo-title" href="index.html" aria-label="Stylish Horizon home page">
         <picture>
           <source srcset="assets/media/StylishHorizon_Clear.webp" type="image/webp">
-          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon logo: A horizon line with stylish elements representing digital restoration" loading="lazy" />
+          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon logo" loading="lazy" />
         </picture>
         <p class="site-title">Stylish Horizon</p>
       </a>
@@ -81,63 +284,188 @@
       <div class="quick-links">
         <div class="button-group">
           <a href="#packages" class="button" role="button">Packages</a>
-          <a href="#examples" class="button" role="button">Examples</a>
+          <a href="#countryside" class="button" role="button">Countryside</a>
+          <a href="#diving" class="button" role="button">Diving</a>
         </div>
       </div>
     </section>
 
-<section id="packages" class="packages">
-  <h2>Choose Your Package</h2>
-  <table class="packages-table">
-    <thead>
-      <tr>
-        <th>Package</th>
-        <th>Quality</th>
-        <th>Price (per minute)</th>
-        <th>What You Get</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Legacy</td>
-        <td>720p ProRes</td>
-        <td>5–15$</td>
-        <td>Raw deinterlace/PAR=1.0 (PAL/NTSC) + natural color balance for VHS/Hi8/MiniDV. For pros editing originals. 4-6 weeks post-preview. Upload expires 14 days.</td>
-      </tr>
-      <tr>
-        <td>Ultimate</td>
-        <td>1080p</td>
-        <td>20–50$</td>
-        <td>Hand-trimmed review + upscale (1920x1080/1200 for YT/Vimeo). Full control on cuts for VHS/Hi8/MiniDV. 4-6 weeks post-preview.</td>
-      </tr>
-      <tr>
-        <td>UHD</td>
-        <td>4K (on request)</td>
-        <td>On request</td>
-        <td>Extended processing for archives (VHS/Hi8/MiniDV). ProRes/VP9 delivery. 4-6 weeks post-preview. Premium territory—quote for the bold.</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+    <section id="packages" class="packages">
+      <h2>Choose Your Package</h2>
+      <table class="packages-table">
+        <thead>
+          <tr>
+            <th>Package</th>
+            <th>Quality</th>
+            <th>Price (per minute)</th>
+            <th>What You Get</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Legacy</td>
+            <td>720p ProRes</td>
+            <td>5–15$</td>
+            <td>Raw deinterlace/PAR=1.0 (PAL/NTSC) + natural color balance for VHS/Hi8/MiniDV. For pros editing originals. 4-6 weeks post-preview. Upload expires 14 days.</td>
+          </tr>
+          <tr>
+            <td>Ultimate</td>
+            <td>1080p</td>
+            <td>20–50$</td>
+            <td>Hand-trimmed review + upscale (1920x1080/1200 for YT/Vimeo). Full control on cuts for VHS/Hi8/MiniDV. 4-6 weeks post-preview.</td>
+          </tr>
+          <tr>
+            <td>UHD</td>
+            <td>4K (on request)</td>
+            <td>On request</td>
+            <td>Extended processing for archives (VHS/Hi8/MiniDV). ProRes/VP9 delivery. 4-6 weeks post-preview. Premium territory—quote for the bold.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-    <section id="examples" class="examples">
-      <h2>Real Examples</h2>
-      <p style="text-align: center; margin-bottom: 2rem;">Same footage, different packages: Watch the difference in quality.</p>
+    <!-- ========== COUNTRYSIDE PROJECT ========== -->
+    <section id="countryside" class="project-section">
+      <h2>Countryside Project</h2>
+      
+      <h3>Full Restoration Videos</h3>
+      <p style="text-align: center; margin-bottom: 2rem;">Same footage across three packages: Legacy (720p), Ultimate (1080p), and UHD (4K).</p>
+      
       <div class="videos">
         <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/rjS13daTnKc?rel=0" title="Same Tape: Legacy (720p ProRes)" frameborder="0" allowfullscreen></iframe>
-          <p>Same Tape: Legacy (720p ProRes)</p>
+          <iframe src="https://www.youtube.com/embed/rjS13daTnKc?rel=0" title="Countryside: Legacy (720p ProRes)" frameborder="0" allowfullscreen loading="lazy"></iframe>
+          <p>Legacy (720p ProRes)</p>
         </div>
         <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/PH5Ap0-exNw?rel=0" title="Same Tape: Ultimate (1080p)" frameborder="0" allowfullscreen></iframe>
-          <p>Same Tape: Ultimate (1080p Upscale)</p>
+          <iframe src="https://www.youtube.com/embed/PH5Ap0-exNw?rel=0" title="Countryside: Ultimate (1080p)" frameborder="0" allowfullscreen loading="lazy"></iframe>
+          <p>Ultimate (1080p Upscale)</p>
         </div>
         <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/aSduAKdM_zk?rel=0" title="Same Tape: UHD (4K)" frameborder="0" allowfullscreen></iframe>
-          <p>Same Tape: UHD (4K On Request)</p>
+          <iframe src="https://www.youtube.com/embed/aSduAKdM_zk?rel=0" title="Countryside: UHD (4K)" frameborder="0" allowfullscreen loading="lazy"></iframe>
+          <p>UHD (4K On Request)</p>
         </div>
       </div>
-      <p style="text-align: center; margin-top: 1rem;">These are unedited exports. Your preview works the same: full deinterlace on private YouTube link.</p>
+
+      <h3 style="margin-top: 3rem;">Frame Comparisons</h3>
+      <p style="text-align: center; margin-bottom: 1rem; color: var(--font-color-secondary);">
+        Drag the slider to compare quality. Click for full-size view.
+      </p>
+
+      <div class="comparison-grid">
+        <!-- Build Scene -->
+        <div class="comparison-item">
+          <h3>Building Scene</h3>
+          <p>720i (688KB) vs 4K (10.3MB)</p>
+          <div class="comparison-container" data-scene="countryside-build">
+            <img class="comparison-before" src="https://archive.org/download/countryside_202512/720i_Build.png" alt="720i Build" loading="lazy">
+            <img class="comparison-after" src="https://archive.org/download/countryside_202512/4k_Build.png" alt="4K Build" loading="lazy">
+            <div class="comparison-slider"></div>
+          </div>
+          <div class="comparison-labels">
+            <span>720i</span>
+            <span>4K</span>
+          </div>
+        </div>
+
+        <!-- Cam Scene -->
+        <div class="comparison-item">
+          <h3>Camera Scene</h3>
+          <p>720i (582KB) vs 4K (9.0MB)</p>
+          <div class="comparison-container" data-scene="countryside-cam">
+            <img class="comparison-before" src="https://archive.org/download/countryside_202512/720i_Cam.png" alt="720i Cam" loading="lazy">
+            <img class="comparison-after" src="https://archive.org/download/countryside_202512/4k_Cam.png" alt="4K Cam" loading="lazy">
+            <div class="comparison-slider"></div>
+          </div>
+          <div class="comparison-labels">
+            <span>720i</span>
+            <span>4K</span>
+          </div>
+        </div>
+
+        <!-- Dog Scene -->
+        <div class="comparison-item">
+          <h3>Dog Scene</h3>
+          <p>720i (674KB) vs 4K (10.8MB)</p>
+          <div class="comparison-container" data-scene="countryside-dog">
+            <img class="comparison-before" src="https://archive.org/download/countryside_202512/720i_Dog.png" alt="720i Dog" loading="lazy">
+            <img class="comparison-after" src="https://archive.org/download/countryside_202512/4k_Dog.png" alt="4K Dog" loading="lazy">
+            <div class="comparison-slider"></div>
+          </div>
+          <div class="comparison-labels">
+            <span>720i</span>
+            <span>4K</span>
+          </div>
+        </div>
+
+        <!-- Girls Scene (no 4K) -->
+        <div class="comparison-item">
+          <h3>Girls Scene</h3>
+          <p>720i (650KB) vs Full Deinterlace (2.2MB)</p>
+          <div class="comparison-container" data-scene="countryside-girls">
+            <img class="comparison-before" src="https://archive.org/download/countryside_202512/720i_Girls.png" alt="720i Girls" loading="lazy">
+            <img class="comparison-after" src="https://archive.org/download/countryside_202512/FD_Girls.png" alt="FD Girls" loading="lazy">
+            <div class="comparison-slider"></div>
+          </div>
+          <div class="comparison-labels">
+            <span>720i</span>
+            <span>Full Deinterlace</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== DIVING PROJECT ========== -->
+    <section id="diving" class="project-section">
+      <h2>Diving Project (2001)</h2>
+      
+      <h3>Restored Video</h3>
+      <p style="text-align: center; margin-bottom: 1rem; color: var(--font-color-secondary);">
+        1920p 50fps restoration (34.6MB MP4)
+      </p>
+      
+      <div style="max-width: 800px; margin: 0 auto 3rem;">
+        <video controls style="width: 100%; border-radius: 8px; box-shadow: 0 8px 40px rgba(0, 212, 255, 0.3);">
+          <source src="https://archive.org/download/2001-sl-720i-25/2001_Diving_1920p50.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <h3>Frame Comparisons</h3>
+      <p style="text-align: center; margin-bottom: 1rem; color: var(--font-color-secondary);">
+        Drag the slider to compare quality. Click for full-size view.
+      </p>
+
+      <div class="comparison-grid">
+        <!-- Diving Scene 2 -->
+        <div class="comparison-item">
+          <h3>Underwater Scene 2</h3>
+          <p>720i (706KB) vs 1920p (3.0MB)</p>
+          <div class="comparison-container" data-scene="diving-scene2">
+            <img class="comparison-before" src="https://archive.org/download/2001-sl-720i-25/2001_SL_720i25_2.png" alt="720i Scene 2" loading="lazy">
+            <img class="comparison-after" src="https://archive.org/download/2001-sl-720i-25/2001_SL_1920p25_2.png" alt="1920p Scene 2" loading="lazy">
+            <div class="comparison-slider"></div>
+          </div>
+          <div class="comparison-labels">
+            <span>720i</span>
+            <span>1920p</span>
+          </div>
+        </div>
+
+        <!-- Diving Scene 3 -->
+        <div class="comparison-item">
+          <h3>Underwater Scene 3</h3>
+          <p>720i (847KB) vs 1920p (3.1MB)</p>
+          <div class="comparison-container" data-scene="diving-scene3">
+            <img class="comparison-before" src="https://archive.org/download/2001-sl-720i-25/2001_SL_720i25_3.png" alt="720i Scene 3" loading="lazy">
+            <img class="comparison-after" src="https://archive.org/download/2001-sl-720i-25/2001_SL_1920p25_3.png" alt="1920p Scene 3" loading="lazy">
+            <div class="comparison-slider"></div>
+          </div>
+          <div class="comparison-labels">
+            <span>720i</span>
+            <span>1920p</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="process" class="process">
@@ -155,12 +483,149 @@
     </div>
   </main>
 
+  <!-- ========== MODAL FOR FULL-SIZE COMPARISON ========== -->
+  <div id="comparisonModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div class="modal-comparison">
+        <div class="comparison-container" id="modalComparisonContainer">
+          <img class="comparison-before" id="modalBefore" alt="Before">
+          <img class="comparison-after" id="modalAfter" alt="After">
+          <div class="comparison-slider"></div>
+        </div>
+      </div>
+      <div class="modal-info">
+        <p id="modalTitle"></p>
+        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Drag slider to compare • ESC to close</p>
+      </div>
+    </div>
+  </div>
+
   <footer role="contentinfo">
     <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon footer logo" loading="lazy" />
     <p>© <span id="year"></span> Stylish Horizon</p>
   </footer>
 
   <script src="script.js" defer></script>
+  
+  <script>
+    // ========== COMPARISON SLIDER FUNCTIONALITY ==========
+    document.addEventListener('DOMContentLoaded', function() {
+      const containers = document.querySelectorAll('.comparison-container');
+      
+      containers.forEach(container => {
+        const slider = container.querySelector('.comparison-slider');
+        const after = container.querySelector('.comparison-after');
+        let isActive = false;
+
+        // Mouse events for desktop
+        slider.addEventListener('mousedown', () => { isActive = true; });
+        document.addEventListener('mouseup', () => { isActive = false; });
+        
+        container.addEventListener('mousemove', (e) => {
+          if (!isActive) return;
+          moveSlider(e, container, after);
+        });
+
+        // Touch events for mobile
+        slider.addEventListener('touchstart', (e) => { 
+          isActive = true;
+          e.preventDefault();
+        });
+        
+        document.addEventListener('touchend', () => { isActive = false; });
+        
+        container.addEventListener('touchmove', (e) => {
+          if (!isActive) return;
+          e.preventDefault();
+          moveSlider(e.touches[0], container, after);
+        });
+
+        // Click to open modal
+        container.addEventListener('click', (e) => {
+          // Don't open modal if user is dragging
+          if (isActive) return;
+          openModal(container);
+        });
+      });
+
+      function moveSlider(e, container, after) {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const percent = (x / rect.width) * 100;
+        
+        // Clamp between 0 and 100
+        const clampedPercent = Math.max(0, Math.min(100, percent));
+        
+        after.style.clipPath = `inset(0 0 0 ${clampedPercent}%)`;
+        container.querySelector('.comparison-slider').style.left = `${clampedPercent}%`;
+      }
+
+      // ========== MODAL FUNCTIONALITY ==========
+      const modal = document.getElementById('comparisonModal');
+      const modalBefore = document.getElementById('modalBefore');
+      const modalAfter = document.getElementById('modalAfter');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalClose = document.querySelector('.modal-close');
+      const modalContainer = document.getElementById('modalComparisonContainer');
+
+      function openModal(container) {
+        const before = container.querySelector('.comparison-before');
+        const after = container.querySelector('.comparison-after');
+        const title = container.closest('.comparison-item').querySelector('h3').textContent;
+        const subtitle = container.closest('.comparison-item').querySelector('p').textContent;
+
+        modalBefore.src = before.src;
+        modalAfter.src = after.src;
+        modalTitle.textContent = `${title} — ${subtitle}`;
+        
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Initialize modal slider at 50%
+        const modalSliderEl = modalContainer.querySelector('.comparison-slider');
+        const modalAfterImg = modalContainer.querySelector('.comparison-after');
+        modalSliderEl.style.left = '50%';
+        modalAfterImg.style.clipPath = 'inset(0 0 0 50%)';
+      }
+
+      function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      modalClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+      });
+
+      // Enable slider in modal
+      const modalSlider = modalContainer.querySelector('.comparison-slider');
+      const modalAfterImg = modalContainer.querySelector('.comparison-after');
+      let modalActive = false;
+
+      modalSlider.addEventListener('mousedown', () => { modalActive = true; });
+      document.addEventListener('mouseup', () => { modalActive = false; });
+      
+      modalContainer.addEventListener('mousemove', (e) => {
+        if (!modalActive) return;
+        moveSlider(e, modalContainer, modalAfterImg);
+      });
+
+      modalSlider.addEventListener('touchstart', (e) => { 
+        modalActive = true;
+        e.preventDefault();
+      });
+      
+      modalContainer.addEventListener('touchmove', (e) => {
+        if (!modalActive) return;
+        e.preventDefault();
+        moveSlider(e.touches[0], modalContainer, modalAfterImg);
+      });
+    });
+  </script>
 </body>
 </html>
-
