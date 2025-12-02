@@ -373,17 +373,22 @@
 
       <h3 style="margin-top: 3rem;">Frame Comparisons</h3>
       <p style="text-align: center; margin-bottom: 1rem; color: var(--font-color-secondary);">
-        Drag the slider to compare quality. Click for full-size view.
+        Thumbnails shown • Click to view full quality comparison (up to 10MB per image)
       </p>
 
       <div class="comparison-grid">
         <!-- Build Scene -->
         <div class="comparison-item">
           <h3>Building Scene</h3>
-          <p>720i (688KB) vs 4K (10.3MB)</p>
-          <div class="comparison-container" data-scene="countryside-build">
-            <img class="comparison-before" src="https://archive.org/download/countryside_202512/720i_Build.png" alt="720i Build" loading="lazy">
-            <img class="comparison-after" src="https://archive.org/download/countryside_202512/4k_Build.png" alt="4K Build" loading="lazy">
+          <p>720i (688KB) vs 4K (10.3MB) • Click for full quality</p>
+          <div class="comparison-container" 
+               data-scene="countryside-build"
+               data-before-thumb="https://archive.org/download/countryside_202512/720i_Build_thumb.jpg"
+               data-after-thumb="https://archive.org/download/countryside_202512/4k_Build_thumb.jpg"
+               data-before-full="https://archive.org/download/countryside_202512/720i_Build.png"
+               data-after-full="https://archive.org/download/countryside_202512/4k_Build.png">
+            <img class="comparison-before" src="https://archive.org/download/countryside_202512/720i_Build_thumb.jpg" alt="720i Build" loading="lazy">
+            <img class="comparison-after" src="https://archive.org/download/countryside_202512/4k_Build_thumb.jpg" alt="4K Build" loading="lazy">
             <div class="comparison-slider"></div>
           </div>
           <div class="comparison-labels">
@@ -395,10 +400,15 @@
         <!-- Cam Scene -->
         <div class="comparison-item">
           <h3>Camera Scene</h3>
-          <p>720i (582KB) vs 4K (9.0MB)</p>
-          <div class="comparison-container" data-scene="countryside-cam">
-            <img class="comparison-before" src="https://archive.org/download/countryside_202512/720i_Cam.png" alt="720i Cam" loading="lazy">
-            <img class="comparison-after" src="https://archive.org/download/countryside_202512/4k_Cam.png" alt="4K Cam" loading="lazy">
+          <p>720i (582KB) vs 4K (9.0MB) • Click for full quality</p>
+          <div class="comparison-container" 
+               data-scene="countryside-cam"
+               data-before-thumb="https://archive.org/download/countryside_202512/720i_Cam_thumb.jpg"
+               data-after-thumb="https://archive.org/download/countryside_202512/4k_Cam_thumb.jpg"
+               data-before-full="https://archive.org/download/countryside_202512/720i_Cam.png"
+               data-after-full="https://archive.org/download/countryside_202512/4k_Cam.png">
+            <img class="comparison-before" src="https://archive.org/download/countryside_202512/720i_Cam_thumb.jpg" alt="720i Cam" loading="lazy">
+            <img class="comparison-after" src="https://archive.org/download/countryside_202512/4k_Cam_thumb.jpg" alt="4K Cam" loading="lazy">
             <div class="comparison-slider"></div>
           </div>
           <div class="comparison-labels">
@@ -410,10 +420,15 @@
         <!-- Dog Scene -->
         <div class="comparison-item">
           <h3>Dog Scene</h3>
-          <p>720i (674KB) vs 4K (10.8MB)</p>
-          <div class="comparison-container" data-scene="countryside-dog">
-            <img class="comparison-before" src="https://archive.org/download/countryside_202512/720i_Dog.png" alt="720i Dog" loading="lazy">
-            <img class="comparison-after" src="https://archive.org/download/countryside_202512/4k_Dog.png" alt="4K Dog" loading="lazy">
+          <p>720i (674KB) vs 4K (10.8MB) • Click for full quality</p>
+          <div class="comparison-container" 
+               data-scene="countryside-dog"
+               data-before-thumb="https://archive.org/download/countryside_202512/720i_Dog_thumb.jpg"
+               data-after-thumb="https://archive.org/download/countryside_202512/4k_Dog_thumb.jpg"
+               data-before-full="https://archive.org/download/countryside_202512/720i_Dog.png"
+               data-after-full="https://archive.org/download/countryside_202512/4k_Dog.png">
+            <img class="comparison-before" src="https://archive.org/download/countryside_202512/720i_Dog_thumb.jpg" alt="720i Dog" loading="lazy">
+            <img class="comparison-after" src="https://archive.org/download/countryside_202512/4k_Dog_thumb.jpg" alt="4K Dog" loading="lazy">
             <div class="comparison-slider"></div>
           </div>
           <div class="comparison-labels">
@@ -425,10 +440,15 @@
         <!-- Girls Scene (no 4K) -->
         <div class="comparison-item">
           <h3>Girls Scene</h3>
-          <p>720i (650KB) vs Full Deinterlace (2.2MB)</p>
-          <div class="comparison-container" data-scene="countryside-girls">
-            <img class="comparison-before" src="https://archive.org/download/countryside_202512/720i_Girls.png" alt="720i Girls" loading="lazy">
-            <img class="comparison-after" src="https://archive.org/download/countryside_202512/FD_Girls.png" alt="FD Girls" loading="lazy">
+          <p>720i (650KB) vs Full Deinterlace (2.2MB) • Click for full quality</p>
+          <div class="comparison-container" 
+               data-scene="countryside-girls"
+               data-before-thumb="https://archive.org/download/countryside_202512/720i_Girls_thumb.jpg"
+               data-after-thumb="https://archive.org/download/countryside_202512/FD_Girls_thumb.jpg"
+               data-before-full="https://archive.org/download/countryside_202512/720i_Girls.png"
+               data-after-full="https://archive.org/download/countryside_202512/FD_Girls.png">
+            <img class="comparison-before" src="https://archive.org/download/countryside_202512/720i_Girls_thumb.jpg" alt="720i Girls" loading="lazy">
+            <img class="comparison-after" src="https://archive.org/download/countryside_202512/FD_Girls_thumb.jpg" alt="FD Girls" loading="lazy">
             <div class="comparison-slider"></div>
           </div>
           <div class="comparison-labels">
@@ -443,31 +463,42 @@
     <section id="diving" class="project-section">
       <h2>Diving Project (2001)</h2>
       
-      <h3>Restored Video</h3>
-      <p style="text-align: center; margin-bottom: 1rem; color: var(--font-color-secondary);">
-        1920p 50fps restoration (34.6MB MP4)
-      </p>
+      <h3>Full Restoration Videos</h3>
+      <p style="text-align: center; margin-bottom: 2rem;">Different quality levels and durations from the same original footage.</p>
       
-      <div style="max-width: 800px; margin: 0 auto 3rem;">
-        <video controls style="width: 100%; border-radius: 8px; box-shadow: 0 8px 40px rgba(0, 212, 255, 0.3);">
-          <source src="https://archive.org/download/2001-sl-720i-25/2001_Diving_1920p50.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+      <div class="videos">
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/x5xNOegZ5sQ?rel=0" title="Diving: 720p" frameborder="0" allowfullscreen loading="lazy"></iframe>
+          <p>720p (1:14:54)</p>
+        </div>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/2TG4Q3H3htc?rel=0" title="Diving: UHD" frameborder="0" allowfullscreen loading="lazy"></iframe>
+          <p>UHD (0:44)</p>
+        </div>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/qfkRSUDacgE?rel=0" title="Diving: UHD" frameborder="0" allowfullscreen loading="lazy"></iframe>
+          <p>UHD (19:37)</p>
+        </div>
       </div>
 
-      <h3>Frame Comparisons</h3>
+      <h3 style="margin-top: 3rem;">Frame Comparisons</h3>
       <p style="text-align: center; margin-bottom: 1rem; color: var(--font-color-secondary);">
-        Drag the slider to compare quality. Click for full-size view.
+        Thumbnails shown • Click to view full quality comparison (up to 3MB per image)
       </p>
 
       <div class="comparison-grid">
         <!-- Diving Scene 2 -->
         <div class="comparison-item">
           <h3>Underwater Scene 2</h3>
-          <p>720i (706KB) vs 1920p (3.0MB)</p>
-          <div class="comparison-container" data-scene="diving-scene2">
-            <img class="comparison-before" src="https://archive.org/download/2001-sl-720i-25/2001_SL_720i25_2.png" alt="720i Scene 2" loading="lazy">
-            <img class="comparison-after" src="https://archive.org/download/2001-sl-720i-25/2001_SL_1920p25_2.png" alt="1920p Scene 2" loading="lazy">
+          <p>720i (706KB) vs 1920p (3.0MB) • Click for full quality</p>
+          <div class="comparison-container" 
+               data-scene="diving-scene2"
+               data-before-thumb="https://archive.org/download/2001-sl-720i-25/2001_SL_720i25_2_thumb.jpg"
+               data-after-thumb="https://archive.org/download/2001-sl-720i-25/2001_SL_1920p25_2_thumb.jpg"
+               data-before-full="https://archive.org/download/2001-sl-720i-25/2001_SL_720i25_2.png"
+               data-after-full="https://archive.org/download/2001-sl-720i-25/2001_SL_1920p25_2.png">
+            <img class="comparison-before" src="https://archive.org/download/2001-sl-720i-25/2001_SL_720i25_2_thumb.jpg" alt="720i Scene 2" loading="lazy">
+            <img class="comparison-after" src="https://archive.org/download/2001-sl-720i-25/2001_SL_1920p25_2_thumb.jpg" alt="1920p Scene 2" loading="lazy">
             <div class="comparison-slider"></div>
           </div>
           <div class="comparison-labels">
@@ -479,10 +510,15 @@
         <!-- Diving Scene 3 -->
         <div class="comparison-item">
           <h3>Underwater Scene 3</h3>
-          <p>720i (847KB) vs 1920p (3.1MB)</p>
-          <div class="comparison-container" data-scene="diving-scene3">
-            <img class="comparison-before" src="https://archive.org/download/2001-sl-720i-25/2001_SL_720i25_3.png" alt="720i Scene 3" loading="lazy">
-            <img class="comparison-after" src="https://archive.org/download/2001-sl-720i-25/2001_SL_1920p25_3.png" alt="1920p Scene 3" loading="lazy">
+          <p>720i (847KB) vs 1920p (3.1MB) • Click for full quality</p>
+          <div class="comparison-container" 
+               data-scene="diving-scene3"
+               data-before-thumb="https://archive.org/download/2001-sl-720i-25/2001_SL_720i25_3_thumb.jpg"
+               data-after-thumb="https://archive.org/download/2001-sl-720i-25/2001_SL_1920p25_3_thumb.jpg"
+               data-before-full="https://archive.org/download/2001-sl-720i-25/2001_SL_720i25_3.png"
+               data-after-full="https://archive.org/download/2001-sl-720i-25/2001_SL_1920p25_3.png">
+            <img class="comparison-before" src="https://archive.org/download/2001-sl-720i-25/2001_SL_720i25_3_thumb.jpg" alt="720i Scene 3" loading="lazy">
+            <img class="comparison-after" src="https://archive.org/download/2001-sl-720i-25/2001_SL_1920p25_3_thumb.jpg" alt="1920p Scene 3" loading="lazy">
             <div class="comparison-slider"></div>
           </div>
           <div class="comparison-labels">
@@ -612,17 +648,34 @@
       const modalContainer = document.getElementById('modalComparisonContainer');
 
       function openModal(container) {
-        const before = container.querySelector('.comparison-before');
-        const after = container.querySelector('.comparison-after');
+        const beforeFull = container.dataset.beforeFull;
+        const afterFull = container.dataset.afterFull;
         const title = container.closest('.comparison-item').querySelector('h3').textContent;
         const subtitle = container.closest('.comparison-item').querySelector('p').textContent;
 
-        modalBefore.src = before.src;
-        modalAfter.src = after.src;
-        modalTitle.textContent = `${title} — ${subtitle}`;
+        // Show loading state
+        modalBefore.src = '';
+        modalAfter.src = '';
+        modalTitle.textContent = `${title} — Loading full quality...`;
         
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
+
+        // Load full resolution images
+        modalBefore.src = beforeFull;
+        modalAfter.src = afterFull;
+
+        // Update title when loaded
+        let loadedCount = 0;
+        const checkLoaded = () => {
+          loadedCount++;
+          if (loadedCount === 2) {
+            modalTitle.textContent = `${title} — ${subtitle}`;
+          }
+        };
+
+        modalBefore.onload = checkLoaded;
+        modalAfter.onload = checkLoaded;
 
         // Initialize modal slider at 50%
         const modalSliderEl = modalContainer.querySelector('.comparison-slider');
