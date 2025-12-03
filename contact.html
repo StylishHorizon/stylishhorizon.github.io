@@ -1,196 +1,118 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Contact Stylish Horizon: Start your MiniDV restoration. Share details, get a quote, and preview link. Honest process, no commitments." />
-  <title>Contact | Stylish Horizon</title>
+<!-- Floating Chat Widget -->
+<style>
+#bill-chat-button {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 9999;
+}
+#bill-chat-window {
+    position: fixed;
+    bottom: 110px;
+    right: 24px;
+    width: 360px;
+    height: 520px;
+    border-radius: 14px;
+    background: #111;
+    border: 1px solid #444;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9999;
+}
+#bill-chat-window header {
+    padding: 14px;
+    background: #1d1d1d;
+    color: white;
+    font-weight: bold;
+    border-bottom: 1px solid #333;
+}
+#bill-chat-window .messages {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+    color: #ddd;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+#bill-chat-window .input-area {
+    display: flex;
+    border-top: 1px solid #333;
+}
+#bill-chat-window input {
+    flex: 1;
+    background: #222;
+    border: none;
+    padding: 12px;
+    color: white;
+}
+#bill-chat-window button {
+    background: #333;
+    border: none;
+    padding: 12px 16px;
+    color: white;
+    cursor: pointer;
+}
+.message-user { text-align: right; margin-bottom: 8px; }
+.message-bill { text-align: left; margin-bottom: 8px; }
+</style>
 
-  <!-- Favicons and manifest for PWA -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/media/favicon-16x16.png">
-  <link rel="shortcut icon" href="/assets/media/favicon.ico">
-  <link rel="manifest" href="/assets/media/site.webmanifest">
+<div id="bill-chat-button">💬</div>
 
-   <!-- CSP for security (tuned for Tidio + Tally) -->
-  <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self';
-    img-src 'self' data: https://stylishhorizon.github.io https://i.ytimg.com https://s.ytimg.com https://code.tidio.co https://widget-v4.tidiochat.com https://cdnjs.cloudflare.com https://tally.so;
-    style-src 'self' https://fonts.googleapis.com 'unsafe-inline' https://code.tidio.co https://tally.so;
-    font-src 'self' https://fonts.gstatic.com https://code.tidio.co https://tally.so;
-    connect-src 'self' blob: https://*.google-analytics.com https://www.googletagmanager.com https://socket.tidio.co https://api-v2.tidio.co https://tally.so wss://socket.tidio.co;
-    script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://code.tidio.co https://widget-v4.tidiochat.com https://*.youtube.com https://s.ytimg.com https://tally.so;
-    frame-src 'self' https://www.youtube.com https://*.youtube.com https://widget-v4.tidiochat.com https://tally.so;
-  ">
-
-  <!-- GTM async for perf -->
-  <script async>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MN6WG3K6');
-  </script>
-
-  <!-- OG and Twitter for sharing -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://stylishhorizon.github.io/contact.html">
-  <meta property="og:title" content="Contact Stylish Horizon: Start Restoration">
-  <meta property="og:description" content="Share your details for MiniDV/VHS digitization. We'll scout a studio, send preview—pay only after approval.">
-  <meta property="og:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://stylishhorizon.github.io/contact.html">
-  <meta name="twitter:title" content="Contact Stylish Horizon: Start Restoration">
-  <meta name="twitter:description" content="Share your details for MiniDV/VHS digitization. We'll scout a studio, send preview—pay only after approval.">
-  <meta name="twitter:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
-  <meta name="twitter:site" content="@yourhandle">
-
-  <!-- Preload fonts for faster load -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" as="style">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
-
-  <link rel="stylesheet" href="style.css">
-  
-  <style>
-    /* ========== TALLY FORM INTEGRATION ========== */
-    .tally-container {
-      max-width: 800px;
-      margin: 0 auto;
-      background: rgba(255, 255, 255, 0.02);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 
-        0 8px 40px rgba(0, 0, 0, 0.5),
-        0 0 60px rgba(0, 212, 255, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    }
-
-    .tally-container iframe {
-      width: 100%;
-      min-height: 600px;
-      border: none;
-      background: transparent;
-    }
-
-    /* Loading state for iframe */
-    .tally-container::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 40px;
-      height: 40px;
-      margin: -20px 0 0 -20px;
-      border: 3px solid rgba(0, 212, 255, 0.2);
-      border-top-color: var(--highlight-color);
-      border-radius: 50%;
-      animation: spinner 0.8s linear infinite;
-    }
-
-    .tally-container.loaded::before {
-      display: none;
-    }
-
-    @keyframes spinner {
-      to { transform: rotate(360deg); }
-    }
-
-    /* Chat section styling */
-    .chat {
-      text-align: center;
-      padding: 2rem 0;
-    }
-
-    .chat h2 {
-      margin-bottom: 1rem;
-    }
-
-    .chat p {
-      color: var(--font-color-secondary);
-      margin-bottom: 1.5rem;
-    }
-
-    @media(max-width: 768px) {
-      .tally-container iframe {
-        min-height: 700px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <div class="parallax-bg" aria-hidden="true"></div>
-
-  <nav id="site-nav" aria-label="Main navigation">
-    <div class="nav-container">
-      <a class="logo-title" href="index.html" aria-label="Stylish Horizon home page">
-        <picture>
-          <source srcset="assets/media/StylishHorizon_Clear.webp" type="image/webp">
-          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon logo: A horizon line with stylish elements representing digital restoration" loading="lazy" />
-        </picture>
-        <p class="site-title">Stylish Horizon</p>
-      </a>
-      <button id="burger" aria-label="Toggle navigation menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
-      <ul id="primary-navigation" class="nav-links" role="navigation">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="manifest.html">Manifest</a></li>
-        <li><a href="archive.html">Archive</a></li>
-        <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
-      </ul>
+<div id="bill-chat-window">
+    <header>Bill — Stylish Horizon</header>
+    <div class="messages" id="bill-messages"></div>
+    <div class="input-area">
+        <input id="bill-input" type="text" placeholder="Ask Bill…" />
+        <button id="bill-send">➤</button>
     </div>
-  </nav>
+</div>
 
-  <main>
-    <section class="hero" id="hero">
-      <div class="hero-content">
-        <h1>Start Your Restoration</h1>
-        <p>Share basics—we'll scout a studio, send raw upload guide, and preview link. Pay after your approval. Or chat now.</p>
-      </div>
-    </section>
+<script>
+const API_URL = "https://huggingface.co/spaces/YOUR_NAME/YOUR_SPACE/api/predict";
 
-    <section id="form" class="order">
-      <h2>Tell Us About Your Tapes</h2>
-      <p style="text-align: center; margin-bottom: 2rem; color: var(--font-color-secondary);">
-        Fill out the form below. We'll reply within 24 hours via email or chat.
-      </p>
-      
-      <div class="tally-container">
-        <iframe 
-          src="https://tally.so/embed//xXVGMd?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
-          loading="lazy"
-          title="Restoration Request Form"
-          onload="this.parentElement.classList.add('loaded')">
-        </iframe>
-      </div>
-      
-      <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--font-color-secondary);">
-        <strong>Process:</strong> Free preview on private YouTube → comment timestamps → approve → we finalize (4-6 weeks) → pay after approval.
-      </p>
-    </section>
+document.getElementById("bill-chat-button").onclick = () => {
+    const win = document.getElementById("bill-chat-window");
+    win.style.display = win.style.display === "flex" ? "none" : "flex";
+};
 
-    <section id="chat" class="chat">
-      <h2>Or Chat Now</h2>
-      <p>Questions? Live chat—AI-powered answers on packages, process. Real humans available.</p>
-      <!-- Tidio Embed with your ID -->
-      <script src="//code.tidio.co/ll3cwv3s2bjkml6iqkz5xu0t4xmrm4yw.js" async></script>
-    </section>
-  </main>
+async function billSend() {
+    const input = document.getElementById("bill-input");
+    const msg = input.value.trim();
+    if (!msg) return;
 
-  <footer role="contentinfo">
-    <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon footer logo" loading="lazy" />
-    <p>© <span id="year"></span> Stylish Horizon | <a href="mailto:stylishhorizon@google.com">stylishhorizon@google.com</a></p>
-  </footer>
+    const messages = document.getElementById("bill-messages");
 
-  <script src="script.js" defer></script>
-  
-  <script>
-    // Tally dynamic height adjustment for better UX
-    window.addEventListener('message', function(e) {
-      if (e.data.hasOwnProperty('tally.height')) {
-        const iframe = document.querySelector('.tally-container iframe');
-        if (iframe) {
-          iframe.style.height = e.data['tally.height'] + 'px';
-        }
-      }
+    messages.innerHTML += `<div class="message-user">${msg}</div>`;
+    input.value = "";
+    messages.scrollTop = messages.scrollHeight;
+
+    const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ data: [msg] })
     });
-  </script>
-</body>
-</html>
 
+    const json = await response.json();
+    const reply = json.data[0];
+
+    messages.innerHTML += `<div class="message-bill">${reply}</div>`;
+    messages.scrollTop = messages.scrollHeight;
+}
+
+document.getElementById("bill-send").onclick = billSend;
+document.getElementById("bill-input").addEventListener("keydown", e => {
+    if (e.key === "Enter") billSend();
+});
+</script>
