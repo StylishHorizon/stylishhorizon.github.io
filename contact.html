@@ -6,116 +6,113 @@
   <meta name="description" content="Contact Stylish Horizon: Start your MiniDV restoration. Share details, get a quote, and preview link. Honest process, no commitments." />
   <title>Contact | Stylish Horizon</title>
 
-  <!-- Favicons and manifest for PWA -->
+  <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/media/favicon-16x16.png">
   <link rel="shortcut icon" href="/assets/media/favicon.ico">
   <link rel="manifest" href="/assets/media/site.webmanifest">
 
-   <!-- CSP for security (tuned for Tidio + Tally) -->
+  <!-- CSP: only Tally + your HF Space -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    img-src 'self' data: https://stylishhorizon.github.io https://i.ytimg.com https://s.ytimg.com https://code.tidio.co https://widget-v4.tidiochat.com https://cdnjs.cloudflare.com https://tally.so;
-    style-src 'self' https://fonts.googleapis.com 'unsafe-inline' https://code.tidio.co https://tally.so;
-    font-src 'self' https://fonts.gstatic.com https://code.tidio.co https://tally.so;
-    connect-src 'self' blob: https://*.google-analytics.com https://www.googletagmanager.com https://socket.tidio.co https://api-v2.tidio.co https://tally.so wss://socket.tidio.co;
-    script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://code.tidio.co https://widget-v4.tidiochat.com https://*.youtube.com https://s.ytimg.com https://tally.so;
-    frame-src 'self' https://www.youtube.com https://*.youtube.com https://widget-v4.tidiochat.com https://tally.so;
+    img-src 'self' data: https://stylishhorizon.github.io https://i.ytimg.com https://tally.so;
+    style-src 'self' https://fonts.googleapis.com 'unsafe-inline' https://tally.so;
+    font-src 'self' https://fonts.gstatic.com https://tally.so;
+    connect-src 'self' https://stylishh-stylishhorizon-chat.hf.space https://tally.so;
+    script-src 'self' 'unsafe-inline' https://tally.so;
+    frame-src 'self' https://tally.so;
   ">
 
-  <!-- GTM async for perf -->
-  <script async>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MN6WG3K6');
-  </script>
-
-  <!-- OG and Twitter for sharing -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://stylishhorizon.github.io/contact.html">
-  <meta property="og:title" content="Contact Stylish Horizon: Start Restoration">
-  <meta property="og:description" content="Share your details for MiniDV/VHS digitization. We'll scout a studio, send preview—pay only after approval.">
-  <meta property="og:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://stylishhorizon.github.io/contact.html">
-  <meta name="twitter:title" content="Contact Stylish Horizon: Start Restoration">
-  <meta name="twitter:description" content="Share your details for MiniDV/VHS digitization. We'll scout a studio, send preview—pay only after approval.">
-  <meta name="twitter:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
-  <meta name="twitter:site" content="@yourhandle">
-
-  <!-- Preload fonts for faster load -->
+  <!-- Fonts -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" as="style">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@30 adversity=swap">
   <link rel="stylesheet" href="style.css">
   
   <style>
-    /* ========== TALLY FORM INTEGRATION ========== */
+    /* ========== TALLY ========== */
     .tally-container {
       max-width: 800px;
       margin: 0 auto;
       background: rgba(255, 255, 255, 0.02);
       border-radius: 8px;
       overflow: hidden;
-      box-shadow: 
-        0 8px 40px rgba(0, 0, 0, 0.5),
-        0 0 60px rgba(0, 212, 255, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 60px rgba(0, 212, 255, 0.15);
     }
-
     .tally-container iframe {
       width: 100%;
       min-height: 600px;
       border: none;
-      background: transparent;
     }
 
-    /* Loading state for iframe */
-    .tally-container::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 40px;
-      height: 40px;
-      margin: -20px 0 0 -20px;
-      border: 3px solid rgba(0, 212, 255, 0.2);
-      border-top-color: var(--highlight-color);
+    /* ========== FLOATING CHAT ========== */
+    #bill-chat-button {
+      position: fixed; bottom: 24px; right: 24px;
+      width: 64px; height: 64px;
       border-radius: 50%;
-      animation: spinner 0.8s linear infinite;
+      background: linear-gradient(135deg, #00d4ff, #0099cc);
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
+      z-index: 9999;
+      transition: transform 0.3s ease;
     }
+    #bill-chat-button:hover { transform: scale(1.1); }
 
-    .tally-container.loaded::before {
-      display: none;
+    #bill-chat-window {
+      position: fixed; bottom: 110px; right: 24px;
+      width: 380px; height: 550px;
+      border-radius: 14px;
+      background: rgba(15, 15, 15, 0.95);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      display: none; flex-direction: column;
+      overflow: hidden; z-index: 9999;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 40px rgba(0, 212, 255, 0.3);
     }
-
-    @keyframes spinner {
-      to { transform: rotate(360deg); }
+    #bill-chat-window.open { display: flex; }
+    #bill-chat-window header {
+      padding: 16px;
+      background: rgba(0, 212, 255, 0.1);
+      color: #00d4ff;
+      font-weight: bold;
+      border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+      display: flex; justify-content: space-between;
     }
-
-    /* Chat section styling */
-    .chat {
-      text-align: center;
-      padding: 2rem 0;
+    #bill-chat-window .close-btn { cursor: pointer; font-size: 20px; opacity: 0.7; }
+    #bill-chat-window .messages {
+      flex: 1; padding: 16px; overflow-y: auto;
+      color: #f0f0f0; font-family: 'Inter', sans-serif; font-size: 14px;
     }
-
-    .chat h2 {
-      margin-bottom: 1rem;
+    #bill-chat-window input {
+      flex: 1; background: transparent; border: none; padding: 14px; color: white;
+      font-family: 'Inter', sans-serif;
     }
-
-    .chat p {
-      color: var(--font-color-secondary);
-      margin-bottom: 1.5rem;
+    #bill-chat-window button {
+      background: rgba(0, 212, 255, 0.2); border: none; padding: 14px 18px;
+      color: #00d4ff; cursor: pointer;
     }
-
-    @media(max-width: 768px) {
-      .tally-container iframe {
-        min-height: 700px;
-      }
+    .message-user, .message-bill {
+      padding: 10px 14px; border-radius: 12px; margin-bottom: 12px;
+      max-width: 80%; display: inline-block; clear: both; line-height: 1.4;
+    }
+    .message-user {
+      background: rgba(0, 212, 255, 0.15);
+      border-radius: 12px 12px 4px 12px;
+      float: right; text-align: right;
+    }
+    .message-bill {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px 12px 12px 4px;
+      float: left; text-align: left;
+    }
+    @media(max-width: 480px) {
+      #bill-chat-window { width: calc(100vw - 48px); }
     }
   </style>
 </head>
 <body>
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="parallax-bg" aria-hidden="true"></div>
 
   <nav id="site-nav" aria-label="Main navigation">
@@ -123,7 +120,7 @@
       <a class="logo-title" href="index.html" aria-label="Stylish Horizon home page">
         <picture>
           <source srcset="assets/media/StylishHorizon_Clear.webp" type="image/webp">
-          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon logo: A horizon line with stylish elements representing digital restoration" loading="lazy" />
+          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon" loading="lazy" />
         </picture>
         <p class="site-title">Stylish Horizon</p>
       </a>
@@ -155,8 +152,7 @@
         <iframe 
           src="https://tally.so/embed/Xx56ZV?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
           loading="lazy"
-          title="Restoration Request Form"
-          onload="this.parentElement.classList.add('loaded')">
+          title="Restoration Request Form">
         </iframe>
       </div>
       
@@ -165,177 +161,15 @@
       </p>
     </section>
 
-    <section id="chat" class="chat">
+    <section id="chat" class="chat" style="text-align: center; padding: 2rem 0;">
       <h2>Chat with Bill (AI Assistant)</h2>
-      <p>Ask about packages, process, pricing. Powered by our custom AI trained on restoration workflows.</p>
+      <p style="color: var(--font-color-secondary); margin-bottom: 1.5rem;">
+        Ask about packages, process, pricing. Powered by our custom AI trained on restoration workflows.
+      </p>
     </section>
   </main>
 
   <!-- Floating Chat Widget -->
-  <style>
-    #bill-chat-button {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #00d4ff, #0099cc);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      cursor: pointer;
-      box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
-      z-index: 9999;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    #bill-chat-button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 30px rgba(0, 212, 255, 0.6);
-    }
-    #bill-chat-window {
-      position: fixed;
-      bottom: 110px;
-      right: 24px;
-      width: 380px;
-      height: 550px;
-      border-radius: 14px;
-      background: rgba(15, 15, 15, 0.95);
-      border: 1px solid rgba(0, 212, 255, 0.3);
-      display: none;
-      flex-direction: column;
-      overflow: hidden;
-      z-index: 9999;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 40px rgba(0, 212, 255, 0.3);
-    }
-    #bill-chat-window.open {
-      display: flex;
-    }
-    #bill-chat-window header {
-      padding: 16px;
-      background: rgba(0, 212, 255, 0.1);
-      color: #00d4ff;
-      font-weight: bold;
-      border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    #bill-chat-window header .close-btn {
-      cursor: pointer;
-      font-size: 20px;
-      opacity: 0.7;
-      transition: opacity 0.3s ease;
-    }
-    #bill-chat-window header .close-btn:hover {
-      opacity: 1;
-    }
-    #bill-chat-window .messages {
-      flex: 1;
-      padding: 16px;
-      overflow-y: auto;
-      color: #f0f0f0;
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-    #bill-chat-window .messages::-webkit-scrollbar {
-      width: 6px;
-    }
-    #bill-chat-window .messages::-webkit-scrollbar-thumb {
-      background: rgba(0, 212, 255, 0.3);
-      border-radius: 3px;
-    }
-    #bill-chat-window .input-area {
-      display: flex;
-      border-top: 1px solid rgba(0, 212, 255, 0.2);
-      background: rgba(0, 0, 0, 0.3);
-    }
-    #bill-chat-window input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      padding: 14px;
-      color: white;
-      font-family: 'Inter', sans-serif;
-    }
-    #bill-chat-window input:focus {
-      outline: none;
-    }
-    #bill-chat-window input::placeholder {
-      color: rgba(255, 255, 255, 0.4);
-    }
-    #bill-chat-window button {
-      background: rgba(0, 212, 255, 0.2);
-      border: none;
-      padding: 14px 18px;
-      color: #00d4ff;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    #bill-chat-window button:hover {
-      background: rgba(0, 212, 255, 0.3);
-    }
-    #bill-chat-window button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    .message-user { 
-      text-align: right; 
-      margin-bottom: 12px;
-      padding: 10px 14px;
-      background: rgba(0, 212, 255, 0.15);
-      border-radius: 12px 12px 4px 12px;
-      display: inline-block;
-      max-width: 80%;
-      float: right;
-      clear: both;
-    }
-    .message-bill { 
-      text-align: left; 
-      margin-bottom: 12px;
-      padding: 10px 14px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px 12px 12px 4px;
-      display: inline-block;
-      max-width: 80%;
-      float: left;
-      clear: both;
-    }
-    .typing-indicator {
-      padding: 10px 14px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      display: inline-block;
-      margin-bottom: 12px;
-    }
-    .typing-indicator span {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #00d4ff;
-      margin: 0 2px;
-      animation: typing 1.4s infinite;
-    }
-    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes typing {
-      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-      30% { transform: translateY(-10px); opacity: 1; }
-    }
-    @media(max-width: 480px) {
-      #bill-chat-window {
-        width: calc(100vw - 48px);
-        right: 24px;
-        left: 24px;
-      }
-    }
-  </style>
-
   <div id="bill-chat-button">💬</div>
   <div id="bill-chat-window">
     <header>
@@ -343,24 +177,37 @@
       <span class="close-btn" onclick="toggleChat()">×</span>
     </header>
     <div class="messages" id="bill-messages">
-      <div class="message-bill">Hey! I'm Bill, your restoration assistant. Ask me about our packages, process, or anything else! 👋</div>
+      <div class="message-bill">Hey! I'm Bill. Ask me about Legacy vs. Ultimate, deinterlacing, or how to start. 👋</div>
     </div>
-    <div class="input-area">
-      <input id="bill-input" type="text" placeholder="Ask Bill about restoration..." />
+    <div style="display: flex; border-top: 1px solid rgba(0, 212, 255, 0.2); background: rgba(0,0,0,0.3);">
+      <input id="bill-input" type="text" placeholder="e.g., What’s UHD?" />
       <button id="bill-send">➤</button>
     </div>
   </div>
 
+  <footer role="contentinfo">
+    <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon footer logo" loading="lazy" />
+    <p>© <span id="year"></span> Stylish Horizon | <a href="mailto:stylishhorizon@google.com">stylishhorizon@google.com</a></p>
+  </footer>
+
+  <script src="script.js" defer></script>
+  
   <script>
-    // Gradio API endpoint for your HuggingFace Space
-    const GRADIO_API = "https://stylishh-stylishh.hf.space";
-    let conversationHistory = [];
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Tally dynamic height
+    window.addEventListener('message', e => {
+      if (e.data && e.data['tally.height']) {
+        document.querySelector('.tally-container iframe').style.height = e.data['tally.height'] + 'px';
+      }
+    });
+
+    // === BILL CHAT LOGIC ===
+    const HF_CHAT_API = "https://stylishh-stylishhorizon-chat.hf.space/chat";
 
     function toggleChat() {
-      const win = document.getElementById("bill-chat-window");
-      win.classList.toggle("open");
+      document.getElementById("bill-chat-window").classList.toggle("open");
     }
-
     document.getElementById("bill-chat-button").onclick = toggleChat;
 
     function addMessage(text, isUser) {
@@ -369,80 +216,30 @@
       div.className = isUser ? "message-user" : "message-bill";
       div.textContent = text;
       messages.appendChild(div);
+      messages.appendChild(document.createElement("div")).style.clear = "both";
       messages.scrollTop = messages.scrollHeight;
-      // Clear floats
-      const clear = document.createElement("div");
-      clear.style.clear = "both";
-      messages.appendChild(clear);
-    }
-
-    function showTyping() {
-      const messages = document.getElementById("bill-messages");
-      const typing = document.createElement("div");
-      typing.className = "typing-indicator";
-      typing.id = "typing";
-      typing.innerHTML = "<span></span><span></span><span></span>";
-      messages.appendChild(typing);
-      messages.scrollTop = messages.scrollHeight;
-    }
-
-    function hideTyping() {
-      const typing = document.getElementById("typing");
-      if (typing) typing.remove();
     }
 
     async function billSend() {
       const input = document.getElementById("bill-input");
-      const sendBtn = document.getElementById("bill-send");
       const msg = input.value.trim();
       if (!msg) return;
 
       addMessage(msg, true);
       input.value = "";
+      const sendBtn = document.getElementById("bill-send");
       sendBtn.disabled = true;
-      showTyping();
 
       try {
-        // Using Gradio client API
-        const response = await fetch(`${GRADIO_API}/call/chat`, {
+        const res = await fetch(HF_CHAT_API, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            data: [msg, conversationHistory]
-          })
+          body: JSON.stringify({ message: msg })
         });
-
-        if (!response.ok) throw new Error("API error");
-
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let eventId = "";
-
-        while (true) {
-          const { value, done } = await reader.read();
-          if (done) break;
-          const chunk = decoder.decode(value);
-          const lines = chunk.split('\n');
-          
-          for (const line of lines) {
-            if (line.startsWith('event: ')) {
-              eventId = line.slice(7);
-            } else if (line.startsWith('data: ') && eventId === 'complete') {
-              const data = JSON.parse(line.slice(6));
-              const reply = data[0];
-              const history = data[1];
-              
-              hideTyping();
-              addMessage(reply, false);
-              conversationHistory = history;
-              break;
-            }
-          }
-        }
-      } catch (error) {
-        console.error("Chat error:", error);
-        hideTyping();
-        addMessage("Sorry, I'm having trouble connecting. Please try again or use the contact form above.", false);
+        const data = await res.json();
+        addMessage(data.response || "I don’t know — check the Manifest or Archive pages.", false);
+      } catch (e) {
+        addMessage("Bill is offline right now. Please use the form above.", false);
       } finally {
         sendBtn.disabled = false;
       }
@@ -453,25 +250,6 @@
       if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
         billSend();
-      }
-    });
-  </script>
-
-  <footer role="contentinfo">
-    <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon footer logo" loading="lazy" />
-    <p>© <span id="year"></span> Stylish Horizon | <a href="mailto:stylishhorizon@google.com">stylishhorizon@google.com</a></p>
-  </footer>
-
-  <script src="script.js" defer></script>
-  
-  <script>
-    // Tally dynamic height adjustment for better UX
-    window.addEventListener('message', function(e) {
-      if (e.data.hasOwnProperty('tally.height')) {
-        const iframe = document.querySelector('.tally-container iframe');
-        if (iframe) {
-          iframe.style.height = e.data['tally.height'] + 'px';
-        }
       }
     });
   </script>
