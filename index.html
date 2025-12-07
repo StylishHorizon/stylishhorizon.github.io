@@ -364,6 +364,8 @@
     const after = container.querySelector('.comparison-after');
     const before = container.querySelector('.comparison-before');
     let isActive = false;
+    let hasDragged = false;
+    let dragStartX = 0;
     let imagesLoaded = 0;
 
     // Track image loading
@@ -389,10 +391,6 @@
       containerEl.querySelector('.comparison-slider').style.left = `${clampedPercent}%`;
     }
 
-    // Track if user actually dragged
-    let hasDragged = false;
-    let dragStartX = 0;
-
     // Mouse events
     slider.addEventListener('mousedown', (e) => { 
       isActive = true;
@@ -404,7 +402,6 @@
     });
     container.addEventListener('mousemove', (e) => {
       if (!isActive) return;
-      // If moved more than 5px, consider it a drag
       if (Math.abs(e.clientX - dragStartX) > 5) {
         hasDragged = true;
       }
@@ -437,7 +434,6 @@
     const modalContainer = document.getElementById('modalComparisonContainer');
 
     container.addEventListener('click', (e) => {
-      // Don't open if user just finished dragging
       if (hasDragged) {
         hasDragged = false;
         return;
@@ -455,7 +451,6 @@
       modalBefore.src = beforeFull;
       modalAfter.src = afterFull;
 
-      // Reset modal slider to 50%
       const modalSliderEl = modalContainer.querySelector('.comparison-slider');
       const modalAfterImg = modalContainer.querySelector('.comparison-after');
       modalSliderEl.style.left = '50%';
