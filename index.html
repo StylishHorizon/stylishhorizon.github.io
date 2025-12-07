@@ -228,6 +228,64 @@
       transform: translateY(0) scale(0.98);
     }
     
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+    }
+    
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-content {
+      position: relative;
+      width: 90%;
+      max-width: 1400px;
+      max-height: 90vh;
+      background: rgba(15, 15, 15, 0.95);
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 20px 80px rgba(0, 212, 255, 0.4);
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 2rem;
+      color: var(--font-color-main);
+      cursor: pointer;
+      z-index: 10;
+      transition: color 0.3s ease;
+    }
+    
+    .modal-close:hover {
+      color: var(--highlight-color);
+    }
+    
+    .modal-comparison {
+      position: relative;
+      width: 100%;
+      max-height: 70vh;
+      aspect-ratio: 16 / 9;
+    }
+    
+    .modal-info {
+      text-align: center;
+      margin-top: 1rem;
+      color: var(--font-color-secondary);
+    }
+    
     @media (max-width: 768px) {
       .slider-hint {
         font-size: 0.8rem;
@@ -240,6 +298,11 @@
         height: 25px;
         font-size: 16px;
       }
+      
+      .modal-content {
+        width: 95%;
+        padding: 1rem;
+      }
     }
   </style>
 </head>
@@ -247,7 +310,11 @@
   <div class="hero-container">
     <!-- Comparison Slider -->
     <div class="comparison-wrapper">
-      <div class="comparison-container" id="heroSlider">
+      <div class="comparison-container" id="heroSlider"
+           data-before-thumb="https://archive.org/download/countryside_202512/720i_Dog_thumb.jpg"
+           data-after-thumb="https://archive.org/download/countryside_202512/4k_Dog_thumb.jpg"
+           data-before-full="https://archive.org/download/countryside_202512/720i_Dog.png"
+           data-after-full="https://archive.org/download/countryside_202512/4k_Dog.png">
         <img class="comparison-before" 
              src="https://archive.org/download/countryside_202512/720i_Dog_thumb.jpg" 
              alt="Before restoration - 720i blurry tape">
@@ -255,7 +322,7 @@
              src="https://archive.org/download/countryside_202512/4k_Dog_thumb.jpg" 
              alt="After restoration - 4K clear">
         <div class="comparison-slider"></div>
-        <div class="slider-hint">Drag to compare</div>
+        <div class="slider-hint">Drag to compare • Click for full quality</div>
       </div>
     </div>
     
@@ -272,8 +339,26 @@
     </div>
   </div>
 
+  <!-- Modal for full quality -->
+  <div id="comparisonModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div class="modal-comparison">
+        <div class="comparison-container" id="modalComparisonContainer">
+          <img class="comparison-before" id="modalBefore" alt="Before">
+          <img class="comparison-after" id="modalAfter" alt="After">
+          <div class="comparison-slider"></div>
+        </div>
+      </div>
+      <div class="modal-info">
+        <p>Dog Scene: 720i (674KB) vs 4K (10.8MB) • Full quality comparison</p>
+        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Drag slider to compare • ESC to close</p>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // Comparison Slider Logic
+    // Main slider logic
     const container = document.getElementById('heroSlider');
     const slider = container.querySelector('.comparison-slider');
     const after = container.querySelector('.comparison-after');
@@ -291,18 +376,17 @@
 
     before.addEventListener('load', checkLoaded);
     after.addEventListener('load', checkLoaded);
-
     if (before.complete) checkLoaded();
     if (after.complete) checkLoaded();
 
-    function moveSlider(e, container, after) {
-      const rect = container.getBoundingClientRect();
+    function moveSlider(e, containerEl, afterEl) {
+      const rect = containerEl.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const percent = (x / rect.width) * 100;
       const clampedPercent = Math.max(0, Math.min(100, percent));
       
-      after.style.clipPath = `inset(0 0 0 ${clampedPercent}%)`;
-      container.querySelector('.comparison-slider').style.left = `${clampedPercent}%`;
+      afterEl.style.clipPath = `inset(0 0 0 ${clampedPercent}%)`;
+      containerEl.querySelector('.comparison-slider').style.left = `${clampedPercent}%`;
     }
 
     // Mouse events
@@ -323,6 +407,72 @@
       if (!isActive) return;
       e.preventDefault();
       moveSlider(e.touches[0], container, after);
+    });
+
+    // Modal functionality
+    const modal = document.getElementById('comparisonModal');
+    const modalBefore = document.getElementById('modalBefore');
+    const modalAfter = document.getElementById('modalAfter');
+    const modalClose = document.querySelector('.modal-close');
+    const modalContainer = document.getElementById('modalComparisonContainer');
+
+    container.addEventListener('click', (e) => {
+      if (isActive) return; // Don't open if dragging
+
+      const beforeFull = container.dataset.beforeFull;
+      const afterFull = container.dataset.afterFull;
+
+      modalBefore.src = '';
+      modalAfter.src = '';
+      
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      modalBefore.src = beforeFull;
+      modalAfter.src = afterFull;
+
+      // Reset modal slider to 50%
+      const modalSliderEl = modalContainer.querySelector('.comparison-slider');
+      const modalAfterImg = modalContainer.querySelector('.comparison-after');
+      modalSliderEl.style.left = '50%';
+      modalAfterImg.style.clipPath = 'inset(0 0 0 50%)';
+    });
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Modal slider
+    const modalSlider = modalContainer.querySelector('.comparison-slider');
+    const modalAfterImg = modalContainer.querySelector('.comparison-after');
+    let modalActive = false;
+
+    modalSlider.addEventListener('mousedown', () => { modalActive = true; });
+    document.addEventListener('mouseup', () => { modalActive = false; });
+    
+    modalContainer.addEventListener('mousemove', (e) => {
+      if (!modalActive) return;
+      moveSlider(e, modalContainer, modalAfterImg);
+    });
+
+    modalSlider.addEventListener('touchstart', (e) => { 
+      modalActive = true;
+      e.preventDefault();
+    });
+    
+    modalContainer.addEventListener('touchmove', (e) => {
+      if (!modalActive) return;
+      e.preventDefault();
+      moveSlider(e.touches[0], modalContainer, modalAfterImg);
     });
   </script>
 </body>
