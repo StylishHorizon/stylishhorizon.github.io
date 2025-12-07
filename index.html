@@ -389,22 +389,42 @@
       containerEl.querySelector('.comparison-slider').style.left = `${clampedPercent}%`;
     }
 
+    // Track if user actually dragged
+    let hasDragged = false;
+    let dragStartX = 0;
+
     // Mouse events
-    slider.addEventListener('mousedown', () => { isActive = true; });
-    document.addEventListener('mouseup', () => { isActive = false; });
+    slider.addEventListener('mousedown', (e) => { 
+      isActive = true;
+      hasDragged = false;
+      dragStartX = e.clientX;
+    });
+    document.addEventListener('mouseup', () => { 
+      isActive = false;
+    });
     container.addEventListener('mousemove', (e) => {
       if (!isActive) return;
+      // If moved more than 5px, consider it a drag
+      if (Math.abs(e.clientX - dragStartX) > 5) {
+        hasDragged = true;
+      }
       moveSlider(e, container, after);
     });
 
     // Touch events
+    let touchStartX = 0;
     slider.addEventListener('touchstart', (e) => { 
       isActive = true;
+      hasDragged = false;
+      touchStartX = e.touches[0].clientX;
       e.preventDefault();
     });
     document.addEventListener('touchend', () => { isActive = false; });
     container.addEventListener('touchmove', (e) => {
       if (!isActive) return;
+      if (Math.abs(e.touches[0].clientX - touchStartX) > 5) {
+        hasDragged = true;
+      }
       e.preventDefault();
       moveSlider(e.touches[0], container, after);
     });
@@ -417,7 +437,11 @@
     const modalContainer = document.getElementById('modalComparisonContainer');
 
     container.addEventListener('click', (e) => {
-      if (isActive) return; // Don't open if dragging
+      // Don't open if user just finished dragging
+      if (hasDragged) {
+        hasDragged = false;
+        return;
+      }
 
       const beforeFull = container.dataset.beforeFull;
       const afterFull = container.dataset.afterFull;
