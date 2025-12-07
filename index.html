@@ -1,124 +1,329 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Digital restoration of MiniDV, VHS, Hi8, and forgotten drives. Preserving memory with integrity. No hype. No noise. Just truth." />
-  <title>Stylish Horizon</title>
-
-  <!-- Favicons and manifest for PWA -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/media/favicon-16x16.png">
-  <link rel="shortcut icon" href="/assets/media/favicon.ico">
-  <link rel="manifest" href="/assets/media/site.webmanifest">
-
-<!-- CSP -->
-  <meta http-equiv="Content-Security-Policy" content="
-  default-src 'self';
-  img-src 'self' https://stylishhorizon.github.io;
-  style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
-  font-src 'self' https://fonts.gstatic.com;
-  connect-src 'self' https://*.google-analytics.com https://www.googletagmanager.com;
-  script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
-">
-
-
-  <!-- GTM async for perf -->
-  <script async>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MN6WG3K6');
-  </script>
-
-  <!-- OG and Twitter for sharing -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://stylishhorizon.github.io/index.html">
-  <meta property="og:title" content="Stylish Horizon: Honest Digital Restoration">
-  <meta property="og:description" content="Digital restoration of MiniDV, VHS, Hi8, and forgotten drives. Preserving memory with integrity. No hype. No noise. Just truth.">
-  <meta property="og:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://stylishhorizon.github.io/index.html">
-  <meta name="twitter:title" content="Stylish Horizon: Honest Digital Restoration">
-  <meta name="twitter:description" content="Digital restoration of MiniDV, VHS, Hi8, and forgotten drives. Preserving memory with integrity. No hype. No noise. Just truth.">
-  <meta name="twitter:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
-
-  <!-- Preload fonts for faster load -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" as="style">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
-
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stylish Horizon - Hero Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-a: #0f0f0f;
+      --bg-b: #0a0a0a;
+      --font-color-main: #f0f0f0;
+      --font-color-secondary: #aaaaaa;
+      --highlight-color: #00d4ff;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-a);
+      color: var(--font-color-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+    
+    .hero-container {
+      max-width: 1200px;
+      width: 100%;
+    }
+    
+    /* Comparison Slider */
+    .comparison-wrapper {
+      width: 100%;
+      max-width: 1200px;
+      height: clamp(250px, 40vh, 600px);
+      margin: 0 auto 2rem;
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 
+        0 8px 40px rgba(0, 0, 0, 0.5),
+        0 0 60px rgba(0, 212, 255, 0.15);
+    }
+    
+    .comparison-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      user-select: none;
+      background: rgba(0, 0, 0, 0.3);
+    }
+    
+    .comparison-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+    
+    .comparison-container::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 40px;
+      height: 40px;
+      margin: -20px 0 0 -20px;
+      border: 3px solid rgba(0, 212, 255, 0.2);
+      border-top-color: var(--highlight-color);
+      border-radius: 50%;
+      animation: spinner 0.8s linear infinite;
+      z-index: 1;
+    }
+    
+    .comparison-container.loaded::before {
+      display: none;
+    }
+    
+    @keyframes spinner {
+      to { transform: rotate(360deg); }
+    }
+    
+    .comparison-after {
+      clip-path: inset(0 0 0 50%);
+    }
+    
+    .comparison-slider {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 3px;
+      height: 100%;
+      background: var(--highlight-color);
+      transform: translateX(-50%);
+      cursor: ew-resize;
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+      z-index: 10;
+    }
+    
+    .comparison-slider::before,
+    .comparison-slider::after {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--highlight-color);
+      color: #000;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
+      font-size: 18px;
+    }
+    
+    .comparison-slider::before {
+      content: '⟨';
+      left: -15px;
+    }
+    
+    .comparison-slider::after {
+      content: '⟩';
+      right: -15px;
+    }
+    
+    .slider-hint {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      color: var(--highlight-color);
+      pointer-events: none;
+      z-index: 5;
+      backdrop-filter: blur(10px);
+    }
+    
+    /* Hero Content */
+    .hero-content {
+      text-align: center;
+      margin: 2rem auto;
+      max-width: 800px;
+    }
+    
+    .hero-content h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+    
+    .hero-content p {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--font-color-secondary);
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Buttons */
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    
+    .button {
+      padding: 0.8rem 1.5rem;
+      text-decoration: none;
+      color: var(--font-color-main);
+      border: 1px solid var(--highlight-color);
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      box-shadow: 
+        0 0 30px rgba(0, 212, 255, 0.2),
+        inset 0 0 20px rgba(0, 212, 255, 0.05);
+      background: transparent;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+    
+    .button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+      transition: left 0.5s ease;
+      border-radius: 50px;
+    }
+    
+    .button:hover::before {
+      left: 100%;
+    }
+    
+    .button:hover {
+      background-color: rgba(0, 212, 255, 0.15);
+      box-shadow: 
+        0 0 50px rgba(0, 212, 255, 0.5),
+        inset 0 0 30px rgba(0, 212, 255, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    .button:active {
+      transform: translateY(0) scale(0.98);
+    }
+    
+    @media (max-width: 768px) {
+      .slider-hint {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+      }
+      
+      .comparison-slider::before,
+      .comparison-slider::after {
+        width: 25px;
+        height: 25px;
+        font-size: 16px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <div class="parallax-bg" aria-hidden="true"></div>
-
-  <nav id="site-nav" aria-label="Main navigation">
-    <div class="nav-container">
-      <a class="logo-title" href="index.html" aria-label="Stylish Horizon home page">
-        <picture>
-          <source srcset="assets/media/StylishHorizon_Clear.webp" type="image/webp">
-          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon logo: A horizon line with stylish elements representing digital restoration" loading="lazy" />
-        </picture>
-        <p class="site-title">Stylish Horizon</p>
-      </a>
-      <button id="burger" aria-label="Toggle navigation menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
-      <ul id="primary-navigation" class="nav-links" role="navigation">
-        <li><a href="index.html" class="active" aria-current="page">Home</a></li>
-        <li><a href="manifest.html">Manifest</a></li>
-        <li><a href="archive.html">Archive</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+  <div class="hero-container">
+    <!-- Comparison Slider -->
+    <div class="comparison-wrapper">
+      <div class="comparison-container" id="heroSlider">
+        <img class="comparison-before" 
+             src="https://archive.org/download/countryside_202512/720i_Dog_thumb.jpg" 
+             alt="Before restoration - 720i blurry tape">
+        <img class="comparison-after" 
+             src="https://archive.org/download/countryside_202512/4k_Dog_thumb.jpg" 
+             alt="After restoration - 4K clear">
+        <div class="comparison-slider"></div>
+        <div class="slider-hint">Drag to compare</div>
+      </div>
     </div>
-  </nav>
-
-  <main>
-    <section class="hero" id="hero">
-      <div class="hero-content">
-        <h1>Digital restoration with integrity</h1>
-        <p>No hype. No noise. Just memory.</p>
-        <p>We restore MiniDV tapes, VHS, Hi8, and forgotten drives—breathing life back into what time tried to erase.</p>
+    
+    <!-- Hero Content -->
+    <div class="hero-content">
+      <h1>Digital restoration with integrity</h1>
+      <p>No hype. No noise. Just memory.</p>
+      <p>We restore MiniDV tapes, VHS, Hi8, and forgotten drives—breathing life back into what time tried to erase.</p>
+      
+      <div class="button-group">
+        <button class="button" onclick="alert('This would go to contact page')">Start Now</button>
+        <button class="button" onclick="alert('This would go to Results page')">See Results</button>
       </div>
-      <div class="quick-links">
-        <div class="button-group">
-          <a href="#how" class="button" role="button">How it works?</a>
-          <a href="archive.html#price" class="button" role="button">Price</a>
-          <a href="archive.html" class="button" role="button">See examples</a>
-        </div>
-      </div>
-    </section>
+    </div>
+  </div>
 
-    <section id="what" class="what">
-      <h2>What we do</h2>
-      <div class="text-block">
-        <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
-        <p>If it still breathes—we help it speak again.</p>
-        <p>Every frame is inspected manually. No filters. No nostalgia filters. Just the truth, frame by frame.</p>
-      </div>
-    </section>
+  <script>
+    // Comparison Slider Logic
+    const container = document.getElementById('heroSlider');
+    const slider = container.querySelector('.comparison-slider');
+    const after = container.querySelector('.comparison-after');
+    const before = container.querySelector('.comparison-before');
+    let isActive = false;
+    let imagesLoaded = 0;
 
-    <section id="how" class="how">
-      <h2>How it works</h2>
-      <div class="text-block">
-        <p>No shipping hassles. We connect you with trusted local studios for capture.</p>
-        <p>No subscriptions. You pay only for what you need—precise, transparent.</p>
-        <p>From there: hand-reviewed trims tailored to your story, gentle deinterlacing, natural color balance. Your memories, revived without distortion.</p>
-      </div>
-    </section>
+    // Track image loading
+    const checkLoaded = () => {
+      imagesLoaded++;
+      if (imagesLoaded === 2) {
+        container.classList.add('loaded');
+      }
+    };
 
-    <section id="why" class="why">
-      <h2>Why it matters</h2>
-      <div class="text-block">
-        <p>We believe memory deserves unfiltered clarity.</p>
-        <p>Not polished illusions, not faded echoes—just the raw truth of what was.</p>
-        <p>Because some stories are worth preserving exactly as they unfolded.</p>
-      </div>
-    </section>
-  </main>
+    before.addEventListener('load', checkLoaded);
+    after.addEventListener('load', checkLoaded);
 
-  <footer role="contentinfo">
-    <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon footer logo" loading="lazy" />
-    <p>© <span id="year"></span> Stylish Horizon</p>
-  </footer>
+    if (before.complete) checkLoaded();
+    if (after.complete) checkLoaded();
 
-  <script src="script.js" defer></script>
+    function moveSlider(e, container, after) {
+      const rect = container.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const percent = (x / rect.width) * 100;
+      const clampedPercent = Math.max(0, Math.min(100, percent));
+      
+      after.style.clipPath = `inset(0 0 0 ${clampedPercent}%)`;
+      container.querySelector('.comparison-slider').style.left = `${clampedPercent}%`;
+    }
+
+    // Mouse events
+    slider.addEventListener('mousedown', () => { isActive = true; });
+    document.addEventListener('mouseup', () => { isActive = false; });
+    container.addEventListener('mousemove', (e) => {
+      if (!isActive) return;
+      moveSlider(e, container, after);
+    });
+
+    // Touch events
+    slider.addEventListener('touchstart', (e) => { 
+      isActive = true;
+      e.preventDefault();
+    });
+    document.addEventListener('touchend', () => { isActive = false; });
+    container.addEventListener('touchmove', (e) => {
+      if (!isActive) return;
+      e.preventDefault();
+      moveSlider(e.touches[0], container, after);
+    });
+  </script>
 </body>
 </html>
