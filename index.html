@@ -13,7 +13,7 @@
   <link rel="shortcut icon" href="/assets/media/favicon.ico">
   <link rel="manifest" href="/assets/media/site.webmanifest">
 
-<!-- CSP (added archive.org for Dog Scene slider) -->
+  <!-- CSP (added archive.org for Dog Scene slider images) -->
   <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
   img-src 'self' https://stylishhorizon.github.io https://archive.org https://*.archive.org;
@@ -73,7 +73,7 @@
     <section class="hero" id="hero">
       <!-- Dog Scene Comparison Slider -->
       <div class="hero-slider-wrapper">
-        <div class="hero-comparison-container" id="heroSlider"
+        <div class="comparison-container" id="heroSlider"
              data-before-thumb="https://archive.org/download/countryside_202512/720i_Dog_thumb.jpg"
              data-after-thumb="https://archive.org/download/countryside_202512/4k_Dog_thumb.jpg"
              data-before-full="https://archive.org/download/countryside_202512/720i_Dog.png"
@@ -132,33 +132,15 @@
     </section>
   </main>
 
-  <!-- Modal for full quality comparison -->
-  <div id="heroComparisonModal" class="modal">
-    <div class="modal-content">
-      <span class="modal-close">&times;</span>
-      <div class="modal-comparison">
-        <div class="hero-comparison-container" id="modalComparisonContainer">
-          <img class="comparison-before" id="modalBefore" alt="Before restoration">
-          <img class="comparison-after" id="modalAfter" alt="After restoration">
-          <div class="comparison-slider"></div>
-        </div>
-      </div>
-      <div class="modal-info">
-        <p>Dog Scene: 720i (674KB) vs 4K (10.8MB) • Full quality comparison</p>
-        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Drag slider to compare • ESC to close</p>
-      </div>
-    </div>
-  </div>
-
   <footer role="contentinfo">
     <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon footer logo" loading="lazy" />
-    <p>© <span id="year"></span> Stylish Horizon</p>
+    <p>© <span id="year"></span> Stylish Horizon | <a href="mailto:stylishhorizon@gmail.com">stylishhorizon@gmail.com</a></p>
   </footer>
 
   <script src="script.js" defer></script>
   
   <script>
-    // Hero comparison slider functionality
+    // ========== HERO COMPARISON SLIDER ==========
     document.addEventListener('DOMContentLoaded', function() {
       const container = document.getElementById('heroSlider');
       if (!container) return;
@@ -229,24 +211,31 @@
         moveSlider(e.touches[0], container, after);
       });
 
-      // Modal functionality
-      const modal = document.getElementById('heroComparisonModal');
-      const modalBefore = document.getElementById('modalBefore');
-      const modalAfter = document.getElementById('modalAfter');
-      const modalClose = document.querySelector('.modal-close');
-      const modalContainer = document.getElementById('modalComparisonContainer');
-
+      // Click to open modal (reuse from archive.html)
       container.addEventListener('click', (e) => {
         if (hasDragged) {
           hasDragged = false;
           return;
         }
 
+        // Open modal with full quality images
+        const modal = document.getElementById('comparisonModal');
+        if (!modal) {
+          // If modal doesn't exist (not on archive page), do nothing
+          return;
+        }
+
+        const modalBefore = document.getElementById('modalBefore');
+        const modalAfter = document.getElementById('modalAfter');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalContainer = document.getElementById('modalComparisonContainer');
+
         const beforeFull = container.dataset.beforeFull;
         const afterFull = container.dataset.afterFull;
 
         modalBefore.src = '';
         modalAfter.src = '';
+        modalTitle.textContent = 'Dog Scene: 720i (674KB) vs 4K (10.8MB) — Loading full quality...';
         
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -254,47 +243,21 @@
         modalBefore.src = beforeFull;
         modalAfter.src = afterFull;
 
+        let loadedCount = 0;
+        const checkModalLoaded = () => {
+          loadedCount++;
+          if (loadedCount === 2) {
+            modalTitle.textContent = 'Dog Scene: 720i (674KB) vs 4K (10.8MB) • Full quality comparison';
+          }
+        };
+
+        modalBefore.onload = checkModalLoaded;
+        modalAfter.onload = checkModalLoaded;
+
         const modalSliderEl = modalContainer.querySelector('.comparison-slider');
         const modalAfterImg = modalContainer.querySelector('.comparison-after');
         modalSliderEl.style.left = '50%';
         modalAfterImg.style.clipPath = 'inset(0 0 0 50%)';
-      });
-
-      function closeModal() {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-
-      modalClose.addEventListener('click', closeModal);
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-      });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeModal();
-      });
-
-      // Modal slider
-      const modalSlider = modalContainer.querySelector('.comparison-slider');
-      const modalAfterImg = modalContainer.querySelector('.comparison-after');
-      let modalActive = false;
-
-      modalSlider.addEventListener('mousedown', () => { modalActive = true; });
-      document.addEventListener('mouseup', () => { modalActive = false; });
-      
-      modalContainer.addEventListener('mousemove', (e) => {
-        if (!modalActive) return;
-        moveSlider(e, modalContainer, modalAfterImg);
-      });
-
-      modalSlider.addEventListener('touchstart', (e) => { 
-        modalActive = true;
-        e.preventDefault();
-      });
-      
-      modalContainer.addEventListener('touchmove', (e) => {
-        if (!modalActive) return;
-        e.preventDefault();
-        moveSlider(e.touches[0], modalContainer, modalAfterImg);
       });
     });
   </script>
