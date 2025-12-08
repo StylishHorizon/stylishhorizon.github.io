@@ -131,7 +131,27 @@
       </div>
     </section>
   </main>
+ </main>
 
+  <!-- Modal for full-size comparison (reused from archive.html) -->
+  <div id="comparisonModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div class="modal-comparison">
+        <div class="comparison-container" id="modalComparisonContainer">
+          <img class="comparison-before" id="modalBefore" alt="Before restoration">
+          <img class="comparison-after" id="modalAfter" alt="After restoration">
+          <div class="comparison-slider"></div>
+        </div>
+      </div>
+      <div class="modal-info">
+        <p id="modalTitle"></p>
+        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Drag slider to compare • ESC to close</p>
+      </div>
+    </div>
+  </div>
+
+  <footer role="contentinfo">
   <footer role="contentinfo">
     <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon footer logo" loading="lazy" />
     <p>© <span id="year"></span> Stylish Horizon | <a href="mailto:stylishhorizon@gmail.com">stylishhorizon@gmail.com</a></p>
