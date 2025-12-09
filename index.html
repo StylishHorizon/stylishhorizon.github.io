@@ -131,9 +131,8 @@
       </div>
     </section>
   </main>
- </main>
 
-  <!-- Modal for full-size comparison (reused from archive.html) -->
+  <!-- Modal for full-size comparison (shared with archive.html) -->
   <div id="comparisonModal" class="modal">
     <div class="modal-content">
       <span class="modal-close">&times;</span>
@@ -152,179 +151,173 @@
   </div>
 
   <footer role="contentinfo">
-  <footer role="contentinfo">
     <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon footer logo" loading="lazy" />
     <p>© <span id="year"></span> Stylish Horizon | <a href="mailto:stylishhorizon@gmail.com">stylishhorizon@gmail.com</a></p>
   </footer>
 
   <script src="script.js" defer></script>
   
-<script>
-  // ========== HERO COMPARISON SLIDER ==========
-  document.addEventListener('DOMContentLoaded', function() {
-    const container = document.getElementById('heroSlider');
-    if (!container) return;
+  <script>
+    // ========== HERO COMPARISON SLIDER ==========
+    document.addEventListener('DOMContentLoaded', function() {
+      const container = document.getElementById('heroSlider');
+      if (!container) return;
 
-    const slider = container.querySelector('.comparison-slider');
-    const after = container.querySelector('.comparison-after');
-    const before = container.querySelector('.comparison-before');
-    let isActive = false;
-    let hasDragged = false;
-    let dragStartX = 0;
-    let imagesLoaded = 0;
+      const slider = container.querySelector('.comparison-slider');
+      const after = container.querySelector('.comparison-after');
+      const before = container.querySelector('.comparison-before');
+      let isActive = false;
+      let hasDragged = false;
+      let dragStartX = 0;
+      let imagesLoaded = 0;
 
-    // Track image loading
-    const checkLoaded = () => {
-      imagesLoaded++;
-      if (imagesLoaded === 2) {
-        container.classList.add('loaded');
-      }
-    };
-
-    before.addEventListener('load', checkLoaded);
-    after.addEventListener('load', checkLoaded);
-    if (before.complete) checkLoaded();
-    if (after.complete) checkLoaded();
-
-    function moveSlider(e, containerEl, afterEl) {
-      const rect = containerEl.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const percent = (x / rect.width) * 100;
-      const clampedPercent = Math.max(0, Math.min(100, percent));
-      
-      afterEl.style.clipPath = `inset(0 0 0 ${clampedPercent}%)`;
-      containerEl.querySelector('.comparison-slider').style.left = `${clampedPercent}%`;
-    }
-
-    // Mouse events
-    slider.addEventListener('mousedown', (e) => { 
-      isActive = true;
-      hasDragged = false;
-      dragStartX = e.clientX;
-    });
-    document.addEventListener('mouseup', () => { 
-      isActive = false;
-    });
-    container.addEventListener('mousemove', (e) => {
-      if (!isActive) return;
-      if (Math.abs(e.clientX - dragStartX) > 5) {
-        hasDragged = true;
-      }
-      moveSlider(e, container, after);
-    });
-
-    // Touch events
-    let touchStartX = 0;
-    slider.addEventListener('touchstart', (e) => { 
-      isActive = true;
-      hasDragged = false;
-      touchStartX = e.touches[0].clientX;
-      e.preventDefault();
-    });
-    document.addEventListener('touchend', () => { isActive = false; });
-    container.addEventListener('touchmove', (e) => {
-      if (!isActive) return;
-      if (Math.abs(e.touches[0].clientX - touchStartX) > 5) {
-        hasDragged = true;
-      }
-      e.preventDefault();
-      moveSlider(e.touches[0], container, after);
-    });
-
-    // ========== MODAL FOR HERO SLIDER ==========
-    const modal = document.getElementById('comparisonModal');
-    if (!modal) return; // No modal on this page
-
-    const modalBefore = document.getElementById('modalBefore');
-    const modalAfter = document.getElementById('modalAfter');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalClose = document.querySelector('.modal-close');
-    const modalContainer = document.getElementById('modalComparisonContainer');
-
-    // Open modal on click
-    container.addEventListener('click', (e) => {
-      if (hasDragged) {
-        hasDragged = false;
-        return;
-      }
-
-      const beforeFull = container.dataset.beforeFull;
-      const afterFull = container.dataset.afterFull;
-
-      modalBefore.src = '';
-      modalAfter.src = '';
-      modalTitle.textContent = 'Dog Scene: 720i (674KB) vs 4K (10.8MB) — Loading full quality...';
-      
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-
-      modalBefore.src = beforeFull;
-      modalAfter.src = afterFull;
-
-      let loadedCount = 0;
-      const checkModalLoaded = () => {
-        loadedCount++;
-        if (loadedCount === 2) {
-          modalTitle.textContent = 'Dog Scene: 720i (674KB) vs 4K (10.8MB) • Full quality comparison';
+      // Track image loading
+      const checkLoaded = () => {
+        imagesLoaded++;
+        if (imagesLoaded === 2) {
+          container.classList.add('loaded');
         }
       };
 
-      modalBefore.onload = checkModalLoaded;
-      modalAfter.onload = checkModalLoaded;
+      before.addEventListener('load', checkLoaded);
+      after.addEventListener('load', checkLoaded);
+      if (before.complete) checkLoaded();
+      if (after.complete) checkLoaded();
 
-      const modalSliderEl = modalContainer.querySelector('.comparison-slider');
+      function moveSlider(e, containerEl, afterEl) {
+        const rect = containerEl.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const percent = (x / rect.width) * 100;
+        const clampedPercent = Math.max(0, Math.min(100, percent));
+        
+        afterEl.style.clipPath = `inset(0 0 0 ${clampedPercent}%)`;
+        containerEl.querySelector('.comparison-slider').style.left = `${clampedPercent}%`;
+      }
+
+      // Mouse events
+      slider.addEventListener('mousedown', (e) => { 
+        isActive = true;
+        hasDragged = false;
+        dragStartX = e.clientX;
+      });
+      document.addEventListener('mouseup', () => { 
+        isActive = false;
+      });
+      container.addEventListener('mousemove', (e) => {
+        if (!isActive) return;
+        if (Math.abs(e.clientX - dragStartX) > 5) {
+          hasDragged = true;
+        }
+        moveSlider(e, container, after);
+      });
+
+      // Touch events
+      let touchStartX = 0;
+      slider.addEventListener('touchstart', (e) => { 
+        isActive = true;
+        hasDragged = false;
+        touchStartX = e.touches[0].clientX;
+        e.preventDefault();
+      });
+      document.addEventListener('touchend', () => { isActive = false; });
+      container.addEventListener('touchmove', (e) => {
+        if (!isActive) return;
+        if (Math.abs(e.touches[0].clientX - touchStartX) > 5) {
+          hasDragged = true;
+        }
+        e.preventDefault();
+        moveSlider(e.touches[0], container, after);
+      });
+
+      // ========== MODAL FOR HERO SLIDER ==========
+      const modal = document.getElementById('comparisonModal');
+      if (!modal) return;
+
+      const modalBefore = document.getElementById('modalBefore');
+      const modalAfter = document.getElementById('modalAfter');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalClose = document.querySelector('.modal-close');
+      const modalContainer = document.getElementById('modalComparisonContainer');
+
+      // Open modal on click
+      container.addEventListener('click', (e) => {
+        if (hasDragged) {
+          hasDragged = false;
+          return;
+        }
+
+        const beforeFull = container.dataset.beforeFull;
+        const afterFull = container.dataset.afterFull;
+
+        modalBefore.src = '';
+        modalAfter.src = '';
+        modalTitle.textContent = 'Dog Scene: 720i (674KB) vs 4K (10.8MB) — Loading full quality...';
+        
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        modalBefore.src = beforeFull;
+        modalAfter.src = afterFull;
+
+        let loadedCount = 0;
+        const checkModalLoaded = () => {
+          loadedCount++;
+          if (loadedCount === 2) {
+            modalTitle.textContent = 'Dog Scene: 720i (674KB) vs 4K (10.8MB) • Full quality comparison';
+          }
+        };
+
+        modalBefore.onload = checkModalLoaded;
+        modalAfter.onload = checkModalLoaded;
+
+        const modalSliderEl = modalContainer.querySelector('.comparison-slider');
+        const modalAfterImg = modalContainer.querySelector('.comparison-after');
+        modalSliderEl.style.left = '50%';
+        modalAfterImg.style.clipPath = 'inset(0 0 0 50%)';
+      });
+
+      // Close modal
+      function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      modalClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+      });
+
+      // Modal slider functionality
+      const modalSlider = modalContainer.querySelector('.comparison-slider');
       const modalAfterImg = modalContainer.querySelector('.comparison-after');
-      modalSliderEl.style.left = '50%';
-      modalAfterImg.style.clipPath = 'inset(0 0 0 50%)';
-    });
+      let modalActive = false;
 
-    // Close modal
-    function closeModal() {
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
+      modalSlider.addEventListener('mousedown', () => { 
+        modalActive = true;
+      });
+      document.addEventListener('mouseup', () => { 
+        modalActive = false;
+      });
+      
+      modalContainer.addEventListener('mousemove', (e) => {
+        if (!modalActive) return;
+        moveSlider(e, modalContainer, modalAfterImg);
+      });
 
-    modalClose.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
+      modalSlider.addEventListener('touchstart', (e) => { 
+        modalActive = true;
+        e.preventDefault();
+      });
+      
+      modalContainer.addEventListener('touchmove', (e) => {
+        if (!modalActive) return;
+        e.preventDefault();
+        moveSlider(e.touches[0], modalContainer, modalAfterImg);
+      });
     });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
-    });
-
-    // Modal slider functionality
-    const modalSlider = modalContainer.querySelector('.comparison-slider');
-    const modalAfterImg = modalContainer.querySelector('.comparison-after');
-    let modalActive = false;
-    let modalDragStartX = 0;
-
-    modalSlider.addEventListener('mousedown', (e) => { 
-      modalActive = true;
-      modalDragStartX = e.clientX;
-    });
-    document.addEventListener('mouseup', () => { 
-      modalActive = false;
-    });
-    
-    modalContainer.addEventListener('mousemove', (e) => {
-      if (!modalActive) return;
-      moveSlider(e, modalContainer, modalAfterImg);
-    });
-
-    modalSlider.addEventListener('touchstart', (e) => { 
-      modalActive = true;
-      modalDragStartX = e.touches[0].clientX;
-      e.preventDefault();
-    });
-    
-    modalContainer.addEventListener('touchmove', (e) => {
-      if (!modalActive) return;
-      e.preventDefault();
-      moveSlider(e.touches[0], modalContainer, modalAfterImg);
-    });
-  });
-</script>
-
-
+  </script>
 </body>
 </html>
