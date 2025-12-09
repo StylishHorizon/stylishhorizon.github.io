@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initSlider(container) {
-    // Skip container inside modal
+    // Skip container inside modal (handled separately in initModal)
     if (container.closest('.modal-content')) return;
 
     const slider = container.querySelector('.comparison-slider');
@@ -108,8 +108,8 @@ function initSlider(container) {
     if (!slider || !after || !before) return;
 
     let isActive = false;
-    let startX = 0;       // Starting X position of the mouse/touch
-    let isClick = true;   // We assume it's a click until the mouse moves
+    let startX = 0;
+    let isClick = true; // Assume click by default
 
     // 1. Loading Check
     let imagesLoaded = 0;
@@ -121,11 +121,12 @@ function initSlider(container) {
     if (before.complete) checkLoaded(); else before.onload = checkLoaded;
     if (after.complete) checkLoaded(); else after.onload = checkLoaded;
 
-    // 2. Logic to move the slider
+    // 2. Movement Logic
     const updateSlider = (x) => {
         const rect = container.getBoundingClientRect();
         let percent = ((x - rect.left) / rect.width) * 100;
         percent = Math.max(0, Math.min(100, percent));
+        
         after.style.clipPath = `inset(0 0 0 ${percent}%)`;
         slider.style.left = `${percent}%`;
     };
@@ -133,9 +134,8 @@ function initSlider(container) {
     // 3. Mouse/Touch Down
     const onDown = (e) => {
         isActive = true;
-        isClick = true; // Reset: assume this new interaction is a click
+        isClick = true; 
         startX = e.touches ? e.touches[0].clientX : e.clientX;
-        // Do NOT preventDefault here, or clicking won't work on some devices
     };
 
     // 4. Mouse/Touch Move
@@ -144,12 +144,12 @@ function initSlider(container) {
 
         const currentX = e.touches ? e.touches[0].clientX : e.clientX;
         
-        // If moved more than 5px, mark as DRAG (not a click)
+        // If moved more than 5px, treat as drag
         if (Math.abs(currentX - startX) > 5) {
             isClick = false;
         }
 
-        // If dragging on mobile, prevent page scrolling
+        // Prevent scroll on mobile if dragging slider
         if (!isClick && e.type === 'touchmove') {
             e.preventDefault();
         }
@@ -162,15 +162,14 @@ function initSlider(container) {
         isActive = false;
     };
 
-    // 6. Click Event (Fires after MouseUp)
+    // 6. Click Handler
     const onClick = (e) => {
-        // Only open modal if we determined it was a click (not a drag)
         if (isClick) {
             openModal(container);
         }
     };
 
-    // Attach events to CONTAINER (covers both image and slider handle)
+    // Bind Events
     container.addEventListener('mousedown', onDown);
     document.addEventListener('mouseup', onUp);
     container.addEventListener('mousemove', onMove);
@@ -233,7 +232,7 @@ function openModal(sourceContainer) {
     const beforeFull = sourceContainer.dataset.beforeFull;
     const afterFull = sourceContainer.dataset.afterFull;
     
-    // Determine Title: Priority: data-modal-title -> h3 inside item -> Default
+    // Determine Title
     let titleText = sourceContainer.dataset.modalTitle;
     if (!titleText) {
         const parentItem = sourceContainer.closest('.comparison-item');
@@ -246,12 +245,12 @@ function openModal(sourceContainer) {
         }
     }
 
-    // 2. Show Modal (Must be done before calculating layout)
+    // 2. Show Modal
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
     modalTitle.textContent = "Loading full quality...";
 
-    // 3. Reset slider to center (50%)
+    // 3. Reset slider to center
     if (slider && afterImg) {
         slider.style.left = '50%';
         afterImg.style.clipPath = 'inset(0 0 0 50%)';
@@ -261,7 +260,6 @@ function openModal(sourceContainer) {
     modalBefore.src = "";
     modalAfter.src = "";
     
-    // Small delay ensures browser registers the source change
     setTimeout(() => {
         modalBefore.src = beforeFull;
         modalAfter.src = afterFull;
@@ -276,4 +274,3 @@ function openModal(sourceContainer) {
     modalBefore.onload = onFullLoad;
     modalAfter.onload = onFullLoad;
 }
-
