@@ -3,133 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Contact Stylish Horizon: Start your MiniDV restoration. Share details, get a quote, and preview link. Honest process, no commitments." />
+  <meta name="description" content="Contact Stylish Horizon: Start your MiniDV restoration. Share details, get a quote." />
   <title>Contact | Stylish Horizon</title>
 
-  <!-- Favicons -->
+  <!-- PWA & Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/media/favicon-16x16.png">
   <link rel="shortcut icon" href="/assets/media/favicon.ico">
   <link rel="manifest" href="/assets/media/site.webmanifest">
 
-  <!-- CSP: only Tally + your HF Space -->
+  <!-- CSP (Special for Contact: allows Tally and HF Space) -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    img-src 'self' data: https://stylishhorizon.github.io https://i.ytimg.com https://tally.so;
+    img-src 'self' data: https://stylishhorizon.github.io https://tally.so;
     style-src 'self' https://fonts.googleapis.com 'unsafe-inline' https://tally.so;
     font-src 'self' https://fonts.gstatic.com https://tally.so;
-    connect-src 'self' https://stylishh-stylishhorizon-chat.hf.space https://tally.so;
-    script-src 'self' 'unsafe-inline' https://tally.so;
+    connect-src 'self' https://stylishh-stylishhorizon-chat.hf.space https://tally.so https://*.google-analytics.com;
+    script-src 'self' 'unsafe-inline' https://tally.so https://www.googletagmanager.com https://www.google-analytics.com;
     frame-src 'self' https://tally.so;
   ">
 
-  <!-- Fonts -->
+  <!-- CSS -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" as="style">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@30 adversity=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
   <link rel="stylesheet" href="style.css">
-  
-  <style>
-    /* ========== TALLY ========== */
-    .tally-container {
-      max-width: 800px;
-      margin: 0 auto;
-      background: rgba(255, 255, 255, 0.02);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 60px rgba(0, 212, 255, 0.15);
-    }
-    .tally-container iframe {
-      width: 100%;
-      min-height: 600px;
-      border: none;
-    }
-
-    /* ========== FLOATING CHAT ========== */
-    #bill-chat-button {
-      position: fixed; bottom: 24px; right: 24px;
-      width: 64px; height: 64px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #00d4ff, #0099cc);
-      color: white;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 28px; cursor: pointer;
-      box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
-      z-index: 9999;
-      transition: transform 0.3s ease;
-    }
-    #bill-chat-button:hover { transform: scale(1.1); }
-
-    #bill-chat-window {
-      position: fixed; bottom: 110px; right: 24px;
-      width: 380px; height: 550px;
-      border-radius: 14px;
-      background: rgba(15, 15, 15, 0.95);
-      border: 1px solid rgba(0, 212, 255, 0.3);
-      display: none; flex-direction: column;
-      overflow: hidden; z-index: 9999;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 40px rgba(0, 212, 255, 0.3);
-    }
-    #bill-chat-window.open { display: flex; }
-    #bill-chat-window header {
-      padding: 16px;
-      background: rgba(0, 212, 255, 0.1);
-      color: #00d4ff;
-      font-weight: bold;
-      border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-      display: flex; justify-content: space-between;
-    }
-    #bill-chat-window .close-btn { cursor: pointer; font-size: 20px; opacity: 0.7; }
-    #bill-chat-window .messages {
-      flex: 1; padding: 16px; overflow-y: auto;
-      color: #f0f0f0; font-family: 'Inter', sans-serif; font-size: 14px;
-    }
-    #bill-chat-window input {
-      flex: 1; background: transparent; border: none; padding: 14px; color: white;
-      font-family: 'Inter', sans-serif;
-    }
-    #bill-chat-window button {
-      background: rgba(0, 212, 255, 0.2); border: none; padding: 14px 18px;
-      color: #00d4ff; cursor: pointer;
-    }
-    .message-user, .message-bill {
-      padding: 10px 14px; border-radius: 12px; margin-bottom: 12px;
-      max-width: 80%; display: inline-block; clear: both; line-height: 1.4;
-    }
-    .message-user {
-      background: rgba(0, 212, 255, 0.15);
-      border-radius: 12px 12px 4px 12px;
-      float: right; text-align: right;
-    }
-    .message-bill {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px 12px 12px 4px;
-      float: left; text-align: left;
-    }
-    @media(max-width: 480px) {
-      #bill-chat-window { width: calc(100vw - 48px); }
-    }
-  </style>
 </head>
 <body>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="parallax-bg" aria-hidden="true"></div>
 
   <nav id="site-nav" aria-label="Main navigation">
     <div class="nav-container">
-      <a class="logo-title" href="index.html" aria-label="Stylish Horizon home page">
+      <a class="logo-title" href="index.html">
         <picture>
           <source srcset="assets/media/StylishHorizon_Clear.webp" type="image/webp">
-          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon" loading="lazy" />
+          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Logo" loading="lazy" />
         </picture>
         <p class="site-title">Stylish Horizon</p>
       </a>
-      <button id="burger" aria-label="Toggle navigation menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
-      <ul id="primary-navigation" class="nav-links" role="navigation">
+      <button id="burger" aria-label="Menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
+      <ul id="primary-navigation" class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="manifest.html">Manifest</a></li>
-        <li><a href="archive.html">Archive</a></li>
-        <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
+        <li><a href="manifest.html">Why Now</a></li>
+        <li><a href="archive.html">Results</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -157,7 +75,7 @@
       </div>
       
       <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--font-color-secondary);">
-        <strong>Process:</strong> Free preview on private YouTube → comment timestamps → approve → we finalize (4-6 weeks) → pay after approval.
+        <strong>Process:</strong> Free preview on private YouTube → comment timestamps → approve → we finalize → pay after approval.
       </p>
     </section>
 
@@ -174,84 +92,22 @@
   <div id="bill-chat-window">
     <header>
       <span>Bill — Stylish Horizon AI</span>
-      <span class="close-btn" onclick="toggleChat()">×</span>
+      <span class="close-btn">×</span>
     </header>
     <div class="messages" id="bill-messages">
       <div class="message-bill">Hey! I'm Bill. Ask me about Legacy vs. Ultimate, deinterlacing, or how to start. 👋</div>
     </div>
-    <div style="display: flex; border-top: 1px solid rgba(0, 212, 255, 0.2); background: rgba(0,0,0,0.3);">
+    <div class="input-area">
       <input id="bill-input" type="text" placeholder="e.g., What’s UHD?" />
       <button id="bill-send">➤</button>
     </div>
   </div>
 
   <footer role="contentinfo">
-    <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon footer logo" loading="lazy" />
-    <p>© <span id="year"></span> Stylish Horizon | <a href="mailto:stylishhorizon@google.com">stylishhorizon@google.com</a></p>
+    <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" loading="lazy" />
+    <p>© <span id="year"></span> Stylish Horizon | <a href="mailto:stylishhorizon@gmail.com">stylishhorizon@gmail.com</a></p>
   </footer>
 
   <script src="script.js" defer></script>
-  
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Tally dynamic height
-    window.addEventListener('message', e => {
-      if (e.data && e.data['tally.height']) {
-        document.querySelector('.tally-container iframe').style.height = e.data['tally.height'] + 'px';
-      }
-    });
-
-    // === BILL CHAT LOGIC ===
-    const HF_CHAT_API = "https://stylishh-stylishhorizon-chat.hf.space/chat";
-
-    function toggleChat() {
-      document.getElementById("bill-chat-window").classList.toggle("open");
-    }
-    document.getElementById("bill-chat-button").onclick = toggleChat;
-
-    function addMessage(text, isUser) {
-      const messages = document.getElementById("bill-messages");
-      const div = document.createElement("div");
-      div.className = isUser ? "message-user" : "message-bill";
-      div.textContent = text;
-      messages.appendChild(div);
-      messages.appendChild(document.createElement("div")).style.clear = "both";
-      messages.scrollTop = messages.scrollHeight;
-    }
-
-    async function billSend() {
-      const input = document.getElementById("bill-input");
-      const msg = input.value.trim();
-      if (!msg) return;
-
-      addMessage(msg, true);
-      input.value = "";
-      const sendBtn = document.getElementById("bill-send");
-      sendBtn.disabled = true;
-
-      try {
-        const res = await fetch(HF_CHAT_API, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: msg })
-        });
-        const data = await res.json();
-        addMessage(data.response || "I don’t know — check the Manifest or Archive pages.", false);
-      } catch (e) {
-        addMessage("Bill is offline right now. Please use the form above.", false);
-      } finally {
-        sendBtn.disabled = false;
-      }
-    }
-
-    document.getElementById("bill-send").onclick = billSend;
-    document.getElementById("bill-input").addEventListener("keydown", e => {
-      if (e.key === "Enter" && !e.shiftKey) {
-        e.preventDefault();
-        billSend();
-      }
-    });
-  </script>
 </body>
 </html>
