@@ -6,14 +6,14 @@
   <meta name="description" content="Digital restoration of MiniDV, VHS, Hi8, and forgotten drives. Preserving memory with integrity. No hype. No noise. Just truth." />
   <title>Stylish Horizon</title>
 
-  <!-- Favicons and manifest for PWA -->
+  <!-- PWA & Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/media/favicon-16x16.png">
   <link rel="shortcut icon" href="/assets/media/favicon.ico">
   <link rel="manifest" href="/assets/media/site.webmanifest">
 
-  <!-- CSP (added archive.org for Dog Scene slider images) -->
+  <!-- CSP -->
   <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
   img-src 'self' https://stylishhorizon.github.io https://archive.org https://*.archive.org;
@@ -23,27 +23,21 @@
   script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
 ">
 
-  <!-- GTM async for perf -->
+  <!-- GTM -->
   <script async>
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MN6WG3K6');
   </script>
 
-  <!-- OG and Twitter for sharing -->
+  <!-- Social Meta -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://stylishhorizon.github.io/index.html">
   <meta property="og:title" content="Stylish Horizon: Honest Digital Restoration">
-  <meta property="og:description" content="Digital restoration of MiniDV, VHS, Hi8, and forgotten drives. Preserving memory with integrity. No hype. No noise. Just truth.">
+  <meta property="og:description" content="Digital restoration of MiniDV, VHS, Hi8. Preserving memory with integrity.">
   <meta property="og:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://stylishhorizon.github.io/index.html">
-  <meta name="twitter:title" content="Stylish Horizon: Honest Digital Restoration">
-  <meta name="twitter:description" content="Digital restoration of MiniDV, VHS, Hi8, and forgotten drives. Preserving memory with integrity. No hype. No noise. Just truth.">
-  <meta name="twitter:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
-
-  <!-- Preload fonts for faster load -->
+  
+  <!-- Fonts & CSS -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" as="style">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
-
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -52,16 +46,16 @@
 
   <nav id="site-nav" aria-label="Main navigation">
     <div class="nav-container">
-      <a class="logo-title" href="index.html" aria-label="Stylish Horizon home page">
+      <a class="logo-title" href="index.html">
         <picture>
           <source srcset="assets/media/StylishHorizon_Clear.webp" type="image/webp">
-          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon logo: A horizon line with stylish elements representing digital restoration" loading="lazy" />
+          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon" loading="lazy" />
         </picture>
         <p class="site-title">Stylish Horizon</p>
       </a>
-      <button id="burger" aria-label="Toggle navigation menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
-      <ul id="primary-navigation" class="nav-links" role="navigation">
-        <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+      <button id="burger" aria-label="Menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
+      <ul id="primary-navigation" class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
         <li><a href="manifest.html">Why Now</a></li>
         <li><a href="archive.html">Results</a></li>
         <li><a href="contact.html">Contact</a></li>
@@ -71,21 +65,15 @@
 
   <main>
     <section class="hero" id="hero">
-      <!-- Dog Scene Comparison Slider -->
       <div class="hero-slider-wrapper">
-        <div class="comparison-container" id="heroSlider"
+        <div class="comparison-container"
+             data-modal-title="Dog Scene: 720i (674KB) vs 4K (10.8MB)"
              data-before-thumb="https://archive.org/download/countryside_202512/720i_Dog_thumb.jpg"
              data-after-thumb="https://archive.org/download/countryside_202512/4k_Dog_thumb.jpg"
              data-before-full="https://archive.org/download/countryside_202512/720i_Dog.png"
              data-after-full="https://archive.org/download/countryside_202512/4k_Dog.png">
-          <img class="comparison-before" 
-               src="https://archive.org/download/countryside_202512/720i_Dog_thumb.jpg" 
-               alt="Before restoration - 720i blurry tape"
-               loading="eager">
-          <img class="comparison-after" 
-               src="https://archive.org/download/countryside_202512/4k_Dog_thumb.jpg" 
-               alt="After restoration - 4K clear"
-               loading="eager">
+          <img class="comparison-before" src="https://archive.org/download/countryside_202512/720i_Dog_thumb.jpg" alt="Before" loading="eager">
+          <img class="comparison-after" src="https://archive.org/download/countryside_202512/4k_Dog_thumb.jpg" alt="After" loading="eager">
           <div class="comparison-slider"></div>
           <div class="slider-hint">Drag to compare • Click for full quality</div>
         </div>
@@ -94,45 +82,34 @@
       <div class="hero-content">
         <h1>Digital restoration with integrity</h1>
         <p>No hype. No noise. Just memory.</p>
-        <p>We restore MiniDV tapes, VHS, Hi8, and forgotten drives—breathing life back into what time tried to erase.</p>
+        <p>We restore MiniDV tapes, VHS, Hi8, and forgotten drives.</p>
       </div>
       <div class="quick-links">
         <div class="button-group">
-          <a href="contact.html" class="button" role="button">Start Now</a>
-          <a href="archive.html" class="button" role="button">See Results</a>
+          <a href="contact.html" class="button">Start Now</a>
+          <a href="archive.html" class="button">See Results</a>
         </div>
       </div>
     </section>
 
-    <section id="what" class="what">
+    <section id="what">
       <h2>What we do</h2>
       <div class="text-block">
-        <p>We restore MiniDV, VHS, Hi8, and forgotten drives.</p>
-        <p>If it still breathes—we help it speak again.</p>
+        <p>We restore MiniDV, VHS, Hi8, and forgotten drives. If it still breathes—we help it speak again.</p>
         <p>Every frame is inspected manually. No filters. No nostalgia filters. Just the truth, frame by frame.</p>
       </div>
     </section>
 
-    <section id="how" class="how">
+    <section id="how">
       <h2>How it works</h2>
       <div class="text-block">
         <p>No shipping hassles. We connect you with trusted local studios for capture.</p>
-        <p>No subscriptions. You pay only for what you need—precise, transparent.</p>
-        <p>From there: hand-reviewed trims tailored to your story, gentle deinterlacing, natural color balance. Your memories, revived without distortion.</p>
-      </div>
-    </section>
-
-    <section id="why" class="why">
-      <h2>Why it matters</h2>
-      <div class="text-block">
-        <p>We believe memory deserves unfiltered clarity.</p>
-        <p>Not polished illusions, not faded echoes—just the raw truth of what was.</p>
-        <p>Because some stories are worth preserving exactly as they unfolded.</p>
+        <p>No subscriptions. You pay only for what you need. From there: hand-reviewed trims, gentle deinterlacing, natural color balance.</p>
       </div>
     </section>
   </main>
 
-  <!-- Modal for full-size comparison (shared with archive.html) -->
+  <!-- Shared Modal Structure -->
   <div id="comparisonModal" class="modal">
     <div class="modal-content">
       <span class="modal-close">&times;</span>
@@ -151,173 +128,10 @@
   </div>
 
   <footer role="contentinfo">
-    <img src="assets/media/StylishHorizon_Clear.webp" alt="Stylish Horizon footer logo" loading="lazy" />
+    <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" loading="lazy" />
     <p>© <span id="year"></span> Stylish Horizon | <a href="mailto:stylishhorizon@gmail.com">stylishhorizon@gmail.com</a></p>
   </footer>
 
   <script src="script.js" defer></script>
-  
-  <script>
-    // ========== HERO COMPARISON SLIDER ==========
-    document.addEventListener('DOMContentLoaded', function() {
-      const container = document.getElementById('heroSlider');
-      if (!container) return;
-
-      const slider = container.querySelector('.comparison-slider');
-      const after = container.querySelector('.comparison-after');
-      const before = container.querySelector('.comparison-before');
-      let isActive = false;
-      let hasDragged = false;
-      let dragStartX = 0;
-      let imagesLoaded = 0;
-
-      // Track image loading
-      const checkLoaded = () => {
-        imagesLoaded++;
-        if (imagesLoaded === 2) {
-          container.classList.add('loaded');
-        }
-      };
-
-      before.addEventListener('load', checkLoaded);
-      after.addEventListener('load', checkLoaded);
-      if (before.complete) checkLoaded();
-      if (after.complete) checkLoaded();
-
-      function moveSlider(e, containerEl, afterEl) {
-        const rect = containerEl.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const percent = (x / rect.width) * 100;
-        const clampedPercent = Math.max(0, Math.min(100, percent));
-        
-        afterEl.style.clipPath = `inset(0 0 0 ${clampedPercent}%)`;
-        containerEl.querySelector('.comparison-slider').style.left = `${clampedPercent}%`;
-      }
-
-      // Mouse events
-      slider.addEventListener('mousedown', (e) => { 
-        isActive = true;
-        hasDragged = false;
-        dragStartX = e.clientX;
-      });
-      document.addEventListener('mouseup', () => { 
-        isActive = false;
-      });
-      container.addEventListener('mousemove', (e) => {
-        if (!isActive) return;
-        if (Math.abs(e.clientX - dragStartX) > 5) {
-          hasDragged = true;
-        }
-        moveSlider(e, container, after);
-      });
-
-      // Touch events
-      let touchStartX = 0;
-      slider.addEventListener('touchstart', (e) => { 
-        isActive = true;
-        hasDragged = false;
-        touchStartX = e.touches[0].clientX;
-        e.preventDefault();
-      });
-      document.addEventListener('touchend', () => { isActive = false; });
-      container.addEventListener('touchmove', (e) => {
-        if (!isActive) return;
-        if (Math.abs(e.touches[0].clientX - touchStartX) > 5) {
-          hasDragged = true;
-        }
-        e.preventDefault();
-        moveSlider(e.touches[0], container, after);
-      });
-
-      // ========== MODAL FOR HERO SLIDER ==========
-      const modal = document.getElementById('comparisonModal');
-      if (!modal) return;
-
-      const modalBefore = document.getElementById('modalBefore');
-      const modalAfter = document.getElementById('modalAfter');
-      const modalTitle = document.getElementById('modalTitle');
-      const modalClose = document.querySelector('.modal-close');
-      const modalContainer = document.getElementById('modalComparisonContainer');
-
-      // Open modal on click
-      container.addEventListener('click', (e) => {
-        if (hasDragged) {
-          hasDragged = false;
-          return;
-        }
-
-        const beforeFull = container.dataset.beforeFull;
-        const afterFull = container.dataset.afterFull;
-
-        modalBefore.src = '';
-        modalAfter.src = '';
-        modalTitle.textContent = 'Dog Scene: 720i (674KB) vs 4K (10.8MB) — Loading full quality...';
-        
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-
-        modalBefore.src = beforeFull;
-        modalAfter.src = afterFull;
-
-        let loadedCount = 0;
-        const checkModalLoaded = () => {
-          loadedCount++;
-          if (loadedCount === 2) {
-            modalTitle.textContent = 'Dog Scene: 720i (674KB) vs 4K (10.8MB) • Full quality comparison';
-          }
-        };
-
-        modalBefore.onload = checkModalLoaded;
-        modalAfter.onload = checkModalLoaded;
-
-        const modalSliderEl = modalContainer.querySelector('.comparison-slider');
-        const modalAfterImg = modalContainer.querySelector('.comparison-after');
-        modalSliderEl.style.left = '50%';
-        modalAfterImg.style.clipPath = 'inset(0 0 0 50%)';
-      });
-
-      // Close modal
-      function closeModal() {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-
-      modalClose.addEventListener('click', closeModal);
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-      });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeModal();
-      });
-
-      // Modal slider functionality
-      const modalSlider = modalContainer.querySelector('.comparison-slider');
-      const modalAfterImg = modalContainer.querySelector('.comparison-after');
-      let modalActive = false;
-
-      modalSlider.addEventListener('mousedown', () => { 
-        modalActive = true;
-      });
-      document.addEventListener('mouseup', () => { 
-        modalActive = false;
-      });
-      
-      modalContainer.addEventListener('mousemove', (e) => {
-        if (!modalActive) return;
-        moveSlider(e, modalContainer, modalAfterImg);
-      });
-
-      modalSlider.addEventListener('touchstart', (e) => { 
-        modalActive = true;
-        e.preventDefault();
-      });
-      
-      modalContainer.addEventListener('touchmove', (e) => {
-        if (!modalActive) return;
-        e.preventDefault();
-        moveSlider(e.touches[0], modalContainer, modalAfterImg);
-      });
-    });
-  </script>
 </body>
 </html>
