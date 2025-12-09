@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Stylish Horizon Archive: Packages for MiniDV restoration and real examples." />
+  <meta name="description" content="Stylish Horizon Archive: Packages for MiniDV restoration, real examples on YouTube, and how the process works." />
   <title>Archive | Stylish Horizon</title>
 
   <!-- PWA & Favicons -->
@@ -16,7 +16,7 @@
   <!-- CSP -->
   <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
-  img-src 'self' https://stylishhorizon.github.io https://i.ytimg.com https://archive.org https://*.archive.org;
+  img-src 'self' https://stylishhorizon.github.io https://i.ytimg.com https://img.youtube.com https://archive.org https://*.archive.org;
   style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
   font-src 'self' https://fonts.gstatic.com;
   connect-src 'self' https://*.google-analytics.com https://www.googletagmanager.com https://www.youtube.com https://*.youtube.com https://*.ytimg.com https://archive.org https://*.archive.org;
@@ -25,6 +25,7 @@
   media-src 'self' https://archive.org https://*.archive.org;
 ">
 
+  <!-- GTM -->
   <script async>
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MN6WG3K6');
   </script>
@@ -32,8 +33,8 @@
   <!-- Social Meta -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://stylishhorizon.github.io/archive.html">
-  <meta property="og:title" content="Stylish Horizon Archive">
-  <meta property="og:description" content="See our packages for MiniDV/VHS restoration and real examples.">
+  <meta property="og:title" content="Stylish Horizon Archive: Packages & Examples">
+  <meta property="og:description" content="See our packages for MiniDV/VHS restoration and real YouTube examples.">
   <meta property="og:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
 
   <!-- CSS -->
@@ -66,6 +67,21 @@
 
   <main>
     <section class="hero" id="hero">
+      <!-- HERO SLIDER (Cloned from Building Scene) -->
+      <div class="hero-slider-wrapper">
+        <div class="comparison-container" 
+             data-modal-title="Building Scene: 720i (688KB) vs 4K (10.3MB)"
+             data-before-thumb="https://archive.org/download/countryside_202512/720i_Build_thumb.jpg"
+             data-after-thumb="https://archive.org/download/countryside_202512/4k_Build_thumb.jpg"
+             data-before-full="https://archive.org/download/countryside_202512/720i_Build.png"
+             data-after-full="https://archive.org/download/countryside_202512/4k_Build.png">
+          <img class="comparison-before" src="https://archive.org/download/countryside_202512/720i_Build_thumb.jpg" alt="Before" loading="eager">
+          <img class="comparison-after" src="https://archive.org/download/countryside_202512/4k_Build_thumb.jpg" alt="After" loading="eager">
+          <div class="comparison-slider"></div>
+          <div class="slider-hint">Drag to compare • Click for full quality</div>
+        </div>
+      </div>
+
       <div class="hero-content">
         <h1>Archive: Restored Truths</h1>
         <p>No filters. No fakes. Just clean, honest revivals.</p>
@@ -113,25 +129,46 @@
     <!-- Countryside Project -->
     <section id="countryside" class="project-section">
       <h2>Countryside Project</h2>
+      
       <h3>Full Restoration Videos</h3>
+      <p style="text-align: center; margin-bottom: 2rem;">Same footage across three packages: Legacy (720p), Ultimate (1080p), and UHD (4K).</p>
+      
       <div class="videos">
+        <!-- Legacy -->
         <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/rjS13daTnKc?rel=0" title="Legacy" loading="lazy"></iframe>
+          <iframe 
+            width="100%" height="100%" loading="lazy"
+            src="https://www.youtube.com/embed/rjS13daTnKc"
+            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/rjS13daTnKc?autoplay=1><img src=https://img.youtube.com/vi/rjS13daTnKc/hqdefault.jpg alt='Legacy Video'><span>▶</span></a>"
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          </iframe>
           <p>Legacy (720p ProRes)</p>
         </div>
+        <!-- Ultimate -->
         <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/PH5Ap0-exNw?rel=0" title="Ultimate" loading="lazy"></iframe>
+          <iframe 
+            width="100%" height="100%" loading="lazy"
+            src="https://www.youtube.com/embed/PH5Ap0-exNw"
+            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/PH5Ap0-exNw?autoplay=1><img src=https://img.youtube.com/vi/PH5Ap0-exNw/hqdefault.jpg alt='Ultimate Video'><span>▶</span></a>"
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          </iframe>
           <p>Ultimate (1080p Upscale)</p>
         </div>
+        <!-- UHD -->
         <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/aSduAKdM_zk?rel=0" title="UHD" loading="lazy"></iframe>
+          <iframe 
+            width="100%" height="100%" loading="lazy"
+            src="https://www.youtube.com/embed/aSduAKdM_zk"
+            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/aSduAKdM_zk?autoplay=1><img src=https://img.youtube.com/vi/aSduAKdM_zk/hqdefault.jpg alt='UHD Video'><span>▶</span></a>"
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          </iframe>
           <p>UHD (4K On Request)</p>
         </div>
       </div>
 
       <h3 style="margin-top: 3rem;">Frame Comparisons</h3>
       <div class="comparison-grid">
-        <!-- Scene Build -->
+        <!-- Scene Build (Now also in Hero, but kept here for context) -->
         <div class="comparison-item">
           <h3>Building Scene</h3>
           <p>720i (688KB) vs 4K (10.3MB) • Click for full quality</p>
@@ -146,7 +183,7 @@
           </div>
           <div class="comparison-labels"><span>720i</span><span>4K</span></div>
         </div>
-        
+
         <!-- Scene Cam -->
         <div class="comparison-item">
           <h3>Camera Scene</h3>
@@ -184,12 +221,27 @@
     <!-- Diving Project -->
     <section id="diving" class="project-section">
       <h2>Diving Project (2001)</h2>
+      
       <div class="videos">
+        <!-- Full Movie -->
         <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/x5xNOegZ5sQ?rel=0" title="Full Movie" loading="lazy"></iframe>
+          <iframe 
+            width="100%" height="100%" loading="lazy"
+            src="https://www.youtube.com/embed/x5xNOegZ5sQ"
+            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/x5xNOegZ5sQ?autoplay=1><img src=https://img.youtube.com/vi/x5xNOegZ5sQ/hqdefault.jpg alt='Diving Full'><span>▶</span></a>"
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          </iframe>
+          <p>Full Movie (720p)</p>
         </div>
+        <!-- Short -->
         <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/2TG4Q3H3htc?rel=0" title="Short" loading="lazy"></iframe>
+          <iframe 
+            width="100%" height="100%" loading="lazy"
+            src="https://www.youtube.com/embed/2TG4Q3H3htc"
+            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/2TG4Q3H3htc?autoplay=1><img src=https://img.youtube.com/vi/2TG4Q3H3htc/hqdefault.jpg alt='Diving Short'><span>▶</span></a>"
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          </iframe>
+          <p>UHD Short</p>
         </div>
       </div>
 
@@ -217,7 +269,7 @@
     </div>
   </main>
 
-  <!-- Shared Modal Structure -->
+  <!-- Shared Modal -->
   <div id="comparisonModal" class="modal">
     <div class="modal-content">
       <span class="modal-close">&times;</span>
