@@ -299,3 +299,77 @@ footer a { color: var(--highlight-color); text-decoration: none; }
   .packages-table td::before { content: attr(data-label); position: absolute; left: 0.5rem; color: var(--highlight-color); }
 }
 
+/* ================== CONTACT PAGE SPECIFICS ================== */
+
+/* Tally Form Container */
+.tally-container {
+  max-width: 800px; margin: 0 auto;
+  background: rgba(255, 255, 255, 0.02); border-radius: 8px; overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 60px rgba(0, 212, 255, 0.15);
+}
+.tally-container iframe { width: 100%; min-height: 600px; border: none; }
+
+/* Bill Chat Floating Widget */
+#bill-chat-button {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 64px; height: 64px; border-radius: 50%;
+  background: linear-gradient(135deg, #00d4ff, #0099cc);
+  color: white; display: flex; align-items: center; justify-content: center;
+  font-size: 28px; cursor: pointer; z-index: 9999;
+  box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
+  transition: transform 0.3s ease;
+}
+#bill-chat-button:hover { transform: scale(1.1); }
+
+#bill-chat-window {
+  position: fixed; bottom: 110px; right: 24px;
+  width: 380px; height: 550px; border-radius: 14px;
+  background: rgba(15, 15, 15, 0.95);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  display: none; flex-direction: column; overflow: hidden; z-index: 9999;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 40px rgba(0, 212, 255, 0.3);
+}
+#bill-chat-window.open { display: flex; }
+
+#bill-chat-window header {
+  padding: 16px; background: rgba(0, 212, 255, 0.1);
+  color: #00d4ff; font-weight: bold;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  display: flex; justify-content: space-between;
+}
+#bill-chat-window .close-btn { cursor: pointer; font-size: 20px; opacity: 0.7; }
+#bill-chat-window .messages {
+  flex: 1; padding: 16px; overflow-y: auto;
+  color: #f0f0f0; font-size: 14px;
+}
+#bill-chat-window .input-area {
+  display: flex; border-top: 1px solid rgba(0, 212, 255, 0.2);
+  background: rgba(0,0,0,0.3);
+}
+#bill-chat-window input {
+  flex: 1; background: transparent; border: none; padding: 14px;
+  color: white; font-family: inherit;
+}
+#bill-chat-window input:focus { outline: none; }
+#bill-chat-window button {
+  background: rgba(0, 212, 255, 0.2); border: none; padding: 14px 18px;
+  color: #00d4ff; cursor: pointer;
+}
+
+.message-user, .message-bill {
+  padding: 10px 14px; border-radius: 12px; margin-bottom: 12px;
+  max-width: 80%; display: inline-block; clear: both; line-height: 1.4;
+}
+.message-user {
+  background: rgba(0, 212, 255, 0.15);
+  border-radius: 12px 12px 4px 12px; float: right; text-align: right;
+}
+.message-bill {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px 12px 12px 4px; float: left; text-align: left;
+}
+@media(max-width: 480px) {
+  #bill-chat-window { width: calc(100vw - 48px); }
+}
+
