@@ -207,13 +207,17 @@ function openModal(sourceContainer) {
     const modalTitle = document.getElementById('modalTitle');
     const modalContainer = document.getElementById('modalComparisonContainer');
     
+    // Элементы управления внутри модалки
+    const slider = modalContainer.querySelector('.comparison-slider');
+    const afterImg = modalContainer.querySelector('.comparison-after');
+
     if (!modalBefore || !modalAfter) return;
 
-    // Данные для отображения
+    // 1. Получаем данные
     const beforeFull = sourceContainer.dataset.beforeFull;
     const afterFull = sourceContainer.dataset.afterFull;
     
-    // Пытаемся найти заголовок: либо data-аттрибут, либо h3 в родителе (для archive.html), либо дефолт
+    // Заголовок
     let titleText = sourceContainer.dataset.modalTitle;
     if (!titleText) {
         const parentItem = sourceContainer.closest('.comparison-item');
@@ -226,28 +230,34 @@ function openModal(sourceContainer) {
         }
     }
 
-    // Сброс и загрузка
-    modalTitle.textContent = "Loading full quality...";
-    modalBefore.src = "";
-    modalAfter.src = "";
+    // 2. Показываем модалку (важно сделать это ДО манипуляций с размерами)
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
+    modalTitle.textContent = "Loading full quality...";
 
-    // Установка позиции слайдера на 50%
-    const slider = modalContainer.querySelector('.comparison-slider');
-    const afterImg = modalContainer.querySelector('.comparison-after');
-    slider.style.left = '50%';
-    afterImg.style.clipPath = 'inset(0 0 0 50%)';
+    // 3. Сбрасываем слайдер в центр (50%)
+    if (slider && afterImg) {
+        slider.style.left = '50%';
+        afterImg.style.clipPath = 'inset(0 0 0 50%)';
+    }
 
-    // Загрузка изображений
+    // 4. Загружаем картинки
+    modalBefore.src = "";
+    modalAfter.src = "";
+    
+    // Небольшая задержка перед установкой src помогает браузеру понять, что картинки новые
+    setTimeout(() => {
+        modalBefore.src = beforeFull;
+        modalAfter.src = afterFull;
+    }, 10);
+
     let loaded = 0;
     const onFullLoad = () => {
         loaded++;
         if (loaded >= 2) modalTitle.textContent = titleText;
     };
 
-    modalBefore.src = beforeFull;
     modalBefore.onload = onFullLoad;
-    modalAfter.src = afterFull;
     modalAfter.onload = onFullLoad;
 }
+
