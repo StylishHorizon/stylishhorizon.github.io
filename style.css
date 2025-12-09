@@ -309,57 +309,16 @@ section .text-block:hover {
     0 0 60px rgba(0, 212, 255, 0.15);
 }
 
-/* ================== COMPARISON SLIDER (shared styles) ================== */
-.comparison-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin: 2rem 0;
-}
-
-.comparison-item {
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 8px;
-  padding: 1rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 
-    0 8px 30px rgba(0, 0, 0, 0.5),
-    0 0 40px rgba(0, 212, 255, 0.1);
-}
-
-.comparison-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 
-    0 12px 50px rgba(0, 212, 255, 0.4),
-    0 8px 30px rgba(0, 0, 0, 0.6);
-}
-
-.comparison-item h3 {
-  color: var(--highlight-color);
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
-  text-align: center;
-}
-
-.comparison-item p {
-  text-align: center;
-  font-size: 0.85rem;
-  color: var(--font-color-secondary);
-  margin-bottom: 1rem;
-}
-
-.comparison-container {
+.hero-slider-wrapper .comparison-container {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  border-radius: 4px;
   cursor: pointer;
   user-select: none;
   background: rgba(0, 0, 0, 0.3);
 }
 
-.comparison-container img {
+.hero-slider-wrapper .comparison-container img {
   position: absolute;
   top: 0;
   left: 0;
@@ -367,11 +326,9 @@ section .text-block:hover {
   height: 100%;
   object-fit: cover;
   pointer-events: none;
-  background: rgba(255, 255, 255, 0.05);
 }
 
-/* Loading spinner for images */
-.comparison-container::before {
+.hero-slider-wrapper .comparison-container::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -386,7 +343,7 @@ section .text-block:hover {
   z-index: 1;
 }
 
-.comparison-container.loaded::before {
+.hero-slider-wrapper .comparison-container.loaded::before {
   display: none;
 }
 
@@ -394,11 +351,11 @@ section .text-block:hover {
   to { transform: rotate(360deg); }
 }
 
-.comparison-after {
+.hero-slider-wrapper .comparison-after {
   clip-path: inset(0 0 0 50%);
 }
 
-.comparison-slider {
+.hero-slider-wrapper .comparison-slider {
   position: absolute;
   top: 0;
   left: 50%;
@@ -411,7 +368,7 @@ section .text-block:hover {
   z-index: 10;
 }
 
-.comparison-slider::before {
+.hero-slider-wrapper .comparison-slider::before {
   content: '⟨';
   position: absolute;
   top: 50%;
@@ -429,7 +386,7 @@ section .text-block:hover {
   box-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
 }
 
-.comparison-slider::after {
+.hero-slider-wrapper .comparison-slider::after {
   content: '⟩';
   position: absolute;
   top: 50%;
@@ -447,15 +404,7 @@ section .text-block:hover {
   box-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
 }
 
-.comparison-labels {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 0.5rem;
-  font-size: 0.8rem;
-  color: var(--font-color-secondary);
-}
-
-.slider-hint {
+.hero-slider-wrapper .slider-hint {
   position: absolute;
   bottom: 1rem;
   left: 50%;
@@ -470,74 +419,18 @@ section .text-block:hover {
   backdrop-filter: blur(10px);
 }
 
-/* ================== MODAL STYLES ================== */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 2000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.95);
-  backdrop-filter: blur(10px);
-}
-
-.modal.active {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-content {
-  position: relative;
-  width: 90%;
-  max-width: 1400px;
-  max-height: 90vh;
-  background: rgba(15, 15, 15, 0.95);
-  border-radius: 8px;
-  padding: 2rem;
-  box-shadow: 0 20px 80px rgba(0, 212, 255, 0.4);
-}
-
-.modal-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 2rem;
-  color: var(--font-color-main);
-  cursor: pointer;
-  z-index: 10;
-  transition: color 0.3s ease;
-}
-
-.modal-close:hover {
-  color: var(--highlight-color);
-}
-
-.modal-comparison {
-  position: relative;
-  width: 100%;
-  max-height: 70vh;
-  aspect-ratio: 16 / 9;
-}
-
-.modal-info {
-  text-align: center;
-  margin-top: 1rem;
-  color: var(--font-color-secondary);
-}
-
-/* ================== PROJECT SECTIONS (for archive.html) ================== */
-.project-section {
-  margin: 4rem 0;
-}
-
-.project-section h3 {
-  font-size: 1.8rem;
-  color: rgba(0, 212, 255, 0.8);
-  text-align: center;
-  margin-bottom: 1rem;
+@media(max-width: 768px) {
+  .hero-slider-wrapper .slider-hint {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .hero-slider-wrapper .comparison-slider::before,
+  .hero-slider-wrapper .comparison-slider::after {
+    width: 25px;
+    height: 25px;
+    font-size: 16px;
+  }
 }
 
 /* ================== PACKAGES TABLE ================== */
@@ -882,3 +775,4 @@ select:focus-visible {
     font-size: 3.5rem;
   }
 }
+
