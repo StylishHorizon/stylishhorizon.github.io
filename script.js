@@ -274,3 +274,88 @@ function openModal(sourceContainer) {
     modalBefore.onload = onFullLoad;
     modalAfter.onload = onFullLoad;
 }
+
+/* ================== CONTACT PAGE LOGIC (BILL AI & TALLY) ================== */
+
+document.addEventListener('DOMContentLoaded', function() {
+    initTally();
+    initBillChat();
+});
+
+function initTally() {
+    // Dynamic height for Tally iframe
+    window.addEventListener('message', e => {
+        if (e.data && e.data['tally.height']) {
+            const iframe = document.querySelector('.tally-container iframe');
+            if (iframe) {
+                iframe.style.height = e.data['tally.height'] + 'px';
+            }
+        }
+    });
+}
+
+function initBillChat() {
+    const chatBtn = document.getElementById("bill-chat-button");
+    const chatWindow = document.getElementById("bill-chat-window");
+    const sendBtn = document.getElementById("bill-send");
+    const input = document.getElementById("bill-input");
+    const messages = document.getElementById("bill-messages");
+    const closeBtn = document.querySelector("#bill-chat-window .close-btn");
+
+    if (!chatBtn || !chatWindow) return; // Exit if not on contact page
+
+    // Toggle Chat
+    const toggleChat = () => chatWindow.classList.toggle("open");
+    chatBtn.addEventListener('click', toggleChat);
+    if (closeBtn) closeBtn.addEventListener('click', toggleChat);
+
+    // Add Message to UI
+    const addMessage = (text, isUser) => {
+        const div = document.createElement("div");
+        div.className = isUser ? "message-user" : "message-bill";
+        div.textContent = text;
+        messages.appendChild(div);
+        
+        // Clear float fix
+        const clear = document.createElement("div");
+        clear.style.clear = "both";
+        messages.appendChild(clear);
+        
+        messages.scrollTop = messages.scrollHeight;
+    };
+
+    // Send Logic
+    const HF_CHAT_API = "https://stylishh-stylishhorizon-chat.hf.space/chat";
+    
+    const sendMessage = async () => {
+        const msg = input.value.trim();
+        if (!msg) return;
+
+        addMessage(msg, true);
+        input.value = "";
+        sendBtn.disabled = true;
+
+        try {
+            const res = await fetch(HF_CHAT_API, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: msg })
+            });
+            const data = await res.json();
+            addMessage(data.response || "I don’t know — check the Manifest or Archive pages.", false);
+        } catch (e) {
+            console.error(e);
+            addMessage("Bill is offline right now. Please use the form above.", false);
+        } finally {
+            sendBtn.disabled = false;
+        }
+    };
+
+    sendBtn.addEventListener('click', sendMessage);
+    input.addEventListener('keydown', e => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+}
