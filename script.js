@@ -8,9 +8,11 @@
 
     window.addEventListener('scroll', () => {
         const currentScrollY = window.scrollY;
+        // Hide if scrolling down and not at the very top (offset 100px)
         if (currentScrollY > lastScrollY && currentScrollY > 100) { 
             nav.classList.add('hidden');
         } else {
+            // Show if scrolling up
             nav.classList.remove('hidden');
         }
         lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
@@ -28,6 +30,7 @@
         burger.setAttribute('aria-expanded', String(isExpanded));
     });
 
+    // Close menu on click outside
     document.addEventListener('click', (event) => {
         if (navLinks.classList.contains('show') && 
             !navLinks.contains(event.target) && 
@@ -37,6 +40,7 @@
         }
     });
 
+    // Close menu when a link inside is clicked
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('show');
@@ -59,7 +63,7 @@
     sections.forEach(section => observer.observe(section));
 })();
 
-// 4. Active Menu Link
+// 4. Active Menu Link Highlight
 (function() {
     const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
     document.querySelectorAll('.nav-links a').forEach(a => {
@@ -74,7 +78,7 @@
     });
 })();
 
-// 5. Dynamic Year
+// 5. Dynamic Year in Footer
 const yearEl = document.getElementById('year');
 if(yearEl){ yearEl.textContent = new Date().getFullYear(); }
 
@@ -84,17 +88,17 @@ if(yearEl){ yearEl.textContent = new Date().getFullYear(); }
 document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('comparisonModal');
     
-    // Инициализируем все слайдеры на странице
+    // Initialize all sliders on the page
     document.querySelectorAll('.comparison-container').forEach(initSlider);
 
-    // Логика Модального окна (если оно есть на странице)
+    // Initialize Modal logic if present
     if (modal) {
         initModal(modal);
     }
 });
 
 function initSlider(container) {
-    // Пропускаем контейнер внутри модалки, он управляется отдельно
+    // Skip container inside modal (handled separately in initModal)
     if (container.closest('.modal-content')) return;
 
     const slider = container.querySelector('.comparison-slider');
@@ -117,7 +121,7 @@ function initSlider(container) {
     if (before.complete) checkLoaded(); else before.onload = checkLoaded;
     if (after.complete) checkLoaded(); else after.onload = checkLoaded;
 
-    // Move Logic
+    // Movement Logic
     const move = (clientX) => {
         const rect = container.getBoundingClientRect();
         let percent = ((clientX - rect.left) / rect.width) * 100;
@@ -127,10 +131,16 @@ function initSlider(container) {
         slider.style.left = `${percent}%`;
     };
 
+    // Reset drag state on any press (Fixes "cannot click after drag" bug)
+    const resetState = () => {
+        hasDragged = false;
+    };
+    container.addEventListener('mousedown', resetState);
+    container.addEventListener('touchstart', resetState, { passive: true });
+
     // Mouse Events
     slider.addEventListener('mousedown', (e) => { 
         isActive = true; 
-        hasDragged = false; 
         startX = e.clientX; 
     });
     
@@ -138,6 +148,7 @@ function initSlider(container) {
     
     container.addEventListener('mousemove', (e) => {
         if (!isActive) return;
+        // If moved more than 5px, consider it a drag operation
         if (Math.abs(e.clientX - startX) > 5) hasDragged = true;
         move(e.clientX);
     });
@@ -145,7 +156,6 @@ function initSlider(container) {
     // Touch Events
     slider.addEventListener('touchstart', (e) => { 
         isActive = true; 
-        hasDragged = false;
         startX = e.touches[0].clientX;
         e.preventDefault(); 
     });
@@ -159,7 +169,7 @@ function initSlider(container) {
         move(e.touches[0].clientX);
     });
 
-    // Click to Open Modal (только если не перетаскивали)
+    // Click to Open Modal (Only if not dragging)
     container.addEventListener('click', () => {
         if (!hasDragged) openModal(container);
     });
@@ -171,7 +181,6 @@ function initModal(modal) {
     const modalSlider = modalContainer.querySelector('.comparison-slider');
     const modalAfter = modalContainer.querySelector('.comparison-after');
     
-    // Закрытие
     const closeModal = () => {
         modal.classList.remove('active');
         document.body.style.overflow = '';
@@ -181,7 +190,7 @@ function initModal(modal) {
     modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-    // Слайдер внутри модалки
+    // Modal internal slider logic
     let isActive = false;
     const moveModal = (clientX) => {
         const rect = modalContainer.getBoundingClientRect();
@@ -207,17 +216,17 @@ function openModal(sourceContainer) {
     const modalTitle = document.getElementById('modalTitle');
     const modalContainer = document.getElementById('modalComparisonContainer');
     
-    // Элементы управления внутри модалки
+    // Controls inside modal
     const slider = modalContainer.querySelector('.comparison-slider');
     const afterImg = modalContainer.querySelector('.comparison-after');
 
     if (!modalBefore || !modalAfter) return;
 
-    // 1. Получаем данные
+    // 1. Get Data from source
     const beforeFull = sourceContainer.dataset.beforeFull;
     const afterFull = sourceContainer.dataset.afterFull;
     
-    // Заголовок
+    // Determine Title: Priority: data-modal-title -> h3 inside item -> Default
     let titleText = sourceContainer.dataset.modalTitle;
     if (!titleText) {
         const parentItem = sourceContainer.closest('.comparison-item');
@@ -230,22 +239,22 @@ function openModal(sourceContainer) {
         }
     }
 
-    // 2. Показываем модалку (важно сделать это ДО манипуляций с размерами)
+    // 2. Show Modal (Must be done before calculating layout)
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
     modalTitle.textContent = "Loading full quality...";
 
-    // 3. Сбрасываем слайдер в центр (50%)
+    // 3. Reset slider to center (50%)
     if (slider && afterImg) {
         slider.style.left = '50%';
         afterImg.style.clipPath = 'inset(0 0 0 50%)';
     }
 
-    // 4. Загружаем картинки
+    // 4. Load Images
     modalBefore.src = "";
     modalAfter.src = "";
     
-    // Небольшая задержка перед установкой src помогает браузеру понять, что картинки новые
+    // Small delay ensures browser registers the source change
     setTimeout(() => {
         modalBefore.src = beforeFull;
         modalAfter.src = afterFull;
@@ -260,4 +269,3 @@ function openModal(sourceContainer) {
     modalBefore.onload = onFullLoad;
     modalAfter.onload = onFullLoad;
 }
-
