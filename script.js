@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initSlider(container) {
-    // Skip container inside modal (handled separately in initModal)
+    // Skip container inside modal
     if (container.closest('.modal-content')) return;
 
     const slider = container.querySelector('.comparison-slider');
@@ -108,10 +108,10 @@ function initSlider(container) {
     if (!slider || !after || !before) return;
 
     let isActive = false;
-    let hasDragged = false;
-    let startX = 0;
+    let startX = 0;       // Starting X position of the mouse/touch
+    let isClick = true;   // We assume it's a click until the mouse moves
 
-    // Loading Check
+    // 1. Loading Check
     let imagesLoaded = 0;
     const checkLoaded = () => {
         imagesLoaded++;
@@ -121,58 +121,65 @@ function initSlider(container) {
     if (before.complete) checkLoaded(); else before.onload = checkLoaded;
     if (after.complete) checkLoaded(); else after.onload = checkLoaded;
 
-    // Movement Logic
-    const move = (clientX) => {
+    // 2. Logic to move the slider
+    const updateSlider = (x) => {
         const rect = container.getBoundingClientRect();
-        let percent = ((clientX - rect.left) / rect.width) * 100;
+        let percent = ((x - rect.left) / rect.width) * 100;
         percent = Math.max(0, Math.min(100, percent));
-        
         after.style.clipPath = `inset(0 0 0 ${percent}%)`;
         slider.style.left = `${percent}%`;
     };
 
-    // Reset drag state on any press (Fixes "cannot click after drag" bug)
-    const resetState = () => {
-        hasDragged = false;
+    // 3. Mouse/Touch Down
+    const onDown = (e) => {
+        isActive = true;
+        isClick = true; // Reset: assume this new interaction is a click
+        startX = e.touches ? e.touches[0].clientX : e.clientX;
+        // Do NOT preventDefault here, or clicking won't work on some devices
     };
-    container.addEventListener('mousedown', resetState);
-    container.addEventListener('touchstart', resetState, { passive: true });
 
-    // Mouse Events
-    slider.addEventListener('mousedown', (e) => { 
-        isActive = true; 
-        startX = e.clientX; 
-    });
-    
-    document.addEventListener('mouseup', () => { isActive = false; });
-    
-    container.addEventListener('mousemove', (e) => {
+    // 4. Mouse/Touch Move
+    const onMove = (e) => {
         if (!isActive) return;
-        // If moved more than 5px, consider it a drag operation
-        if (Math.abs(e.clientX - startX) > 5) hasDragged = true;
-        move(e.clientX);
-    });
 
-    // Touch Events
-    slider.addEventListener('touchstart', (e) => { 
-        isActive = true; 
-        startX = e.touches[0].clientX;
-        e.preventDefault(); 
-    });
-    
-    document.addEventListener('touchend', () => { isActive = false; });
-    
-    container.addEventListener('touchmove', (e) => {
-        if (!isActive) return;
-        if (Math.abs(e.touches[0].clientX - startX) > 5) hasDragged = true;
-        e.preventDefault();
-        move(e.touches[0].clientX);
-    });
+        const currentX = e.touches ? e.touches[0].clientX : e.clientX;
+        
+        // If moved more than 5px, mark as DRAG (not a click)
+        if (Math.abs(currentX - startX) > 5) {
+            isClick = false;
+        }
 
-    // Click to Open Modal (Only if not dragging)
-    container.addEventListener('click', () => {
-        if (!hasDragged) openModal(container);
-    });
+        // If dragging on mobile, prevent page scrolling
+        if (!isClick && e.type === 'touchmove') {
+            e.preventDefault();
+        }
+
+        updateSlider(currentX);
+    };
+
+    // 5. Mouse/Touch Up
+    const onUp = () => {
+        isActive = false;
+    };
+
+    // 6. Click Event (Fires after MouseUp)
+    const onClick = (e) => {
+        // Only open modal if we determined it was a click (not a drag)
+        if (isClick) {
+            openModal(container);
+        }
+    };
+
+    // Attach events to CONTAINER (covers both image and slider handle)
+    container.addEventListener('mousedown', onDown);
+    document.addEventListener('mouseup', onUp);
+    container.addEventListener('mousemove', onMove);
+
+    container.addEventListener('touchstart', onDown, { passive: true });
+    document.addEventListener('touchend', onUp);
+    container.addEventListener('touchmove', onMove, { passive: false });
+
+    container.addEventListener('click', onClick);
 }
 
 function initModal(modal) {
@@ -269,3 +276,4 @@ function openModal(sourceContainer) {
     modalBefore.onload = onFullLoad;
     modalAfter.onload = onFullLoad;
 }
+
