@@ -1,80 +1,69 @@
-// ========== HEADER HIDE ON SCROLL ==========
+/* ================== CORE UI FUNCTIONS ================== */
+
+// 1. Header Hide on Scroll
 (function() {
     let lastScrollY = window.scrollY;
-    // Используем #site-nav, как в HTML
     const nav = document.getElementById('site-nav'); 
+    if (!nav) return;
 
     window.addEventListener('scroll', () => {
         const currentScrollY = window.scrollY;
-
-        // Скрыть, если прокручиваем вниз и не в самом верху (offset 100px)
         if (currentScrollY > lastScrollY && currentScrollY > 100) { 
             nav.classList.add('hidden');
         } else {
-            // Показать, если прокручиваем вверх или вернулись к самому верху
             nav.classList.remove('hidden');
         }
         lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
     });
 })();
 
-// ========== BURGER MENU TOGGLE ==========
+// 2. Burger Menu
 (function() {
-    // Используем #primary-navigation и #burger, как в HTML
     const navLinks = document.getElementById('primary-navigation');
     const burger = document.getElementById('burger'); 
+    if (!navLinks || !burger) return;
 
     burger.addEventListener('click', () => {
         const isExpanded = navLinks.classList.toggle('show');
         burger.setAttribute('aria-expanded', String(isExpanded));
     });
 
-    // Close menu on link click and click outside (optimized structure)
     document.addEventListener('click', (event) => {
-        const isClickInsideNav = navLinks.contains(event.target);
-        const isClickOnBurger = burger.contains(event.target);
-
-        if (navLinks.classList.contains('show') && !isClickInsideNav && !isClickOnBurger) {
+        if (navLinks.classList.contains('show') && 
+            !navLinks.contains(event.target) && 
+            !burger.contains(event.target)) {
             navLinks.classList.remove('show');
             burger.setAttribute('aria-expanded', 'false');
         }
     });
 
-    // Close menu when a link inside is clicked (for better mobile UX)
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('show');
             burger.setAttribute('aria-expanded', 'false');
         });
     });
-
 })();
 
-// ========== SECTION VISIBILITY ON SCROLL (Intersection Observer) ==========
+// 3. Scroll Animations (Intersection Observer)
 (function() {
     const sections = document.querySelectorAll('section');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // observer.unobserve(entry.target); // Опционально: прекратить наблюдение после первого появления
             }
         });
-    }, {
-        rootMargin: '0px',
-        threshold: 0.2
-    });
+    }, { rootMargin: '0px', threshold: 0.1 });
 
     sections.forEach(section => observer.observe(section));
 })();
 
-// ========== ACTIVE MENU ITEM HIGHLIGHT (Based on URL) ==========
-(function markActive() {
+// 4. Active Menu Link
+(function() {
     const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
     document.querySelectorAll('.nav-links a').forEach(a => {
         const href = a.getAttribute('href')?.toLowerCase() || '';
-
-        // Проверяем, совпадает ли href с текущим файлом и не является ли он якорем (#how)
         if (href.endsWith(path) && !href.includes('#')) {
             a.classList.add('active');
             a.setAttribute('aria-current', 'page');
@@ -85,7 +74,180 @@
     });
 })();
 
-// ========== DYNAMIC YEAR IN FOOTER ==========
-// Используем id="year" как в HTML
+// 5. Dynamic Year
 const yearEl = document.getElementById('year');
 if(yearEl){ yearEl.textContent = new Date().getFullYear(); }
+
+
+/* ================== COMPARISON SLIDER & MODAL LOGIC ================== */
+
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('comparisonModal');
+    
+    // Инициализируем все слайдеры на странице
+    document.querySelectorAll('.comparison-container').forEach(initSlider);
+
+    // Логика Модального окна (если оно есть на странице)
+    if (modal) {
+        initModal(modal);
+    }
+});
+
+function initSlider(container) {
+    // Пропускаем контейнер внутри модалки, он управляется отдельно
+    if (container.closest('.modal-content')) return;
+
+    const slider = container.querySelector('.comparison-slider');
+    const after = container.querySelector('.comparison-after');
+    const before = container.querySelector('.comparison-before');
+    
+    if (!slider || !after || !before) return;
+
+    let isActive = false;
+    let hasDragged = false;
+    let startX = 0;
+
+    // Loading Check
+    let imagesLoaded = 0;
+    const checkLoaded = () => {
+        imagesLoaded++;
+        if (imagesLoaded >= 2) container.classList.add('loaded');
+    };
+
+    if (before.complete) checkLoaded(); else before.onload = checkLoaded;
+    if (after.complete) checkLoaded(); else after.onload = checkLoaded;
+
+    // Move Logic
+    const move = (clientX) => {
+        const rect = container.getBoundingClientRect();
+        let percent = ((clientX - rect.left) / rect.width) * 100;
+        percent = Math.max(0, Math.min(100, percent));
+        
+        after.style.clipPath = `inset(0 0 0 ${percent}%)`;
+        slider.style.left = `${percent}%`;
+    };
+
+    // Mouse Events
+    slider.addEventListener('mousedown', (e) => { 
+        isActive = true; 
+        hasDragged = false; 
+        startX = e.clientX; 
+    });
+    
+    document.addEventListener('mouseup', () => { isActive = false; });
+    
+    container.addEventListener('mousemove', (e) => {
+        if (!isActive) return;
+        if (Math.abs(e.clientX - startX) > 5) hasDragged = true;
+        move(e.clientX);
+    });
+
+    // Touch Events
+    slider.addEventListener('touchstart', (e) => { 
+        isActive = true; 
+        hasDragged = false;
+        startX = e.touches[0].clientX;
+        e.preventDefault(); 
+    });
+    
+    document.addEventListener('touchend', () => { isActive = false; });
+    
+    container.addEventListener('touchmove', (e) => {
+        if (!isActive) return;
+        if (Math.abs(e.touches[0].clientX - startX) > 5) hasDragged = true;
+        e.preventDefault();
+        move(e.touches[0].clientX);
+    });
+
+    // Click to Open Modal (только если не перетаскивали)
+    container.addEventListener('click', () => {
+        if (!hasDragged) openModal(container);
+    });
+}
+
+function initModal(modal) {
+    const closeBtn = modal.querySelector('.modal-close');
+    const modalContainer = modal.querySelector('.comparison-container');
+    const modalSlider = modalContainer.querySelector('.comparison-slider');
+    const modalAfter = modalContainer.querySelector('.comparison-after');
+    
+    // Закрытие
+    const closeModal = () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    // Слайдер внутри модалки
+    let isActive = false;
+    const moveModal = (clientX) => {
+        const rect = modalContainer.getBoundingClientRect();
+        let percent = ((clientX - rect.left) / rect.width) * 100;
+        percent = Math.max(0, Math.min(100, percent));
+        modalAfter.style.clipPath = `inset(0 0 0 ${percent}%)`;
+        modalSlider.style.left = `${percent}%`;
+    };
+
+    modalSlider.addEventListener('mousedown', () => isActive = true);
+    document.addEventListener('mouseup', () => isActive = false);
+    modalContainer.addEventListener('mousemove', (e) => { if (isActive) moveModal(e.clientX); });
+
+    modalSlider.addEventListener('touchstart', (e) => { isActive = true; e.preventDefault(); });
+    document.addEventListener('touchend', () => isActive = false);
+    modalContainer.addEventListener('touchmove', (e) => { if (isActive) { e.preventDefault(); moveModal(e.touches[0].clientX); }});
+}
+
+function openModal(sourceContainer) {
+    const modal = document.getElementById('comparisonModal');
+    const modalBefore = document.getElementById('modalBefore');
+    const modalAfter = document.getElementById('modalAfter');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContainer = document.getElementById('modalComparisonContainer');
+    
+    if (!modalBefore || !modalAfter) return;
+
+    // Данные для отображения
+    const beforeFull = sourceContainer.dataset.beforeFull;
+    const afterFull = sourceContainer.dataset.afterFull;
+    
+    // Пытаемся найти заголовок: либо data-аттрибут, либо h3 в родителе (для archive.html), либо дефолт
+    let titleText = sourceContainer.dataset.modalTitle;
+    if (!titleText) {
+        const parentItem = sourceContainer.closest('.comparison-item');
+        if (parentItem) {
+            const h3 = parentItem.querySelector('h3');
+            const p = parentItem.querySelector('p');
+            titleText = `${h3 ? h3.textContent : ''} ${p ? '— ' + p.textContent : ''}`;
+        } else {
+            titleText = "Full Quality Comparison";
+        }
+    }
+
+    // Сброс и загрузка
+    modalTitle.textContent = "Loading full quality...";
+    modalBefore.src = "";
+    modalAfter.src = "";
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    // Установка позиции слайдера на 50%
+    const slider = modalContainer.querySelector('.comparison-slider');
+    const afterImg = modalContainer.querySelector('.comparison-after');
+    slider.style.left = '50%';
+    afterImg.style.clipPath = 'inset(0 0 0 50%)';
+
+    // Загрузка изображений
+    let loaded = 0;
+    const onFullLoad = () => {
+        loaded++;
+        if (loaded >= 2) modalTitle.textContent = titleText;
+    };
+
+    modalBefore.src = beforeFull;
+    modalBefore.onload = onFullLoad;
+    modalAfter.src = afterFull;
+    modalAfter.onload = onFullLoad;
+}
