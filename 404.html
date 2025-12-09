@@ -2,13 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>404 - Stylish Horizon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 | Stylish Horizon</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body { display: flex; flex-direction: column; height: 100vh; justify-content: center; }
+    .hero { min-height: auto; }
+    h1 { font-size: 4rem; color: var(--highlight-color); margin: 0; }
+  </style>
 </head>
 <body>
-  <main style="text-align:center; padding-top: 20vh;">
+  <div class="parallax-bg"></div>
+  <section class="hero">
     <h1>404</h1>
-    <p>Page not found. <a href="/">Return home</a></p>
-  </main>
+    <p>Signal Lost.</p>
+    <p style="color: var(--font-color-secondary);">This tape seems to be empty.</p>
+    <div class="quick-links">
+      <a href="index.html" class="button">Rewind to Home</a>
+    </div>
+  </section>
 </body>
 </html>
