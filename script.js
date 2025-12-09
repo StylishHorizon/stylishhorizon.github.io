@@ -121,14 +121,32 @@ function initSlider(container) {
     if (before.complete) checkLoaded(); else before.onload = checkLoaded;
     if (after.complete) checkLoaded(); else after.onload = checkLoaded;
 
-    // 2. Movement Logic
+// 2. Movement Logic
     const updateSlider = (x) => {
         const rect = container.getBoundingClientRect();
         let percent = ((x - rect.left) / rect.width) * 100;
+        
+        // Clamp percentage between 0 and 100
         percent = Math.max(0, Math.min(100, percent));
         
         after.style.clipPath = `inset(0 0 0 ${percent}%)`;
         slider.style.left = `${percent}%`;
+
+        // === FIX START: Hide arrows at edges ===
+        // Hide left arrow if < 4%
+        if (percent < 4) {
+            container.classList.add('edge-left');
+        } else {
+            container.classList.remove('edge-left');
+        }
+
+        // Hide right arrow if > 96%
+        if (percent > 96) {
+            container.classList.add('edge-right');
+        } else {
+            container.classList.remove('edge-right');
+        }
+        // === FIX END ===
     };
 
     // 3. Mouse/Touch Down
@@ -359,3 +377,4 @@ function initBillChat() {
         }
     });
 }
+
