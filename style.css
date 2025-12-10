@@ -57,6 +57,7 @@ body {
   -webkit-backdrop-filter: blur(10px);
   transition: transform 0.3s ease-in-out;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), 0 0 60px rgba(0, 212, 255, 0.15);
+  padding-top: env(safe-area-inset-top);
 }
 #site-nav.hidden { transform: translateY(-100%); }
 
@@ -412,3 +413,4 @@ footer a { color: var(--highlight-color); text-decoration: none; }
   .packages-table td { display: block; text-align: right; position: relative; padding-left: 50%; }
   .packages-table td::before { content: attr(data-label); position: absolute; left: 0.5rem; color: var(--highlight-color); }
 }
+
