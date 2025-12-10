@@ -4,9 +4,9 @@
   "description": "Digital restoration of MiniDV, VHS, Hi8, and forgotten drives.",
   "start_url": "/index.html",
   "display": "standalone",
-  "orientation": "portrait",
+  "orientation": "any",
   "background_color": "#0a0a0a",
-  "theme_color": "#00d4ff",
+  "theme_color": "#0a0a0a",
   "icons": [
     {
       "src": "/assets/media/android-chrome-192x192.png",
