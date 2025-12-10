@@ -380,4 +380,19 @@ footer a { color: var(--highlight-color); text-decoration: none; }
   #bill-chat-window { width: calc(100vw - 48px); }
 }
 
+/* ================== ASPECT RATIO UTILITIES ================== */
+
+/* Helper for MiniDV/VHS content (4:3 aspect ratio) */
+.comparison-container.ratio-4-3 {
+  aspect-ratio: 4 / 3;
+}
+
+/* On wider screens, prevent 4:3 containers from becoming too tall/huge */
+@media (min-width: 768px) {
+  .comparison-container.ratio-4-3 {
+    max-width: 85%; /* Slightly narrower to look elegant */
+    margin-left: auto; 
+    margin-right: auto;
+  }
+}
 
