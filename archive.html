@@ -13,6 +13,10 @@
   <link rel="shortcut icon" href="/assets/media/favicon.ico">
   <link rel="manifest" href="/assets/media/site.webmanifest">
 
+  <!-- Preconnect to Archive.org for faster full-res image loading -->
+  <link rel="preconnect" href="https://archive.org">
+  <link rel="dns-prefetch" href="https://archive.org">
+
   <!-- CSP -->
   <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
@@ -67,10 +71,9 @@
 
   <main>
     <section class="hero" id="hero">
-      <!-- HERO SLIDER (Cloned from Building Scene) -->
-      <section class="hero" id="hero">
+      <!-- HERO SLIDER (Building Scene - 4:3 Ratio) -->
       <div class="hero-slider-wrapper">
-        <div class="comparison-container" 
+        <div class="comparison-container ratio-4-3" 
              data-modal-title="Building Scene: 720i (688KB) vs 4K (10.3MB)"
              data-before-thumb="assets/media/thumbnails/720i_Build_thumb.jpg"
              data-after-thumb="assets/media/thumbnails/4k_Build_thumb.jpg"
@@ -82,7 +85,6 @@
           <div class="slider-hint">Drag to compare • Click for full quality</div>
         </div>
       </div>
-      <!-- ... rest of hero content ... -->
 
       <div class="hero-content">
         <h1>Archive: Restored Truths</h1>
@@ -169,28 +171,44 @@
       </div>
 
       <h3 style="margin-top: 3rem;">Frame Comparisons</h3>
-     div class="comparison-grid
-        <!-- Scene Cam -->
+      <div class="comparison-grid">
+        <!-- Scene Build (4:3) -->
         <div class="comparison-item">
-          <h3>Camera Scene</h3>
-          <p>720i (582KB) vs 4K (9.0MB) • Click for full quality</p>
-          <div class="comparison-container" 
-               data-before-thumb="https://archive.org/download/countryside_202512/720i_Cam_thumb.jpg"
-               data-after-thumb="https://archive.org/download/countryside_202512/4k_Cam_thumb.jpg"
-               data-before-full="https://archive.org/download/countryside_202512/720i_Cam.png"
-               data-after-full="https://archive.org/download/countryside_202512/4k_Cam.png">
-            <img class="comparison-before" src="https://archive.org/download/countryside_202512/720i_Cam_thumb.jpg" alt="720i Cam" loading="lazy">
-            <img class="comparison-after" src="https://archive.org/download/countryside_202512/4k_Cam_thumb.jpg" alt="4K Cam" loading="lazy">
+          <h3>Building Scene</h3>
+          <p>720i (688KB) vs 4K (10.3MB) • Click for full quality</p>
+          <div class="comparison-container ratio-4-3" 
+               data-before-thumb="assets/media/thumbnails/720i_Build_thumb.jpg"
+               data-after-thumb="assets/media/thumbnails/4k_Build_thumb.jpg"
+               data-before-full="https://archive.org/download/countryside_202512/720i_Build.png"
+               data-after-full="https://archive.org/download/countryside_202512/4k_Build.png">
+            <img class="comparison-before" src="assets/media/thumbnails/720i_Build_thumb.jpg" alt="720i Build" loading="lazy">
+            <img class="comparison-after" src="assets/media/thumbnails/4k_Build_thumb.jpg" alt="4K Build" loading="lazy">
             <div class="comparison-slider"></div>
           </div>
           <div class="comparison-labels"><span>720i</span><span>4K</span></div>
         </div>
 
-       <!-- Scene Dog -->
+        <!-- Scene Cam (4:3) -->
+        <div class="comparison-item">
+          <h3>Camera Scene</h3>
+          <p>720i (582KB) vs 4K (9.0MB) • Click for full quality</p>
+          <div class="comparison-container ratio-4-3" 
+               data-before-thumb="assets/media/thumbnails/720i_Cam_thumb.jpg"
+               data-after-thumb="assets/media/thumbnails/4k_Cam_thumb.jpg"
+               data-before-full="https://archive.org/download/countryside_202512/720i_Cam.png"
+               data-after-full="https://archive.org/download/countryside_202512/4k_Cam.png">
+            <img class="comparison-before" src="assets/media/thumbnails/720i_Cam_thumb.jpg" alt="720i Cam" loading="lazy">
+            <img class="comparison-after" src="assets/media/thumbnails/4k_Cam_thumb.jpg" alt="4K Cam" loading="lazy">
+            <div class="comparison-slider"></div>
+          </div>
+          <div class="comparison-labels"><span>720i</span><span>4K</span></div>
+        </div>
+
+        <!-- Scene Dog (4:3) -->
         <div class="comparison-item">
           <h3>Dog Scene</h3>
           <p>720i (674KB) vs 4K (10.8MB) • Click for full quality</p>
-          <div class="comparison-container" 
+          <div class="comparison-container ratio-4-3" 
                data-before-thumb="assets/media/thumbnails/720i_Dog_thumb.jpg"
                data-after-thumb="assets/media/thumbnails/4k_Dog_thumb.jpg"
                data-before-full="https://archive.org/download/countryside_202512/720i_Dog.png"
@@ -202,7 +220,8 @@
           <div class="comparison-labels"><span>720i</span><span>4K</span></div>
         </div>
       </div>
-      
+    </section>
+
     <!-- Diving Project -->
     <section id="diving" class="project-section">
       <h2>Diving Project (2001)</h2>
@@ -231,8 +250,10 @@
       </div>
 
       <h3 style="margin-top: 3rem;">Frame Comparisons</h3>
-      <div class="comparison-item">
-          <h3>Underwater Scene 2</h3>
+      <div class="comparison-grid">
+        <!-- Diving Scene (16:9, NO ratio-4-3) -->
+        <div class="comparison-item">
+          <h3>Diving Station Scene</h3>
           <p>720i vs 1920p • Click for full quality</p>
           <div class="comparison-container" 
                data-before-thumb="assets/media/thumbnails/2001_SL_720i25_2_thumb.jpg"
@@ -279,5 +300,3 @@
   <script src="script.js" defer></script>
 </body>
 </html>
-
-
