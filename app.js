@@ -21,6 +21,19 @@ const HEADER_HTML = `
   </div>
 `;
 
+const CHAT_HTML = `
+  <div id="bill-chat-button">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+  </div>
+  <div id="bill-chat-window">
+    <header><span>Bill — Stylish Horizon AI</span><span class="close-btn">×</span></header>
+    <div class="messages" id="bill-messages"><div class="message-bill">Hey! I'm Bill. Ask me about Legacy vs. Ultimate. 👋</div></div>
+    <div class="input-area"><input id="bill-input" type="text" placeholder="Type here..." /><button id="bill-send">➤</button></div>
+  </div>
+`;
+
 const FOOTER_HTML = `
   <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" loading="lazy" />
   <p>© <span id="year">${CURRENT_YEAR}</span> ${SITE_TITLE} | <a href="mailto:stylishhorizon@gmail.com">stylishhorizon@gmail.com</a></p>
@@ -254,3 +267,4 @@ function initChat() {
     document.getElementById("bill-send").addEventListener('click', send);
     input.addEventListener('keydown', (e) => { if (e.key === "Enter") send(); });
 }
+
