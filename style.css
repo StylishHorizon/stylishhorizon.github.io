@@ -366,6 +366,67 @@ h2 {
 footer { text-align: center; padding: 2rem 0; margin-top: 4rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
 footer img { height: 30px; opacity: 0.6; }
 
+/* =========================================
+   10. CONTACT (Tally & Chat)
+   ========================================= */
+.tally-container {
+  max-width: 800px; margin: 0 auto;
+  background: rgba(255, 255, 255, 0.02); border-radius: 8px; overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 60px rgba(0, 212, 255, 0.15);
+}
+.tally-container iframe { width: 100%; min-height: 600px; border: none; }
+
+/* Chat Button - Neon Style */
+#bill-chat-button {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 60px; height: 60px; border-radius: 50%;
+  background: #0f0f0f; 
+  border: 1px solid var(--highlight-color); 
+  color: var(--highlight-color);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 9999;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); 
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 1; transform: scale(1);
+}
+#bill-chat-button:hover { 
+  transform: scale(1.1); 
+  background: rgba(0, 212, 255, 0.1);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
+}
+
+/* Hidden state (when chat is open) */
+#bill-chat-button.hidden {
+  opacity: 0;
+  transform: scale(0);
+  pointer-events: none;
+}
+
+/* Chat Window */
+#bill-chat-window {
+  position: fixed; bottom: 100px; right: 24px;
+  width: 380px; height: 500px; 
+  background: rgba(10, 10, 10, 0.95); 
+  border: 1px solid var(--highlight-color);
+  display: none; flex-direction: column; overflow: hidden; z-index: 9999;
+  backdrop-filter: blur(15px); border-radius: 14px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#bill-chat-window.open { 
+  display: flex; 
+  opacity: 1; transform: translateY(0);
+}
+
+#bill-chat-window header { 
+  padding: 16px; 
+  background: rgba(0, 212, 255, 0.1); 
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  colo
+
+
 
 
 
