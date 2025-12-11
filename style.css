@@ -268,6 +268,9 @@ h2 {
 /* =========================================
    8. MODAL
    ========================================= */
+/* =========================================
+   8. MODAL
+   ========================================= */
 .modal {
   display: none; position: fixed; z-index: 2000; left: 0; top: 0;
   width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95);
@@ -285,31 +288,26 @@ h2 {
   position: absolute; top: 20px; right: 20px; font-size: 3rem;
   color: var(--font-color-main); cursor: pointer; z-index: 2001; line-height: 1;
 }
-.modal-close:hover { color: var(--highlight-color); }
 
 .modal-comparison { 
-  position: relative; 
-  width: 100%; 
-  height: 85%; /* Оставляем место под заголовок */
+  position: relative; width: 100%; height: 85%;
   display: flex; align-items: center; justify-content: center;
 }
 
-/* === ИСПРАВЛЕНИЕ ЗДЕСЬ === */
+/* Modal Slider Container */
 .modal-comparison .comparison-container {
-  width: 100%;      /* Было auto -> Растягиваем на всю ширину */
-  height: 100%;     /* Было auto -> Растягиваем на всю высоту */
-  max-width: 100%; 
-  max-height: 100%;
-  aspect-ratio: unset; /* Отключаем пропорции 4:3, чтобы влезло всё */
-  background: transparent;
+  width: 100%; height: 100%;
+  max-width: 100%; max-height: 100%;
+  aspect-ratio: unset; background: transparent;
+  
+  /* РАЗРЕШАЕМ ЗУМ (PINCH) */
+  touch-action: pan-x pan-y pinch-zoom; 
 }
 
 .modal-comparison img { 
-  object-fit: contain; /* Картинка сама найдет пропорции и впишется */
-  width: 100% !important;
-  height: 100% !important;
-} 
-/* =========================== */
+  object-fit: contain; 
+  width: 100% !important; height: 100% !important;
+}
 
 .modal-info { text-align: center; margin-top: 1rem; color: var(--font-color-secondary); }
 /* =========================================
@@ -344,4 +342,5 @@ h2 {
 
 footer { text-align: center; padding: 2rem 0; margin-top: 4rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
 footer img { height: 30px; opacity: 0.6; }
+
 
