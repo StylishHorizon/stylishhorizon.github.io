@@ -1,23 +1,29 @@
-/* ================== BASE & RESET ================== */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
+/* =========================================
+   1. VARIABLES & RESET
+   ========================================= */
 :root {
+  /* Colors */
   --bg-a: #0f0f0f;
   --bg-b: #0a0a0a;
   --bg-c: #050505;
   --font-color-main: #f0f0f0;
   --font-color-secondary: #aaaaaa;
   --highlight-color: #00d4ff;
+
+  /* Spacing */
+  --nav-height: 80px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
   width: 100%;
+  overflow-x: hidden; /* Critical for mobile stability */
 }
 
 body {
@@ -27,12 +33,13 @@ body {
   background: var(--bg-a);
   color: var(--font-color-main);
   margin: 0;
-  overflow-x: hidden;
   width: 100%;
+  overflow-x: hidden; /* Double safety */
   position: relative;
   animation: breathing-bg 30s ease-in-out infinite;
 }
 
+/* Background Animation */
 @keyframes breathing-bg {
   0%, 100% { background: var(--bg-a); }
   50% { background: var(--bg-b); }
@@ -44,10 +51,13 @@ body {
   * { animation: none !important; transition: none !important; }
 }
 
-/* ================== PARALLAX BACKGROUND ================== */
+
+/* =========================================
+   2. PARALLAX BACKGROUND
+   ========================================= */
 .parallax-bg {
   position: fixed;
-  inset: -20vh -20vw;
+  inset: -20vh -20vw; /* Oversized for desktop parallax effect */
   z-index: -1;
   pointer-events: none;
   background:
@@ -57,6 +67,7 @@ body {
   will-change: transform;
 }
 
+/* Mobile Fix: Clamp background to viewport to prevent scroll issues */
 @media (max-width: 768px) {
   .parallax-bg {
     inset: 0;
@@ -64,24 +75,32 @@ body {
   }
 }
 
-/* ================== NAVIGATION ================== */
+
+/* =========================================
+   3. NAVIGATION
+   ========================================= */
 #site-nav {
-  position: fixed; top: 0; left: 0; width: 100%;
+  position: fixed; 
+  top: 0; left: 0; width: 100%;
+  height: var(--nav-height);
   background: rgba(0, 0, 0, 0.85);
   z-index: 1000;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transition: transform 0.3s ease-in-out;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), 0 0 60px rgba(0, 212, 255, 0.15);
-  padding-top: env(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top); /* Safe area for notched phones */
 }
+
 #site-nav.hidden { transform: translateY(-100%); }
 
 .nav-container {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 1rem 2rem; max-width: 1200px; margin: 0 auto;
+  height: 100%;
+  padding: 0 2rem; max-width: 1200px; margin: 0 auto;
 }
 
+/* Logo */
 .logo-title {
   display: flex; align-items: center; text-decoration: none; gap: 1rem;
   transition: transform 0.2s ease;
@@ -106,12 +125,14 @@ body {
 }
 .logo-title:hover .logo { filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.8)); }
 
+/* Burger Menu (Mobile) */
 #burger {
   display: none; background: transparent; border: none;
   color: var(--font-color-main); font-size: 2rem; cursor: pointer;
+  padding: 0.5rem;
 }
-#burger:hover { color: var(--highlight-color); }
 
+/* Links */
 .nav-links { display: flex; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
 .nav-links a {
   color: var(--font-color-main); text-decoration: none; position: relative;
@@ -126,6 +147,7 @@ body {
 }
 .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
 
+/* Mobile Menu Logic */
 @media(max-width:768px) {
   #burger { display: block; }
   .nav-links {
@@ -133,35 +155,46 @@ body {
     top: 100%; left: 0; width: 100%;
     background: rgba(0, 0, 0, 0.95); padding: 1rem 0;
     backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
   }
   .nav-links.show { display: flex; }
-  .nav-links a { padding: 0.5rem 2rem; display: block; }
+  .nav-links a { padding: 1rem 2rem; display: block; font-size: 1.1rem; }
 }
 
-/* ================== SECTIONS & TYPOGRAPHY ================== */
-main { padding-top: 80px; }
+
+/* =========================================
+   4. LAYOUT & SECTIONS
+   ========================================= */
+main { padding-top: var(--nav-height); }
+
 section {
-  scroll-margin-top: 80px; max-width: 800px; margin: 4rem auto; padding: 0 1rem;
+  scroll-margin-top: var(--nav-height);
+  max-width: 800px; margin: 4rem auto; padding: 0 1rem;
   opacity: 0; transform: translateY(20px) scale(0.98);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 section.visible { opacity: 1; transform: translateY(0) scale(1); }
 
-h1 { letter-spacing: -0.02em; font-weight: 700; }
+h1 { letter-spacing: -0.02em; font-weight: 700; line-height: 1.2; }
 h2 {
   font-size: 2.5rem; font-weight: 700; text-align: center;
   margin-bottom: 2rem; color: rgba(0, 212, 255, 0.9);
   text-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
 }
-.text-block { margin-bottom: 1.6em; line-height: 1.7; }
+.text-block { margin-bottom: 1.6em; line-height: 1.7; font-size: 1.1rem; }
 
-/* ================== HERO & BUTTONS ================== */
+
+/* =========================================
+   5. HERO SECTION
+   ========================================= */
 .hero {
   display: flex; flex-direction: column; align-items: center;
-  min-height: 70vh; padding: 2rem 1rem; text-align: center;
+  min-height: 70vh; /* Ensures it looks substantial */
+  padding: 2rem 1rem; text-align: center;
 }
 .hero-content { font-size: 1.5rem; font-weight: 500; margin-bottom: 2rem; }
 
+/* Buttons */
 .quick-links { margin-top: 2rem; display: flex; justify-content: center; }
 .button-group { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
 
@@ -171,6 +204,7 @@ h2 {
   position: relative; overflow: hidden; font-weight: 500;
   box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(0,0,0,0.3);
 }
 .button::before {
   content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
@@ -184,118 +218,149 @@ h2 {
   transform: translateY(-2px);
 }
 
-/* ================== HERO SLIDER (ADAPTIVE) ================== */
+
+/* =========================================
+   6. UNIVERSAL COMPARISON SLIDER (The Core)
+   ========================================= */
+/* Wrapper for aesthetics (Border, Glow) */
+.comparison-item {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px; padding: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  display: block; 
+  width: auto;
+}
+.comparison-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 50px rgba(0, 212, 255, 0.4);
+}
+
+/* Slider Container (The Functional Part) */
+.comparison-container {
+  position: relative;
+  width: 100%;           /* Default: fit width (Mobile/Grid) */
+  height: auto;          /* Height defined by aspect ratio */
+  margin: 0 auto;
+  user-select: none;     /* Prevent text selection */
+  -webkit-user-select: none;
+  background: #000;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: ew-resize; 
+  touch-action: pan-y;   /* Allow vertical scroll, block horizontal */
+}
+
+/* Aspect Ratio Helpers */
+.comparison-container.ratio-4-3 { aspect-ratio: 4 / 3; }
+.comparison-container.ratio-16-9 { aspect-ratio: 16 / 9; }
+
+/* Images */
+.comparison-container img {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; /* Ensures fill without distortion */
+  pointer-events: none; 
+  display: block;
+}
+
+/* Layers */
+.comparison-before { z-index: 1; }
+.comparison-after  { z-index: 2; clip-path: inset(0 0 0 50%); }
+
+/* Slider Handle */
+.comparison-slider {
+  position: absolute; top: 0; bottom: 0; left: 50%;
+  width: 2px;
+  background: var(--highlight-color);
+  transform: translateX(-50%);
+  z-index: 20;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+  touch-action: none; /* Crucial: Block ALL scroll when grabbing handle */
+}
+
+/* Arrows */
+.comparison-slider::before, .comparison-slider::after {
+  content: '⟨';
+  position: absolute; top: 50%; width: 32px; height: 32px;
+  background: var(--highlight-color); color: #000;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: bold;
+  transform: translateY(-50%);
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+  left: -16px; opacity: 1; transition: opacity 0.2s;
+}
+.comparison-slider::after { content: '⟩'; left: auto; right: -16px; }
+
+/* Hide arrows near edges */
+.comparison-container.edge-left .comparison-slider::before { opacity: 0; }
+.comparison-container.edge-right .comparison-slider::after { opacity: 0; }
+
+/* Loading Spinner */
+.comparison-container::before {
+  content: ''; position: absolute;
+  top: 50%; left: 50%;
+  width: 40px; height: 40px; margin: -20px 0 0 -20px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--highlight-color);
+  border-radius: 50%;
+  animation: spinner 0.8s linear infinite;
+  z-index: 5;
+}
+.comparison-container.loaded::before { display: none; }
+@keyframes spinner { to { transform: rotate(360deg); } }
+
+/* Slider Hint Text */
+.slider-hint {
+  position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7); padding: 0.5rem 1rem; border-radius: 20px;
+  font-size: 0.8rem; color: var(--highlight-color); pointer-events: none;
+  z-index: 15; backdrop-filter: blur(10px); width: max-content;
+}
+
+
+/* =========================================
+   7. HERO VS GRID CONTEXTS
+   ========================================= */
+
+/* Hero Slider Wrapper */
 .hero-slider-wrapper {
   width: 100%; max-width: 1200px;
   margin: 0 auto 2rem; padding: 10px;
   display: flex; justify-content: center; align-items: center;
 }
 
-.hero-slider-wrapper .comparison-item { width: auto; }
-
-/* Mobile Logic: Width driven */
-.hero-slider-wrapper .comparison-container {
-  width: 100%;
-  max-width: 500px;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  margin: 0 auto;
-  position: relative;
-  overflow: hidden;
-  border-radius: 4px;
-  cursor: pointer;
-  user-select: none;
-  background: #000;
+/* MOBILE HERO: Width priority */
+@media (max-width: 767px) {
+  .hero-slider-wrapper .comparison-container {
+    max-width: 500px; /* Don't get too huge on tablets */
+  }
 }
 
-/* Desktop/TV Logic: Height driven */
+/* DESKTOP HERO: Height priority (Looks good on TV) */
 @media (min-width: 768px) {
   .hero-slider-wrapper .comparison-container {
-    width: auto;
-    max-width: none;
-    height: 60vh;
+    width: auto;         /* Unset width constraint */
+    height: 60vh;        /* Fixed height */
+    max-width: none;     /* Allow width to grow based on aspect ratio */
   }
 }
 
-/* ================== COMPARISON GRID ITEMS ================== */
+/* GRID CONTEXT (Archive Page) */
 .comparison-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem; margin: 2rem 0;
 }
+/* In Grid, always respect width logic */
+.comparison-grid .comparison-item h3 { color: var(--highlight-color); text-align: center; margin-bottom: 0.5rem; }
+.comparison-grid .comparison-item p { text-align: center; font-size: 0.85rem; color: var(--font-color-secondary); margin-bottom: 1rem; }
 
-.comparison-item {
-  background: rgba(255, 255, 255, 0.02); border-radius: 8px; padding: 1rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-  display: block; 
-}
-.comparison-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 50px rgba(0, 212, 255, 0.4);
-}
-.comparison-item h3 { color: var(--highlight-color); text-align: center; margin-bottom: 0.5rem; }
-.comparison-item p { text-align: center; font-size: 0.85rem; color: var(--font-color-secondary); margin-bottom: 1rem; }
 
-/* ================== SLIDER UI ELEMENTS ================== */
-.comparison-container img {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  object-fit: cover; pointer-events: none; display: block;
-}
-
-.comparison-before { z-index: 1; }
-.comparison-after { z-index: 2; clip-path: inset(0 0 0 50%); }
-
-.comparison-container::before {
-  content: ''; position: absolute; top: 50%; left: 50%;
-  width: 40px; height: 40px; margin: -20px 0 0 -20px;
-  border: 3px solid rgba(0, 212, 255, 0.2);
-  border-top-color: var(--highlight-color); border-radius: 50%;
-  animation: spinner 0.8s linear infinite; z-index: 10;
-}
-.comparison-container.loaded::before { display: none; }
-@keyframes spinner { to { transform: rotate(360deg); } }
-
-.comparison-slider {
-  position: absolute; top: 0; left: 50%; width: 3px; height: 100%;
-  background: var(--highlight-color); transform: translateX(-50%);
-  cursor: ew-resize; box-shadow: 0 0 10px rgba(0, 212, 255, 0.8); 
-  z-index: 20;
-}
-
-.comparison-slider::before, .comparison-slider::after {
-  position: absolute; top: 50%; transform: translateY(-50%) scale(1);
-  background: var(--highlight-color); color: #000;
-  width: 30px; height: 30px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: bold; box-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
-  content: '⟨'; left: -15px;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  opacity: 1;
-}
-.comparison-slider::after { content: '⟩'; right: -15px; left: auto; }
-
-.comparison-container.edge-left .comparison-slider::before {
-  opacity: 0; transform: translateY(-50%) scale(0.5);
-}
-.comparison-container.edge-right .comparison-slider::after {
-  opacity: 0; transform: translateY(-50%) scale(0.5);
-}
-
-.slider-hint {
-  position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.7); padding: 0.5rem 1rem; border-radius: 20px;
-  font-size: 0.9rem; color: var(--highlight-color); pointer-events: none;
-  z-index: 15; backdrop-filter: blur(10px);
-}
-
-.comparison-container.ratio-4-3 { aspect-ratio: 4 / 3; }
-@media (min-width: 768px) {
-  .comparison-grid .comparison-container.ratio-4-3 {
-    max-width: 85%; margin-left: auto; margin-right: auto;
-  }
-}
-
-/* ================== MODAL ================== */
+/* =========================================
+   8. MODAL (FULL SCREEN)
+   ========================================= */
 .modal {
   display: none; position: fixed; z-index: 2000; left: 0; top: 0;
   width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95);
@@ -304,25 +369,56 @@ h2 {
 .modal.active { display: flex; }
 
 .modal-content {
-  position: relative; width: 90%; max-width: 1400px; max-height: 90vh;
-  background: rgba(15, 15, 15, 0.95); border-radius: 8px; padding: 2rem;
-  box-shadow: 0 20px 80px rgba(0, 212, 255, 0.4);
+  position: relative; width: 100%; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 1rem;
 }
+
 .modal-close {
-  position: absolute; top: 1rem; right: 1rem; font-size: 2rem;
-  color: var(--font-color-main); cursor: pointer; z-index: 10;
+  position: absolute; top: 20px; right: 20px; font-size: 3rem;
+  color: var(--font-color-main); cursor: pointer; z-index: 2001;
+  line-height: 1;
 }
 .modal-close:hover { color: var(--highlight-color); }
-.modal-comparison { position: relative; width: 100%; max-height: 70vh; aspect-ratio: 16 / 9; }
+
+.modal-comparison { 
+  position: relative; 
+  width: 100%; height: 85%; /* Leave room for text */
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Modal Internal Slider: Fit to Screen */
+.modal-comparison .comparison-container {
+  width: auto;
+  height: auto;
+  max-width: 95vw;
+  max-height: 85vh;
+  aspect-ratio: auto; /* Let image decide, or fallback */
+  background: transparent;
+}
+.modal-comparison img { object-fit: contain; } /* Show full image */
+
 .modal-info { text-align: center; margin-top: 1rem; color: var(--font-color-secondary); }
 
-/* ================== TABLES & VIDEO ================== */
+
+/* =========================================
+   9. TABLES & VIDEOS
+   ========================================= */
 .packages-table {
   width: 100%; border-collapse: collapse; margin: 2rem 0;
   background: rgba(255, 255, 255, 0.02); border-radius: 8px; overflow: hidden;
 }
 .packages-table th, .packages-table td { padding: 1rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
 .packages-table th { color: var(--highlight-color); text-transform: uppercase; font-size: 0.85rem; }
+
+/* Responsive Table */
+@media(max-width: 768px) {
+  .packages-table { display: block; }
+  .packages-table thead { display: none; }
+  .packages-table tr { display: block; margin-bottom: 1rem; border: 1px solid rgba(255,255,255,0.1); }
+  .packages-table td { display: block; text-align: right; position: relative; padding-left: 50%; }
+  .packages-table td::before { content: attr(data-label); position: absolute; left: 0.5rem; color: var(--highlight-color); }
+}
 
 .videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin: 2rem 0; }
 .video-container {
@@ -338,13 +434,10 @@ h2 {
 .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 .video-container p { text-align: center; margin-top: 0.5rem; color: var(--font-color-secondary); }
 
-/* ================== FOOTER ================== */
-footer { text-align: center; padding: 2rem 0; margin-top: 4rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
-footer img { height: 30px; opacity: 0.6; }
-footer img:hover { opacity: 0.9; }
-footer a { color: var(--highlight-color); text-decoration: none; }
 
-/* ================== CONTACT & CHAT ================== */
+/* =========================================
+   10. CONTACT (Tally & Chat)
+   ========================================= */
 .tally-container {
   max-width: 800px; margin: 0 auto;
   background: rgba(255, 255, 255, 0.02); border-radius: 8px; overflow: hidden;
@@ -414,13 +507,11 @@ footer a { color: var(--highlight-color); text-decoration: none; }
   #bill-chat-window { width: calc(100vw - 48px); }
 }
 
-/* ================== RESPONSIVE UTILITIES ================== */
-@media(max-width: 768px) {
-  .modal-content { width: 95%; padding: 1rem; }
-  .comparison-grid { grid-template-columns: 1fr; }
-  .packages-table { display: block; }
-  .packages-table thead { display: none; }
-  .packages-table tr { display: block; margin-bottom: 1rem; border: 1px solid rgba(255,255,255,0.1); }
-  .packages-table td { display: block; text-align: right; position: relative; padding-left: 50%; }
-  .packages-table td::before { content: attr(data-label); position: absolute; left: 0.5rem; color: var(--highlight-color); }
-}
+
+/* =========================================
+   11. FOOTER
+   ========================================= */
+footer { text-align: center; padding: 2rem 0; margin-top: 4rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+footer img { height: 30px; opacity: 0.6; }
+footer img:hover { opacity: 0.9; }
+footer a { color: var(--highlight-color); text-decoration: none; }
