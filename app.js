@@ -244,11 +244,25 @@ function initChat() {
     const btn = document.getElementById("bill-chat-button");
     const win = document.getElementById("bill-chat-window");
     if (!btn || !win) return;
+    
     const input = document.getElementById("bill-input");
     const msgs = document.getElementById("bill-messages");
-    const toggle = () => win.classList.toggle("open");
+    
+    // Toggle logic: Hide button when window is open
+    const toggle = () => {
+        const isOpen = win.classList.toggle("open");
+        if (isOpen) {
+            btn.classList.add("hidden");
+            // Auto-focus input for UX
+            setTimeout(() => input.focus(), 300);
+        } else {
+            btn.classList.remove("hidden");
+        }
+    };
+
     btn.addEventListener('click', toggle);
     win.querySelector('.close-btn').addEventListener('click', toggle);
+    
     const send = async () => {
         const txt = input.value.trim();
         if (!txt) return;
@@ -267,4 +281,3 @@ function initChat() {
     document.getElementById("bill-send").addEventListener('click', send);
     input.addEventListener('keydown', (e) => { if (e.key === "Enter") send(); });
 }
-
