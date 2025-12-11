@@ -3,309 +3,87 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Stylish Horizon Archive: Packages for MiniDV restoration, real examples on YouTube, and how the process works." />
-  <title>Archive | Stylish Horizon</title>
-  <!-- Mobile Browser Styling -->
+  <meta name="description" content="Archive: Real examples of restoration." />
   <meta name="theme-color" content="#0f0f0f">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-  <!-- PWA & Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/media/favicon-16x16.png">
-  <link rel="shortcut icon" href="/assets/media/favicon.ico">
-  <link rel="manifest" href="/assets/media/site.webmanifest">
-
-  <!-- Preconnect to Archive.org for faster full-res image loading -->
-  <link rel="preconnect" href="https://archive.org">
-  <link rel="dns-prefetch" href="https://archive.org">
-
-  <!-- CSP -->
-  <meta http-equiv="Content-Security-Policy" content="
-  default-src 'self';
-  img-src 'self' https://stylishhorizon.github.io https://i.ytimg.com https://img.youtube.com https://archive.org https://*.archive.org;
-  style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
-  font-src 'self' https://fonts.gstatic.com;
-  connect-src 'self' https://*.google-analytics.com https://www.googletagmanager.com https://www.youtube.com https://*.youtube.com https://*.ytimg.com https://archive.org https://*.archive.org;
-  script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.youtube.com https://*.youtube.com;
-  frame-src 'self' https://www.youtube.com https://*.youtube.com;
-  media-src 'self' https://archive.org https://*.archive.org;
-">
-
-  <!-- GTM -->
-  <script async>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MN6WG3K6');
-  </script>
-
-  <!-- Social Meta -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://stylishhorizon.github.io/archive.html">
-  <meta property="og:title" content="Stylish Horizon Archive: Packages & Examples">
-  <meta property="og:description" content="See our packages for MiniDV/VHS restoration and real YouTube examples.">
-  <meta property="og:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
-
-  <!-- CSS -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" as="style">
+  <title>Archive | Stylish Horizon</title>
+  
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="parallax-bg" aria-hidden="true"></div>
-
-  <nav id="site-nav" aria-label="Main navigation">
-    <div class="nav-container">
-      <a class="logo-title" href="index.html">
-        <picture>
-          <source srcset="assets/media/StylishHorizon_Clear.webp" type="image/webp">
-          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Logo" loading="lazy" />
-        </picture>
-        <p class="site-title">Stylish Horizon</p>
-      </a>
-      <button id="burger" aria-label="Menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
-     <ul id="primary-navigation" class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="manifest.html">Why Now</a></li>
-        <li><a href="archive.html" class="active">Results</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
+  <nav id="site-nav"></nav>
 
   <main>
-    <section class="hero" id="hero">
-      <!-- HERO SLIDER (Building Scene - 4:3 Ratio) -->
+    <section class="hero">
        <div class="hero-slider-wrapper">
-        
-        <!-- NEW: Added 'comparison-item' wrapper to get the neon glow and card effect -->
         <div class="comparison-item">
-          
+          <!-- 4:3 Example -->
           <div class="comparison-container ratio-4-3" 
-               data-modal-title="Building Scene: 720i (688KB) vs 4K (10.3MB)"
+               data-modal-title="Building Scene"
                data-before-thumb="assets/media/thumbnails/720i_Build_thumb.jpg"
                data-after-thumb="assets/media/thumbnails/4k_Build_thumb.jpg"
                data-before-full="https://archive.org/download/countryside_202512/720i_Build.png"
                data-after-full="https://archive.org/download/countryside_202512/4k_Build.png">
-            <img class="comparison-before" src="assets/media/thumbnails/720i_Build_thumb.jpg" alt="Before" loading="eager">
-            <img class="comparison-after" src="assets/media/thumbnails/4k_Build_thumb.jpg" alt="After" loading="eager">
+            <img class="comparison-before" src="assets/media/thumbnails/720i_Build_thumb.jpg">
+            <img class="comparison-after" src="assets/media/thumbnails/4k_Build_thumb.jpg">
             <div class="comparison-slider"></div>
           </div>
-
+        </div>
+      </div>
       <div class="hero-content">
         <h1>Archive: Restored Truths</h1>
-        <p>No filters. No fakes. Just clean, honest revivals.</p>
-      </div>
-      <div class="quick-links">
-        <div class="button-group">
-          <a href="#packages" class="button">Packages</a>
-          <a href="#countryside" class="button">Countryside</a>
-          <a href="#diving" class="button">Diving</a>
-        </div>
+        <p>No filters. Just clean revivals.</p>
       </div>
     </section>
 
     <section id="packages">
-      <h2>Choose Your Package</h2>
+      <h2>Packages</h2>
       <table class="packages-table">
-        <thead>
-          <tr>
-            <th>Package</th><th>Quality</th><th>Price (per minute)</th><th>What You Get</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Package</th><th>Quality</th><th>Price</th></tr></thead>
         <tbody>
-          <tr>
-            <td data-label="Package">Legacy</td>
-            <td data-label="Quality">720p ProRes</td>
-            <td data-label="Price">5–15$</td>
-            <td data-label="Get">Raw deinterlace/PAR=1.0. For pros editing originals.</td>
-          </tr>
-          <tr>
-            <td data-label="Package">Ultimate</td>
-            <td data-label="Quality">1080p</td>
-            <td data-label="Price">20–50$</td>
-            <td data-label="Get">Hand-trimmed review + upscale (1080p). Full control on cuts.</td>
-          </tr>
-          <tr>
-            <td data-label="Package">UHD</td>
-            <td data-label="Quality">4K (request)</td>
-            <td data-label="Price">Request</td>
-            <td data-label="Get">Extended processing. Premium territory.</td>
-          </tr>
+          <tr><td data-label="Package">Legacy</td><td data-label="Quality">720p</td><td data-label="Price">$5-15</td></tr>
+          <tr><td data-label="Package">Ultimate</td><td data-label="Quality">1080p</td><td data-label="Price">$20-50</td></tr>
         </tbody>
       </table>
     </section>
 
-    <!-- Countryside Project -->
-    <section id="countryside" class="project-section">
-      <h2>Countryside Project</h2>
-      
-      <h3>Full Restoration Videos</h3>
-      <p style="text-align: center; margin-bottom: 2rem;">Same footage across three packages: Legacy (720p), Ultimate (1080p), and UHD (4K).</p>
-      
-      <div class="videos">
-        <!-- Legacy -->
-        <div class="video-container">
-          <iframe 
-            width="100%" height="100%" loading="lazy"
-            src="https://www.youtube.com/embed/rjS13daTnKc"
-            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/rjS13daTnKc?autoplay=1><img src=https://img.youtube.com/vi/rjS13daTnKc/hqdefault.jpg alt='Legacy Video'><span>▶</span></a>"
-            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-          </iframe>
-          <p>Legacy (720p ProRes)</p>
-        </div>
-        <!-- Ultimate -->
-        <div class="video-container">
-          <iframe 
-            width="100%" height="100%" loading="lazy"
-            src="https://www.youtube.com/embed/PH5Ap0-exNw"
-            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/PH5Ap0-exNw?autoplay=1><img src=https://img.youtube.com/vi/PH5Ap0-exNw/hqdefault.jpg alt='Ultimate Video'><span>▶</span></a>"
-            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-          </iframe>
-          <p>Ultimate (1080p Upscale)</p>
-        </div>
-        <!-- UHD -->
-        <div class="video-container">
-          <iframe 
-            width="100%" height="100%" loading="lazy"
-            src="https://www.youtube.com/embed/aSduAKdM_zk"
-            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/aSduAKdM_zk?autoplay=1><img src=https://img.youtube.com/vi/aSduAKdM_zk/hqdefault.jpg alt='UHD Video'><span>▶</span></a>"
-            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-          </iframe>
-          <p>UHD (4K On Request)</p>
-        </div>
-      </div>
-
-      <h3 style="margin-top: 3rem;">Frame Comparisons</h3>
+    <section>
+      <h2>Grid Examples</h2>
       <div class="comparison-grid">
-        <!-- Scene Build (4:3) -->
-        <div class="comparison-item">
-          <h3>Building Scene</h3>
-          <p>720i (688KB) vs 4K (10.3MB) • Click for full quality</p>
-          <div class="comparison-container ratio-4-3" 
-               data-before-thumb="assets/media/thumbnails/720i_Build_thumb.jpg"
-               data-after-thumb="assets/media/thumbnails/4k_Build_thumb.jpg"
-               data-before-full="https://archive.org/download/countryside_202512/720i_Build.png"
-               data-after-full="https://archive.org/download/countryside_202512/4k_Build.png">
-            <img class="comparison-before" src="assets/media/thumbnails/720i_Build_thumb.jpg" alt="720i Build" loading="lazy">
-            <img class="comparison-after" src="assets/media/thumbnails/4k_Build_thumb.jpg" alt="4K Build" loading="lazy">
-            <div class="comparison-slider"></div>
-          </div>
-          <div class="comparison-labels"><span>720i</span><span>4K</span></div>
-        </div>
-
-        <!-- Scene Cam (4:3) -->
-        <div class="comparison-item">
+         <!-- Example Grid Item -->
+         <div class="comparison-item">
           <h3>Camera Scene</h3>
-          <p>720i (582KB) vs 4K (9.0MB) • Click for full quality</p>
           <div class="comparison-container ratio-4-3" 
+               data-modal-title="Camera Scene"
                data-before-thumb="assets/media/thumbnails/720i_Cam_thumb.jpg"
                data-after-thumb="assets/media/thumbnails/4k_Cam_thumb.jpg"
                data-before-full="https://archive.org/download/countryside_202512/720i_Cam.png"
                data-after-full="https://archive.org/download/countryside_202512/4k_Cam.png">
-            <img class="comparison-before" src="assets/media/thumbnails/720i_Cam_thumb.jpg" alt="720i Cam" loading="lazy">
-            <img class="comparison-after" src="assets/media/thumbnails/4k_Cam_thumb.jpg" alt="4K Cam" loading="lazy">
+            <img class="comparison-before" src="assets/media/thumbnails/720i_Cam_thumb.jpg">
+            <img class="comparison-after" src="assets/media/thumbnails/4k_Cam_thumb.jpg">
             <div class="comparison-slider"></div>
           </div>
-          <div class="comparison-labels"><span>720i</span><span>4K</span></div>
-        </div>
-
-        <!-- Scene Dog (4:3) -->
-        <div class="comparison-item">
-          <h3>Dog Scene</h3>
-          <p>720i (674KB) vs 4K (10.8MB) • Click for full quality</p>
-          <div class="comparison-container ratio-4-3" 
-               data-before-thumb="assets/media/thumbnails/720i_Dog_thumb.jpg"
-               data-after-thumb="assets/media/thumbnails/4k_Dog_thumb.jpg"
-               data-before-full="https://archive.org/download/countryside_202512/720i_Dog.png"
-               data-after-full="https://archive.org/download/countryside_202512/4k_Dog.png">
-            <img class="comparison-before" src="assets/media/thumbnails/720i_Dog_thumb.jpg" alt="720i Dog" loading="lazy">
-            <img class="comparison-after" src="assets/media/thumbnails/4k_Dog_thumb.jpg" alt="4K Dog" loading="lazy">
-            <div class="comparison-slider"></div>
-          </div>
-          <div class="comparison-labels"><span>720i</span><span>4K</span></div>
         </div>
       </div>
     </section>
-
-    <!-- Diving Project -->
-    <section id="diving" class="project-section">
-      <h2>Diving Project (2001)</h2>
-      
-      <div class="videos">
-        <!-- Full Movie -->
-        <div class="video-container">
-          <iframe 
-            width="100%" height="100%" loading="lazy"
-            src="https://www.youtube.com/embed/x5xNOegZ5sQ"
-            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/x5xNOegZ5sQ?autoplay=1><img src=https://img.youtube.com/vi/x5xNOegZ5sQ/hqdefault.jpg alt='Diving Full'><span>▶</span></a>"
-            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-          </iframe>
-          <p>Full Movie (720p)</p>
-        </div>
-        <!-- Short -->
-        <div class="video-container">
-          <iframe 
-            width="100%" height="100%" loading="lazy"
-            src="https://www.youtube.com/embed/2TG4Q3H3htc"
-            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/2TG4Q3H3htc?autoplay=1><img src=https://img.youtube.com/vi/2TG4Q3H3htc/hqdefault.jpg alt='Diving Short'><span>▶</span></a>"
-            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-          </iframe>
-          <p>UHD Short</p>
-        </div>
-      </div>
-
-      <h3 style="margin-top: 3rem;">Frame Comparisons</h3>
-      <div class="comparison-grid">
-        <!-- Diving Scene (16:9, NO ratio-4-3) -->
-        <div class="comparison-item">
-          <h3>Diving Station Scene</h3>
-          <p>720i vs 1920p • Click for full quality</p>
-          <div class="comparison-container" 
-               data-before-thumb="assets/media/thumbnails/2001_SL_720i25_2_thumb.jpg"
-               data-after-thumb="assets/media/thumbnails/2001_SL_1920p25_2_thumb.jpg"
-               data-before-full="https://archive.org/download/2001-sl-720i-25/2001_SL_720i25_2.png"
-               data-after-full="https://archive.org/download/2001-sl-720i-25/2001_SL_1920p25_2.png">
-            <img class="comparison-before" src="assets/media/thumbnails/2001_SL_720i25_2_thumb.jpg" alt="720i" loading="lazy">
-            <img class="comparison-after" src="assets/media/thumbnails/2001_SL_1920p25_2_thumb.jpg" alt="1920p" loading="lazy">
-            <div class="comparison-slider"></div>
-          </div>
-          <div class="comparison-labels"><span>720i</span><span>1920p</span></div>
-        </div>
-      </div>
-    </section>
-
-    <div class="quick-links" style="text-align: center; margin: 4rem 0;">
-      <a href="contact.html" class="button">Ready? Contact</a>
-    </div>
   </main>
 
-  <!-- Shared Modal -->
   <div id="comparisonModal" class="modal">
     <div class="modal-content">
       <span class="modal-close">&times;</span>
       <div class="modal-comparison">
         <div class="comparison-container" id="modalComparisonContainer">
-          <img class="comparison-before" id="modalBefore" alt="Before">
-          <img class="comparison-after" id="modalAfter" alt="After">
+          <img class="comparison-before" id="modalBefore">
+          <img class="comparison-after" id="modalAfter">
           <div class="comparison-slider"></div>
         </div>
       </div>
-      <div class="modal-info">
-        <p id="modalTitle"></p>
-        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Drag slider to compare • ESC to close</p>
-      </div>
+      <p id="modalTitle" class="modal-info"></p>
     </div>
   </div>
 
-  <footer role="contentinfo">
-    <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" loading="lazy" />
-    <p>© <span id="year"></span> Stylish Horizon</p>
-  </footer>
-
-  <script src="script.js" defer></script>
+  <footer role="contentinfo"></footer>
+  <script src="app.js" defer></script>
 </body>
 </html>
-
-
-
-
