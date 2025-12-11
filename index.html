@@ -3,115 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Digital restoration of MiniDV, VHS, Hi8, and forgotten drives. Preserving memory with integrity. No hype. No noise. Just truth." />
+  <meta name="description" content="Digital restoration of MiniDV, VHS, Hi8. Integrity first." />
+  <meta name="theme-color" content="#0f0f0f">
   <title>Stylish Horizon</title>
   
-  <!-- Mobile Browser Styling -->
-  <meta name="theme-color" content="#0f0f0f">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-  <!-- PWA & Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/media/favicon-16x16.png">
-  <link rel="shortcut icon" href="/assets/media/favicon.ico">
-  <link rel="manifest" href="/assets/media/site.webmanifest">
-
-  <!-- Preconnect to Archive -->
-  <link rel="preconnect" href="https://archive.org">
-  <link rel="dns-prefetch" href="https://archive.org">
-
-  <!-- CSP -->
-  <meta http-equiv="Content-Security-Policy" content="
-  default-src 'self';
-  img-src 'self' https://stylishhorizon.github.io https://archive.org https://*.archive.org;
-  style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
-  font-src 'self' https://fonts.gstatic.com;
-  connect-src 'self' https://*.google-analytics.com https://www.googletagmanager.com;
-  script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
-">
-
-  <!-- GTM -->
-  <script async>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MN6WG3K6');
-  </script>
-
-  <!-- SEO JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Stylish Horizon",
-    "image": "https://stylishhorizon.github.io/assets/media/og-image.png",
-    "description": "Professional digital restoration of MiniDV, VHS, and Hi8 tapes with integrity.",
-    "priceRange": "$$",
-    "url": "https://stylishhorizon.github.io"
-  }
-  </script>
-
-  <!-- Social Meta -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://stylishhorizon.github.io/index.html">
-  <meta property="og:title" content="Stylish Horizon: Honest Digital Restoration">
-  <meta property="og:description" content="Digital restoration of MiniDV, VHS, Hi8. Preserving memory with integrity.">
-  <meta property="og:image" content="https://stylishhorizon.github.io/assets/media/og-image.png">
-  
-  <!-- CSS -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" as="style">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6WG3K6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="parallax-bg" aria-hidden="true"></div>
-
-  <nav id="site-nav" aria-label="Main navigation">
-    <div class="nav-container">
-      <a class="logo-title" href="index.html">
-        <picture>
-          <source srcset="assets/media/StylishHorizon_Clear.webp" type="image/webp">
-          <img class="logo" src="assets/media/StylishHorizon_Black.png" alt="Stylish Horizon" loading="lazy" />
-        </picture>
-        <p class="site-title">Stylish Horizon</p>
-      </a>
-      <button id="burger" aria-label="Menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
-      <ul id="primary-navigation" class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="manifest.html">Why Now</a></li>
-        <li><a href="archive.html">Results</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
+  
+  <!-- NAV (Injected by JS) -->
+  <nav id="site-nav" aria-label="Main navigation"></nav>
 
   <main>
-<section class="hero" id="hero">
+    <section class="hero" id="hero">
       <div class="hero-slider-wrapper">
-        
-        <!-- Wrapper for the card style -->
         <div class="comparison-item">
-          <!-- The slider itself -->
+          <!-- Add ratio-4-3 class here if square, or ratio-16-9 -->
           <div class="comparison-container ratio-4-3"
-               data-modal-title="Dog Scene: 720i (674KB) vs 4K (10.8MB)"
+               data-modal-title="Dog Scene: 720i vs 4K"
                data-before-thumb="assets/media/thumbnails/720i_Dog_thumb.jpg"
                data-after-thumb="assets/media/thumbnails/4k_Dog_thumb.jpg"
                data-before-full="https://archive.org/download/countryside_202512/720i_Dog.png"
                data-after-full="https://archive.org/download/countryside_202512/4k_Dog.png">
-            <img class="comparison-before" src="assets/media/thumbnails/720i_Dog_thumb.jpg" alt="Before" loading="eager">
-            <img class="comparison-after" src="assets/media/thumbnails/4k_Dog_thumb.jpg" alt="After" loading="eager">
+            <img class="comparison-before" src="assets/media/thumbnails/720i_Dog_thumb.jpg" alt="Before">
+            <img class="comparison-after" src="assets/media/thumbnails/4k_Dog_thumb.jpg" alt="After">
             <div class="comparison-slider"></div>
-            <div class="slider-hint">Drag to compare • Click for full quality</div>
+            <div class="slider-hint">Drag to compare • Click for full</div>
           </div>
         </div>
-
       </div>
 
       <div class="hero-content">
         <h1>Digital restoration with integrity</h1>
         <p>No hype. No noise. Just memory.</p>
-        <p>We restore MiniDV tapes, VHS, Hi8, and forgotten drives.</p>
       </div>
-      
       <div class="quick-links">
         <div class="button-group">
           <a href="contact.html" class="button">Start Now</a>
@@ -120,46 +47,33 @@
       </div>
     </section>
 
-    <section id="what">
+    <section>
       <h2>What we do</h2>
       <div class="text-block">
-        <p>We restore MiniDV, VHS, Hi8, and forgotten drives. If it still breathes—we help it speak again.</p>
-        <p>Every frame is inspected manually. No filters. No nostalgia filters. Just the truth, frame by frame.</p>
-      </div>
-    </section>
-
-    <section id="how">
-      <h2>How it works</h2>
-      <div class="text-block">
-        <p>No shipping hassles. We connect you with trusted local studios for capture.</p>
-        <p>No subscriptions. You pay only for what you need. From there: hand-reviewed trims, gentle deinterlacing, natural color balance.</p>
+        <p>We restore MiniDV, VHS, Hi8. Every frame is inspected manually. No filters. Just truth.</p>
       </div>
     </section>
   </main>
 
-  <!-- Shared Modal -->
+  <!-- SHARED MODAL -->
   <div id="comparisonModal" class="modal">
     <div class="modal-content">
       <span class="modal-close">&times;</span>
       <div class="modal-comparison">
         <div class="comparison-container" id="modalComparisonContainer">
-          <img class="comparison-before" id="modalBefore" alt="Before restoration">
-          <img class="comparison-after" id="modalAfter" alt="After restoration">
+          <img class="comparison-before" id="modalBefore">
+          <img class="comparison-after" id="modalAfter">
           <div class="comparison-slider"></div>
         </div>
       </div>
-      <div class="modal-info">
-        <p id="modalTitle"></p>
-        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Drag slider to compare • ESC to close</p>
-      </div>
+      <p id="modalTitle" class="modal-info"></p>
     </div>
   </div>
 
-  <footer role="contentinfo">
-    <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" loading="lazy" />
-    <p>© <span id="year"></span> Stylish Horizon | <a href="mailto:stylishhorizon@gmail.com">stylishhorizon@gmail.com</a></p>
-  </footer>
-
-  <script src="script.js" defer></script>
+  <!-- FOOTER (Injected by JS) -->
+  <footer role="contentinfo"></footer>
+  
+  <!-- Use app.js now -->
+  <script src="app.js" defer></script>
 </body>
 </html>
