@@ -2,7 +2,6 @@
 const CURRENT_YEAR = new Date().getFullYear();
 const SITE_TITLE = "Stylish Horizon";
 
-// Shared HTML Strings (Injected to all pages)
 const HEADER_HTML = `
   <div class="nav-container">
     <a class="logo-title" href="index.html">
@@ -30,17 +29,9 @@ const FOOTER_HTML = `
 const CHAT_HTML = `
   <div id="bill-chat-button">💬</div>
   <div id="bill-chat-window">
-    <header>
-      <span>Bill — Stylish Horizon AI</span>
-      <span class="close-btn">×</span>
-    </header>
-    <div class="messages" id="bill-messages">
-      <div class="message-bill">Hey! I'm Bill. Ask me about Legacy vs. Ultimate or how to start. 👋</div>
-    </div>
-    <div class="input-area">
-      <input id="bill-input" type="text" placeholder="e.g., What’s UHD?" />
-      <button id="bill-send">➤</button>
-    </div>
+    <header><span>Bill — Stylish Horizon AI</span><span class="close-btn">×</span></header>
+    <div class="messages" id="bill-messages"><div class="message-bill">Hey! I'm Bill. Ask me about Legacy vs. Ultimate. 👋</div></div>
+    <div class="input-area"><input id="bill-input" type="text" placeholder="e.g., What’s UHD?" /><button id="bill-send">➤</button></div>
   </div>
 `;
 
@@ -49,58 +40,34 @@ document.addEventListener('DOMContentLoaded', () => {
     injectLayout();
     initUI();
     initSliders();
-    initChat(); // Only activates if chat placeholder exists or on Contact page
+    initChat();
 });
 
-/* ================== LAYOUT INJECTOR ================== */
 function injectLayout() {
     const headerEl = document.getElementById('site-nav');
     const footerEl = document.querySelector('footer[role="contentinfo"]');
-    
-    // 1. Inject Nav
-    if (headerEl) {
-        headerEl.innerHTML = HEADER_HTML;
-        highlightActiveLink();
-        initBurgerMenu();
-    }
-
-    // 2. Inject Footer
-    if (footerEl) {
-        footerEl.innerHTML = FOOTER_HTML;
-    }
-
-    // 3. Inject Chat Widget (Only if on Contact page OR layout dictates)
-    // For this build, we inject it into Contact page specifically via HTML check,
-    // or we can append it globally. Let's stick to Contact page placeholder logic.
+    if (headerEl) { headerEl.innerHTML = HEADER_HTML; highlightActiveLink(); initBurgerMenu(); }
+    if (footerEl) { footerEl.innerHTML = FOOTER_HTML; }
     const chatPlaceholder = document.getElementById('chat-widget-placeholder');
-    if (chatPlaceholder) {
-        chatPlaceholder.innerHTML = CHAT_HTML;
-    }
+    if (chatPlaceholder) { chatPlaceholder.innerHTML = CHAT_HTML; }
 }
 
 function highlightActiveLink() {
     const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
     document.querySelectorAll('.nav-links a').forEach(a => {
         const href = a.getAttribute('href')?.toLowerCase() || '';
-        if (href.endsWith(path) && !href.includes('#')) {
-            a.classList.add('active');
-        } else {
-            a.classList.remove('active');
-        }
+        if (href.endsWith(path) && !href.includes('#')) a.classList.add('active');
+        else a.classList.remove('active');
     });
 }
 
-/* ================== UI LOGIC ================== */
+/* ================== UI & SLIDERS ================== */
 function initUI() {
-    // Scroll Animation
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('section').forEach(s => observer.observe(s));
 
-    // Hide Nav on Scroll
     let lastScrollY = window.scrollY;
     const nav = document.getElementById('site-nav');
     window.addEventListener('scroll', () => {
@@ -115,24 +82,17 @@ function initBurgerMenu() {
     const burger = document.getElementById('burger');
     const navLinks = document.getElementById('primary-navigation');
     if (!burger || !navLinks) return;
-
     burger.addEventListener('click', () => {
         const show = navLinks.classList.toggle('show');
         burger.setAttribute('aria-expanded', String(show));
     });
-
     document.addEventListener('click', (e) => {
-        if (navLinks.classList.contains('show') && !navLinks.contains(e.target) && !burger.contains(e.target)) {
-            navLinks.classList.remove('show');
-        }
+        if (navLinks.classList.contains('show') && !navLinks.contains(e.target) && !burger.contains(e.target)) navLinks.classList.remove('show');
     });
 }
 
-/* ================== SLIDERS ================== */
 function initSliders() {
     document.querySelectorAll('.comparison-container').forEach(setupSlider);
-    
-    // Modal
     const modal = document.getElementById('comparisonModal');
     if (modal) setupModal(modal);
 }
@@ -145,20 +105,14 @@ function setupSlider(container) {
     const before = container.querySelector('.comparison-before');
     if (!slider || !after || !before) return;
 
-    // Load Check
     const onImgLoad = () => {
-        if (before.complete && after.complete && before.naturalWidth > 0) {
-            container.classList.add('loaded');
-        }
+        if (before.complete && after.complete && before.naturalWidth > 0) container.classList.add('loaded');
     };
     if (before.complete) onImgLoad(); else before.onload = onImgLoad;
     if (after.complete) onImgLoad(); else after.onload = onImgLoad;
     setTimeout(onImgLoad, 200);
 
-    // Interaction
-    let isActive = false;
-    let isClick = true;
-    let startX = 0;
+    let isActive = false, isClick = true, startX = 0;
 
     const update = (x) => {
         const rect = container.getBoundingClientRect();
@@ -166,7 +120,6 @@ function setupSlider(container) {
         p = Math.max(0, Math.min(100, p));
         after.style.clipPath = `inset(0 0 0 ${p}%)`;
         slider.style.left = `${p}%`;
-        
         container.classList.toggle('edge-left', p < 5);
         container.classList.toggle('edge-right', p > 95);
     };
@@ -187,11 +140,9 @@ function setupSlider(container) {
     container.addEventListener('mousedown', start);
     document.addEventListener('mouseup', end);
     container.addEventListener('mousemove', move);
-    
     container.addEventListener('touchstart', start, {passive: false});
     document.addEventListener('touchend', end);
     container.addEventListener('touchmove', move, {passive: false});
-
     container.addEventListener('click', () => { if (isClick) openModal(container); });
 }
 
@@ -208,7 +159,6 @@ function setupModal(modal) {
     modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 
-    // Internal Slider
     const c = modal.querySelector('.comparison-container');
     const s = c.querySelector('.comparison-slider');
     const a = c.querySelector('.comparison-after');
@@ -226,9 +176,17 @@ function setupModal(modal) {
     document.addEventListener('mouseup', () => act = false);
     c.addEventListener('mousemove', (e) => { if (act) moveM(e.clientX); });
     
-    s.addEventListener('touchstart', (e) => { act = true; });
+    s.addEventListener('touchstart', (e) => { 
+        // Allow pinch zoom (2 fingers) to pass through
+        if (e.touches.length > 1) return;
+        act = true; 
+    });
     document.addEventListener('touchend', () => act = false);
-    c.addEventListener('touchmove', (e) => { if (act) { e.preventDefault(); moveM(e.touches[0].clientX); } }, {passive: false});
+    c.addEventListener('touchmove', (e) => { 
+        // Allow pinch zoom
+        if (e.touches.length > 1) return;
+        if (act) { e.preventDefault(); moveM(e.touches[0].clientX); } 
+    }, {passive: false});
 }
 
 function openModal(src) {
@@ -244,15 +202,26 @@ function openModal(src) {
     document.body.style.overflow = 'hidden';
     mT.textContent = "Loading full quality...";
     
-    // Reset
+    // 1. Сброс состояния и ПОКАЗ СПИННЕРА
+    mC.classList.remove('loaded'); 
     mC.querySelector('.comparison-slider').style.left = '50%';
     mC.querySelector('.comparison-after').style.clipPath = 'inset(0 0 0 50%)';
 
-    // Load
+    // 2. Загрузка
     let loaded = 0;
-    const done = () => { loaded++; if (loaded >= 2) mT.textContent = src.dataset.modalTitle || "Comparison"; };
+    const done = () => { 
+        loaded++; 
+        if (loaded >= 2) {
+            mT.textContent = src.dataset.modalTitle || "Comparison";
+            // 3. СКРЫТИЕ СПИННЕРА
+            mC.classList.add('loaded');
+        }
+    };
     
+    // Сбрасываем onload, чтобы не срабатывали старые
+    mB.onload = null; mA.onload = null; 
     mB.onload = done; mA.onload = done;
+    
     mB.src = src.dataset.beforeFull;
     mA.src = src.dataset.afterFull;
 }
@@ -262,37 +231,26 @@ function initChat() {
     const btn = document.getElementById("bill-chat-button");
     const win = document.getElementById("bill-chat-window");
     if (!btn || !win) return;
-
     const input = document.getElementById("bill-input");
     const msgs = document.getElementById("bill-messages");
-    
     const toggle = () => win.classList.toggle("open");
     btn.addEventListener('click', toggle);
     win.querySelector('.close-btn').addEventListener('click', toggle);
-
     const send = async () => {
         const txt = input.value.trim();
         if (!txt) return;
-        
-        // Add User Msg
         msgs.innerHTML += `<div class="message-user">${txt}</div><div style="clear:both"></div>`;
         msgs.scrollTop = msgs.scrollHeight;
         input.value = "";
-        
         try {
             const res = await fetch("https://stylishh-stylishhorizon-chat.hf.space/chat", {
-                method: "POST", 
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({message: txt})
+                method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({message: txt})
             });
             const data = await res.json();
             msgs.innerHTML += `<div class="message-bill">${data.response}</div><div style="clear:both"></div>`;
-        } catch (e) {
-            msgs.innerHTML += `<div class="message-bill">I'm offline right now.</div><div style="clear:both"></div>`;
-        }
+        } catch (e) { msgs.innerHTML += `<div class="message-bill">I'm offline right now.</div><div style="clear:both"></div>`; }
         msgs.scrollTop = msgs.scrollHeight;
     };
-
     document.getElementById("bill-send").addEventListener('click', send);
     input.addEventListener('keydown', (e) => { if (e.key === "Enter") send(); });
 }
