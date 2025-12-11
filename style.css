@@ -22,6 +22,8 @@ body {
   color: var(--font-color-main);
   margin: 0;
   animation: breathing-bg 30s ease-in-out infinite;
+    overflow-x: hidden;
+  width: 100%;
 }
 
 @keyframes breathing-bg {
@@ -204,6 +206,7 @@ h2 {
   height: clamp(250px, 45vh, 600px);
   aspect-ratio: 4 / 3;
   width: auto;
+  max-width: 100%; 
 }
 .hero-slider-wrapper .comparison-item { width: auto; }
 
@@ -413,4 +416,5 @@ footer a { color: var(--highlight-color); text-decoration: none; }
   .packages-table td { display: block; text-align: right; position: relative; padding-left: 50%; }
   .packages-table td::before { content: attr(data-label); position: absolute; left: 0.5rem; color: var(--highlight-color); }
 }
+
 
