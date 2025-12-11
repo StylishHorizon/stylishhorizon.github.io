@@ -1,3 +1,5 @@
+*, *::before, *::after {
+  box-sizing: border-box;
 /* ================== BASE COLORS AND TYPOGRAPHY ================== */
 :root {
   --bg-a: #0f0f0f;
@@ -416,5 +418,6 @@ footer a { color: var(--highlight-color); text-decoration: none; }
   .packages-table td { display: block; text-align: right; position: relative; padding-left: 50%; }
   .packages-table td::before { content: attr(data-label); position: absolute; left: 0.5rem; color: var(--highlight-color); }
 }
+
 
 
