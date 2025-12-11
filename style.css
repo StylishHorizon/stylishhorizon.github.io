@@ -241,25 +241,52 @@ h2 {
 }
 
 /* =========================================
-   7. CONTEXTS (Grid vs Hero)
+   7. CONTEXTS (HERO VS GRID - PREVIEW ONLY)
    ========================================= */
+
+/* Wrapper Styles */
 .hero-slider-wrapper {
-  width: 100%; max-width: 1200px; margin: 0 auto 2rem; padding: 10px;
-  display: flex; justify-content: center; align-items: center;
+  width: 100%; 
+  max-width: 1200px; 
+  margin: 0 auto 2rem; 
+  padding: 10px;
 }
-/* Mobile: Limit width */
+
+/* MOBILE HERO (< 768px): Simple block model for stability */
 @media (max-width: 767px) {
-  .hero-slider-wrapper .comparison-container { max-width: 500px; }
-}
-/* Desktop: Limit height */
-@media (min-width: 768px) {
-  .hero-slider-wrapper .comparison-container {
-    width: auto; height: 60vh; max-width: none;
+  .hero-slider-wrapper {
+    display: block;       /* Remove Flex to avoid layout collapse */
+    text-align: center;   
+  }
+
+  .hero-slider-wrapper .comparison-container { 
+    display: block;       
+    width: 100%;          /* Fill width */
+    max-width: 500px;     /* Cap width */
+    margin: 0 auto;       /* Center horizontally */
+    /* Height is auto-calculated via aspect-ratio class */
   }
 }
 
+/* DESKTOP HERO (>= 768px): Flex for vertical centering */
+@media (min-width: 768px) {
+  .hero-slider-wrapper {
+    display: flex;        
+    justify-content: center; 
+    align-items: center;
+  }
+
+  .hero-slider-wrapper .comparison-container {
+    width: auto; 
+    height: 60vh;         /* Height priority */
+    max-width: none;
+  }
+}
+
+/* GRID (ARCHIVE): Grid Layout */
 .comparison-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem; margin: 2rem 0;
 }
 .comparison-grid .comparison-item h3 { color: var(--highlight-color); text-align: center; margin-bottom: 0.5rem; }
@@ -338,6 +365,7 @@ h2 {
 
 footer { text-align: center; padding: 2rem 0; margin-top: 4rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
 footer img { height: 30px; opacity: 0.6; }
+
 
 
 
