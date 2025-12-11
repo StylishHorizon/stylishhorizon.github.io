@@ -21,6 +21,12 @@ const HEADER_HTML = `
   </div>
 `;
 
+const FOOTER_HTML = `
+  <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" loading="lazy" />
+  <p>© <span id="year">${CURRENT_YEAR}</span> ${SITE_TITLE} | <a href="mailto:stylishhorizon@gmail.com">stylishhorizon@gmail.com</a></p>
+`;
+
+// SVG Icon for Chat
 const CHAT_HTML = `
   <div id="bill-chat-button">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -31,20 +37,6 @@ const CHAT_HTML = `
     <header><span>Bill — Stylish Horizon AI</span><span class="close-btn">×</span></header>
     <div class="messages" id="bill-messages"><div class="message-bill">Hey! I'm Bill. Ask me about Legacy vs. Ultimate. 👋</div></div>
     <div class="input-area"><input id="bill-input" type="text" placeholder="Type here..." /><button id="bill-send">➤</button></div>
-  </div>
-`;
-
-const FOOTER_HTML = `
-  <img src="assets/media/StylishHorizon_Clear.webp" alt="Logo" loading="lazy" />
-  <p>© <span id="year">${CURRENT_YEAR}</span> ${SITE_TITLE} | <a href="mailto:stylishhorizon@gmail.com">stylishhorizon@gmail.com</a></p>
-`;
-
-const CHAT_HTML = `
-  <div id="bill-chat-button">💬</div>
-  <div id="bill-chat-window">
-    <header><span>Bill — Stylish Horizon AI</span><span class="close-btn">×</span></header>
-    <div class="messages" id="bill-messages"><div class="message-bill">Hey! I'm Bill. Ask me about Legacy vs. Ultimate. 👋</div></div>
-    <div class="input-area"><input id="bill-input" type="text" placeholder="e.g., What’s UHD?" /><button id="bill-send">➤</button></div>
   </div>
 `;
 
@@ -61,8 +53,12 @@ function injectLayout() {
     const footerEl = document.querySelector('footer[role="contentinfo"]');
     if (headerEl) { headerEl.innerHTML = HEADER_HTML; highlightActiveLink(); initBurgerMenu(); }
     if (footerEl) { footerEl.innerHTML = FOOTER_HTML; }
+    
+    // Inject chat into placeholder if exists, otherwise append to body (for Contact page mostly)
     const chatPlaceholder = document.getElementById('chat-widget-placeholder');
-    if (chatPlaceholder) { chatPlaceholder.innerHTML = CHAT_HTML; }
+    if (chatPlaceholder) { 
+        chatPlaceholder.innerHTML = CHAT_HTML; 
+    }
 }
 
 function highlightActiveLink() {
@@ -190,14 +186,12 @@ function setupModal(modal) {
     c.addEventListener('mousemove', (e) => { if (act) moveM(e.clientX); });
     
     s.addEventListener('touchstart', (e) => { 
-        // Allow pinch zoom (2 fingers) to pass through
-        if (e.touches.length > 1) return;
+        if (e.touches.length > 1) return; // Allow pinch
         act = true; 
     });
     document.addEventListener('touchend', () => act = false);
     c.addEventListener('touchmove', (e) => { 
-        // Allow pinch zoom
-        if (e.touches.length > 1) return;
+        if (e.touches.length > 1) return; // Allow pinch
         if (act) { e.preventDefault(); moveM(e.touches[0].clientX); } 
     }, {passive: false});
 }
@@ -212,72 +206,4 @@ function openModal(src) {
     if (!mB || !mA) return;
 
     modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    mT.textContent = "Loading full quality...";
-    
-    // 1. Сброс состояния и ПОКАЗ СПИННЕРА
-    mC.classList.remove('loaded'); 
-    mC.querySelector('.comparison-slider').style.left = '50%';
-    mC.querySelector('.comparison-after').style.clipPath = 'inset(0 0 0 50%)';
-
-    // 2. Загрузка
-    let loaded = 0;
-    const done = () => { 
-        loaded++; 
-        if (loaded >= 2) {
-            mT.textContent = src.dataset.modalTitle || "Comparison";
-            // 3. СКРЫТИЕ СПИННЕРА
-            mC.classList.add('loaded');
-        }
-    };
-    
-    // Сбрасываем onload, чтобы не срабатывали старые
-    mB.onload = null; mA.onload = null; 
-    mB.onload = done; mA.onload = done;
-    
-    mB.src = src.dataset.beforeFull;
-    mA.src = src.dataset.afterFull;
-}
-
-/* ================== CHAT ================== */
-function initChat() {
-    const btn = document.getElementById("bill-chat-button");
-    const win = document.getElementById("bill-chat-window");
-    if (!btn || !win) return;
-    
-    const input = document.getElementById("bill-input");
-    const msgs = document.getElementById("bill-messages");
-    
-    // Toggle logic: Hide button when window is open
-    const toggle = () => {
-        const isOpen = win.classList.toggle("open");
-        if (isOpen) {
-            btn.classList.add("hidden");
-            // Auto-focus input for UX
-            setTimeout(() => input.focus(), 300);
-        } else {
-            btn.classList.remove("hidden");
-        }
-    };
-
-    btn.addEventListener('click', toggle);
-    win.querySelector('.close-btn').addEventListener('click', toggle);
-    
-    const send = async () => {
-        const txt = input.value.trim();
-        if (!txt) return;
-        msgs.innerHTML += `<div class="message-user">${txt}</div><div style="clear:both"></div>`;
-        msgs.scrollTop = msgs.scrollHeight;
-        input.value = "";
-        try {
-            const res = await fetch("https://stylishh-stylishhorizon-chat.hf.space/chat", {
-                method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({message: txt})
-            });
-            const data = await res.json();
-            msgs.innerHTML += `<div class="message-bill">${data.response}</div><div style="clear:both"></div>`;
-        } catch (e) { msgs.innerHTML += `<div class="message-bill">I'm offline right now.</div><div style="clear:both"></div>`; }
-        msgs.scrollTop = msgs.scrollHeight;
-    };
-    document.getElementById("bill-send").addEventListener('click', send);
-    input.addEventListener('keydown', (e) => { if (e.key === "Enter") send(); });
-}
+    docu
