@@ -206,4 +206,67 @@ function openModal(src) {
     if (!mB || !mA) return;
 
     modal.classList.add('active');
-    docu
+    document.body.style.overflow = 'hidden';
+    mT.textContent = "Loading full quality...";
+    
+    mC.classList.remove('loaded'); 
+    mC.querySelector('.comparison-slider').style.left = '50%';
+    mC.querySelector('.comparison-after').style.clipPath = 'inset(0 0 0 50%)';
+
+    let loaded = 0;
+    const done = () => { 
+        loaded++; 
+        if (loaded >= 2) {
+            mT.textContent = src.dataset.modalTitle || "Comparison";
+            mC.classList.add('loaded');
+        }
+    };
+    
+    mB.onload = null; mA.onload = null; 
+    mB.onload = done; mA.onload = done;
+    
+    mB.src = src.dataset.beforeFull;
+    mA.src = src.dataset.afterFull;
+}
+
+/* ================== CHAT ================== */
+function initChat() {
+    const btn = document.getElementById("bill-chat-button");
+    const win = document.getElementById("bill-chat-window");
+    if (!btn || !win) return;
+    
+    const input = document.getElementById("bill-input");
+    const msgs = document.getElementById("bill-messages");
+    
+    // Toggle Logic: Hide button when chat is open
+    const toggle = () => { 
+        const isOpen = win.classList.toggle("open");
+        if (isOpen) {
+            btn.classList.add("hidden");
+            setTimeout(() => input.focus(), 300);
+        } else {
+            btn.classList.remove("hidden");
+        }
+    };
+
+    btn.addEventListener('click', toggle);
+    win.querySelector('.close-btn').addEventListener('click', toggle);
+
+    const send = async () => {
+        const txt = input.value.trim();
+        if (!txt) return;
+        msgs.innerHTML += `<div class="message-user">${txt}</div><div style="clear:both"></div>`;
+        msgs.scrollTop = msgs.scrollHeight;
+        input.value = "";
+        try {
+            const res = await fetch("https://stylishh-stylishhorizon-chat.hf.space/chat", {
+                method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({message: txt})
+            });
+            const data = await res.json();
+            msgs.innerHTML += `<div class="message-bill">${data.response}</div><div style="clear:both"></div>`;
+        } catch (e) { msgs.innerHTML += `<div class="message-bill">I'm offline right now.</div><div style="clear:both"></div>`; }
+        msgs.scrollTop = msgs.scrollHeight;
+    };
+    document.getElementById("bill-send").addEventListener('click', send);
+    input.addEventListener('keydown', (e) => { if (e.key === "Enter") send(); });
+}
