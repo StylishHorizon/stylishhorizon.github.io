@@ -12,70 +12,158 @@
 </head>
 <body>
   <div class="parallax-bg" aria-hidden="true"></div>
+  <!-- Navigation injected by app.js -->
   <nav id="site-nav"></nav>
 
   <main>
     <section class="hero">
        <div class="hero-slider-wrapper">
         <div class="comparison-item">
-          <!-- 4:3 Example -->
+          <!-- Main Hero Slider -->
           <div class="comparison-container ratio-4-3" 
-               data-modal-title="Building Scene"
+               data-modal-title="Building Scene: 720i vs 4K"
                data-before-thumb="assets/media/thumbnails/720i_Build_thumb.jpg"
                data-after-thumb="assets/media/thumbnails/4k_Build_thumb.jpg"
                data-before-full="https://archive.org/download/countryside_202512/720i_Build.png"
                data-after-full="https://archive.org/download/countryside_202512/4k_Build.png">
-            <img class="comparison-before" src="assets/media/thumbnails/720i_Build_thumb.jpg">
-            <img class="comparison-after" src="assets/media/thumbnails/4k_Build_thumb.jpg">
+            <img class="comparison-before" src="assets/media/thumbnails/720i_Build_thumb.jpg" alt="Before">
+            <img class="comparison-after" src="assets/media/thumbnails/4k_Build_thumb.jpg" alt="After">
             <div class="comparison-slider"></div>
+            <div class="slider-hint">Drag to compare • Click for full</div>
           </div>
         </div>
       </div>
       <div class="hero-content">
         <h1>Archive: Restored Truths</h1>
-        <p>No filters. Just clean revivals.</p>
+        <p>No filters. No fakes. Just clean, honest revivals.</p>
       </div>
     </section>
 
     <section id="packages">
       <h2>Packages</h2>
       <table class="packages-table">
-        <thead><tr><th>Package</th><th>Quality</th><th>Price</th></tr></thead>
+        <thead><tr><th>Package</th><th>Quality</th><th>Price</th><th>Details</th></tr></thead>
         <tbody>
-          <tr><td data-label="Package">Legacy</td><td data-label="Quality">720p</td><td data-label="Price">$5-15</td></tr>
-          <tr><td data-label="Package">Ultimate</td><td data-label="Quality">1080p</td><td data-label="Price">$20-50</td></tr>
+          <tr><td data-label="Package">Legacy</td><td data-label="Quality">720p ProRes</td><td data-label="Price">$5-15</td><td data-label="Details">Raw deinterlace. For pros.</td></tr>
+          <tr><td data-label="Package">Ultimate</td><td data-label="Quality">1080p</td><td data-label="Price">$20-50</td><td data-label="Details">Hand-trimmed + upscale.</td></tr>
+          <tr><td data-label="Package">UHD</td><td data-label="Quality">4K</td><td data-label="Price">Request</td><td data-label="Details">Premium processing.</td></tr>
         </tbody>
       </table>
     </section>
 
-    <section>
-      <h2>Grid Examples</h2>
+    <!-- COUNTRYSIDE SECTION -->
+    <section id="countryside">
+      <h2>Countryside Project</h2>
+      <p class="text-block" style="text-align: center;">Same footage across three packages.</p>
+      
+      <div class="videos">
+        <!-- Legacy -->
+        <div class="video-container">
+          <iframe loading="lazy" src="https://www.youtube.com/embed/rjS13daTnKc" srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/rjS13daTnKc?autoplay=1><img src=https://img.youtube.com/vi/rjS13daTnKc/hqdefault.jpg alt='Legacy Video'><span>▶</span></a>" frameborder="0" allowfullscreen></iframe>
+          <p>Legacy (720p)</p>
+        </div>
+        <!-- Ultimate -->
+        <div class="video-container">
+          <iframe loading="lazy" src="https://www.youtube.com/embed/PH5Ap0-exNw" srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/PH5Ap0-exNw?autoplay=1><img src=https://img.youtube.com/vi/PH5Ap0-exNw/hqdefault.jpg alt='Ultimate Video'><span>▶</span></a>" frameborder="0" allowfullscreen></iframe>
+          <p>Ultimate (1080p)</p>
+        </div>
+        <!-- UHD -->
+        <div class="video-container">
+          <iframe loading="lazy" src="https://www.youtube.com/embed/aSduAKdM_zk" srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/aSduAKdM_zk?autoplay=1><img src=https://img.youtube.com/vi/aSduAKdM_zk/hqdefault.jpg alt='UHD Video'><span>▶</span></a>" frameborder="0" allowfullscreen></iframe>
+          <p>UHD (4K)</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 3rem; text-align: center;">Frame Comparisons</h3>
       <div class="comparison-grid">
-         <!-- Example Grid Item -->
-         <div class="comparison-item">
-          <h3>Camera Scene</h3>
+        <!-- Building -->
+        <div class="comparison-item">
+          <h3>Building</h3>
+          <div class="comparison-container ratio-4-3" 
+               data-modal-title="Building Scene"
+               data-before-thumb="assets/media/thumbnails/720i_Build_thumb.jpg"
+               data-after-thumb="assets/media/thumbnails/4k_Build_thumb.jpg"
+               data-before-full="https://archive.org/download/countryside_202512/720i_Build.png"
+               data-after-full="https://archive.org/download/countryside_202512/4k_Build.png">
+            <img class="comparison-before" src="assets/media/thumbnails/720i_Build_thumb.jpg" alt="Before">
+            <img class="comparison-after" src="assets/media/thumbnails/4k_Build_thumb.jpg" alt="After">
+            <div class="comparison-slider"></div>
+          </div>
+        </div>
+        <!-- Camera -->
+        <div class="comparison-item">
+          <h3>Camera</h3>
           <div class="comparison-container ratio-4-3" 
                data-modal-title="Camera Scene"
                data-before-thumb="assets/media/thumbnails/720i_Cam_thumb.jpg"
                data-after-thumb="assets/media/thumbnails/4k_Cam_thumb.jpg"
                data-before-full="https://archive.org/download/countryside_202512/720i_Cam.png"
                data-after-full="https://archive.org/download/countryside_202512/4k_Cam.png">
-            <img class="comparison-before" src="assets/media/thumbnails/720i_Cam_thumb.jpg">
-            <img class="comparison-after" src="assets/media/thumbnails/4k_Cam_thumb.jpg">
+            <img class="comparison-before" src="assets/media/thumbnails/720i_Cam_thumb.jpg" alt="Before">
+            <img class="comparison-after" src="assets/media/thumbnails/4k_Cam_thumb.jpg" alt="After">
+            <div class="comparison-slider"></div>
+          </div>
+        </div>
+        <!-- Dog -->
+        <div class="comparison-item">
+          <h3>Dog</h3>
+          <div class="comparison-container ratio-4-3" 
+               data-modal-title="Dog Scene"
+               data-before-thumb="assets/media/thumbnails/720i_Dog_thumb.jpg"
+               data-after-thumb="assets/media/thumbnails/4k_Dog_thumb.jpg"
+               data-before-full="https://archive.org/download/countryside_202512/720i_Dog.png"
+               data-after-full="https://archive.org/download/countryside_202512/4k_Dog.png">
+            <img class="comparison-before" src="assets/media/thumbnails/720i_Dog_thumb.jpg" alt="Before">
+            <img class="comparison-after" src="assets/media/thumbnails/4k_Dog_thumb.jpg" alt="After">
             <div class="comparison-slider"></div>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- DIVING SECTION -->
+    <section id="diving">
+      <h2>Diving Project (2001)</h2>
+      <div class="videos">
+        <div class="video-container">
+          <iframe loading="lazy" src="https://www.youtube.com/embed/x5xNOegZ5sQ" srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/x5xNOegZ5sQ?autoplay=1><img src=https://img.youtube.com/vi/x5xNOegZ5sQ/hqdefault.jpg alt='Diving Full'><span>▶</span></a>" frameborder="0" allowfullscreen></iframe>
+          <p>Full Movie (720p)</p>
+        </div>
+        <div class="video-container">
+          <iframe loading="lazy" src="https://www.youtube.com/embed/2TG4Q3H3htc" srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/2TG4Q3H3htc?autoplay=1><img src=https://img.youtube.com/vi/2TG4Q3H3htc/hqdefault.jpg alt='Diving Short'><span>▶</span></a>" frameborder="0" allowfullscreen></iframe>
+          <p>UHD Short</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 3rem; text-align: center;">Frame Comparisons</h3>
+      <div class="comparison-grid">
+        <div class="comparison-item">
+          <h3>Station Scene</h3>
+          <!-- Note: Removed ratio-4-3 class for wide content, or keep if 4:3 -->
+          <div class="comparison-container" 
+               data-modal-title="Diving Station"
+               data-before-thumb="assets/media/thumbnails/2001_SL_720i25_2_thumb.jpg"
+               data-after-thumb="assets/media/thumbnails/2001_SL_1920p25_2_thumb.jpg"
+               data-before-full="https://archive.org/download/2001-sl-720i-25/2001_SL_720i25_2.png"
+               data-after-full="https://archive.org/download/2001-sl-720i-25/2001_SL_1920p25_2.png">
+            <img class="comparison-before" src="assets/media/thumbnails/2001_SL_720i25_2_thumb.jpg" alt="Before">
+            <img class="comparison-after" src="assets/media/thumbnails/2001_SL_1920p25_2_thumb.jpg" alt="After">
+            <div class="comparison-slider"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
+  <!-- MODAL -->
   <div id="comparisonModal" class="modal">
     <div class="modal-content">
       <span class="modal-close">&times;</span>
       <div class="modal-comparison">
         <div class="comparison-container" id="modalComparisonContainer">
-          <img class="comparison-before" id="modalBefore">
-          <img class="comparison-after" id="modalAfter">
+          <img class="comparison-before" id="modalBefore" alt="Before">
+          <img class="comparison-after" id="modalAfter" alt="After">
           <div class="comparison-slider"></div>
         </div>
       </div>
