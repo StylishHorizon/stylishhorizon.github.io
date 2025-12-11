@@ -1,4 +1,8 @@
-/* ================== BASE COLORS AND TYPOGRAPHY ================== */
+/* ================== BASE & RESET ================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 :root {
   --bg-a: #0f0f0f;
   --bg-b: #0a0a0a;
@@ -12,6 +16,8 @@ html {
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -21,6 +27,9 @@ body {
   background: var(--bg-a);
   color: var(--font-color-main);
   margin: 0;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
   animation: breathing-bg 30s ease-in-out infinite;
 }
 
@@ -46,6 +55,13 @@ body {
     linear-gradient(to bottom, rgba(255, 255, 255, 0.02), transparent 35%);
   transform: translate3d(0, 0, 0);
   will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .parallax-bg {
+    inset: 0;
+    background-size: cover;
+  }
 }
 
 /* ================== NAVIGATION ================== */
@@ -168,8 +184,40 @@ h2 {
   transform: translateY(-2px);
 }
 
-/* ================== CARDS (COMPARISON ITEM) ================== */
-/* This style applies to both Grid Items and the Hero Card */
+/* ================== HERO SLIDER (ADAPTIVE) ================== */
+.hero-slider-wrapper {
+  width: 100%; max-width: 1200px;
+  margin: 0 auto 2rem; padding: 10px;
+  display: flex; justify-content: center; align-items: center;
+}
+
+.hero-slider-wrapper .comparison-item { width: auto; }
+
+/* Mobile Logic: Width driven */
+.hero-slider-wrapper .comparison-container {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  background: #000;
+}
+
+/* Desktop/TV Logic: Height driven */
+@media (min-width: 768px) {
+  .hero-slider-wrapper .comparison-container {
+    width: auto;
+    max-width: none;
+    height: 60vh;
+  }
+}
+
+/* ================== COMPARISON GRID ITEMS ================== */
 .comparison-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem; margin: 2rem 0;
@@ -179,7 +227,6 @@ h2 {
   background: rgba(255, 255, 255, 0.02); border-radius: 8px; padding: 1rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-  /* Make sure it wraps content tightly for the Hero */
   display: block; 
 }
 .comparison-item:hover {
@@ -189,43 +236,15 @@ h2 {
 .comparison-item h3 { color: var(--highlight-color); text-align: center; margin-bottom: 0.5rem; }
 .comparison-item p { text-align: center; font-size: 0.85rem; color: var(--font-color-secondary); margin-bottom: 1rem; }
 
-/* ================== HERO SLIDER WRAPPER ================== */
-.hero-slider-wrapper {
-  width: 100%; max-width: 1200px;
-  /* Wrapper acts as a flexible centerer, no background itself */
-  margin: 0 auto 2rem;
-  padding: 10px; /* Space for hover movement */
-  display: flex; justify-content: center; align-items: center;
-  background: transparent; box-shadow: none;
-}
-
-/* Force the card inside Hero to respect 4:3 and constrain height */
-.hero-slider-wrapper .comparison-container {
-  height: clamp(250px, 45vh, 600px);
-  aspect-ratio: 4 / 3;
-  width: auto;
-  max-width: 100%; 
-}
-.hero-slider-wrapper .comparison-item { width: auto; }
-
-
-/* ================== COMPARISON SLIDER (CORE) ================== */
-.comparison-container {
-  position: relative; width: 100%; aspect-ratio: 16 / 9;
-  overflow: hidden; border-radius: 4px; cursor: pointer; user-select: none;
-  background: #000;
-}
-
+/* ================== SLIDER UI ELEMENTS ================== */
 .comparison-container img {
   position: absolute; top: 0; left: 0; width: 100%; height: 100%;
   object-fit: cover; pointer-events: none; display: block;
 }
 
-/* Layering */
 .comparison-before { z-index: 1; }
 .comparison-after { z-index: 2; clip-path: inset(0 0 0 50%); }
 
-/* Loading Spinner */
 .comparison-container::before {
   content: ''; position: absolute; top: 50%; left: 50%;
   width: 40px; height: 40px; margin: -20px 0 0 -20px;
@@ -236,7 +255,6 @@ h2 {
 .comparison-container.loaded::before { display: none; }
 @keyframes spinner { to { transform: rotate(360deg); } }
 
-/* Slider Handle */
 .comparison-slider {
   position: absolute; top: 0; left: 50%; width: 3px; height: 100%;
   background: var(--highlight-color); transform: translateX(-50%);
@@ -244,7 +262,6 @@ h2 {
   z-index: 20;
 }
 
-/* Slider Arrows */
 .comparison-slider::before, .comparison-slider::after {
   position: absolute; top: 50%; transform: translateY(-50%) scale(1);
   background: var(--highlight-color); color: #000;
@@ -252,13 +269,11 @@ h2 {
   display: flex; align-items: center; justify-content: center;
   font-weight: bold; box-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
   content: '⟨'; left: -15px;
-  /* Smooth fade */
   transition: opacity 0.2s ease, transform 0.2s ease;
   opacity: 1;
 }
 .comparison-slider::after { content: '⟩'; right: -15px; left: auto; }
 
-/* Hide arrows near edges */
 .comparison-container.edge-left .comparison-slider::before {
   opacity: 0; transform: translateY(-50%) scale(0.5);
 }
@@ -273,18 +288,14 @@ h2 {
   z-index: 15; backdrop-filter: blur(10px);
 }
 
-/* ================== ASPECT RATIO UTILITIES ================== */
-.comparison-container.ratio-4-3 {
-  aspect-ratio: 4 / 3;
-}
+.comparison-container.ratio-4-3 { aspect-ratio: 4 / 3; }
 @media (min-width: 768px) {
-  /* In Grid, constrain 4:3 items so they aren't huge */
   .comparison-grid .comparison-container.ratio-4-3 {
     max-width: 85%; margin-left: auto; margin-right: auto;
   }
 }
 
-/* ================== MODAL (SHARED) ================== */
+/* ================== MODAL ================== */
 .modal {
   display: none; position: fixed; z-index: 2000; left: 0; top: 0;
   width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95);
@@ -333,7 +344,7 @@ footer img { height: 30px; opacity: 0.6; }
 footer img:hover { opacity: 0.9; }
 footer a { color: var(--highlight-color); text-decoration: none; }
 
-/* ================== CONTACT PAGE SPECIFICS ================== */
+/* ================== CONTACT & CHAT ================== */
 .tally-container {
   max-width: 800px; margin: 0 auto;
   background: rgba(255, 255, 255, 0.02); border-radius: 8px; overflow: hidden;
@@ -341,7 +352,6 @@ footer a { color: var(--highlight-color); text-decoration: none; }
 }
 .tally-container iframe { width: 100%; min-height: 600px; border: none; }
 
-/* Bill Chat */
 #bill-chat-button {
   position: fixed; bottom: 24px; right: 24px;
   width: 64px; height: 64px; border-radius: 50%;
@@ -404,7 +414,7 @@ footer a { color: var(--highlight-color); text-decoration: none; }
   #bill-chat-window { width: calc(100vw - 48px); }
 }
 
-/* ================== RESPONSIVE TABLES ================== */
+/* ================== RESPONSIVE UTILITIES ================== */
 @media(max-width: 768px) {
   .modal-content { width: 95%; padding: 1rem; }
   .comparison-grid { grid-template-columns: 1fr; }
@@ -414,4 +424,3 @@ footer a { color: var(--highlight-color); text-decoration: none; }
   .packages-table td { display: block; text-align: right; position: relative; padding-left: 50%; }
   .packages-table td::before { content: attr(data-label); position: absolute; left: 0.5rem; color: var(--highlight-color); }
 }
-
