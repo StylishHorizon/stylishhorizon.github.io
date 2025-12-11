@@ -3,31 +3,58 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Why Now." />
+  <meta name="description" content="Why restore MiniDV/VHS now. No cloud risks, local truth, unfiltered clarity." />
   <meta name="theme-color" content="#0f0f0f">
   <title>Why Now | Stylish Horizon</title>
+
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="parallax-bg" aria-hidden="true"></div>
+  
+  <!-- Navigation injected by app.js -->
   <nav id="site-nav"></nav>
 
   <main>
-    <section class="hero">
+    <section class="hero" id="hero">
       <div class="hero-content">
         <h1>Manifest: Preserve the Unfiltered</h1>
-        <p>Your memories are not pixels in the cloud.</p>
+        <p>Your memories are not pixels in the cloud—they're fragile tapes, fading frame by frame.</p>
+      </div>
+      <div class="quick-links">
+        <div class="button-group">
+          <a href="#risks" class="button">The Risk</a>
+          <a href="#approach" class="button">Our Approach</a>
+          <a href="archive.html" class="button">Packages</a>
+        </div>
       </div>
     </section>
-    
-    <section>
-        <h2>The Risk</h2>
-        <p class="text-block">MiniDV and VHS degrade. Cloud saves are copies, not cures.</p>
+
+    <section id="risks">
+      <h2>The Risk: Time Waits for No Tape</h2>
+      <div class="text-block">
+        <p>MiniDV, VHS, Hi8—the magnetic layers degrade in 10-15 years. Colors bleed, frames warp, audio hums into silence.</p>
+        <p>Cloud "saves" mean copies, not cures. Why now? A wedding from 1998, first steps in 2002—they're not infinite.</p>
+      </div>
+    </section>
+
+    <section id="approach">
+      <h2>Our Approach: Local Truth</h2>
+      <div class="text-block">
+        <p>No shipping across borders. We connect you to trusted local studios for capture.</p>
+        <p>First pass: Deinterlace PAL/NTSC to PAR=1.0. Gentle fixes (denoise, colors, square pixels, 50fps, audio normalize) without nostalgia filters.</p>
+        <p>Process: Raw upload → free private preview → comment trims → finalize. Unfiltered clarity—your story, as it was.</p>
+      </div>
+      <div class="quick-links" style="text-align: center; margin-top: 2rem;">
+        <a href="contact.html" class="button">Start Now</a>
+      </div>
     </section>
   </main>
 
+  <!-- Footer injected by app.js -->
   <footer role="contentinfo"></footer>
+  
   <script src="app.js" defer></script>
 </body>
 </html>
