@@ -12,23 +12,24 @@
 </head>
 <body>
   <div class="parallax-bg" aria-hidden="true"></div>
-  
-  <!-- NAV (Injected by JS) -->
   <nav id="site-nav" aria-label="Main navigation"></nav>
 
   <main>
     <section class="hero" id="hero">
       <div class="hero-slider-wrapper">
         <div class="comparison-item">
-          <!-- Add ratio-4-3 class here if square, or ratio-16-9 -->
+          <!-- Main Slider with correct Data Attributes for Modal -->
           <div class="comparison-container ratio-4-3"
                data-modal-title="Dog Scene: 720i vs 4K"
                data-before-thumb="assets/media/thumbnails/720i_Dog_thumb.jpg"
                data-after-thumb="assets/media/thumbnails/4k_Dog_thumb.jpg"
                data-before-full="https://archive.org/download/countryside_202512/720i_Dog.png"
                data-after-full="https://archive.org/download/countryside_202512/4k_Dog.png">
-            <img class="comparison-before" src="assets/media/thumbnails/720i_Dog_thumb.jpg" alt="Before">
-            <img class="comparison-after" src="assets/media/thumbnails/4k_Dog_thumb.jpg" alt="After">
+            
+            <!-- Added fetchpriority to fix desktop score -->
+            <img class="comparison-before" src="assets/media/thumbnails/720i_Dog_thumb.jpg" alt="Before" loading="eager" fetchpriority="high">
+            <img class="comparison-after" src="assets/media/thumbnails/4k_Dog_thumb.jpg" alt="After" loading="eager" fetchpriority="high">
+            
             <div class="comparison-slider"></div>
             <div class="slider-hint">Drag to compare • Click for full</div>
           </div>
@@ -38,6 +39,7 @@
       <div class="hero-content">
         <h1>Digital restoration with integrity</h1>
         <p>No hype. No noise. Just memory.</p>
+        <p>We restore MiniDV tapes, VHS, Hi8, and forgotten drives.</p>
       </div>
       <div class="quick-links">
         <div class="button-group">
@@ -50,19 +52,19 @@
     <section>
       <h2>What we do</h2>
       <div class="text-block">
-        <p>We restore MiniDV, VHS, Hi8. Every frame is inspected manually. No filters. Just truth.</p>
+        <p>We restore MiniDV, VHS, Hi8, and forgotten drives. If it still breathes—we help it speak again.</p>
+        <p>Every frame is inspected manually. No filters. No nostalgia filters. Just the truth, frame by frame.</p>
       </div>
     </section>
   </main>
 
-  <!-- SHARED MODAL -->
   <div id="comparisonModal" class="modal">
     <div class="modal-content">
       <span class="modal-close">&times;</span>
       <div class="modal-comparison">
         <div class="comparison-container" id="modalComparisonContainer">
-          <img class="comparison-before" id="modalBefore">
-          <img class="comparison-after" id="modalAfter">
+          <img class="comparison-before" id="modalBefore" alt="Before">
+          <img class="comparison-after" id="modalAfter" alt="After">
           <div class="comparison-slider"></div>
         </div>
       </div>
@@ -70,10 +72,7 @@
     </div>
   </div>
 
-  <!-- FOOTER (Injected by JS) -->
   <footer role="contentinfo"></footer>
-  
-  <!-- Use app.js now -->
   <script src="app.js" defer></script>
 </body>
 </html>
