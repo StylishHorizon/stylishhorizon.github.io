@@ -1,4 +1,478 @@
 /* =========================================
+   1. VARIABLES & RESET
+   ========================================= */
+:root {
+  /* Colors */
+  --bg-a: #0f0f0f;
+  --bg-b: #0a0a0a;
+  --bg-c: #050505;
+  --font-color-main: #f0f0f0;
+  --font-color-secondary: #aaaaaa;
+  --highlight-color: #00d4ff;
+
+  /* Spacing */
+  --nav-height: 80px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
+  overflow-x: hidden; /* Critical for mobile stability */
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  background: var(--bg-a);
+  color: var(--font-color-main);
+  margin: 0;
+  width: 100%;
+  overflow-x: hidden; /* Double safety */
+  position: relative;
+  animation: breathing-bg 30s ease-in-out infinite;
+}
+
+/* Background Animation */
+@keyframes breathing-bg {
+  0%, 100% { background: var(--bg-a); }
+  50% { background: var(--bg-b); }
+  75% { background: var(--bg-c); }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  * { animation: none !important; transition: none !important; }
+}
+
+
+/* =========================================
+   2. PARALLAX BACKGROUND
+   ========================================= */
+.parallax-bg {
+  position: fixed;
+  inset: -20vh -20vw; /* Oversized for desktop parallax effect */
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(900px circle at 50% 40%, rgba(0, 212, 255, 0.08), transparent 60%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02), transparent 35%);
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+/* Mobile Fix: Clamp background to viewport to prevent scroll issues */
+@media (max-width: 768px) {
+  .parallax-bg {
+    inset: 0;
+    background-size: cover;
+  }
+}
+
+
+/* =========================================
+   3. NAVIGATION (Injected via JS)
+   ========================================= */
+#site-nav {
+  position: fixed; 
+  top: 0; left: 0; width: 100%;
+  height: var(--nav-height);
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), 0 0 60px rgba(0, 212, 255, 0.15);
+  padding-top: env(safe-area-inset-top); /* Safe area for notched phones */
+}
+
+#site-nav.hidden { transform: translateY(-100%); }
+
+.nav-container {
+  display: flex; justify-content: space-between; align-items: center;
+  height: 100%;
+  padding: 0 2rem; max-width: 1200px; margin: 0 auto;
+}
+
+/* Logo */
+.logo-title {
+  display: flex; align-items: center; text-decoration: none; gap: 1rem;
+  transition: transform 0.2s ease;
+}
+.logo-title:hover { transform: translateY(-1px); }
+
+.logo-title .site-title {
+  font-size: 1.5rem; font-weight: 700; letter-spacing: 0.02em;
+  background: linear-gradient(90deg, #00d4ff, #8e2de2, #ff8c00, #00d4ff);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  background-size: 200% 100%; animation: slide-bg 5s linear infinite;
+}
+@keyframes slide-bg {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.logo-title .logo {
+  height: 40px; 
+  filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.5));
+  transition: opacity 0.3s, filter 0.3s;
+}
+.logo-title:hover .logo { filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.8)); }
+
+/* Burger Menu (Mobile) */
+#burger {
+  display: none; background: transparent; border: none;
+  color: var(--font-color-main); font-size: 2rem; cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* Links */
+.nav-links { display: flex; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
+.nav-links a {
+  color: var(--font-color-main); text-decoration: none; position: relative;
+  transition: color 0.3s ease; letter-spacing: 0.03em;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--highlight-color); }
+.nav-links a::after {
+  content: ''; display: block; width: 0; height: 2px;
+  background: var(--highlight-color); transition: width 0.3s ease;
+  position: absolute; bottom: -5px; left: 0;
+  box-shadow: 0 0 8px var(--highlight-color);
+}
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+/* Mobile Menu Logic */
+@media(max-width:768px) {
+  #burger { display: block; }
+  .nav-links {
+    display: none; flex-direction: column; position: absolute;
+    top: 100%; left: 0; width: 100%;
+    background: rgba(0, 0, 0, 0.95); padding: 1rem 0;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .nav-links.show { display: flex; }
+  .nav-links a { padding: 1rem 2rem; display: block; font-size: 1.1rem; }
+}
+
+
+/* =========================================
+   4. LAYOUT & SECTIONS
+   ========================================= */
+main { padding-top: var(--nav-height); }
+
+section {
+  scroll-margin-top: var(--nav-height);
+  max-width: 800px; margin: 4rem auto; padding: 0 1rem;
+  opacity: 0; transform: translateY(20px) scale(0.98);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+section.visible { opacity: 1; transform: translateY(0) scale(1); }
+
+h1 { letter-spacing: -0.02em; font-weight: 700; line-height: 1.2; }
+h2 {
+  font-size: 2.5rem; font-weight: 700; text-align: center;
+  margin-bottom: 2rem; color: rgba(0, 212, 255, 0.9);
+  text-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+}
+.text-block { margin-bottom: 1.6em; line-height: 1.7; font-size: 1.1rem; }
+
+
+/* =========================================
+   5. HERO & BUTTONS
+   ========================================= */
+.hero {
+  display: flex; flex-direction: column; align-items: center;
+  min-height: 70vh; /* Ensures it looks substantial */
+  padding: 2rem 1rem; text-align: center;
+}
+.hero-content { font-size: 1.5rem; font-weight: 500; margin-bottom: 2rem; }
+
+/* Buttons */
+.quick-links { margin-top: 2rem; display: flex; justify-content: center; }
+.button-group { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+.button {
+  padding: 0.8rem 1.5rem; text-decoration: none; color: var(--font-color-main);
+  border: 1px solid var(--highlight-color); border-radius: 50px;
+  position: relative; overflow: hidden; font-weight: 500;
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(0,0,0,0.3);
+}
+.button::before {
+  content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+.button:hover::before { left: 100%; }
+.button:hover {
+  background: rgba(0, 212, 255, 0.15);
+  box-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+
+/* =========================================
+   6. COMPARISON SLIDER (CORE / SHARED)
+   ========================================= */
+/* Wrapper for aesthetics (Border, Glow) */
+.comparison-item {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px; padding: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  display: block; width: auto;
+}
+.comparison-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 50px rgba(0, 212, 255, 0.4);
+}
+
+/* Slider Container (The Functional Part) */
+.comparison-container {
+  position: relative;
+  width: 100%;           /* Default: fit width (Mobile/Grid) */
+  height: auto;          /* Height defined by aspect ratio */
+  margin: 0 auto;
+  user-select: none;     /* Prevent text selection */
+  -webkit-user-select: none;
+  background: #000;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer; 
+  touch-action: pan-y;   /* Allow vertical scroll, block horizontal */
+}
+
+/* Aspect Ratio Helpers */
+.comparison-container.ratio-4-3 { aspect-ratio: 4 / 3; }
+.comparison-container.ratio-16-9 { aspect-ratio: 16 / 9; }
+
+/* Images */
+.comparison-container img {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; /* Ensures fill without distortion */
+  pointer-events: none; 
+  display: block;
+}
+
+/* Layers */
+.comparison-before { z-index: 1; }
+.comparison-after  { z-index: 2; clip-path: inset(0 0 0 50%); }
+
+/* Slider Handle */
+.comparison-slider {
+  position: absolute; top: 0; bottom: 0; left: 50%;
+  width: 2px;
+  background: var(--highlight-color);
+  transform: translateX(-50%);
+  z-index: 20;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+  touch-action: none; /* Crucial: Block ALL scroll when grabbing handle */
+  cursor: ew-resize;
+}
+
+/* Arrows */
+.comparison-slider::before, .comparison-slider::after {
+  content: '⟨';
+  position: absolute; top: 50%; width: 32px; height: 32px;
+  background: var(--highlight-color); color: #000;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: bold;
+  transform: translateY(-50%);
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+  left: -16px; opacity: 1; transition: opacity 0.2s;
+}
+.comparison-slider::after { content: '⟩'; left: auto; right: -16px; }
+
+/* Hide arrows near edges */
+.comparison-container.edge-left .comparison-slider::before { opacity: 0; }
+.comparison-container.edge-right .comparison-slider::after { opacity: 0; }
+
+/* Loading Spinner */
+.comparison-container::before {
+  content: ''; position: absolute;
+  top: 50%; left: 50%;
+  width: 40px; height: 40px; margin: -20px 0 0 -20px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--highlight-color);
+  border-radius: 50%;
+  animation: spinner 0.8s linear infinite;
+  z-index: 5;
+}
+.comparison-container.loaded::before { display: none; }
+@keyframes spinner { to { transform: rotate(360deg); } }
+
+/* Slider Hint Text */
+.slider-hint {
+  position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7); padding: 0.5rem 1rem; border-radius: 20px;
+  font-size: 0.8rem; color: var(--highlight-color); pointer-events: none;
+  z-index: 15; backdrop-filter: blur(10px); width: max-content;
+}
+
+
+/* =========================================
+   7. CONTEXTS (HERO VS GRID - PREVIEW ONLY)
+   ========================================= */
+
+/* Wrapper Styles */
+.hero-slider-wrapper {
+  width: 100%; 
+  max-width: 1200px; 
+  margin: 0 auto 2rem; 
+  padding: 10px;
+}
+
+/* MOBILE HERO (< 768px): Simple block model for stability */
+@media (max-width: 767px) {
+  .hero-slider-wrapper {
+    display: block;       /* Remove Flex to avoid layout collapse */
+    text-align: center;   
+  }
+
+  .hero-slider-wrapper .comparison-container { 
+    display: block;       
+    width: 100%;          /* Fill width */
+    max-width: 500px;     /* Cap width */
+    margin: 0 auto;       /* Center horizontally */
+    /* Height is auto-calculated via aspect-ratio class */
+  }
+}
+
+/* DESKTOP HERO (>= 768px): Flex for vertical centering */
+@media (min-width: 768px) {
+  .hero-slider-wrapper {
+    display: flex;        
+    justify-content: center; 
+    align-items: center;
+  }
+
+  .hero-slider-wrapper .comparison-container {
+    width: auto; 
+    height: 60vh;         /* Height priority */
+    max-width: none;
+  }
+}
+
+/* GRID (ARCHIVE): Grid Layout */
+.comparison-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem; margin: 2rem 0;
+}
+.comparison-grid .comparison-item h3 { color: var(--highlight-color); text-align: center; margin-bottom: 0.5rem; }
+.comparison-grid .comparison-item p { text-align: center; font-size: 0.85rem; color: var(--font-color-secondary); margin-bottom: 1rem; }
+
+
+/* =========================================
+   8. MODAL (FULL SCREEN FIXED)
+   ========================================= */
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 2000; 
+  left: 0; top: 0;
+  width: 100%; height: 100%; 
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px); 
+  /* Remove flex centering here to avoid mobile collapsing issues */
+}
+.modal.active { display: block; } /* Use block to allow absolute children */
+
+.modal-content {
+  position: relative; 
+  width: 100%; height: 100%;
+  overflow: hidden; /* Prevent scrolling outside */
+}
+
+.modal-close {
+  position: absolute; top: 20px; right: 20px; font-size: 3rem;
+  color: var(--font-color-main); cursor: pointer; z-index: 2001; line-height: 1;
+}
+.modal-close:hover { color: var(--highlight-color); }
+
+/* Absolute positioning to force size */
+.modal-comparison { 
+  position: absolute; 
+  top: 60px; /* Space for close button */
+  bottom: 60px; /* Space for text info */
+  left: 0; right: 0;
+  width: 100%;
+  height: auto; 
+}
+
+/* Modal Slider Container - FORCE FILL */
+.modal-comparison .comparison-container {
+  position: absolute; /* Critical fix for mobile */
+  top: 0; left: 0;
+  width: 100% !important; 
+  height: 100% !important;
+  max-width: none; max-height: none;
+  aspect-ratio: unset; 
+  background: transparent;
+  margin: 0;
+  
+  /* Allow pinch zoom */
+  touch-action: pan-x pan-y pinch-zoom; 
+}
+
+.modal-comparison img { 
+  width: 100% !important; 
+  height: 100% !important;
+  object-fit: contain; /* Keeps aspect ratio correct */
+}
+
+.modal-info { 
+  position: absolute; 
+  bottom: 20px; width: 100%; 
+  text-align: center; 
+  color: var(--font-color-secondary); 
+  pointer-events: none;
+}
+
+
+/* =========================================
+   9. TABLES & VIDEOS
+   ========================================= */
+.packages-table {
+  width: 100%; border-collapse: collapse; margin: 2rem 0;
+  background: rgba(255, 255, 255, 0.02); border-radius: 8px; overflow: hidden;
+}
+.packages-table th, .packages-table td { padding: 1rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+.packages-table th { color: var(--highlight-color); text-transform: uppercase; font-size: 0.85rem; }
+
+/* Responsive Table */
+@media(max-width: 768px) {
+  .packages-table { display: block; }
+  .packages-table thead { display: none; }
+  .packages-table tr { display: block; margin-bottom: 1rem; border: 1px solid rgba(255,255,255,0.1); }
+  .packages-table td { display: block; text-align: right; position: relative; padding-left: 50%; }
+  .packages-table td::before { content: attr(data-label); position: absolute; left: 0.5rem; color: var(--highlight-color); }
+}
+
+.videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin: 2rem 0; }
+.video-container {
+  position: relative; width: 100%; aspect-ratio: 16 / 9;
+  background: rgba(255, 255, 255, 0.02); border-radius: 8px; overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+.video-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 50px rgba(0, 212, 255, 0.4);
+}
+.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+.video-container p { text-align: center; margin-top: 0.5rem; color: var(--font-color-secondary); }
+
+/* =========================================
    10. CONTACT (Tally & Chat)
    ========================================= */
 .tally-container {
@@ -76,3 +550,11 @@
 @media(max-width: 480px) { 
   #bill-chat-window { width: calc(100vw - 48px); bottom: 24px; height: 60vh; } 
 }
+
+/* =========================================
+   11. FOOTER
+   ========================================= */
+footer { text-align: center; padding: 2rem 0; margin-top: 4rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+footer img { height: 30px; opacity: 0.6; }
+footer img:hover { opacity: 0.9; }
+footer a { color: var(--highlight-color); text-decoration: none; }
