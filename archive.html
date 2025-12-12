@@ -135,21 +135,26 @@
         </div>
       </div>
 
-      <h3 style="margin-top: 3rem; text-align: center;">Frame Comparisons</h3>
+   <h3 style="margin-top: 3rem; text-align: center;">Frame Comparisons</h3>
+      
       <div class="comparison-grid">
         <div class="comparison-item">
           <h3>Station Scene</h3>
-          <!-- Note: Removed ratio-4-3 class for wide content, or keep if 4:3 -->
-          <div class="comparison-container" 
-               data-modal-title="Diving Station"
+          
+          <!-- ADDED CLASS: ratio-16-9 (Critical for height!) -->
+          <div class="comparison-container ratio-16-9" 
+               data-modal-title="Diving Station: 720i vs 1080p"
                data-before-thumb="assets/media/thumbnails/2001_SL_720i25_2_thumb.jpg"
                data-after-thumb="assets/media/thumbnails/2001_SL_1920p25_2_thumb.jpg"
                data-before-full="https://archive.org/download/2001-sl-720i-25/2001_SL_720i25_2.png"
                data-after-full="https://archive.org/download/2001-sl-720i-25/2001_SL_1920p25_2.png">
-            <img class="comparison-before" src="assets/media/thumbnails/2001_SL_720i25_2_thumb.jpg" alt="Before">
-            <img class="comparison-after" src="assets/media/thumbnails/2001_SL_1920p25_2_thumb.jpg" alt="After">
+            
+            <img class="comparison-before" src="assets/media/thumbnails/2001_SL_720i25_2_thumb.jpg" alt="Before" loading="lazy">
+            <img class="comparison-after" src="assets/media/thumbnails/2001_SL_1920p25_2_thumb.jpg" alt="After" loading="lazy">
+            
             <div class="comparison-slider"></div>
           </div>
+          
         </div>
       </div>
     </section>
@@ -175,3 +180,4 @@
   <script src="app.js" defer></script>
 </body>
 </html>
+
