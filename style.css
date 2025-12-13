@@ -558,3 +558,44 @@ footer { text-align: center; padding: 2rem 0; margin-top: 4rem; border-top: 1px 
 footer img { height: 30px; opacity: 0.6; }
 footer img:hover { opacity: 0.9; }
 footer a { color: var(--highlight-color); text-decoration: none; }
+
+/* =========================================
+   12. FAQ (ACCORDION)
+   ========================================= */
+details {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1rem;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--highlight-color);
+  list-style: none; /* Standard way to hide default triangle */
+}
+
+/* Hide default triangle in Webkit browsers */
+summary::-webkit-details-marker { 
+  display: none; 
+}
+
+/* Custom Plus/Minus indicator */
+summary::after {
+  content: '+';
+  float: right;
+  font-weight: 300;
+  transition: transform 0.2s;
+}
+
+details[open] summary::after {
+  content: '−';
+}
+
+/* Content styling */
+details p {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: var(--font-color-secondary);
+  line-height: 1.6;
+}
