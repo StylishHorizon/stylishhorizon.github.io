@@ -12,10 +12,12 @@ const HEADER_HTML = `
       <p class="site-title">${SITE_TITLE}</p>
     </a>
     <button id="burger" aria-label="Menu" aria-controls="primary-navigation" aria-expanded="false">&#9776;</button>
+   /* In app.js -> const HEADER_HTML */
     <ul id="primary-navigation" class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="manifest.html">Why Now</a></li>
       <li><a href="archive.html">Results</a></li>
+      <li><a href="faq.html">FAQ</a></li> <!-- ADDED LINK -->
       <li><a href="contact.html">Contact</a></li>
     </ul>
   </div>
@@ -270,3 +272,4 @@ function initChat() {
     document.getElementById("bill-send").addEventListener('click', send);
     input.addEventListener('keydown', (e) => { if (e.key === "Enter") send(); });
 }
+
